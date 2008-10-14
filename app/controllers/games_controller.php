@@ -11,6 +11,10 @@ class GamesController extends AppController {
 			'recursive' => 0
 	    );
 	var $uses = array("Game","Download","Rating");
+	
+	var $helpers = array('Cache');
+	
+	var $cacheAction = array("view/" => "1 day");
 
 	function index() {        
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
@@ -18,11 +22,13 @@ class GamesController extends AppController {
 	}
 	
 	function view($id = null) {
-	  # we assume a valid and public id. fixme
-		$this->Game->id = $id;
+	  # FIXME we assume a valid and public id. 
+	  
+	  if ($id == null) { $this->cakeError('error404'); }
+	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review
 		$this->Game->cacheQueries = true;
-		$this->set('game', $this->Game->read());
+		$this->set('game', $this->Game->read("",$id)); # DL status and validity needs to be checked, custom finderquery.
 
 		$this->set('LICENSE',$this->Game->LICENSE);
 		$this->set('GENRE',$this->Game->GENRE);

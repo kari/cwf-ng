@@ -3,6 +3,7 @@ class UsersController extends AppController {
     var $name = 'Users';    
 
 		var $components = array('Auth');
+		var $helpers = array("Bbcode");
 		
 		function beforeFilter() {
 						Security::setHash("md5");
@@ -25,6 +26,8 @@ class UsersController extends AppController {
     }
     
     function view($id = null) {
+      if ($id == null) { $this->cakeError('error404'); }
+      
       $this->set('user', $this->User->read('',$id));
     }
 }
