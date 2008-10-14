@@ -33,5 +33,8 @@ class Rating extends AppModel {
       "fields" => array("AVG(rating_value) AS average_rating","COUNT(rating_value) AS vote_count"),
       "group" => array("rating_type"))); # "game_id","rating_type",
   }
+  
+  # TOP 50 games with at least 2 votes
+  # SELECT COUNT(rating_value) as votes,AVG(rating_value) AS rating,game_id FROM CWF_game_ratings WHERE (rating_type = 0) GROUP BY game_id HAVING votes > 1 ORDER BY rating DESC LIMIT 50
 }
 ?>

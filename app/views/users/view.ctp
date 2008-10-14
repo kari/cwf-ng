@@ -13,15 +13,16 @@ switch ($user['User']['user_avatar_type']) {
 }
 ?>
 <ul>
-  <li>Website: <?=$html->link($user["User"]["user_website"],$user["User"]["user_website"])?></li>
+  <li><?=$html->link("Website",$user["User"]["user_website"])?></li>
   <li>Location: <?=$user["User"]["user_from"]?> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>
   <li>Occupation: <?=$user["User"]["user_occ"]?></li>
   <li>Last visit: <?=date("d.m.Y",$user["User"]["user_lastvisit"])?></li>
   <li>User since: <?=date("d.m.Y",$user["User"]["user_regdate"])?></li>
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
+  <li><?=$html->link("Forum profile","http://curlysworldoffreeware.com/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
   <li>Interests: <?=$user["User"]["user_interests"]?></li>
   <li>User timzeone: <?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> <?=date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")?> (like <?=timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0)?>)</li>
-  <li>Forum signature: <?=$user["User"]["user_sig"]?></li> <?# FIXME contains BBCode?>
+  <li>Forum signature: <?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></li> <?# FIXME contains BBCode?>
 </ul>
 <h2>Proposed games</h2>
 <ul>

@@ -8,7 +8,7 @@
     <li>Game proposer: <?=$html->link($game['Game_Proposer']['username'],array("controller"=>"users","action"=>"view",$game["Game_Proposer"]["user_id"]))?></li>
     <li>Reviews: <?=$game["Game"]["review_amount"]?></li>
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
-    <li>Forum link: <?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
+    <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
     <li>System requirements: <?=nl2br($game["Game"]["requirements"])?></li>
   </ul>
 <h2>Genres</h2>
