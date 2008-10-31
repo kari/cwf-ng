@@ -89,5 +89,10 @@ class Game extends AppModel {
 	  $conditions = array("download_status" => 0, "game_id" => $id);
 	  $this->set('game', $this->Game->find('first',array("conditions"=>$conditions)));
 	}
+	
+	function getRandom($amount = 1) {
+		$conditions = array("download_status" => 0);
+		return $this->find('all',array("conditions"=>$conditions,'limit'=>$amount,"order"=>"rand()"));
+	}
 }
 ?>

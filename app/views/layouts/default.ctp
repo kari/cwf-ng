@@ -11,7 +11,8 @@
   <div id="doc">
     <div id="hd"><h1><?=$html->link("CWF-Freeware","/")?></h1></div>
     <div id="bd">
-    <?php echo $content_for_layout ?>
+    <? $session->flash()?>
+    <?=$content_for_layout ?>
     </div>
     <div id="ft"></div>
   </div>
