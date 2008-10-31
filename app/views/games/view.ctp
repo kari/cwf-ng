@@ -1,7 +1,9 @@
+<?
+		$this->pageTitle = $game["Game"]["game_name"];
+?>
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
 <p><small>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></small></p>
 <p><?=nl2br($game['Game']['description'])?></p>
-
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['Game_Hunter']['username'],array("controller"=>"users","action"=>"view",$game["Game_Hunter"]["user_id"]))?></li>
@@ -32,13 +34,15 @@ foreach ($game["Screenshot"] as $screenshot) {
 ?>
 </ul>
 <h2>Ratings</h2><ul>
-<li>Game hunters' rating: <?=$game["Game"]["site_rating"]?></li>
+<li>Game hunters' rating: <?=$game["Game"]["site_rating"]?> of 6</li>
 <?
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': ';
   if (array_key_exists($key,$ratings)) {
-    printf("%01.2f",$ratings[$key][0]["average_rating"]);
-    echo ' ('.$ratings[$key][0]["vote_count"].' votes)';
+    echo $number->precision($ratings[$key][0]["average_rating"],2);
+    echo ' ('.$ratings[$key][0]["vote_count"].' vote';
+    if ($ratings[$key][0]["vote_count"] <> 1) echo 's'; // hack pluralization
+    echo ')';
   } else {
     echo "No votes";
   }
@@ -49,7 +53,7 @@ foreach ($RATING_TYPE as $key => $type) {
 <h2>Downloads</h2>
 <ul><?
 foreach ($game["Download"] as $file) {
-  echo '<li>'.$html->link($file["download_link"],array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$file["size"].' kB)<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
+  echo '<li>'.$html->link($file["download_link"],array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
 
@@ -65,5 +69,3 @@ if (count($game["Review"]) == 0) {
   echo "<p>No reviews.</p>";
 }
 ?>
-<h2>Comments</h2>
-<p>Not entirely sure what these would be for.</p>

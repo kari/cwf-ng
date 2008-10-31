@@ -5,7 +5,7 @@ class UsersController extends AppController {
 		var $components = array('Auth');
 		var $helpers = array("Bbcode");
 		
-		function beforeFilter() {
+		function _beforeFilter() {
 						Security::setHash("md5");
 		        $this->Auth->fields = array(
 		            'username' => 'username', 
@@ -27,7 +27,6 @@ class UsersController extends AppController {
     
     function view($id = null) {
       if ($id == null) { $this->cakeError('error404'); }
-      
       $this->set('user', $this->User->read('',$id));
     }
 }
