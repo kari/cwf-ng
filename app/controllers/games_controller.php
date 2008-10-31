@@ -12,9 +12,9 @@ class GamesController extends AppController {
 	    );
 	var $uses = array("Game","Download","Rating");
 	
-	var $helpers = array('Cache');
+	var $helpers = array('Cache',"Number");
 	
-	var $cacheAction = array("view/" => "1 day");
+	# var $cacheAction = array("view/" => "1 day");
 
 	function index() {        
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
