@@ -39,7 +39,7 @@
 <? foreach($reviews as $review) {
   echo "<li><strong>";
   echo $time->format("d.m.Y",$review["Review"]["added"]);
-  echo " - ".$html->link($review["Review"]["review_title"],array("controller"=>"blogs","action"=> "view",$review["Review"]["review_id"]))." for ".$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]))." by ".$review["User"]["username"];
+  echo " - ".$html->link($review["Review"]["review_title"],array("controller"=>"reviews","action"=> "view",$review["Review"]["review_id"]))." for ".$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]))." by ".$review["User"]["username"];
   echo "</strong><br>".$text->trim($review["Review"]["review_text"],200,"...",false);
   echo "</li>";
 }?>  
@@ -55,3 +55,4 @@
 ?>
 </ul>
 <?=$this->element("adbox",array("style"=>"wide")) ?>
+<?=$this->element("spotlight")?>

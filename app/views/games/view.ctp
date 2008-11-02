@@ -34,12 +34,13 @@ foreach ($game["Screenshot"] as $screenshot) {
 ?>
 </ul>
 <h2>Ratings</h2><ul>
-<li>Game hunters' rating: <?=$game["Game"]["site_rating"]?> of 6</li>
+<li>Game hunters' rating: <?=$stars->draw($game["Game"]["site_rating"],6)?> <?=$game["Game"]["site_rating"]?> of 6</li>
 <?
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': ';
   if (array_key_exists($key,$ratings)) {
-    echo $number->precision($ratings[$key][0]["average_rating"],2);
+    echo $stars->draw(floor($ratings[$key][0]["average_rating"]),6);
+    echo " ".$number->precision($ratings[$key][0]["average_rating"],2);
     echo ' ('.$ratings[$key][0]["vote_count"].' vote';
     if ($ratings[$key][0]["vote_count"] <> 1) echo 's'; // hack pluralization
     echo ')';
