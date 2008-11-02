@@ -1,4 +1,5 @@
-<? $this->pageTitle = "Game vs. Game"; ?>
+<?  # This could also live as some kind of an Element.
+    $this->pageTitle = "Game vs. Game"; ?>
 <h1>Game Vs Game</h1>
 <?=$form->create("",array("action"=>"vote")); ?>
 <table>

@@ -12,7 +12,7 @@ class GamesController extends AppController {
 	    );
 	var $uses = array("Game","Download","Rating");
 	
-	var $helpers = array('Cache',"Number");
+	var $helpers = array('Cache',"Number","Stars");
 	
 	# var $cacheAction = array("view/" => "1 day");
 
@@ -23,7 +23,10 @@ class GamesController extends AppController {
 	
 	function view($id = null) {
 	  # FIXME we assume a valid and public id. 
-	  
+	  if (($id == null) and (isset($this->params["requested"]))) {
+			return $this->Game->getRandom(1);	# For Spotlights-element.
+		}
+		
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review
@@ -39,6 +42,7 @@ class GamesController extends AppController {
 		$this->set('ratings',$this->Rating->average_ratings($id)); # TODO: custom finderquery for Game model
 		
 	}
+	
 	
 }
 
