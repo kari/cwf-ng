@@ -1,5 +1,16 @@
-<?
+<? # View initialization
 		$this->pageTitle = $game["Game"]["game_name"];
+		$html->css("fancy","stylesheet",array("media"=>"screen"),false);
+		$javascript->link("/js/jquery.fancybox.js",false);
+?>
+<? # Page-specific jQuery code: 
+  echo $javascript->codeBlock("$(document).ready(function() {
+    $('ul#screenshots li a').fancybox({
+      'hideOnContentClick': true,
+      'overlayShow': true,
+      'overlayOpacity': 0,
+      });
+    });")
 ?>
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
 <p><small>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></small></p>
@@ -27,9 +38,9 @@ foreach ($game["Specs"] as $platform => $platform_set) {
 }
 ?></ul>
 <h2>Screenshots</h2>
-<ul><?
+<ul id="screenshots"><?
 foreach ($game["Screenshot"] as $screenshot) {
-  echo '<li><a href="http://www.curlysworldoffreeware.com/'.$screenshot["image_link"].'"><img src="http://www.curlysworldoffreeware.com/'.$screenshot["thumb_link"].'"></a></li>';
+  echo "<li>".$html->link($html->image("http://www.curlysworldoffreeware.com/".$screenshot["thumb_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),"http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
 }
 ?>
 </ul>
