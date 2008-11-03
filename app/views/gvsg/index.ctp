@@ -1,7 +1,7 @@
 <?  # This could also live as some kind of an Element.
     $this->pageTitle = "Game vs. Game"; ?>
 <h1>Game Vs Game</h1>
-<?=$form->create("",array("action"=>"vote")); ?>
+<?=$form->create("",array("controller"=>"gvsg","action"=>"vote")); ?>
 <table>
   <tr><td>
 <?=$html->image("http://www.curlysworldoffreeware.com/".$games[0]["Screenshot"][0]["thumb_link"],array("width"=>100,"height"=>100))?><br>

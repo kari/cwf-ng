@@ -39,7 +39,7 @@ foreach ($game["Screenshot"] as $screenshot) {
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': ';
   if (array_key_exists($key,$ratings)) {
-    echo $stars->draw(floor($ratings[$key][0]["average_rating"]),6);
+    echo $stars->draw($ratings[$key][0]["average_rating"],6);
     echo " ".$number->precision($ratings[$key][0]["average_rating"],2);
     echo ' ('.$ratings[$key][0]["vote_count"].' vote';
     if ($ratings[$key][0]["vote_count"] <> 1) echo 's'; // hack pluralization

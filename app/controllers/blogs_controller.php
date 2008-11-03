@@ -1,6 +1,12 @@
 <?php
 class BlogsController extends AppController {
-	var $name = 'Blogs';    
+	var $name = 'Blogs';
+	
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->deny("*");
+		$this->Auth->allow(array("index","view"));
+	}
 	
 	function index() {        
 		$this->set('blogs', $this->Blog->find('all'));    		
