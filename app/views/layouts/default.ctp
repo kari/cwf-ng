@@ -3,7 +3,7 @@
 <head>
     <?=$html->charset("utf-8"); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
-		<?=$html->meta('icon');?>
+		<?=$html->meta('icon',"img/icons/sport_shuttlecock.png");?>
     <?=$html->css('default');?>
     <?=$javascript->link("/js/jquery.js");?>
     <?=$scripts_for_layout;?>
