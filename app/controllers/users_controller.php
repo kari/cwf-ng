@@ -1,17 +1,12 @@
 <?php
 class UsersController extends AppController {
     var $name = 'Users';    
-
-		var $components = array('Auth');
 		var $helpers = array("Bbcode");
 		
-		function _beforeFilter() {
-						Security::setHash("md5");
-		        $this->Auth->fields = array(
-		            'username' => 'username', 
-		            'password' => 'user_password'
-		            );
-						$this->Auth->userScope = array('User.user_active' => '1');
+		function beforeFilter() {
+			parent::beforeFilter();
+			$this->Auth->deny("*");
+			$this->Auth->allow(array("login","logout"));
 		}
  
     /**

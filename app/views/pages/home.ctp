@@ -1,5 +1,6 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
 <h1>Welcome to CWF-Freeware</h1>
+<?=$this->element("login")?>
 <ul>
   <li><?=$html->link("Games",array("controller"=>"games"))?></li>
   <li><?=$html->link("Blogs",array("controller"=>"blogs"))?></li>
@@ -7,11 +8,18 @@
 </ul>
 <h2>Latest news</h2>
 <ul>
-<? foreach($news as $item) {
-  echo "<li><strong>";
-  echo $time->format("d.m.Y",$item["News"]["post_date"])." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"];
-  echo "</strong><br>".$text->trim($item["News"]["news_text"],200,"...",false);
-  echo "</li>";
+<? 
+  $first = true;
+  foreach($news as $item) {
+    echo "<li><strong>";
+    echo $time->format("d.m.Y",$item["News"]["post_date"])." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"]."</strong><br>";
+    if ($first) {
+      echo $text->trim($item["News"]["news_text"],1000,"...",false);
+      $first = false;
+    } else {
+      echo $text->trim($item["News"]["news_text"],200,"...",false);
+    }
+    echo "</li>";
 }?>
 </ul>
 <h2>Latest games</h2>

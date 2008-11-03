@@ -4,20 +4,29 @@ class GvsgController extends AppController {
 	var $name = 'Gvsg';
   var $uses = array("Game");
 
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->deny("*");
+		$this->Auth->allow(array("index","stats"));
+	}
+	
+	function index() {
+		$this->Game->recursive = 1;
+		$this->set("games",$this->Game->getRandom(2));
+	}
+
 	function vote() {
 		if(!empty($this->data["gvsg"])) {
 			# TODO: User has to be logged in.
 			$winner = $this->Game->read("",$this->data["Game"][$this->data["gvsg"]["winner"]]["game_id"]);
 			$loser = $this->Game->read("",$this->data["Game"][($this->data["gvsg"]["winner"] XOR 1)]["game_id"]); # loser is the opposite of winner. 1 xor 1 = 0, 0 xor 1 = 1. 
 			
-			
+			# Some DB action...
 			
 			$this->Session->setFlash("Your vote for ".$winner["Game"]["game_name"]." is counted. Thanks for playing!");
-			# $this->redirect('/'); # or where-ever we did the vote
+			$this->redirect($this->referer()); # or where-ever we did the vote
 		}
-		
-		$this->Game->recursive = 1;
-		$this->set("games",$this->Game->getRandom(2));
+		$this->redirect(array("action"=>"index"));
 	}
 	
 	function stats() {
