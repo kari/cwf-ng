@@ -5,6 +5,7 @@
     <title>CWF - <?=$title_for_layout; ?></title>
 		<?=$html->meta('icon');?>
     <?=$html->css('default');?>
+    <?=$javascript->link("/js/jquery.js");?>
     <?=$scripts_for_layout;?>
 </head>
 <body>

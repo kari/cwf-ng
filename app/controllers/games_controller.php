@@ -12,7 +12,7 @@ class GamesController extends AppController {
 	    );
 	var $uses = array("Game","Download","Rating");
 	
-	var $helpers = array('Cache',"Number","Stars");
+	var $helpers = array('Cache',"Number","Stars","Javascript");
 	
 	# var $cacheAction = array("view/" => "1 day");
 
