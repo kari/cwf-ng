@@ -40,17 +40,19 @@ foreach ($game["Specs"] as $platform => $platform_set) {
 <h2>Screenshots</h2>
 <ul id="screenshots"><?
 foreach ($game["Screenshot"] as $screenshot) {
-  echo "<li>".$html->link($html->image("http://www.curlysworldoffreeware.com/".$screenshot["thumb_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),"http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
+  # "http://www.curlysworldoffreeware.com/".$screenshot["thumb_link"]
+  echo "<li>".$html->link($html->image("http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),"http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
+  # $html->image => $site->image for resizing.
 }
 ?>
 </ul>
 <h2>Ratings</h2><ul>
-<li>Game hunters' rating: <?=$stars->draw($game["Game"]["site_rating"],6)?> <?=$game["Game"]["site_rating"]?> of 6</li>
+<li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6)?> <?=$game["Game"]["site_rating"]?> of 6</li>
 <?
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': ';
   if (array_key_exists($key,$ratings)) {
-    echo $stars->draw($ratings[$key][0]["average_rating"],6);
+    echo $site->drawStars($ratings[$key][0]["average_rating"],6);
     echo " ".$number->precision($ratings[$key][0]["average_rating"],2);
     echo ' ('.$ratings[$key][0]["vote_count"].' vote';
     if ($ratings[$key][0]["vote_count"] <> 1) echo 's'; // hack pluralization

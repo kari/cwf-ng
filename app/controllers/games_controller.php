@@ -7,17 +7,18 @@ class GamesController extends AppController {
 	    'conditions' => array("download_status" => 0),
       'limit' => 25,
       'order' => array('Game.game_name' => 'asc'),
-			"fields" => array("game_name","game_id"),
-			'recursive' => 0
+			# "fields" => array("game_name","game_id"),
+			'recursive' => 1
 	    );
 	var $uses = array("Game","Download","Rating");
 	
-	var $helpers = array('Cache',"Number","Stars","javascript");
+	var $helpers = array('Cache',"Number","Site","javascript");
 	
 	# var $cacheAction = array("view/" => "1 day");
 
 	function index() {        
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
+		$this->set('GENRE',$this->Game->GENRE);
 		$this->set("games",$this->paginate('Game'));	
 	}
 	
