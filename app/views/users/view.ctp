@@ -52,7 +52,7 @@ switch ($user['User']['user_avatar_type']) {
 <ul>
   <? 
   foreach($user["Group"] as $group) {
-    echo "<li>".$group["group_name"]."</li>";  
+    echo "<li>".$group["group_name"]." <i>(".$group["group_description"].")</i></li>";  
   }
   ?>
 </ul>

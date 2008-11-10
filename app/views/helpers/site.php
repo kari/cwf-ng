@@ -2,19 +2,18 @@
 class SiteHelper extends AppHelper {
 		var $helpers = array('Html');
     
-function drawStars($num=0, $max=6, $half=true) {
-        # if ($num > $max) { $num = $max; }
+function drawStars($num=0, $max=6, $half=true, $img=array("/img/icons/star.png","/img/icons/star_gray.png","/img/icons/star_half.png")) {
+        if ($num > $max) { $num = $max; }
 				$str = "";
 				for($i=1;$i<=floor($num);$i++) {
-				# for($i = 1; $i <= $num; $i++) {
-					$str .= $this->Html->image("/img/icons/star.png");
+					$str .= $this->Html->image($img[0]);
 				}
 				if (!(floor($num*2) % 2 == 0) && $half) {
-					$str .= $this->Html->image("/img/icons/star_half.png");
+					$str .= $this->Html->image($img[2]);
 					$num += 1;
 				}
 				for($i=1;$i<=($max-floor($num));$i++) {
-					$str .= $this->Html->image("/img/icons/star_gray.png");
+					$str .= $this->Html->image($img[1]);
 				}
 				return $this->output($str);
     }
