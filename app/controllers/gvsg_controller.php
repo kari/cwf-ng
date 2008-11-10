@@ -18,6 +18,7 @@ class GvsgController extends AppController {
 	function vote() {
 		if(!empty($this->data["gvsg"])) {
 			# TODO: User has to be logged in.
+			$user = $this->data["User"]["user_id"];
 			$winner = $this->Game->read("",$this->data["Game"][$this->data["gvsg"]["winner"]]["game_id"]);
 			$loser = $this->Game->read("",$this->data["Game"][($this->data["gvsg"]["winner"] XOR 1)]["game_id"]); # loser is the opposite of winner. 1 xor 1 = 0, 0 xor 1 = 1. 
 			

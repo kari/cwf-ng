@@ -28,6 +28,7 @@ class NewsController extends AppController {
 	
 	function add() {
 		if (!empty($this->data)) {
+			$this->data["News"]["post_date"] = date("Y-m-d H:i:s");
 			if($this->News->save($this->data)) {
 				$this->Session->setFlash("News added.");
 				$this->redirect("/news");
@@ -38,6 +39,7 @@ class NewsController extends AppController {
 	
 	function edit($id=null) {
 		if (!empty($this->data)) {
+			$this->data["News"]["last_edit_time"] = date("Y-m-d H:i:s");
 			if($this->News->save($this->data)) {
 		  	//Set a session flash message and redirect.
 		    $this->Session->setFlash("News Saved!");
