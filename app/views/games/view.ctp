@@ -22,6 +22,7 @@
     <li>Reviews: <?=$game["Game"]["review_amount"]?></li>
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
     <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
+    <li><?=$html->link("Game homepage",$game["Game"]["site"])?></li>
     <li>System requirements: <?=nl2br($game["Game"]["requirements"])?></li>
   </ul>
 <h2>Genres</h2>
@@ -47,7 +48,7 @@ foreach ($game["Screenshot"] as $screenshot) {
 ?>
 </ul>
 <h2>Ratings</h2><ul>
-<li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6)?> <?=$game["Game"]["site_rating"]?> of 6</li>
+<li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$game["Game"]["site_rating"]?> of 6)</li>
 <?
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': ';

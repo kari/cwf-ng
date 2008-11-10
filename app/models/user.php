@@ -15,7 +15,7 @@ class User extends AppModel {
 	"Game_Hunted" => array("className" => "Game","foreignKey" => "game_proposer_id","fields" => "game_id,game_name",'conditions' => array("download_status" => 0))); 
 	
 	var $hasAndBelongsToMany = array(
-	  "Group" => array("joinTable" => "phpbb_user_group", "foreignKey" => "user_id", "associationForeignKey" => "group_id","conditions"=>array("Group.group_single_user"=>"0","PhpbbUserGroup.user_pending"=>"0"),"fields"=>"group_id,group_name"));
+	  "Group" => array("joinTable" => "phpbb_user_group", "foreignKey" => "user_id", "associationForeignKey" => "group_id","conditions"=>array("Group.group_single_user"=>"0","PhpbbUserGroup.user_pending"=>"0"),"fields"=>"group_id,group_name,group_description"));
 	
 	# This model SHOULD NOT add or remove users. These and most user info management should be left to phpbb
 	
