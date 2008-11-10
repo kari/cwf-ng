@@ -15,6 +15,7 @@ vs.
 <?=$html->link($games[1]["Game"]["game_name"],array("controller"=>"games","action"=>"view",$games[1]["Game"]["game_id"]))?>
 <br><input type="radio" name="data[gvsg][winner]" value="1">
 <?=$form->hidden("Game.1.game_id",array("value"=>$games[1]["Game"]["game_id"]))?>
+<?=$form->hidden("User.user_id",array("value"=>$session->read("Auth.User.user_id")))?>
 </td></tr>
 </table>
 <?=$form->end("Vote")?>

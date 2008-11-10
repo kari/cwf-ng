@@ -1,5 +1,5 @@
 <h1>Blog posts</h1>
-<p><?php echo $html->link('Add Blog', '/blogs/add'); ?></p>
+<p><?php echo $html->link('Write a new Blog Entry', '/blogs/add'); ?></p>
 <table>
 	<tr>
 		<th>Id</th>

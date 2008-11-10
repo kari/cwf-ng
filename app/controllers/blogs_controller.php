@@ -9,7 +9,7 @@ class BlogsController extends AppController {
 	}
 	
 	function index() {        
-		$this->set('blogs', $this->Blog->find('all'));    		
+		$this->set('blogs', $this->Blog->find('all',array("order"=>"created DESC")));    		
 	}
 	
 	function view($id = null) {
@@ -24,7 +24,7 @@ class BlogsController extends AppController {
 		}    
 	}
 	
-	function delete($id) {    
+	function delete($id) {	# FIXME!
 		$this->Blog->del($id);    
 		$this->flash('The blog with id: '.$id.' has been deleted.', '/blogs');
 	}
