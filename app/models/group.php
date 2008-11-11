@@ -14,10 +14,10 @@ class Group extends AppModel {
 	# Allowed actions for group, action_id is "controller/action"
 	var $hasMany = array("Action"=>array("conditions"=>array("allow"=>true),"fields"=>"action_id"));
 	
-	# This model SHOULD NOT modify groups table.
+	# This model SHOULD NOT modify groups table. 
 	
-	# Groups
-	# 2 Admin (single user)
+	# phpbb_Groups
+	# 2 Admin (single user, so not a group here.)
 	# 9 Contributor
 	# 14 CREW
 	# 51 Game Hunter
@@ -28,6 +28,7 @@ class Group extends AppModel {
 	# 268 Newsgroup
 	# 
 	# ? Member (needed)
+	# 	- phpbb should somehow assign all new users to a Member group.
 	# ? Guest (not needed, public actions are set at controller)
 	
 }

@@ -22,6 +22,10 @@ class PagesController extends AppController {
 		
 	}
 	
+	function status() {
+		
+	}
+	
 }
 
 ?>
