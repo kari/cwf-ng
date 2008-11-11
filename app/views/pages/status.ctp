@@ -84,4 +84,4 @@ if (isset($filePresent)):
 	?>
 </p>
 <?php endif;?>
-
+<?=$this->element("license")?>
