@@ -37,7 +37,15 @@
           }
         } ?>
       (<?=$game["Game"]["year"]?>)<br>
-      GH: <?=$site->drawStars($game["Game"]["site_rating"],6)?></p>
+      <?=$html->image("/img/icons/group.png",array("title"=>"Game Hunters' rating"))?> <?=$site->drawStars($game["Game"]["site_rating"],6)?> <?=$html->image("/img/icons/user.png",array("title"=>"Site users' rating"))?>
+<?
+if (array_key_exists(0,$game["Rating"])) { # FIXME: Ugly way, and might not be Overall (type=0)!
+  $average_rating = $game["Rating"][0]["Rating"][0]["average_rating"];
+} else {
+  $average_rating = 0;
+}
+?>
+<?=$site->drawStars($average_rating,6)?></p>
       <p><?=$text->trim($game['Game']['description'],300,"...",false)?></p>
 	</td></tr>
 	<? } ?>

@@ -4,7 +4,9 @@
   echo $form->create("Game");
   echo $form->input("game_name");
   echo $form->input("year",array("maxLength"=>4));
-  echo $form->input("publisher_id");
+  echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
+  echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
+  echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
   
   echo $form->input("description");
   echo $form->input("site");
@@ -61,4 +63,4 @@
 <li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
 
-<?=debug($this->data)?>
+<?#=debug($this->data)?>
