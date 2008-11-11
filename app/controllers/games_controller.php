@@ -30,12 +30,13 @@ class GamesController extends AppController {
 	function view($id = null) {
 	  # FIXME we assume a valid and public id. 
 	  if (($id == null) and (isset($this->params["requested"]))) {
+			$this->Game->recursive = 1;
 			return $this->Game->getRandom(1);	# For Spotlights-element.
 		}
 		
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
-		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review
+		# $this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review
 		$this->Game->cacheQueries = true;
 		$this->set('game', $this->Game->read("",$id)); # DL status and validity needs to be checked, custom finderquery.
 

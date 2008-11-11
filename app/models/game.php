@@ -17,9 +17,9 @@ class Game extends AppModel {
 	  'Review' => array("conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5), # TODO: we also need the reviewer's names. But how?
 	  "Comment" => array("limit" => 5),
 	  "Download",
-	  "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
-	  # => array("className" => "User", "finderQuery" => 'SELECT AVG(rating_value) AS average_rating,COUNT(rating_value) AS vote_count FROM Chroell_Forum.CWF_game_ratings AS Rating WHERE game_id = {$__cakeID__$} GROUP BY rating_type'),
-	  "Screenshot" => array("order" => "screenshot_id ASC"));
+	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
+	  "Screenshot" => array("order" => "screenshot_id ASC"),
+		"Rating" => array("className" => "Rating", "finderQuery" => 'SELECT Rating.game_id,Rating.rating_type, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating WHERE Rating.game_id IN ({$__cakeID__$}) GROUP BY Rating.game_id, Rating.rating_type ORDER BY Rating.game_id, Rating.rating_type')); # Average ratings. For some reason, merges the ratings wrong, but at least it works.
 	
 	var $belongsTo = array(
 	  "GameProposer" => array("className" => "User", "foreignKey" => "game_proposer_id","fields" => "username,user_id"),
@@ -91,6 +91,7 @@ class Game extends AppModel {
 	}
 	
 	function getRandom($amount = 1) {
+		# FIXME: Really slow (> 100 ms)
 		$conditions = array("download_status" => 0);
 		return $this->find('all',array("conditions"=>$conditions,'limit'=>$amount,"order"=>"rand()"));
 	}

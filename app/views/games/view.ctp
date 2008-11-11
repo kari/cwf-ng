@@ -50,13 +50,18 @@ foreach ($game["Screenshot"] as $screenshot) {
 <h2>Ratings</h2><ul>
 <li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$game["Game"]["site_rating"]?> of 6)</li>
 <?
+$ratings = array();
+foreach ($game["Rating"] as $rating) {
+  $ratings[$rating["rating_type"]]["average_rating"] = $rating["Rating"][0]["average_rating"];
+  $ratings[$rating["rating_type"]]["vote_count"] = $rating["Rating"][0]["vote_count"];
+}
 foreach ($RATING_TYPE as $key => $type) {
-  echo '<li>'.$type.': ';
+  echo '<li>'.$type.': '; 
   if (array_key_exists($key,$ratings)) {
-    echo $site->drawStars($ratings[$key][0]["average_rating"],6);
-    echo " ".$number->precision($ratings[$key][0]["average_rating"],2);
-    echo ' ('.$ratings[$key][0]["vote_count"].' vote';
-    if ($ratings[$key][0]["vote_count"] <> 1) echo 's'; // hack pluralization
+    echo $site->drawStars($ratings[$key]["average_rating"],6);
+    echo " ".$number->precision($ratings[$key]["average_rating"],2);
+    echo ' ('.$ratings[$key]["vote_count"].' vote';
+    if ($ratings[$key]["vote_count"] <> 1) echo 's'; // hack pluralization
     echo ')';
   } else {
     echo "No votes";
@@ -84,3 +89,4 @@ if (count($game["Review"]) == 0) {
   echo "<p>No reviews.</p>";
 }
 ?>
+<?#=debug($game)?>
