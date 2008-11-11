@@ -12,7 +12,14 @@
   <div id="doc">
     <div id="hd"><h1><?=$html->link("CWF-Freeware","/")?></h1></div>
     <div id="bd">
-    <? $session->flash()?>
+    <?
+    	if ($session->check('Message.flash')) {
+    		$session->flash();
+    	}
+    	if ($session->check('Message.auth')) {
+    		$session->flash('auth');
+    	}
+    ?>
     <?=$content_for_layout ?>
     </div>
     <div id="ft"></div>

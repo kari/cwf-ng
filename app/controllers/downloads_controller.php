@@ -4,6 +4,11 @@ class DownloadsController extends AppController {
 	var $name = 'Downloads';
   var $scaffold;
 
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow(array("index","view"));
+	}
+
 	function get($id=null) {
 		$this->layout = 'ajax';
 		$this->view = 'Media';

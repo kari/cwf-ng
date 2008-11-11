@@ -4,7 +4,6 @@ class BlogsController extends AppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->deny("*");
 		$this->Auth->allow(array("index","view"));
 	}
 	
@@ -24,12 +23,12 @@ class BlogsController extends AppController {
 		}    
 	}
 	
-	function delete($id) {	# FIXME!
+	function delete($id) {	# FIXME: Delete only own.
 		$this->Blog->del($id);    
 		$this->flash('The blog with id: '.$id.' has been deleted.', '/blogs');
 	}
 	
-	function edit($id = null) {
+	function edit($id = null) { # FIXME: Delete only own.
 		$this->Blog->id = $id;
 		if (empty($this->data)) {
 			$this->data = $this->Blog->read();

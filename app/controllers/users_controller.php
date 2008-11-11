@@ -5,8 +5,7 @@ class UsersController extends AppController {
 		
 		function beforeFilter() {
 			parent::beforeFilter();
-			$this->Auth->deny("*");
-			$this->Auth->allow(array("logout"));
+			# $this->Auth->allow("view");
 		}
  
     /**
@@ -22,6 +21,7 @@ class UsersController extends AppController {
     
     function view($id = null) {
       if ($id == null) { $this->cakeError('error404'); }
+			$this->User->recursive = 2; # TODO: It'd be nice to limit this just to Group
       $this->set('user', $this->User->read('',$id));
     }
 }

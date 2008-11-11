@@ -22,8 +22,8 @@ class Game extends AppModel {
 	  "Screenshot" => array("order" => "screenshot_id ASC"));
 	
 	var $belongsTo = array(
-	  "Game_Proposer" => array("className" => "User", "foreignKey" => "game_proposer_id","fields" => "username,user_id"),
-	  "Game_Hunter" => array("className" => "User", "foreignKey" => "game_hunter_id","fields" => "username,user_id"),
+	  "GameProposer" => array("className" => "User", "foreignKey" => "game_proposer_id","fields" => "username,user_id"),
+	  "GameHunter" => array("className" => "User", "foreignKey" => "game_hunter_id","fields" => "username,user_id"),
 	  "Specs" => array("className" => "Specs", "foreignKey" => "specs_id"),
 	  "Genres" => array("className" => "Genres", "foreignKey" => "genre_id"),
 	  "Publisher"
@@ -73,11 +73,11 @@ class Game extends AppModel {
 	3 => "Special permission");
 	
 	var $DL_STATUS = array(0 => "Accepted for DL",
-	1 => "Not validated",
+	-1 => "Not validated",
 	2 => "Not accepted",
 	3 => "Unknown",
 	-666 => "Remove!",
-	-665 => "Removed"
+	-665 => "Removed",
 	);
 		
 	function index() {
