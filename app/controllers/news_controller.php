@@ -14,7 +14,6 @@ class NewsController extends AppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->deny("*");
 		$this->Auth->allow(array("index","view"));
 	}
 	
@@ -37,7 +36,7 @@ class NewsController extends AppController {
 		$this->set("user_id",$this->Auth->user("user_id"));
 	}
 	
-	function edit($id=null) {
+	function edit($id=null) { # news/edit allows to edit all news.
 		if (!empty($this->data)) {
 			$this->data["News"]["last_edit_time"] = date("Y-m-d H:i:s");
 			if($this->News->save($this->data)) {
@@ -48,7 +47,7 @@ class NewsController extends AppController {
 		}
 		$this->data = $this->News->findByNews_id($id);
 		$this->set("user_id",$this->Auth->user("user_id"));
-		$this->set("users",$this->User->find('list',array("fields"=>"user_id,username","order"=>"username"))); # FIXME: should only list users with relevant access level?
+		$this->set("posters",$this->News->User->find('list')); # FIXME: should only list users with relevant access level?
 	}
 	
 }

@@ -16,6 +16,11 @@ class GamesController extends AppController {
 	
 	# var $cacheAction = array("view/" => "1 day");
 
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allow(array("index","view"));
+	}
+
 	function index() {        
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
 		$this->set('GENRE',$this->Game->GENRE);
@@ -44,7 +49,19 @@ class GamesController extends AppController {
 		
 	}
 	
-	
+	function edit($id = null) {
+		$this->data = $this->Game->read("",$id);
+		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
+		$this->set("gameHunters",$this->Game->GameHunter->find('list'));
+		$this->set("publishers",$this->Game->Publisher->find('list'));
+		$this->set('LICENSE',$this->Game->LICENSE);
+		$this->set('GENRE',$this->Game->GENRE);
+		$this->set('OSYSTEM',$this->Game->OSYSTEM);
+		$this->set('DL_STATUS',$this->Game->DL_STATUS);
+		$this->set("DL_TYPE",$this->Download->TYPE);
+		$this->set("PLATFORM",$this->Download->PLATFORM);
+		
+	}
 }
 
 ?>

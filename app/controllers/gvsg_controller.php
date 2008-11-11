@@ -6,7 +6,6 @@ class GvsgController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->deny("*");
 		$this->Auth->allow(array("index","stats"));
 	}
 	

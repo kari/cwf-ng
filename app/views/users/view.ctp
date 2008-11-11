@@ -51,8 +51,23 @@ switch ($user['User']['user_avatar_type']) {
 <h2>Groups</h2>
 <ul>
   <? 
+  $actions = array();
   foreach($user["Group"] as $group) {
-    echo "<li>".$group["group_name"]." <i>(".$group["group_description"].")</i></li>";  
+    echo "<li>".$group["group_name"]." <i>(".$group["group_description"].")</i><ul>";
+    foreach($group["Action"] as $action) {
+      echo "<li>allows ".$action["action_id"]."</li>";
+      $actions[] = $action["action_id"];
+    }  
+    echo "</ul></li>";  
+  }
+  ?>
+</ul>
+<h2>Site privileges</h2>
+<ul>
+  <? $actions = array_unique($actions);
+  sort($actions); 
+  foreach($actions as $action) {
+    echo "<li>".$action."</li>";
   }
   ?>
 </ul>

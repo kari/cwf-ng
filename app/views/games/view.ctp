@@ -17,8 +17,8 @@
 <p><?=nl2br($game['Game']['description'])?></p>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
-    <li>Game hunter: <?=$html->link($game['Game_Hunter']['username'],array("controller"=>"users","action"=>"view",$game["Game_Hunter"]["user_id"]))?></li>
-    <li>Game proposer: <?=$html->link($game['Game_Proposer']['username'],array("controller"=>"users","action"=>"view",$game["Game_Proposer"]["user_id"]))?></li>
+    <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
+    <li>Game proposer: <?=$html->link($game['GameProposer']['username'],array("controller"=>"users","action"=>"view",$game["GameProposer"]["user_id"]))?></li>
     <li>Reviews: <?=$game["Game"]["review_amount"]?></li>
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
     <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>

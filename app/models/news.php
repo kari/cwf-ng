@@ -13,8 +13,9 @@ class News extends AppModel {
 	
 	var $order = "post_date DESC";
 	
-	var $belongsTo = array("User" => array("foreignKey"=>"poster_id","fields"=>"user_id,username"),
-	"Editor" => array("className"=>"User","foreignKey"=>"edited_by","fields"=>"user_id,username"));
+	var $belongsTo = array(
+		"User" => array("foreignKey"=>"poster_id","fields"=>"user_id,username","order"=>"User.username"),
+		"Editor" => array("className"=>"User","foreignKey"=>"edited_by","fields"=>"user_id,username","order"=>"Editor.username"));
 
 	
 }

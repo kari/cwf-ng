@@ -9,6 +9,7 @@ class Publisher extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'publisher_id';
 	# var $displayField = 'name';
+	var $order = "name";
 	
 	var $hasMany = array("Game");
 }

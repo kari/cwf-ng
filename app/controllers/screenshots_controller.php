@@ -1,7 +1,7 @@
 <?php
 
-class ReviewsController extends AppController {
-	var $name = 'Reviews';
+class ScreenshotsController extends AppController {
+	var $name = 'Screenshots';
   var $scaffold;
 
 	function beforeFilter() {
