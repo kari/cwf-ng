@@ -29,5 +29,7 @@ class User extends AppModel {
 		return false;
 	}
 	
+	# User also needs a hasRight($action) function, maybe with a relationship to Actions with custom finderQuery (taking just unique rights) (see isAuthorized for example finderQuery). Actions should also be available through $this->Group?
+	 
 }
 ?>

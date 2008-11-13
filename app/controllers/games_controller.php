@@ -51,6 +51,11 @@ class GamesController extends AppController {
 	}
 	
 	function edit($id = null) {
+		if (!empty($this->data)) {
+			$this->Game->saveAll($this->data,array("validate"=>"first"));
+			$this->flash("Game changes saved.","");
+		}
+		
 		$this->data = $this->Game->read("",$id);
 		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
 		$this->set("gameHunters",$this->Game->GameHunter->find('list'));
@@ -60,8 +65,27 @@ class GamesController extends AppController {
 		$this->set('OSYSTEM',$this->Game->OSYSTEM);
 		$this->set('DL_STATUS',$this->Game->DL_STATUS);
 		$this->set("DL_TYPE",$this->Download->TYPE);
-		$this->set("PLATFORM",$this->Download->PLATFORM);
+		$this->set("PLATFORM",$this->Download->PLATFORM);		
+	}
+	
+	function add() {
+		if (!empty($this->data)) {
+			$this->Game->Specs->save($this->data);
+			$this->data["Game"]["specs_id"] = $this->Game->Specs->id;
+			$this->Game->Genres->save($this->data);
+			$this->data["Game"]["genre_id"] = $this->Game->Genres->id;
+			$this->Game->save($this->data);
+			$this->flash("Game created.",array("action"=>"edit",$this->Game->id));
+		}
+		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
+		$this->set("gameHunters",$this->Game->GameHunter->find('list'));
+		$this->set("publishers",$this->Game->Publisher->find('list'));
+		$this->set('LICENSE',$this->Game->LICENSE);
+		$this->set('GENRE',$this->Game->GENRE);
+		$this->set('OSYSTEM',$this->Game->OSYSTEM);
+		$this->set('DL_STATUS',$this->Game->DL_STATUS);
 		
+		$this->set("user_id",$this->Auth->user("user_id"));
 	}
 }
 
