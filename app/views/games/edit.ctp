@@ -2,6 +2,9 @@
 <h2>Game info</h2>
 <?
   echo $form->create("Game");
+  echo $form->hidden("game_id");
+  echo $form->hidden("Specs.specs_id");
+  echo $form->hidden("Genres.genre_id");
   echo $form->input("game_name");
   echo $form->input("year",array("maxLength"=>4));
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
@@ -49,7 +52,7 @@
   }
 ?>
 <li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
-</ui>
+</ul>
 <h2>Files</h2>
 <ul>
 <?
