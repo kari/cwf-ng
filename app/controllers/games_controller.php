@@ -52,8 +52,11 @@ class GamesController extends AppController {
 	
 	function edit($id = null) {
 		if (!empty($this->data)) {
-			$this->Game->saveAll($this->data,array("validate"=>"first"));
-			$this->flash("Game changes saved.","");
+			if ($this->Game->saveAll($this->data,array("validate"=>"first"))) {
+				$this->flash("Game changes saved.","");
+			} else {
+				$this->Session->setFlash("There were validation errors"); # FIXME: Validation errors are not visible!
+			}
 		}
 		
 		$this->data = $this->Game->read("",$id);

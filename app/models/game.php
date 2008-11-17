@@ -11,11 +11,20 @@ class Game extends AppModel {
 	var $oder = "game_name DESC";
 	
 	# Validation
+	var $validate = array(
+		"game_name" => "notEmpty",
+		"specs_id" => "notEmpty",
+		"genre_id" => "notEmpty",
+		"site_rating" => array("rule"=>"numeric","allowEmpty"=>false),
+		"year" => array("rule"=>array("range",1900,3000)), # FIXME: possible Y3K problem.
+		"site" => array("rule"=>"url","allowEmpty"=>true),
+		"forum_link" => array("rule"=>"url","allowEmpty"=>true),
+		);
 	
 	# Relationships
 	var $hasMany = array(
 	  'Review' => array("conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5), # TODO: we also need the reviewer's names. But how?
-	  "Comment" => array("limit" => 5),
+	  "Comment" => array("limit" => 5,"order"=>"created DESC"),
 	  "Download",
 	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
 	  "Screenshot" => array("order" => "screenshot_id ASC"),
