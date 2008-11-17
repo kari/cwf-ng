@@ -66,4 +66,4 @@
 <li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
 
-<?#=debug($this->data)?>
+<?#=debug($this->validationErrors)?>

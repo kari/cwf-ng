@@ -9,6 +9,9 @@ class Rating extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'vote_id';
 	var $displayField = 'rating_value';
+	
+	var $validate = array("rating_value" => array("rule"=>array("range",0,6))
+		);
 
   var $TYPE = array(0 => "Overall",
   1 => "Playability",
