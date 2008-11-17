@@ -37,7 +37,7 @@
           }
         } ?>
       (<?=$game["Game"]["year"]?>)<br>
-      <?=$html->image("/img/icons/group.png",array("title"=>"Game Hunters' rating"))?> <?=$site->drawStars($game["Game"]["site_rating"],6)?> <?=$html->image("/img/icons/user.png",array("title"=>"Site users' rating"))?>
+      <?=$html->image("/img/icons/group.png",array("title"=>"Game Hunters' rating"))?> <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> <?=$html->image("/img/icons/user.png",array("title"=>"Site users' rating"))?>
 <?
 if (array_key_exists(0,$game["Rating"])) { # FIXME: Ugly way, and might not be Overall (type=0)!
   $average_rating = $game["Rating"][0]["Rating"][0]["average_rating"];
