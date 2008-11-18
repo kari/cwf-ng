@@ -19,7 +19,7 @@ class PagesController extends AppController {
 	}
 	
 	function sitemap() {
-		
+		# http://bakery.cakephp.org/articles/view/automatically-generate-dynamic-sitemaps
 	}
 	
 	function status() {

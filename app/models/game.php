@@ -28,7 +28,10 @@ class Game extends AppModel {
 	  "Download",
 	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
 	  "Screenshot" => array("order" => "screenshot_id ASC"),
-		"Rating" => array("className" => "Rating", "finderQuery" => 'SELECT Rating.game_id,Rating.rating_type, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating WHERE Rating.game_id IN ({$__cakeID__$}) GROUP BY Rating.game_id, Rating.rating_type ORDER BY Rating.game_id, Rating.rating_type')); # Average ratings. For some reason, merges the ratings wrong, but at least it works.
+		"Rating" => array("className" => "Rating", "finderQuery" => 'SELECT Rating.game_id,Rating.rating_type, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating WHERE Rating.game_id IN ({$__cakeID__$}) GROUP BY Rating.game_id, Rating.rating_type ORDER BY Rating.game_id, Rating.rating_type', # Average ratings. For some reason, merges the ratings wrong, but at least it works.
+		)); 
+	
+	var $hasOne = array("GvsgStats");
 	
 	var $belongsTo = array(
 	  "GameProposer" => array("className" => "User", "foreignKey" => "game_proposer_id","fields" => "username,user_id"),
@@ -101,6 +104,7 @@ class Game extends AppModel {
 	
 	function getRandom($amount = 1) {
 		# FIXME: Really slow (> 100 ms)
+		# possible FIX: get all games and then choose $amount at random at application layer?
 		$conditions = array("download_status" => 0);
 		return $this->find('all',array("conditions"=>$conditions,'limit'=>$amount,"order"=>"rand()"));
 	}
