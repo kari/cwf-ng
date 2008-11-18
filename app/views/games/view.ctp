@@ -89,4 +89,8 @@ if (count($game["Review"]) == 0) {
   echo "<p>No reviews.</p>";
 }
 ?>
+
+<h2>Comments</h2>
+<p>Not implemented yet</p>
+
 <?#=debug($game)?>
