@@ -10,9 +10,13 @@ class Rating extends AppModel {
 	var $primaryKey = 'vote_id';
 	var $displayField = 'rating_value';
 	
-	var $validate = array("rating_value" => array("rule"=>array("range",0,6))
-		);
-
+	var $validate = array(# "rating_value" => array("rule"=>array("range",0,6),"allowEmpty"=>false),
+	"game_id" => "notEmpty",
+	"user_id" => "notEmpty",
+	# "rating_type" => "numeric" #array("rule"=>array("range",0,6))
+	# FIXME: rating_value/_type range validation doesn't work for some reason.
+	);
+	
   var $TYPE = array(0 => "Overall",
   1 => "Playability",
   2 => "Idea",

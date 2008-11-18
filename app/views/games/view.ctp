@@ -47,13 +47,26 @@ foreach ($game["Screenshot"] as $screenshot) {
 }
 ?>
 </ul>
-<h2>Ratings</h2><ul>
+<h2>Ratings</h2>
+<? 
+if(!empty($user_id)) { 
+  echo $form->create("Rating",array("controller"=>"ratings","action"=>"vote"));
+  echo $form->hidden("Game.game_id",array("value"=>$game["Game"]["game_id"]));
+}
+?>
+<ul>
 <li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$game["Game"]["site_rating"]?> of 6)</li>
 <?
+# Rewriting arrays for better traversal in foreach loops.
 $ratings = array();
+$user_rating = array();
 foreach ($game["Rating"] as $rating) {
   $ratings[$rating["rating_type"]]["average_rating"] = $rating["Rating"][0]["average_rating"];
   $ratings[$rating["rating_type"]]["vote_count"] = $rating["Rating"][0]["vote_count"];
+}
+foreach ($user_ratings as $rating) {
+  $user_rating[$rating["Rating"]["rating_type"]]["value"] = $rating["Rating"]["rating_value"];
+  $user_rating[$rating["Rating"]["rating_type"]]["vote_id"] = $rating["Rating"]["vote_id"];
 }
 foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': '; 
@@ -66,10 +79,22 @@ foreach ($RATING_TYPE as $key => $type) {
   } else {
     echo "No votes";
   }
+  echo " Your vote: ";
+  # Placeholders for voting.
+  $allowEmpty = false;
+  if (!array_key_exists($key,$user_rating)) {
+    $user_rating[$key]["value"] = "";
+    $allowEmpty = true;
+  }
+  if(!empty($user_id)) {
+    echo $form->hidden("Rating.".$key.".rating_type",array("value"=>$key));
+    echo $form->select("Rating.".$key.".rating_value",array(0=>"0",1=>"1",2=>"2",3=>"3",4=>"4",5=>"5",6=>"6"),$user_rating[$key]["value"],array(),(false OR $allowEmpty));
+  }
   echo '</li>';
 }
 ?>
 </ul>
+<? if(!empty($user_id)) echo $form->end("Vote"); ?>
 <h2>Downloads</h2>
 <ul><?
 foreach ($game["Download"] as $file) {

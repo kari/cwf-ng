@@ -28,7 +28,7 @@ class BlogsController extends AppController {
 		$this->flash('The blog with id: '.$id.' has been deleted.', '/blogs');
 	}
 	
-	function edit($id = null) { # FIXME: Delete only own.
+	function edit($id = null) { # FIXME: Edit only own.
 		$this->Blog->id = $id;
 		if (empty($this->data)) {
 			$this->data = $this->Blog->read();

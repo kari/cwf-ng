@@ -13,6 +13,7 @@ class UsersController extends AppController {
      *  for login, so you can leave this function blank.
      */
     function login() {
+			# TODO: there should be Remember Me-functionality
     }
 
     function logout() {

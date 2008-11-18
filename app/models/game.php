@@ -8,7 +8,7 @@ class Game extends AppModel {
 	var $primaryKey = 'game_id';
 	var $displayField = 'game_name';
 	
-	var $oder = "game_name DESC";
+	var $order = "game_name DESC";
 	
 	# Validation
 	var $validate = array(
