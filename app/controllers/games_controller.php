@@ -46,7 +46,9 @@ class GamesController extends AppController {
 		$this->set("DL_TYPE",$this->Download->TYPE);
 		$this->set("PLATFORM",$this->Download->PLATFORM);
 		$this->set("RATING_TYPE",$this->Rating->TYPE);
-		$this->set('ratings',$this->Rating->average_ratings($id)); # TODO: custom finderquery for Game model
+		$this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$this->Game->id))));
+		 # $this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>81,"game_id"=>$this->Game->id))));
+		$this->set("user_id",$this->Auth->user("user_id"));
 		
 	}
 	

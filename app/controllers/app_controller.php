@@ -11,7 +11,7 @@ class AppController extends Controller {
 		$this->Auth->deny("*");
 		$this->Auth->authorize = array("model"=>"User");
 		# FIXME: User should be always update (if possible) something created by him. Some cases even delete.
-		# Workaround: update/delete action only applies to own. admin access also others.
+		# Workaround: update/delete action only applies to own. admin access also others. admin/controller/action for such actions?
 		
 		$this->Auth->logoutRedirect = "/";
 	  $this->Auth->fields = array(
