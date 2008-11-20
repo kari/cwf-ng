@@ -41,8 +41,7 @@ foreach ($game["Specs"] as $platform => $platform_set) {
 <h2>Screenshots</h2>
 <ul id="screenshots"><?
 foreach ($game["Screenshot"] as $screenshot) {
-  # "http://www.curlysworldoffreeware.com/".$screenshot["thumb_link"]
-  echo "<li>".$html->link($html->image("http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),"http://www.curlysworldoffreeware.com/".$screenshot["image_link"],array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
+  echo "<li>".$html->link($site->image($screenshot["image_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),$site->image_url($screenshot["image_link"]),array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
   # $html->image => $site->image for resizing.
 }
 ?>

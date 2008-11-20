@@ -20,8 +20,7 @@
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>
-	 <?= $html->link($html->image("http://www.curlysworldoffreeware.com/".$game["Screenshot"][0]["thumb_link"],array("width"=>100,"height"=>100,"title"=>$game["Game"]["game_name"])),"http://www.curlysworldoffreeware.com/".$game["Screenshot"][0]["image_link"],array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false)?>
-	    <!-- <a class="thumb" href="#"><?=$html->image("http://www.curlysworldoffreeware.com/".$game["Screenshot"][0]["thumb_link"],array("width"=>100,"height"=>100))?></a> -->
+	 <?= $html->link($site->image($game["Screenshot"][0]["image_link"],array("width"=>100,"height"=>100,"title"=>$game["Game"]["game_name"])),$site->image_url($game["Screenshot"][0]["image_link"]),array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false)?>
 	  </td><td>
 		<h4><?=$html->link($game['Game']['game_name'], '/games/view/'.$game['Game']['game_id']);?></h4>
 		  <p><? $first = true;
