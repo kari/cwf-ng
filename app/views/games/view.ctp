@@ -77,15 +77,15 @@ foreach ($RATING_TYPE as $key => $type) {
     echo ')';
   } else {
     echo "No votes";
-  }
-  echo " Your vote: ";
+  };
   # Placeholders for voting.
-  $allowEmpty = false;
-  if (!array_key_exists($key,$user_rating)) {
-    $user_rating[$key]["value"] = "";
-    $allowEmpty = true;
-  }
   if(!empty($user_id)) {
+    $allowEmpty = false;
+    if (!array_key_exists($key,$user_rating)) {
+      $user_rating[$key]["value"] = "";
+      $allowEmpty = true;
+    }
+    echo " Your vote: ";
     echo $form->hidden("Rating.".$key.".rating_type",array("value"=>$key));
     echo $form->select("Rating.".$key.".rating_value",array(0=>"0",1=>"1",2=>"2",3=>"3",4=>"4",5=>"5",6=>"6"),$user_rating[$key]["value"],array(),(false OR $allowEmpty));
   }
@@ -97,7 +97,7 @@ foreach ($RATING_TYPE as $key => $type) {
 <h2>Downloads</h2>
 <ul><?
 foreach ($game["Download"] as $file) {
-  echo '<li>'.$html->link($file["download_link"],array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
+  echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
 
