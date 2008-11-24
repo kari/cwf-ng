@@ -5,7 +5,7 @@ Originally from http://www.phpit.net/code/bbcode-format-function/
 */ 
 
 function bbcode_format ($str) { 
-    $str = htmlentities($str,ENT_QUOTES); // ENT_QUOTES added by zyx
+    $str = htmlentities($str,ENT_QUOTES,"UTF-8",false); // ENT_QUOTES added by zyx
 
     $simple_search = array( 
                 '/\[b\](.*?)\[\/b\]/is',                                 

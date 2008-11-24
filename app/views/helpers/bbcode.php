@@ -9,13 +9,19 @@
 
 class BBCodeHelper extends AppHelper {
         
-    function decode($bbcode,$phpbb_code = null) {
+    function decode($bbcode="",$phpbb_code = null) {
         App::import('Vendor','lib_bbcode');
         if ($phpbb_code) {
           $bbcode = preg_replace("/:".$phpbb_code."/", "", $bbcode);
         }
         return $this->output(bbcode_format($bbcode));
     }
+
+		function strip($str="") {
+			$match = '/\[[^\]]+\]/';
+			$str = preg_replace($match,"",$str);
+			return $this->output($str);
+		}
 }
 
 ?>
