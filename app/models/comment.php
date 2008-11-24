@@ -16,7 +16,7 @@ class Comment extends AppModel {
 	var $validate = array(        
 		'title' => "notEmpty",
 	  'text' => "notEmpty",
-		'user_id' => "notEmpty",
+		# 'user_id' => "notEmpty",
 	);
 	
 	

@@ -6,7 +6,7 @@ class CommentsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view")); # FIXME: No comments/index in production.
+		$this->Auth->allow(array("index","view","add")); # FIXME: No comments/index in production.
 	}
 }
 

@@ -11,7 +11,8 @@
 </head>
 <body>
   <div id="doc">
-    <div id="hd"><h1><?=$html->link("CWF-Freeware","/")?></h1></div>
+    <div id="hd"><h1><?=$html->link("CWF-Freeware","/")?></h1>
+    <?=$this->element("login")?></div>
     <div id="bd">
     <?
     	if ($session->check('Message.flash')) {

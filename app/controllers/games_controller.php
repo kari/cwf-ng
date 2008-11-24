@@ -21,14 +21,14 @@ class GamesController extends AppController {
 		$this->Auth->allow(array("index","view"));
 	}
 
-	function index() {        
+	function index() {
+		# FIXME: Do not fetch Reviews and Comments.
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
 		$this->set('GENRE',$this->Game->GENRE);
 		$this->set("games",$this->paginate('Game'));	
 	}
 	
 	function view($id = null) {
-	  # FIXME we assume a valid and public id. 
 	  if (($id == null) and (isset($this->params["requested"]))) {
 			$this->Game->recursive = 1;
 			return $this->Game->getRandom(1);	# For Spotlights-element.
@@ -36,10 +36,12 @@ class GamesController extends AppController {
 		
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
-		# $this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review
+		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment
 		$this->Game->cacheQueries = true;
-		$this->set('game', $this->Game->read("",$id)); # DL status and validity needs to be checked, custom finderquery.
-
+		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
+		if (empty($game)) { $this->cakeError("error404"); }
+		
+		$this->set("game",$game);
 		$this->set('LICENSE',$this->Game->LICENSE);
 		$this->set('GENRE',$this->Game->GENRE);
 		$this->set('OSYSTEM',$this->Game->OSYSTEM);
