@@ -1,7 +1,5 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
 <h1>Welcome to CWF-Freeware</h1>
-<?#=debug($Auth)?>
-<?=$this->element("login")?>
 <ul>
   <li><?=$html->link("Games",array("controller"=>"games"))?></li>
   <li><?=$html->link("Blogs",array("controller"=>"blogs"))?></li>

@@ -110,8 +110,8 @@ foreach ($game["Download"] as $file) {
 <?
 foreach ($game["Review"] as $review) {
  echo '<h3>'.$review["review_title"].'</h3>';
- echo "written by ".$review["User"]["username"]. " in ".$review["review_lang"]."<br/>";
- echo nl2br($review["review_text"]); # TODO: encoding (DB iso, site utf-8)
+ echo "written by ".$review["User"]["username"]. " in ".$review["review_lang"];
+ echo "<p>".nl2br($review["review_text"])."</p>"; # TODO: encoding (DB iso, site utf-8)
  # print_r($review);
 }
 if (count($game["Review"]) == 0) {
@@ -120,6 +120,28 @@ if (count($game["Review"]) == 0) {
 ?>
 
 <h2>Comments</h2>
-<p>Not implemented yet</p>
+<?
+foreach ($game["Comment"] as $comment) {
+  echo "<strong>".$comment["title"]." by ";
+  if (!empty($comment["user_id"])) {
+    echo $comment["User"]["username"];
+  } else {
+    echo "Anonymous";
+  }
+  echo "</strong>";
+  echo "<p>".nl2br($comment["text"])."</p>";
+}
+?>
+<h3>Add a comment</h3>
+<?=$form->create("Comment");?>
+<?=$form->input("title");?>
+<?=$form->input("text",array("rows"=>3));?>
+<? if (!empty($user_id)) {
+  echo $form->hidden("user_id",array("value"=>$user_id));
+}
+?>
+<?=$form->hidden("game_id",array("value"=>$game["Game"]["game_id"]));?>
+<?# FIXME: Captcha for non-registered ?>
+<?=$form->end("Submit")?>
 
 <?#=debug($game)?>
