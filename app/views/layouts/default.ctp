@@ -3,9 +3,10 @@
 <head>
     <?=$html->charset("utf-8"); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
-		<?=$html->meta('icon',"/img/icons/sport_shuttlecock.png");?>
+		<?=$html->meta('icon',"/img/icons/sport_shuttlecock.png");?> <? # FIXME ?>
     <?=$html->css('default');?>
-    <?=$javascript->link("/js/jquery.js");?>
+    <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");?>  
+    <?#=$javascript->link("http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/yuiloader/yuiloader-min.js"); ?>
     <?=$scripts_for_layout;?>
 </head>
 <body>

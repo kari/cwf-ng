@@ -40,7 +40,7 @@
   echo "<li><strong>";
   echo $time->format("d.m.Y",$blog["Blog"]["created"]);
   echo " - ".$html->link($blog["Blog"]["title"],array("controller"=>"blogs","action"=> "view",$blog["Blog"]["entry_id"]))." by ".$blog["User"]["username"];
-  echo "</strong><br>".$text->trim($blog["Blog"]["content"],200,"...",false);
+  echo "</strong><br>".$text->trim($bbcode->strip($blog["Blog"]["content"]),200,"...",false);
   echo "</li>";  
 }?>
 </ul>
