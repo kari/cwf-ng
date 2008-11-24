@@ -20,14 +20,12 @@ def wm_annotate(img)
 end
 
 path = "originals/"
+wm = Magick::Image.read("../cwf_watermark.png").first
 for o_file in Dir.entries(path).grep(/.+\..{3}/) #.first(10)
   # o_file = "originals/scummvm1.png"
   basename,ext = o_file.split(/\./)
   img = Magick::Image.read(path+o_file).first
   puts "Original: #{img.base_filename}, size #{img.filesize/1024} kb (#{img.columns}x#{img.rows})"
-  thumb = img.resize_to_fit(100,100)
-
-  wm = Magick::Image.read("../cwf_watermark.png").first
 # Watermark with text
 # wm_annotate(img)
 # Watermark in HSL-space
@@ -35,8 +33,12 @@ for o_file in Dir.entries(path).grep(/.+\..{3}/) #.first(10)
 # Add with CompositeOp
 # wm_img = img.composite(wm,Magick::SouthEastGravity,2,2,Magick::OverCompositeOp)
 # Dissolve with opacity
-  wm_img = img.dissolve(wm,0.75,1,Magick::SouthEastGravity,2,2)
-
-  wm_img.write("../cache/#{basename}-full.#{ext.downcase}")
-  thumb.write("../cache/#{basename}-100w.#{ext.downcase}")
+  unless File.exist?("../cache/#{basename}-full.#{ext.downcase}")
+    wm_img = img.dissolve(wm,0.75,1,Magick::SouthEastGravity,2,2)
+    wm_img.write("../cache/#{basename}-full.#{ext.downcase}")
+  end
+  unless File.exist?("../cache/#{basename}-100w.#{ext.downcase}")
+    thumb = img.resize_to_fit(100,100)
+    thumb.write("../cache/#{basename}-100w.#{ext.downcase}") 
+  end
 end
