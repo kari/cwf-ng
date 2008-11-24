@@ -45,6 +45,11 @@ foreach ($game["Screenshot"] as $screenshot) {
   # $html->image => $site->image for resizing.
 }
 ?>
+<?
+if (empty($game["Screenshot"])) {
+  echo "<li>".$html->image("/img/cwf_nosshot.png",array("width"=>100,"height"=>100,"title"=>"No screenshot"))."</li>";
+}
+?>
 </ul>
 <h2>Ratings</h2>
 <? 

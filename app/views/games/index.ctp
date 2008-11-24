@@ -20,7 +20,13 @@
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>
-	 <?= $html->link($site->image($game["Screenshot"][0]["image_link"],array("width"=>100,"height"=>100,"title"=>$game["Game"]["game_name"])),$site->image_url($game["Screenshot"][0]["image_link"]),array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false)?>
+	 <?
+	 if (!empty($game["Screenshot"])) {
+	   echo $html->link($site->image($game["Screenshot"][0]["image_link"],array("width"=>100,"height"=>100,"title"=>$game["Game"]["game_name"])),$site->image_url($game["Screenshot"][0]["image_link"]),array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false);
+   } else {
+     echo $html->image("/img/cwf_nosshot.png",array("width"=>100,"height"=>100,"title"=>"No screenshot"));
+   }
+	   ?>
 	  </td><td>
 		<h4><?=$html->link($game['Game']['game_name'], '/games/view/'.$game['Game']['game_id']);?></h4>
 		  <p><? $first = true;
