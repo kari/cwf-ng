@@ -23,7 +23,7 @@ class BlogsController extends AppController {
 		}    
 	}
 	
-	function delete($id) {	# FIXME: Delete only own.
+	function delete($id=null) {	# FIXME: Delete only own.
 		$this->Blog->del($id);    
 		$this->flash('The blog with id: '.$id.' has been deleted.', '/blogs');
 	}

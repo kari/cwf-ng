@@ -23,6 +23,7 @@ class GamesController extends AppController {
 
 	function index() {
 		# FIXME: Do not fetch Reviews and Comments.
+		# Remove those associations on the fly.
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
 		$this->set('GENRE',$this->Game->GENRE);
 		$this->set("games",$this->paginate('Game'));	
@@ -36,7 +37,7 @@ class GamesController extends AppController {
 		
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
-		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment
+		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
 		$this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
 		if (empty($game)) { $this->cakeError("error404"); }
@@ -93,6 +94,26 @@ class GamesController extends AppController {
 		$this->set('DL_STATUS',$this->Game->DL_STATUS);
 		
 		$this->set("user_id",$this->Auth->user("user_id"));
+	}
+	
+/*	function delete($id = null) {
+		# Delete the game. Should set dependencies at model level, too.
+	} */
+	
+	function queue() {
+		# GH voting and validation.
+		if (!empty($this->data)) {
+			# Err... or should we post to game/edit instead?
+		}
+		$this->set("games",$this->Game->find("all",array("conditions"=>array("Game.download_status <>"=>0),"order"=>"download_status,game_name")));
+		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
+		$this->set("gameHunters",$this->Game->GameHunter->find('list'));
+		$this->set("publishers",$this->Game->Publisher->find('list'));
+		$this->set('LICENSE',$this->Game->LICENSE);
+		$this->set('GENRE',$this->Game->GENRE);
+		$this->set('OSYSTEM',$this->Game->OSYSTEM);
+		$this->set('DL_STATUS',$this->Game->DL_STATUS);	
+		
 	}
 }
 
