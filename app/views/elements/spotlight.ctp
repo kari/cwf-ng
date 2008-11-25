@@ -1,5 +1,5 @@
 <h1>At Spotlights</h1>
-<? $game = $this->requestAction('games/view'); ?>
+<? $game = $this->requestAction('games/random/1'); ?>
 <h2><?=$html->link($game[0]["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game[0]["Game"]["game_id"]))?></h2>
 <p><small>by <?=$html->link($game[0]['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game[0]["Publisher"]["publisher_id"]))?></small></p>
 <?=$site->image($game[0]["Screenshot"][0]["image_link"],array("width"=>100,"height"=>100))?><br>

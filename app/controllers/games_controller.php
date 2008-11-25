@@ -18,7 +18,7 @@ class GamesController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view"));
+		$this->Auth->allow(array("index","view","random","top"));
 	}
 
 	function index() {
@@ -29,12 +29,42 @@ class GamesController extends AppController {
 		$this->set("games",$this->paginate('Game'));	
 	}
 	
-	function view($id = null) {
-	  if (($id == null) and (isset($this->params["requested"]))) {
+	function random($limit=1) {
+		if (isset($this->params["requested"])) {
+			if ($limit < 1) $limit = 1;
+			if ($limit > 10) $limit = 10;
 			$this->Game->recursive = 1;
-			return $this->Game->getRandom(1);	# For Spotlights-element.
+			return $this->Game->getRandom($limit);	# For Spotlights-element.
 		}
-		
+		$this->cakeError("error404");
+	}
+	
+	function top($by="download",$limit=10) {
+		if (isset($this->params["requested"])) {
+			$this->Game->recursive = 0;
+			switch ($by) {
+				case "download":
+					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC"));
+					break;
+				case "rating":
+					# $this->Game->recursive = 1;
+					$games = $this->Game->query("SELECT Game.game_name, Game.game_id, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating LEFT JOIN CWF_games AS Game ON Game.game_id = Rating.game_id WHERE Rating.rating_type = 0 GROUP BY Rating.game_id, Rating.rating_type HAVING COUNT(Rating.rating_value) > 2");
+					$games = array_slice(Set::sort($games,'{n}.0.average_rating',"desc"),0,10);
+					break;
+				case "latest":
+					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC"));
+					break;
+				default:
+					$games = array();
+					break;
+			}
+			return $games;
+		}
+		$this->cakeError("error404");
+	}
+	
+	function view($id = null) {
+	
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?

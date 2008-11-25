@@ -109,4 +109,9 @@ class Game extends AppModel {
 		return $this->find('all',array("conditions"=>$conditions,'limit'=>$amount,"order"=>"rand()"));
 	}
 }
+
+/* Notes:
+Dates for games were created from earliest file associated with the game using following SQL:
+UPDATE CWF_games,(SELECT game_id,MIN(uploaded) AS uploaded FROM CWF_game_files GROUP BY game_id) AS File SET CWF_games.created = File.uploaded WHERE CWF_games.game_id = File.game_id
+*/
 ?>
