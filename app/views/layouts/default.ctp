@@ -18,6 +18,8 @@
         <li><?=$html->link("Games","/games/")?></li>
         <li><?=$html->link("Blogs","/blogs/")?></li>
         <li><?=$html->link("News","/news/")?></li>
+        <li><?=$html->link("Reviews","/reviews/")?></li>
+        <li><?=$html->link("Interviews","/interviews/")?></li>
         <li><?=$html->link("Forums","/forum")?></li>
       </ul>
     <div id="loginbox">

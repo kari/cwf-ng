@@ -1,7 +1,7 @@
 <?
 class AppController extends Controller {  
 	var $components = array('Auth');
-	var $helpers = array("html","form","javascript","text","site","Bbcode");
+	var $helpers = array("html","form","javascript","text","site","Bbcode","number");
 	# var $uses = "User";
 	
 	function beforeFilter() {

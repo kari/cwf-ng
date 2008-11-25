@@ -59,3 +59,6 @@
 </ul>
 <?=$this->element("adbox",array("style"=>"wide")) ?>
 <?=$this->element("spotlight")?>
+<?=$this->element("topdownloads")?>
+<?=$this->element("toprated")?>
+<?=$this->element("toplatest")?>
