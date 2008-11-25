@@ -47,12 +47,12 @@ class GamesController extends AppController {
 					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC"));
 					break;
 				case "rating":
-					# $this->Game->recursive = 1;
+					# FIXME: lists Tools. ...LEFT JOIN CWF_games_genres AS Genre ON ... WHERE Genre.Tools = 0...
 					$games = $this->Game->query("SELECT Game.game_name, Game.game_id, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating LEFT JOIN CWF_games AS Game ON Game.game_id = Rating.game_id WHERE Rating.rating_type = 0 GROUP BY Rating.game_id, Rating.rating_type HAVING COUNT(Rating.rating_value) > 2");
-					$games = array_slice(Set::sort($games,'{n}.0.average_rating',"desc"),0,10);
+					$games = array_slice(Set::sort($games,'{n}.0.average_rating',"desc"),0,$limit); #TOP ten.
 					break;
 				case "latest":
-					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC"));
+					$games = $this->Game->find("all",array("conditions"=>array("Game.download_status"=>0),"fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC"));
 					break;
 				default:
 					$games = array();

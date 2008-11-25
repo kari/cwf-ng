@@ -23,22 +23,32 @@ class BlogsController extends AppController {
 		}    
 	}
 	
-	function delete($id=null) {	# FIXME: Delete only own.
-		$this->Blog->del($id);    
-		$this->flash('The blog with id: '.$id.' has been deleted.', '/blogs');
-	}
-	
-	function edit($id = null) { # FIXME: Edit only own.
-		$this->Blog->id = $id;
-		if (empty($this->data)) {
-			$this->data = $this->Blog->read();
+	function delete($id=null) {
+		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id,"Blog.user_id"=>$this->Auth->user("user_id"))));
+		if (!empty($blog)) {
+			$this->Blog->del($id);
+			$this->flash('The blog with id '.$id.' has been deleted.', '/blogs');
 		} else {
-			if ($this->Blog->save($this->data)) {
-				$this->flash('Your post has been updated.','/blogs');
-			}
+			$this->Session->setFlash($this->Auth->authError);
+			$this->redirect("/blogs");
 		}
 	}
 	
+	function edit($id = null) { # FIXME: Edit only own.
+		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id,"Blog.user_id"=>$this->Auth->user("user_id"))));
+		if (!empty($blog)) {
+			if (empty($this->data)) {
+				$this->data = $blog;
+			} else {
+				if ($this->Blog->save($this->data)) {
+					$this->flash('Your post has been updated.','/blogs');
+				}
+			}
+		} else {
+			$this->Session->setFlash($this->Auth->authError);
+			$this->redirect("/blogs");
+		}
+	}
 	
 }
 ?>
