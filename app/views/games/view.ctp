@@ -100,7 +100,7 @@ foreach ($RATING_TYPE as $key => $type) {
 </ul>
 <? if(!empty($user_id)) echo $form->end("Vote"); ?>
 <h2>Downloads</h2>
-<ul><?
+<ul class="downloads"><?
 foreach ($game["Download"] as $file) {
   echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }

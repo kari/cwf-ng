@@ -1,11 +1,6 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
 <h1>Welcome to CWF-Freeware</h1>
-<ul>
-  <li><?=$html->link("Games",array("controller"=>"games"))?></li>
-  <li><?=$html->link("Blogs",array("controller"=>"blogs"))?></li>
-  <li><?=$html->link("News",array("controller"=>"news"))?></li>
-  <li><?=$html->link("Forums","/forum")?></li>
-</ul>
+
 <h2>Latest news</h2>
 <ul>
 <? 
