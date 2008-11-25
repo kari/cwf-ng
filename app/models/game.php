@@ -88,8 +88,8 @@ class Game extends AppModel {
 	-1 => "Not validated",
 	2 => "Not accepted",
 	3 => "Unknown",
-	-666 => "Remove!",
-	-665 => "Removed",
+	-128 => "Remove!", # DB datatype tinyint.
+	-127 => "Removed",
 	);
 		
 	function index() {
