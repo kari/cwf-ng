@@ -1,4 +1,38 @@
+/* FIXME: could get these from Google CDN */
 @import url("reset-fonts-grids.css");
 @import url("base-min.css");
 
-.xcake-sql-log { display:none;}
+.cake-sql-log { display:none;}
+
+/* Colors:
+light_blue 195 215 255 #C3D7FF
+blue- 5 90 255 #055AFF
+blue 5 50 140 #05328C
+dark_blue 0 25 55 #001937
+light_yellow 240 245 195 #F0F5C3
+yellow 250 230 90 #F0E65A
+*/
+
+html { background-color: #C3D7FF; }
+
+div#bd { background-color: #FEFEFE; padding: 0px 2px; margin-top: 5px; border: 1px solid #001937;}
+
+div#hd { margin-top: 10px;}
+
+div#hd ul.nav li { display: inline; margin: 0; padding: 0;}
+div#hd ul.nav { margin-left: 0px;}
+
+div#bd h1 { width: 500px; background-color: #05328C; color: #C3D7FF;
+	padding-top: 2px; padding-bottom: 2px; padding-left: 5px;}
+	
+ul#screenshots, ul#screenshots li { display: inline; margin: 0; padding: 0;}
+
+ul#screenshots li {
+	margin-left: 5px;
+	margin-right: 5px;
+	list-style-type: none;
+}
+
+ul.downloads li {list-style: none outside url("/~zyx/cwf-ng/img/icons/disk.png");}
+
+div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px;}
