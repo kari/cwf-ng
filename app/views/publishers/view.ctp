@@ -13,4 +13,10 @@
 ?>
 </ul>
 <h2>Interviews</h2>
-<ul><li>Not implemented yet</li></ul>
+<ul>
+<?
+  foreach($publisher["Interview"] as $interview) {
+    echo "<li>".$html->link($interview["interview_title"],array("controller"=>"interviews","action"=>"view",$interview["interview_id"]))."</li>";
+  }
+?>
+</ul>
