@@ -11,6 +11,6 @@ class Publisher extends AppModel {
 	# var $displayField = 'name';
 	var $order = "name";
 	
-	var $hasMany = array("Game");
+	var $hasMany = array("Game","Interview" => array("foreignKey"=>"developer_id"));
 }
 ?>
