@@ -107,17 +107,17 @@ foreach ($game["Download"] as $file) {
 ?></ul>
 
 <h2>Reviews</h2>
+<ul class="reviews">
 <?
 foreach ($game["Review"] as $review) {
- echo '<h3>'.$review["review_title"].'</h3>';
- echo "written by ".$review["User"]["username"]. " in ".$review["review_lang"];
- echo "<p>".nl2br($review["review_text"])."</p>"; # TODO: encoding (DB iso, site utf-8)
- # print_r($review);
+ echo '<li><h3>'.$review["review_title"].' by '.$review["User"]["username"].'</h3>';
+ echo "<p>".nl2br($text->trim($review["review_text"],300))."</p></li>"; # TODO: encoding (DB iso, site utf-8)
 }
 if (count($game["Review"]) == 0) {
   echo "<p>No reviews.</p>";
 }
 ?>
+</ul>
 
 <h2>Comments</h2>
 <?

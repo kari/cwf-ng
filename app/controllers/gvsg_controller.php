@@ -31,6 +31,7 @@ class GvsgController extends AppController {
 			# Some DB action...
 			# gvsg vote, must be unique for (user_id,game1_id,game2_id)
 			$gvsg_vote = array("GvsgVote"=>array("game1_id"=>$winner["Game"]["game_id"],"game2_id"=>$loser["Game"]["game_id"],"winner"=>$winner["Game"]["game_id"],"voter"=>$user_id,"time"=>date("Y-m-d H:i:s")));
+			$winner["GvsgStats"]["game_id"] = $winner["Game"]["game_id"]; # Game had never won 
 			$winner["GvsgStats"]["wins"] += 1;
 			$winner["GvsgStats"]["points"] += $loser["GvsgStats"]["wins"];
 			
