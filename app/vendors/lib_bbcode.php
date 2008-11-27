@@ -3,9 +3,11 @@
 Originally from http://www.phpit.net/code/bbcode-format-function/
 
 */ 
+# FIXME: Outputs XHTML. ("<img />")
+# FIXME: Doesn't handle attributes enclosed in double quotes.
 
 function bbcode_format ($str) { 
-    $str = htmlentities($str,ENT_QUOTES,"UTF-8",false); // ENT_QUOTES added by zyx
+    $str = htmlentities($str,ENT_QUOTES,"UTF-8",false); // ENT_QUOTES added by zyx (ENT_NOQUOTES)
 
     $simple_search = array( 
                 '/\[b\](.*?)\[\/b\]/is',                                 
@@ -15,7 +17,8 @@ function bbcode_format ($str) {
                 '/\[url\](.*?)\[\/url\]/is',                              
                 '/\[align\=(left|center|right)\](.*?)\[\/align\]/is',     
                 '/\[img\](.*?)\[\/img\]/is',
-                '/\[img\=(.*?)\](.*?)\[\/img\]/is', // added by zyx  
+                '/\[img\=(.*?)\](.*?)\[\/img\]/is', // added by zyx
+  							'/\[img +src\=\"(.*?)\".*?title\=\"(.*?)\".*?\]/is', // added by zyx, will not match anything beacuse of htmlentities coding above. Not true BBCode anyway.
                 '/\[mail\=(.*?)\](.*?)\[\/mail\]/is',                     
                 '/\[mail\](.*?)\[\/mail\]/is',                             
                 '/\[font\=(.*?)\](.*?)\[\/font\]/is',                     
@@ -32,6 +35,7 @@ function bbcode_format ($str) {
                 '<div style="text-align: $1;">$2</div>', 
                 '<img src="$1" />',
 								'<img src="$1" title="$2" />', // added by zyx
+								'<img src="$1" title="$2" />', // added by zyx, see above.
                 '<a href="mailto:$1">$2</a>', 
                 '<a href="mailto:$1">$1</a>', 
                 '<span style="font-family: $1;">$2</span>', 

@@ -18,7 +18,7 @@ class BBCodeHelper extends AppHelper {
     }
 
 		function strip($str="") {
-			$match = '/\[[^\]]+\]/';
+			$match = '/\[[^\]]+\]/'; # FIXME: Doesn't handle images nicely. Implement a better strip() to lib_bbcode
 			$str = preg_replace($match,"",$str);
 			return $this->output($str);
 		}

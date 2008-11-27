@@ -1,8 +1,8 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
 <h1>Welcome to CWF-Freeware</h1>
 
-<h2>Latest news</h2>
-<ul>
+<h2>Latest site news</h2>
+<ul class="news">
 <? 
   $first = true;
   foreach($news as $item) {
@@ -17,8 +17,24 @@
     echo "</li>";
 }?>
 </ul>
+<h2>Latest world news</h2>
+<ul class="news">
+  <? 
+    $first = true;
+    foreach($worldnews as $item) {
+      echo "<li><strong>";
+      echo $time->format("d.m.Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"worldnews","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
+      if ($first) {
+        echo $text->trim($bbcode->strip($item["WorldNews"]["wnews_text"]),1000,"...",false);
+        $first = false;
+      } else {
+        echo $text->trim($bbcode->strip($item["WorldNews"]["wnews_text"]),200,"...",false);
+      }
+      echo "</li>";
+  }?>
+</ul>
 <h2>Latest games</h2>
-<ul>
+<ul class="games">
 <? foreach($games as $game) {
   echo "<li><strong>";
   # echo date("d.m.Y",strtotime($item["News"]["post_date"]))." - ";
@@ -28,7 +44,7 @@
 }?>
 </ul>
 <h2>Latest blogs</h2>
-<ul>
+<ul class="blogs">
 <? foreach($blogs as $blog) {
   echo "<li><strong>";
   echo $time->format("d.m.Y",$blog["Blog"]["created"]);
@@ -38,7 +54,7 @@
 }?>
 </ul>
 <h2>Latest reviews</h2>
-<ul>
+<ul class="reviews">
 <? foreach($reviews as $review) {
   echo "<li><strong>";
   echo $time->format("d.m.Y",$review["Review"]["added"]);
@@ -48,12 +64,12 @@
 }?>  
 </ul>
 <h2>Latest interviews</h2>
-<ul>
-<?/* foreach($interviews as $item) {
+<ul class="reviews">
+<? foreach($interviews as $item) {
   echo "<li><strong>";
-  echo date("d.m.Y",strtotime($item["News"]["post_date"]))." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"];
-  echo "</strong><br>".$text->trim($item["News"]["news_text"],200,"...",false);
-  echo "</li>";  } */
+  echo date("d.m.Y",strtotime($item["Interview"]["interview_date"]))." - ".$html->link($item["Interview"]["interview_title"],array("controller"=>"interviews","action"=>"view",$item["Interview"]["interview_id"]))." by ".$item["Interviewer"]["username"];
+  echo "</strong><br>".$text->trim($item["Interview"]["text"],200,"...",false);
+  echo "</li>";  }
   echo "<li>Not implemented</li>";
 ?>
 </ul>

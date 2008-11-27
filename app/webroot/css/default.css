@@ -35,4 +35,13 @@ ul#screenshots li {
 
 ul.downloads li {list-style: none outside url("/~zyx/cwf-ng/img/icons/disk.png");}
 
+ul.news li {list-style: none outside url("/~zyx/cwf-ng/img/icons/newspaper.png");}
+
+ul.games li {list-style: none outside url("/~zyx/cwf-ng/img/icons/joystick.png");}
+
+ul.blogs li {list-style: none outside url("/~zyx/cwf-ng/img/icons/book.png");}
+
+ul.reviews li {list-style: none outside url("/~zyx/cwf-ng/img/icons/user_comment.png");}
+
+
 div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px;}
