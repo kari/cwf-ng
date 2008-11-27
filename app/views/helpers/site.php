@@ -20,7 +20,9 @@ class SiteHelper extends AppHelper {
 
 	function image_url($url,$options=array()) {
 		# Returns url to cached version of image.
-		# Probably a better way than this would be to link screenshots/view/1 which would cache on demand. Requires some header setting (image/type) and suggested content filename.
+		# FIXME: Problem is, this way in a worst case scenario this function is called multiple times and the script might timeout.
+		# Probably a better way than this would be to link screenshots/view/1 which would cache on demand. Requires some header setting (image/type) and suggested content filename. And understanding how to route urls. Forget all that, best way to do this is to link to screenshots/view/<requestedimage>. Let that controller sort things out.
+		
 		# strict =  don't maintain aspect ratio when resizing
 		$def_options = array("width"=>null,"height"=>null,"strict"=>false);
 		$options = array_merge($def_options,$options);

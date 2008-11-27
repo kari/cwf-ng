@@ -26,7 +26,7 @@ switch ($user['User']['user_avatar_type']) {
   <li>Forum signature: <blockquote><?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></blockquote></li>
 </ul>
 <h2>Proposed games</h2>
-<ul>
+<ul class="games">
   <?
   foreach($user["Game_Proposed"] as $game) {
     echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>"; 
@@ -34,7 +34,7 @@ switch ($user['User']['user_avatar_type']) {
   ?>
 </ul>
 <h2>Hunted games</h2>
-<ul>
+<ul class="games">
   <?
   foreach($user["Game_Hunted"] as $game) {
     echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>";
@@ -42,7 +42,7 @@ switch ($user['User']['user_avatar_type']) {
   ?>
 </ul>
 <h2>Reviews</h2>
-<ul>  <?
+<ul class="reviews">  <?
   foreach($user["Review"] as $review) {
     echo "<li>".$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"]))."</li>";
   }

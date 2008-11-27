@@ -64,7 +64,7 @@ class GamesController extends AppController {
 	}
 	
 	function view($id = null) {
-	
+	# FIXME: view decide if $id is a number (primary key) or slug (acidbomb-2-rearmament) and work accordingly. Same thing to all view-actions which'd benefit from friendly urls. 
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
