@@ -69,8 +69,8 @@
   echo "<li><strong>";
   echo date("d.m.Y",strtotime($item["Interview"]["interview_date"]))." - ".$html->link($item["Interview"]["interview_title"],array("controller"=>"interviews","action"=>"view",$item["Interview"]["interview_id"]))." by ".$item["Interviewer"]["username"];
   echo "</strong><br>".$text->trim($item["Interview"]["text"],200,"...",false);
-  echo "</li>";  }
-  echo "<li>Not implemented</li>";
+  echo "</li>";  
+  }
 ?>
 </ul>
 <?=$this->element("adbox",array("style"=>"wide")) ?>
