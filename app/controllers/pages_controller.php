@@ -3,7 +3,7 @@
 class PagesController extends AppController {
 	var $name = 'Pages';
 	var $helpers = array("html","javascript","text","time"); # probably should be put on AppController, because prototype/script.al.blah-tricks will be on all views?
-	var $uses = array("News","Blog","Review","Game");
+	var $uses = array("News","Blog","Review","Game","Interview","WorldNews");
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -15,6 +15,8 @@ class PagesController extends AppController {
 		$this->set("blogs",$this->Blog->find("all",array("order" => "created DESC","limit"=>10)));
 		$this->set("reviews",$this->Review->find("all",array("conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5)));
 		$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>10)));
+		$this->set("interviews",$this->Interview->find("all",array("limit"=>5)));
+		$this->set("worldnews",$this->WorldNews->find("all",array("limit"=>5)));
 		# $this->set('Auth',$this->Auth->user());
 	}
 	
