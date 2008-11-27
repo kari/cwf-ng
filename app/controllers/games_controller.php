@@ -5,7 +5,7 @@ class GamesController extends AppController {
   # var $scaffold;
 	var $paginate = array(
 	    'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
-      'limit' => 25,
+      'limit' => 15,
       'order' => array('Game.game_name' => 'asc'),
 			# "fields" => array("game_name","game_id"),
 			'recursive' => 1

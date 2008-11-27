@@ -1,5 +1,5 @@
 <h1>Site News</h1>
-<ul>
+<ul class="news">
 <? 
   foreach($news as $item) {
     echo "<li><strong>";
