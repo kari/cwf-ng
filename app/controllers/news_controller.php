@@ -22,7 +22,10 @@ class NewsController extends AppController {
 	}
 	
 	function view($id = null) {
-		$this->set("news",$this->News->findByNews_id($id));
+		if ($id == null) { $this->cakeError("error404"); }
+		$news = $this->News->findByNews_id($id);
+		if (empty($news)) { $this->cakeError("error404"); }
+		$this->set("news",$news);
 	}
 	
 	function add() {

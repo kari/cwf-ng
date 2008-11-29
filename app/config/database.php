@@ -94,15 +94,5 @@ class DATABASE_CONFIG {
 		'encoding' => 'UTF-8',
 	);
 
-	var $dev = array(
-		'driver' => 'mysql',
-		'persistent' => false, #false,
-		'host' => 'localhost',
-		'login' => 'root',
-		'password' => 'the2towers',
-		'database' => 'rhino_dev',
-		'encoding' => 'UTF-8',
-		'prefix' => '',
-	);
 }
 ?>

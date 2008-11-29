@@ -1,3 +1,3 @@
-<h1><?php echo $blog['Blog']['title']?></h1>
-<p><small>Created by <?=$blog['User']['username']?> at <?php echo $blog['Blog']['created']?></small></p>
-<p><?php echo $bbcode->decode($blog['Blog']['content'])?></p>
+<h1><?=$blog['Blog']['title']?></h1>
+<p>Created by <?=$blog['User']['username']?> at <?=$time->format("d.m.Y H:i",$blog['Blog']['created'])?></p>
+<p><?=$bbcode->decode($blog['Blog']['content'])?></p>

@@ -14,7 +14,7 @@
 ?>
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
 <p><small>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></small></p>
-<p><?=nl2br($game['Game']['description'])?></p>
+<p><?=$bbcode->decode(iconv("ISO-8859-1","UTF-8",$game['Game']['description']))?></p>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
@@ -110,8 +110,8 @@ foreach ($game["Download"] as $file) {
 <ul class="reviews">
 <?
 foreach ($game["Review"] as $review) {
- echo '<li><h3>'.$review["review_title"].' by '.$review["User"]["username"].'</h3>';
- echo "<p>".nl2br($text->trim($review["review_text"],300))."</p></li>"; # TODO: encoding (DB iso, site utf-8)
+ echo '<li><h3>'.$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"])).' by '.$review["User"]["username"].'</h3>';
+ echo "<p>".nl2br($text->trim(iconv("ISO-8859-1","UTF-8",$review["review_text"]),300))."</p></li>"; # FIXME: encoding (DB iso, site utf-8)
 }
 if (count($game["Review"]) == 0) {
   echo "<p>No reviews.</p>";
@@ -120,18 +120,21 @@ if (count($game["Review"]) == 0) {
 </ul>
 
 <h2>Comments</h2>
+<ul class="reviews">
 <?
 foreach ($game["Comment"] as $comment) {
-  echo "<strong>".$comment["title"]." by ";
+  echo "<li><strong>".$comment["title"]."</strong> by ";
   if (!empty($comment["user_id"])) {
-    echo $comment["User"]["username"];
+    echo $html->link($comment["User"]["username"],array("controller"=>"users","action"=>"view",$comment["User"]["user_id"]));
   } else {
     echo "Anonymous";
   }
-  echo "</strong>";
-  echo "<p>".nl2br($comment["text"])."</p>";
+  echo " ".$time->timeAgoInWords($comment["created"],array("format"=>"d.m.Y"));
+  echo "<br>".nl2br($comment["text"])."</li>";
 }
 ?>
+</ul>
+
 <h3>Add a comment</h3>
 <?=$form->create("Comment");?>
 <?=$form->input("title");?>
