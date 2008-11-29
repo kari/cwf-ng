@@ -20,6 +20,7 @@
         <li><?=$html->link("News","/news/")?></li>
         <li><?=$html->link("Reviews","/reviews/")?></li>
         <li><?=$html->link("Interviews","/interviews/")?></li>
+        <li><?=$html->link("Tools","/tools/")?></li>
         <li><?=$html->link("Forums","/forum")?></li>
       </ul>
     <div id="loginbox">

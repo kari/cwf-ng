@@ -43,5 +43,6 @@ ul.blogs li {list-style: none outside url("/~zyx/cwf-ng/img/icons/book.png");}
 
 ul.reviews li {list-style: none outside url("/~zyx/cwf-ng/img/icons/user_comment.png");}
 
+ul.tools li {list-style: none outside url("/~zyx/cwf-ng/img/icons/cog.png");}
 
 div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px;}

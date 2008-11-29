@@ -69,7 +69,7 @@ class GamesController extends AppController {
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
 		$this->Game->cacheQueries = true;
-		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
+		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id,"Genres.tools"=>0)));
 		if (empty($game)) { $this->cakeError("error404"); }
 		
 		$this->set("game",$game);
@@ -79,7 +79,7 @@ class GamesController extends AppController {
 		$this->set("DL_TYPE",$this->Download->TYPE);
 		$this->set("PLATFORM",$this->Download->PLATFORM);
 		$this->set("RATING_TYPE",$this->Rating->TYPE);
-		$this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$this->Game->id))));
+		$this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id))));
 		 # $this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>81,"game_id"=>$this->Game->id))));
 		$this->set("user_id",$this->Auth->user("user_id"));
 		
