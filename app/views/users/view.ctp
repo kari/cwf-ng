@@ -25,22 +25,34 @@ switch ($user['User']['user_avatar_type']) {
   <li>User timzeone: <?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> <?=date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")?> (like <?=timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0)?>)</li>
   <li>Forum signature: <blockquote><?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></blockquote></li>
 </ul>
-<h2>Proposed games</h2>
+<div class="yui-g">
+  <div class="yui-u first">
+<h2>Proposed games (<?=count($user["Game_Proposed"])?>)</h2>
 <ul class="games">
   <?
+  $i = 0;
+  shuffle($user["Game_Proposed"]); # FIXME: Is this really useful? Default oder is DESC by date.
   foreach($user["Game_Proposed"] as $game) {
-    echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>"; 
+    if ($i++>=10) { echo "<li>and many more...</li>"; break; };
+    echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>";     
   }
   ?>
 </ul>
-<h2>Hunted games</h2>
+  </div>
+  <div class="yui-u">
+<h2>Hunted games (<?=count($user["Game_Hunted"])?>)</h2>
 <ul class="games">
   <?
+  $i = 0;
+  shuffle($user["Game_Hunted"]); # FIXME: See above.
   foreach($user["Game_Hunted"] as $game) {
+    if ($i++>=10) { echo "<li>and many more...</li>"; break; };
     echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>";
   }
   ?>
 </ul>
+  </div>
+</div>
 <h2>Reviews</h2>
 <ul class="reviews">  <?
   foreach($user["Review"] as $review) {

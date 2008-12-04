@@ -68,8 +68,9 @@ class GamesController extends AppController {
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
 		$this->Game->cacheQueries = true;
-		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id,"Genres.tools"=>0)));
+		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
 		if (empty($game)) { $this->cakeError("error404"); }
+		if ($game["Genres"]["tools"] == 1) {$this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
 		
 		$this->set("game",$game);
 		$this->set('LICENSE',$this->Game->LICENSE);
