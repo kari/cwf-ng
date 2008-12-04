@@ -6,7 +6,7 @@ class RatingsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		# $this->Auth->allow(array("index","view"));
+		# $this->Auth->allow(array("user_ratings"));
 	}
 
 	function vote() {
@@ -42,6 +42,14 @@ class RatingsController extends AppController {
 			$this->redirect("/"); # shouldn't be here if not POSTed.
 		}
 	}
+	/* Some skeleton for possible game ratings element.. 
+	function user_ratings($id=null) {
+		if ((isset($this->params["requested"])) AND (isset($id))) {
+			$user_ratings = $this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id)));
+			return $user_ratings;
+		}
+		$this->cakeError("error404");
+	} */
 }
 
 ?>

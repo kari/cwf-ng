@@ -23,8 +23,9 @@ class UsersController extends AppController {
     function view($id = null) {
 		# FIXME: view decide if $id is a number (primary key) or slug (zyx) and work accordingly.
       if ($id == null) { $this->cakeError('error404'); }
-			$this->User->recursive = 2; # TODO: It'd be nice to limit this just to Group
-      $this->set('user', $this->User->read('',$id));
+			$this->User->recursive = 1; # FIXME: It'd be nice to limit this just to Group
+      $this->set('user', $this->User->find("first",array("conditions"=>array("user_id"=>$id))));
+			# $this->set("groups",$this->User->Group->find("all"));
     }
 }
 

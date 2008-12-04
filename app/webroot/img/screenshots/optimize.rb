@@ -36,10 +36,12 @@ for o_file in Dir.entries(path).grep(/.+\..{3}/) #.first(10)
 # Dissolve with opacity
   unless File.exist?("../cache/#{basename}-full.#{ext.downcase}")
     wm_img = img.dissolve(wm,0.75,1,Magick::SouthEastGravity,2,2)
+    puts "Writing full-size watermarked..."
     wm_img.write("../cache/#{basename}-full.#{ext.downcase}")
   end
   unless File.exist?("../cache/#{basename}-#{tb_size}w.#{ext.downcase}")
     thumb = img.resize_to_fit(tb_size,tb_size)
+    puts "Writing thumbnail (width = #{tb_size}px)"
     thumb.write("../cache/#{basename}-#{tb_size}w.#{ext.downcase}") 
   end
 end
