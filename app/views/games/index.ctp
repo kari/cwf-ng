@@ -22,9 +22,9 @@
 	<tr><td>
 	 <?
 	 if (!empty($game["Screenshot"])) {
-	   echo $html->link($site->image($game["Screenshot"][0]["image_link"],array("width"=>100,"height"=>100,"title"=>$game["Game"]["game_name"])),$site->image_url($game["Screenshot"][0]["image_link"]),array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false);
+	   echo $html->link($site->image($game["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150,"title"=>$game["Game"]["game_name"])),$site->image_url($game["Screenshot"][0]["image_link"]),array("class"=>"thumb","title"=>$game["Game"]["game_name"]),false,false);
    } else {
-     echo $html->image("/img/cwf_nosshot.png",array("width"=>100,"height"=>100,"title"=>"No screenshot"));
+     echo $html->image("/img/cwf_nosshot.png",array("width"=>150,"height"=>150,"title"=>"No screenshot"));
    }
 	   ?>
 	  </td><td>

@@ -1,4 +1,6 @@
 <h1>Edit game</h1>
+<div class="yui-gc">
+  <div class="yui-u first">
 <h2>Game info</h2>
 <?
   echo $form->create("Game");
@@ -40,6 +42,8 @@
   
   echo $form->end("Save");
 ?>
+  </div>
+  <div class="yui-u">
 <h2>Screenshots</h2>
 <ul>
 <?  
@@ -57,7 +61,7 @@
 <ul>
 <?
   foreach($this->data["Download"] as $file) {
-    echo '<li>'.$file["download_link"].' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i><br>';
+    echo '<li>'.basename($file["download_link"]).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i><br>';
     echo $html->link("Edit",array("controller"=>"downloads","action"=>"edit",$file["file_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
     echo $html->link("Delete",array("controller"=>"downloads","action"=>"delete",$file["file_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
     echo '</li>';
@@ -65,5 +69,7 @@
 ?>
 <li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
+  </div>
+</div>
 
 <?#=debug($this->validationErrors)?>

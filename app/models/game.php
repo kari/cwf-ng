@@ -105,7 +105,7 @@ class Game extends AppModel {
 	function getRandom($amount = 1) {
 		# FIXME: Really slow (> 100 ms)
 		# possible FIX: get all games and then choose $amount at random at application layer?
-		$conditions = array("download_status" => 0);
+		$conditions = array("download_status" => 0,"Genres.tools"=>0);
 		return $this->find('all',array("conditions"=>$conditions,'limit'=>$amount,"order"=>"rand()"));
 	}
 }
