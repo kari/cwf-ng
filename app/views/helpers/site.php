@@ -21,7 +21,6 @@ class SiteHelper extends AppHelper {
 	function image_url($url,$options=array()) {
 		# Returns url to cached version of image.
 		# FIXME: Problem is, this way in a worst case scenario this function is called multiple times and the script might timeout.
-		# Probably a better way than this would be to link screenshots/view/1 which would cache on demand. Requires some header setting (image/type) and suggested content filename. And understanding how to route urls. Forget all that, best way to do this is to link to screenshots/view/<requestedimage>. Let that controller sort things out.
 		
 		# strict =  don't maintain aspect ratio when resizing
 		$def_options = array("width"=>null,"height"=>null,"strict"=>false);
@@ -47,15 +46,21 @@ class SiteHelper extends AppHelper {
 			} elseif ($height and !($width)) {
 				$type = $width."h";
 			} else
-			$type = "full";
+			$type = "full"; # FIXME: = null
 		}
 		$ext = substr($url,-4,4);
 		$image = basename($url,$ext); # MAYBEFIXME: currently works only for relative urls?
 		# $cached = "/img/cache/".$image."-".md5($url)."-".$type.strtolower($ext);
-		$cached = "/img/cache/".$image."-".$type.strtolower($ext);
-		if (!file_exists($cached)) {
+		
+		$cached = "/img/cache/".$image;
+		if (isset($type)) { $cached .= "-".$type; }
+		$cached .= strtolower($ext);
+		
+		if (!file_exists(WWW_ROOT.$cached)) {
 			# generate image
+			$cached = "/img/cwf_nosshot.png";
 		}
+		# $cached = "/screenshots/show/".$image."-".$type.strtolower($ext);
 		return $this->output($cached);
 		
 	}
@@ -63,6 +68,8 @@ class SiteHelper extends AppHelper {
 	function image($url,$options=array()) {	 
 		$cached_url = $this->image_url($url,$options);
 		if (isset($options["strict"])) { unset($options["strict"]); }
+		if (isset($options["width"])) { unset($options["width"]); }
+		if (isset($options["height"])) { unset($options["height"]); }
 		$str = $this->Html->image($cached_url,$options);
 		return $this->output($str);
 	}

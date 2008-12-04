@@ -13,7 +13,8 @@
     });")
 ?>
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
-<p><small>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></small></p>
+<p>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
+<?# FIXME: A bigger thumbnail of "featured" (or first) screenshot would be nice here! ?>
 <p><?=$bbcode->decode(iconv("ISO-8859-1","UTF-8",$game['Game']['description']))?></p>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
