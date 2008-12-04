@@ -1,6 +1,10 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
+<div class="yui-g">
 <h1>Welcome to CWF-Freeware</h1>
-
+<?=$this->element("adbox",array("style"=>"pw-leaderboard")) ?>
+</div>
+<div class="yui-g">
+  <div class="yui-u first">
 <h2>Latest site news</h2>
 <ul class="news">
 <? 
@@ -17,6 +21,8 @@
     echo "</li>";
 }?>
 </ul>
+  </div>
+  <div class="yui-u">
 <h2>Latest world news</h2>
 <ul class="news">
   <? 
@@ -33,6 +39,10 @@
       echo "</li>";
   }?>
 </ul>
+  </div>
+</div>
+<div class="yui-g">
+  <div class="yui-u first">
 <h2>Latest games</h2>
 <ul class="games">
 <? foreach($games as $game) {
@@ -43,6 +53,8 @@
   echo "</li>";
 }?>
 </ul>
+  </div>
+  <div class="yui-u">
 <h2>Latest blogs</h2>
 <ul class="blogs">
 <? foreach($blogs as $blog) {
@@ -53,6 +65,10 @@
   echo "</li>";  
 }?>
 </ul>
+  </div>
+</div>
+<div class="yui-g">
+  <div class="yui-u first">
 <h2>Latest reviews</h2>
 <ul class="reviews">
 <? foreach($reviews as $review) {
@@ -63,6 +79,8 @@
   echo "</li>";
 }?>  
 </ul>
+  </div>
+  <div class="yui-u">
 <h2>Latest interviews</h2>
 <ul class="reviews">
 <? foreach($interviews as $item) {
@@ -73,8 +91,8 @@
   }
 ?>
 </ul>
-<?=$this->element("adbox",array("style"=>"wide")) ?>
-<?=$this->element("spotlight")?>
-<?=$this->element("topdownloads")?>
-<?=$this->element("toprated")?>
-<?=$this->element("toplatest")?>
+  </div>
+</div>
+<div class="yui-g">
+
+</div>
