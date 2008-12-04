@@ -41,18 +41,17 @@ class GamesController extends AppController {
 	
 	function top($by="download",$limit=10) {
 		if (isset($this->params["requested"])) {
-			$this->Game->recursive = 0;
+			$this->Game->recursive = 1;
 			switch ($by) {
 				case "download":
-					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC"));
+					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0)));
 					break;
 				case "rating":
-					# FIXME: lists Tools. ...LEFT JOIN CWF_games_genres AS Genre ON ... WHERE Genre.Tools = 0...
-					$games = $this->Game->query("SELECT Game.game_name, Game.game_id, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating LEFT JOIN CWF_games AS Game ON Game.game_id = Rating.game_id WHERE Rating.rating_type = 0 GROUP BY Rating.game_id, Rating.rating_type HAVING COUNT(Rating.rating_value) > 2");
+					$games = $this->Game->query("SELECT Game.game_name, Game.game_id, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating LEFT JOIN CWF_games AS Game ON Game.game_id = Rating.game_id LEFT JOIN CWF_game_genres AS Genres ON Game.genre_id = Genres.genre_id WHERE Rating.rating_type = 0 AND Genres.tools = 0 GROUP BY Rating.game_id, Rating.rating_type HAVING COUNT(Rating.rating_value) > 2");
 					$games = array_slice(Set::sort($games,'{n}.0.average_rating',"desc"),0,$limit); #TOP ten.
 					break;
 				case "latest":
-					$games = $this->Game->find("all",array("conditions"=>array("Game.download_status"=>0),"fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC"));
+					$games = $this->Game->find("all",array("conditions"=>array("Game.download_status"=>0),"fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0)));
 					break;
 				default:
 					$games = array();

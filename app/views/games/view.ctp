@@ -42,13 +42,13 @@ foreach ($game["Specs"] as $platform => $platform_set) {
 <h2>Screenshots</h2>
 <ul id="screenshots"><?
 foreach ($game["Screenshot"] as $screenshot) {
-  echo "<li>".$html->link($site->image($screenshot["image_link"],array("width"=>100,"height"=>100,"title"=>"Screenshot")),$site->image_url($screenshot["image_link"]),array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
+  echo "<li>".$html->link($site->image($screenshot["image_link"],array("width"=>150,"height"=>150,"title"=>"Screenshot")),$site->image_url($screenshot["image_link"]),array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
   # $html->image => $site->image for resizing.
 }
 ?>
 <?
 if (empty($game["Screenshot"])) {
-  echo "<li>".$html->image("/img/cwf_nosshot.png",array("width"=>100,"height"=>100,"title"=>"No screenshot"))."</li>";
+  echo "<li>".$html->image("/img/cwf_nosshot.png",array("width"=>150,"height"=>150,"title"=>"No screenshot"))."</li>";
 }
 ?>
 </ul>

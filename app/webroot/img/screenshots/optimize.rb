@@ -19,6 +19,7 @@ def wm_annotate(img)
   return img
 end
 
+tb_size = 150
 path = "originals/"
 wm = Magick::Image.read("../cwf_watermark.png").first
 for o_file in Dir.entries(path).grep(/.+\..{3}/) #.first(10)
@@ -37,8 +38,8 @@ for o_file in Dir.entries(path).grep(/.+\..{3}/) #.first(10)
     wm_img = img.dissolve(wm,0.75,1,Magick::SouthEastGravity,2,2)
     wm_img.write("../cache/#{basename}-full.#{ext.downcase}")
   end
-  unless File.exist?("../cache/#{basename}-100w.#{ext.downcase}")
-    thumb = img.resize_to_fit(100,100)
-    thumb.write("../cache/#{basename}-100w.#{ext.downcase}") 
+  unless File.exist?("../cache/#{basename}-#{tb_size}w.#{ext.downcase}")
+    thumb = img.resize_to_fit(tb_size,tb_size)
+    thumb.write("../cache/#{basename}-#{tb_size}w.#{ext.downcase}") 
   end
 end
