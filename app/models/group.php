@@ -14,6 +14,9 @@ class Group extends AppModel {
 	# Allowed actions for group, action_id is "controller/action"
 	var $hasMany = array("Action"=>array("conditions"=>array("allow"=>true),"fields"=>"action_id"));
 	
+	var $hasAndBelongsToMany = array(
+	  "User" => array("joinTable" => "phpbb_user_group", "foreignKey" => "group_id", "associationForeignKey" => "user_id","conditions"=>array("PhpbbUserGroup.user_pending"=>"0"),"fields"=>"user_id,username"));
+	
 	# This model SHOULD NOT modify groups table. 
 	
 	# phpbb_Groups

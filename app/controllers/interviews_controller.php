@@ -3,6 +3,8 @@
 class InterviewsController extends AppController {
 	var $name = 'Interviews';
   var $scaffold;
+	var $helpers = array("cache");
+	var $cacheAction = array("index"=>"+1 day","view/"=>"+1 day");
 
 	function beforeFilter() {
 		parent::beforeFilter();

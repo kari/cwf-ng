@@ -12,6 +12,8 @@
       });
     });")
 ?>
+<div class="yui-gc">
+  <div class="yui-u first">
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
 <p>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
 <?# FIXME: A bigger thumbnail of "featured" (or first) screenshot would be nice here! ?>
@@ -147,5 +149,9 @@ foreach ($game["Comment"] as $comment) {
 <?=$form->hidden("game_id",array("value"=>$game["Game"]["game_id"]));?>
 <?# FIXME: Captcha for non-registered ?>
 <?=$form->end("Submit")?>
-
+  </div>
+  <div class="yui-u">
+    <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>
 <?#=debug($game)?>

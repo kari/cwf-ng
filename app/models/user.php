@@ -14,8 +14,8 @@ class User extends AppModel {
 		'Blog',
 		"Comment",
 		'Review' => array("conditions" => "review_rating <> -99","order" => "added DESC"),
-		"Game_Proposed" => array("className" => "Game","foreignKey" => "game_proposer_id","fields" => "game_id,game_name",'conditions' => array("download_status" => 0)),
-		"Game_Hunted" => array("className" => "Game","foreignKey" => "game_proposer_id","fields" => "game_id,game_name",'conditions' => array("download_status" => 0))); 
+		"Game_Proposed" => array("className" => "Game","foreignKey" => "game_proposer_id","fields" => "game_id,game_name",'conditions' => array("download_status" => 0),"order"=>"Game_Proposed.created DESC"),
+		"Game_Hunted" => array("className" => "Game","foreignKey" => "game_proposer_id","fields" => "game_id,game_name",'conditions' => array("download_status" => 0),"order"=>"Game_Hunted.created DESC")); 
 	
 	var $hasAndBelongsToMany = array(
 	  "Group" => array("joinTable" => "phpbb_user_group", "foreignKey" => "user_id", "associationForeignKey" => "group_id","conditions"=>array("Group.group_single_user"=>"0","PhpbbUserGroup.user_pending"=>"0"),"fields"=>"group_id,group_name,group_description"));

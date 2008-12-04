@@ -18,7 +18,8 @@ class BlogsController extends AppController {
 	function add() {
 		if (!empty($this->data)) {            
 			if ($this->Blog->save($this->data)) {                
-				$this->flash('Your blog entry has been saved.', '/blogs');            
+				$this->Session->setFlash('Your blog entry has been saved.');
+				$this->redirect("/blogs");            
 			}        
 		}    
 	}
@@ -41,7 +42,8 @@ class BlogsController extends AppController {
 				$this->data = $blog;
 			} else {
 				if ($this->Blog->save($this->data)) {
-					$this->flash('Your post has been updated.','/blogs');
+					$this->Session->setFlash('Your post has been updated.');
+					$this->redirect("/blogs");
 				}
 			}
 		} else {

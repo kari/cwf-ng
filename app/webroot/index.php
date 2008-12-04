@@ -93,5 +93,6 @@
 	}
 	if (Configure::read() > 0) {
 		echo "<!-- " . round(getMicrotime() - $TIME_START, 4) . "s -->";
+		echo "<!-- " . round(memory_get_usage()/1024.0/1024.0,3) ."MB -->"; 
 	}
 ?>

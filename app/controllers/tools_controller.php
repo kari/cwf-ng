@@ -11,11 +11,11 @@ class ToolsController extends AppController {
 			# "fields" => array("game_name","game_id"),
 			'recursive' => 1
 	    );
-	var $uses = array("Game","Download","Rating");
+	var $uses = array("Game","Download","Rating","Cache");
 	
 	var $helpers = array('Cache',"Number","Site","javascript");
 	
-	# var $cacheAction = array("view/" => "1 day");
+	var $cacheAction = array("index" => "+1 day");
 
 	function beforeFilter() {
 		parent::beforeFilter();

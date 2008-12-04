@@ -3,7 +3,7 @@
 <head>
     <?=$html->charset("utf-8"); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
-		<?=$html->meta('icon',"/~zyx/cwf-ng/img/icons/sport_shuttlecock.png");?> <? # FIXME ?>
+		<?=$html->meta('icon',"/~zyx/cwf-ng/favicon.ico");?> <? # FIXME ?>
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");?>  
     <?#=$javascript->link("http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/yuiloader/yuiloader-min.js"); ?>
@@ -14,7 +14,9 @@
     <div id="hd">
             <?=$html->link($html->image("/img/cwf_freeware.png",array("title"=>"CWF-Freeware","alt"=>"CWF-Freeware")),"/",array(),false,false)?>
             <div id="loginbox">
+              <cake:nocache>
               <?=$this->element("login")?>
+              </cake:nocache>
             </div>
           <ul class="nav">
             <li><?=$html->link("Main","/")?></li>
@@ -44,17 +46,21 @@
           <!-- can be split with yui-u div-classes -->
             <?=$content_for_layout ?>
           <div class="yui-g">
+            <cake:nocache>
             <?=$this->element("adbox",array("style"=>"pw-leaderboard")) ?>
+            </cake:nocache>
           </div>
         </div>
       </div>
       <div class="yui-b" id="sidebar">
         <!-- Sidebar content -->
-        <?=$this->element("spotlight")?>
-        <?=$this->element("toplatest")?>
-        <?=$this->element("toprated")?>
-        <?=$this->element("topdownloads")?>
-        <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+        <cake:nocache>
+        <?=$this->element("spotlight",array("cache"=>array("key"=>"frontpage","time"=>"+1 hour")))?>
+        <?=$this->element("toplatest",array("cache"=>array("key"=>"frontpage","time"=>"+1 hour")))?>
+        <?=$this->element("toprated",array("cache"=>array("key"=>"frontpage","time"=>"+6 hour")))?>
+        <?=$this->element("topdownloads",array("cache"=>array("key"=>"frontpage","time"=>"+1 day")))?>
+        <?=$this->element("adbox",array("style"=>"pw-square"))?>
+        </cake:nocache>
       </div>
     </div>
     <div id="ft">

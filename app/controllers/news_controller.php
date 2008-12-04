@@ -9,8 +9,9 @@ class NewsController extends AppController {
       'order' => array('post_date' => 'desc'),
 			# 'recursive' => 1
 	    );
-	var $helpers = array("Time");
+	var $helpers = array("Time","Cache");
 	var $uses = array("News","User");
+	var $cacheAction = "+1 day";
 	
 	function beforeFilter() {
 		parent::beforeFilter();
