@@ -40,5 +40,5 @@ switch ($style) {
 }
 ?>
 <div style="width:<?=$width?>px;height:<?=$height?>px;border:1px solid black;background-color:#C3D7FF;color:#001937;">
-<p style="margin-left:auto;margin-right:auto;width:<?=$width?>px"><strong>I'm an advertisement. Fear me. I'm <?=$style?>.</strong></p>
+<p style="margin-left:auto;margin-right:auto;width:<?=$width?>px"><strong>I'm an advertisement. Fear me. I'm '<?=$style?>' (<?=$width?>x<?=$height?>).</strong></p>
 </div>

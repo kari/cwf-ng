@@ -34,7 +34,12 @@ class GamesController extends AppController {
 			if ($limit < 1) $limit = 1;
 			if ($limit > 10) $limit = 10;
 			$this->Game->recursive = 1;
-			return $this->Game->getRandom($limit);	# For Spotlights-element.
+			$findparams = array("conditions"=>array("download_status" => 0,"Genres.tools"=>0),'limit'=>$limit,"order"=>"rand()");
+			if ($limit == 1) {
+				return $this->Game->find("first",$findparams);
+			} else {
+				return $this->Game->find("all",$findparams);
+			}
 		}
 		$this->cakeError("error404");
 	}
@@ -70,6 +75,7 @@ class GamesController extends AppController {
 		$this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
 		if (empty($game)) { $this->cakeError("error404"); }
+		if (isset($this->params["requested"])) { return $game; }
 		if ($game["Genres"]["tools"] == 1) {$this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
 		
 		$this->set("game",$game);
@@ -143,6 +149,18 @@ class GamesController extends AppController {
 		$this->set('OSYSTEM',$this->Game->OSYSTEM);
 		$this->set('DL_STATUS',$this->Game->DL_STATUS);	
 		
+	}
+	
+	function delete($id=null) { # FIXME: Fix dependencies to delete also dependent models.
+		if ($id == null) { $this->redirect("/"); }
+		$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
+		if (!empty($game)) {
+			$this->Game->del($id);
+			$this->flash('The game with id '.$id.' has been deleted.', '/games/queue');
+		} else {
+			$this->Session->setFlash($this->Auth->authError);
+			$this->redirect("/games/queue");
+		}
 	}
 }
 

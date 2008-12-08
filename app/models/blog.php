@@ -7,6 +7,7 @@ class Blog extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'entry_id';
 	var $displayField = 'title';
+	var $order = "created DESC";
 	
 	# Relationships
 	var $belongsTo = array('User' => array("fields" => "username,user_id"));

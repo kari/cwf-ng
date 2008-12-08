@@ -5,7 +5,7 @@ class NewsController extends AppController {
 	# var $scaffold;
 	var $paginate = array(
 	    # 'conditions' => array("download_status" => 0),
-      'limit' => 25,
+      'limit' => 15,
       'order' => array('post_date' => 'desc'),
 			# 'recursive' => 1
 	    );
@@ -41,6 +41,7 @@ class NewsController extends AppController {
 	}
 	
 	function edit($id=null) { # news/edit allows to edit all news.
+		if ($id == null) { $this->redirect("/news"); }
 		if (!empty($this->data)) {
 			$this->data["News"]["last_edit_time"] = date("Y-m-d H:i:s");
 			if($this->News->save($this->data)) {
@@ -52,6 +53,19 @@ class NewsController extends AppController {
 		$this->data = $this->News->findByNews_id($id);
 		$this->set("user_id",$this->Auth->user("user_id"));
 		$this->set("posters",$this->News->User->find('list')); # FIXME: should only list users with relevant access level?
+	}
+	
+	function delete($id=null) { # news/delete allows to delete all news.
+		if ($id == null) { $this->redirect("/news"); }
+		$news = $this->News->find("first",array("conditions"=>array("news_id"=>$id)));
+		if (!empty($news)) {
+			$this->News->del($id);
+			$this->flash('The news item with id '.$id.' has been deleted.', '/news');
+		} else {
+			$this->Session->setFlash($this->Auth->authError);
+			$this->redirect("/news");
+		}
+		
 	}
 	
 }

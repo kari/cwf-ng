@@ -1,6 +1,13 @@
 <?php
 class BlogsController extends AppController {
 	var $name = 'Blogs';
+	var $paginate = array(
+	    # 'conditions' => array("download_status" => 0),
+      'limit' => 15,
+      # 'order' => array('post_date' => 'desc'),
+			# 'recursive' => 1
+	    );
+	
 	
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -8,7 +15,8 @@ class BlogsController extends AppController {
 	}
 	
 	function index() {        
-		$this->set('blogs', $this->Blog->find('all',array("order"=>"created DESC")));    		
+		# $this->set('blogs', $this->Blog->find('all',array("order"=>"created DESC")));
+		$this->set("blogs",$this->paginate("Blog"));    		
 	}
 	
 	function view($id = null) {
