@@ -4,7 +4,7 @@ if(!isset($game_id)) {
   $title = "At Spotlights";
 } else {
   $game = $this->requestAction("games/view/".$game_id);
-  $title = $game["Game"]["game_name"];
+  $title = $html->link($game["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]));
 }
 ?>
 <h1><?=$title?></h1>

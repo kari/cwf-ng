@@ -24,6 +24,7 @@
             <li><?=$html->link("Blogs","/blogs/")?></li>
             <li><?=$html->link("News","/news/")?></li>
             <li><?=$html->link("Reviews","/reviews/")?></li>
+            <li><?=$html->link("Guides","/guides/")?></li>
             <li><?=$html->link("Interviews","/interviews/")?></li>
             <li><?=$html->link("Tools","/tools/")?></li>
             <li><?=$html->link("Forums","/forum")?></li>
