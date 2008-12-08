@@ -26,6 +26,11 @@
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
     <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
     <li><?=$html->link("Game homepage",$game["Game"]["site"])?></li>
+    <li>Platforms:<ul><?
+        foreach ($game["Specs"] as $platform => $platform_set) {
+          if ($platform_set == 1) echo "<li>".$OSYSTEM[$platform]."</li>";
+        }
+        ?></ul></li>
     <li>System requirements: <?=nl2br($game["Game"]["requirements"])?></li>
   </ul>
 <h2>Genres</h2>
@@ -35,12 +40,6 @@ foreach ($game["Genres"] as $genre => $genre_set) {
 }
 ?>  
 </ul>
-<h2>Platforms</h2>
-<ul><?
-foreach ($game["Specs"] as $platform => $platform_set) {
-  if ($platform_set == 1) echo "<li>".$OSYSTEM[$platform]."</li>";
-}
-?></ul>
 <h2>Screenshots</h2>
 <ul id="screenshots"><?
 foreach ($game["Screenshot"] as $screenshot) {
@@ -108,10 +107,15 @@ foreach ($game["Download"] as $file) {
   echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
+<? if (!empty($game["Guide"])) { ?>
 <h2>Guides</h2>
-<ul class="">
-  <em>Not implemented yet</em>
+<ul class=""><?
+foreach ($game["Guide"] as $guide) {
+  echo "<li>".$html->link($guide["title"],array("controller"=>"guides","action"=>"view",$guide["id"]))."</li>";
+}
+?>
 </ul>
+<? } ?>
 <h2>Reviews</h2>
 <ul class="reviews">
 <?
@@ -120,7 +124,7 @@ foreach ($game["Review"] as $review) {
  echo "<p>".nl2br($text->trim(iconv("ISO-8859-1","UTF-8",$review["review_text"]),300))."</p></li>"; # FIXME: encoding (DB iso, site utf-8)
 }
 if (count($game["Review"]) == 0) {
-  echo "<p>No reviews.</p>";
+  echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add"))."</p>";
 }
 ?>
 </ul>
