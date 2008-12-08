@@ -28,7 +28,7 @@
    }
 	   ?>
 	  </td><td>
-		<h4><?=$html->link($game['Game']['game_name'], '/games/view/'.$game['Game']['game_id']);?></h4>
+		<h4><?=$html->link($game['Game']['game_name'], '/games/view/'.$game['Game']['game_id'],array(),null,false);?></h4>
 		  <p><? $first = true;
 		    foreach ($game["Genres"] as $genre => $genre_set) {
 		      if ($genre == "genre_id") continue;

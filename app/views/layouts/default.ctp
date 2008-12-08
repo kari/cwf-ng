@@ -55,10 +55,11 @@
       <div class="yui-b" id="sidebar">
         <!-- Sidebar content -->
         <cake:nocache>
-        <?=$this->element("spotlight",array("cache"=>array("key"=>"frontpage","time"=>"+1 hour")))?>
-        <?=$this->element("toplatest",array("cache"=>array("key"=>"frontpage","time"=>"+1 hour")))?>
-        <?=$this->element("toprated",array("cache"=>array("key"=>"frontpage","time"=>"+6 hour")))?>
-        <?=$this->element("topdownloads",array("cache"=>array("key"=>"frontpage","time"=>"+1 day")))?>
+        <?=$this->element("search",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
+        <?=$this->element("spotlight",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
+        <?=$this->element("toplatest",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
+        <?=$this->element("toprated",array("cache"=>array("key"=>"","time"=>"+6 hour")))?>
+        <?=$this->element("topdownloads",array("cache"=>array("key"=>"","time"=>"+1 day")))?>
         <?=$this->element("adbox",array("style"=>"pw-square"))?>
         </cake:nocache>
       </div>

@@ -1,3 +1,8 @@
+<?
+  $this->pageTitle = "Interview - ".$interview["Interview"]["interview_title"];
+?>
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1><?=$interview["Interview"]["interview_title"]?></h1>
 <p><em>or, where <?=$interview["Interviewer"]["username"]?> interviews 
 <? # Come up with who is being interviewed.
@@ -19,7 +24,7 @@ if (!empty($interview["Interview"]["game_id"])) {
 <p>
 <?=$bbcode->decode($interview["Interview"]["text"])?>
 </p>
-<h3>Related links</h2>
+<h3>Related links</h3>
 <ul>
 <?
 if (!empty($interview["Game"])) echo "<li>".$html->link($interview["Game"]["game_name"]." on CWF",array("controller"=>"games","action"=>"view",$interview["Game"]["game_id"]))."</li>";
@@ -29,3 +34,14 @@ if (!empty($interview["Publisher"]["site"])) echo "<li>".$html->link("Official s
 
 ?>
 </ul>
+  </div>
+  <div class="yui-u">
+  <!-- right bar -->
+  <? 
+  if (!empty($interview["Game"])) {
+    echo $this->element("spotlight",array("game_id"=>$interview["Game"]["game_id"],"cache"=>array("key"=>$interview["Game"]["game_id"],"time"=>"+1 day")));
+  }
+  ?>
+  <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>

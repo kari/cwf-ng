@@ -12,10 +12,10 @@
       });
     });")
 ?>
-<div class="yui-gc">
+<div class="yui-ge">
   <div class="yui-u first">
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
-<p>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
+<p>by <?=$html->link(iconv("ISO-8859-1","UTF-8",$game['Publisher']['name']),array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
 <?# FIXME: A bigger thumbnail of "featured" (or first) screenshot would be nice here! ?>
 <p><?=$bbcode->decode(iconv("ISO-8859-1","UTF-8",$game['Game']['description']))?></p>
 <h2>Details</h2>
@@ -108,7 +108,10 @@ foreach ($game["Download"] as $file) {
   echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"dl",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
-
+<h2>Guides</h2>
+<ul class="">
+  <em>Not implemented yet</em>
+</ul>
 <h2>Reviews</h2>
 <ul class="reviews">
 <?
