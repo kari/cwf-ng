@@ -6,9 +6,10 @@ class ScreenshotsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view","show"));
+		# $this->Auth->allow(array("index","view"));
 	}
 
+/*
 	function show($img = null) {
 		# This might be even slower way to do things. We need to invoke a php thread for each image... every time.
 		# view = show DB-entry, show (public) = return image.
@@ -26,6 +27,7 @@ class ScreenshotsController extends AppController {
 		$this->set($params);
 		# if fail, show this:
 		# $this->cakeError("error404");
-	}
+	} 
+*/
 }
 ?>

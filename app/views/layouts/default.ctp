@@ -23,6 +23,7 @@
             <li><?=$html->link("Games","/games/")?></li>
             <li><?=$html->link("Blogs","/blogs/")?></li>
             <li><?=$html->link("News","/news/")?></li>
+            <li><?=$html->link("World News","/world_news")?></li> <? #FIXME: Should this be in News? ?>
             <li><?=$html->link("Reviews","/reviews/")?></li>
             <li><?=$html->link("Guides","/guides/")?></li>
             <li><?=$html->link("Interviews","/interviews/")?></li>
@@ -47,9 +48,11 @@
           <!-- can be split with yui-u div-classes -->
             <?=$content_for_layout ?>
           <div class="yui-g">
+            <p>&nbsp;</p>
             <cake:nocache>
             <?=$this->element("adbox",array("style"=>"pw-leaderboard")) ?>
             </cake:nocache>
+            <p>&nbsp;</p>
           </div>
         </div>
       </div>

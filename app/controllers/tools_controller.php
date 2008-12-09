@@ -1,9 +1,9 @@
 <?php
 
 class ToolsController extends AppController {
-	# This is just a clone of the Games Controller. Internally games and tools are identical, but for display purposes there should be some distinction.
+	# This is just a clone of the Games Controller. Internally games and tools are identical, but for display purposes there should be some distinction. Editing and deleting goes through Games controller.
+	
 	var $name = 'Tools';
-  # var $scaffold;
 	var $paginate = array(
 	    'conditions' => array("Game.download_status" => 0,"Genres.tools"=>1),
       'limit' => 15,
@@ -27,7 +27,8 @@ class ToolsController extends AppController {
 		# Remove those associations on the fly.
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
 		$this->set('GENRE',$this->Game->GENRE);
-		$this->set("tools",$this->Game->find("all",array("conditions"=>array("Game.download_status" => 0,"Genres.tools"=>1))));	
+		$this->set("tools",$this->paginate("Game"));
+#		$this->set("tools",$this->Game->find("all",array("conditions"=>array("Game.download_status" => 0,"Genres.tools"=>1))));	
 	}
 
 	function view($id = null) {
@@ -50,6 +51,14 @@ class ToolsController extends AppController {
 		 # $this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>81,"game_id"=>$this->Game->id))));
 		$this->set("user_id",$this->Auth->user("user_id"));
 		
+	}
+	
+	function delete($id=null) {
+		$this->redirect(array("controller"=>"games","action"=>"delete",$id));
+	}
+	
+	function edit($id=null) {
+		$this->redirect(array("controller"=>"games","action"=>"edit",$id));
 	}
 	
 			

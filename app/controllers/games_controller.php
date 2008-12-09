@@ -4,12 +4,17 @@ class GamesController extends AppController {
 	var $name = 'Games';
   # var $scaffold;
 	var $paginate = array(
-	    'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
-      'limit' => 15,
-      'order' => array('Game.game_name' => 'asc'),
+		"Game" => array(
+	   	'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
+     	'limit' => 15,
+     	'order' => array('Game.game_name' => 'asc'),
 			# "fields" => array("game_name","game_id"),
-			'recursive' => 1
-	    );
+			'recursive' => 1),
+		"Comment" => array(
+			"conditions" => array("Comment.validated"=>TRUE),
+			"order" => array("Comment.created"=>"desc"),
+			"limit" => 10)
+			);
 	var $uses = array("Game","Download","Rating");
 	
 	var $helpers = array('Cache',"Number","Site","javascript");
@@ -72,13 +77,17 @@ class GamesController extends AppController {
 	  if ($id == null) { $this->cakeError('error404'); }
 	  
 		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
+		# FIXME: Make Game Containable.
 		$this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
+		if (isset($this->params["requested"])) { 
+			if (!empty($game)) { return $game; } else { return false; }
+		}
 		if (empty($game)) { $this->cakeError("error404"); }
-		if (isset($this->params["requested"])) { return $game; }
 		if ($game["Genres"]["tools"] == 1) {$this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
 		
 		$this->set("game",$game);
+		$this->set("comments",$this->paginate("Comment",array("Comment.game_id"=>$game["Game"]["game_id"])));
 		$this->set('LICENSE',$this->Game->LICENSE);
 		$this->set('GENRE',$this->Game->GENRE);
 		$this->set('OSYSTEM',$this->Game->OSYSTEM);
