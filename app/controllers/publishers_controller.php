@@ -2,7 +2,7 @@
 
 class PublishersController extends AppController {
 	var $name = 'Publishers';
-  var $scaffold;
+  # var $scaffold;
 
 	function beforeFilter() {
 		parent::beforeFilter();

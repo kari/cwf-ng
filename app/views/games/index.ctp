@@ -13,10 +13,9 @@
   });")
 ?>
 <h1>Games</h1>
-<p>Order by <b>Name</b>, Score<br>
-  Filter by Platform, Score, Genre<br>
-  Search <?$form->text("Search")?></p>
-<?#=debug($games[0])?>
+<p>Sort by <?=$paginator->sort("Game name","game_name",array("direction"=>"desc"))?>, 
+ <?=$paginator->sort("Score","site_rating",array("direction"=>"desc"))?>, <?=$paginator->sort("Date added","created",array("direction"=>"desc"))?><br>
+  Filter by Platform, Score, Genre</p>
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>

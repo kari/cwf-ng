@@ -124,7 +124,7 @@ foreach ($game["Review"] as $review) {
  echo "<p>".nl2br($text->trim(iconv("ISO-8859-1","UTF-8",$review["review_text"]),300))."</p></li>"; # FIXME: encoding (DB iso, site utf-8)
 }
 if (count($game["Review"]) == 0) {
-  echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add"))."</p>";
+  echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."</p>";
 }
 ?>
 </ul>
@@ -132,19 +132,20 @@ if (count($game["Review"]) == 0) {
 <h2>Comments</h2>
 <ul class="reviews">
 <?
-foreach ($game["Comment"] as $comment) {
-  echo "<li><strong>".$comment["title"]."</strong> by ";
-  if (!empty($comment["user_id"])) {
+foreach ($comments as $comment) {
+  echo "<li><strong>".$comment["Comment"]["title"]."</strong> by ";
+  if ($comment["Comment"]["user_id"] <> -1) {
     echo $html->link($comment["User"]["username"],array("controller"=>"users","action"=>"view",$comment["User"]["user_id"]));
   } else {
     echo "Anonymous";
   }
-  echo " ".$time->timeAgoInWords($comment["created"],array("format"=>"d.m.Y"));
-  echo "<br>".nl2br($comment["text"])."</li>";
+  echo " ".$time->timeAgoInWords($comment["Comment"]["created"],array("format"=>"d.m.Y"));
+  echo "<br>".nl2br($comment["Comment"]["text"])."</li>";
 }
 ?>
 </ul>
-
+<?=$paginator->prev('« Previous ', null, null, array('class' => 'disabled'));?>&nbsp;
+<?=$paginator->next(' Next »', null, null, array('class' => 'disabled'));?>
 <h3>Add a comment</h3>
 <?=$form->create("Comment");?>
 <?=$form->input("title");?>

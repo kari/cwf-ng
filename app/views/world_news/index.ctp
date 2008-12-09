@@ -1,12 +1,12 @@
 <div class="yui-ge">
   <div class="yui-u first">
-<h1>Site News</h1>
+<h1>World News</h1>
 <ul class="news">
 <? 
-  foreach($news as $item) {
+  foreach($wnews as $item) {
     echo "<li><strong>";
-    echo $time->format("d.m.Y",$item["News"]["post_date"])." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"]."</strong><br>";
-    echo $text->trim($bbcode->strip($item["News"]["news_text"]),1000,"...",false);
+    echo $time->format("d.m.Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"world_news","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
+    echo $text->trim($bbcode->strip($item["WorldNews"]["wnews_text"]),1000,"...",false);
     echo "</li>";
 }?>
 </ul>

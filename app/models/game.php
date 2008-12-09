@@ -24,8 +24,8 @@ class Game extends AppModel {
 	# Relationships
 	var $hasMany = array(
 		"Guide" => array("fields"=>"Guide.id,Guide.title"),
-	  'Review' => array("fields"=>"Review.review_id,Review.review_title","conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5), # TODO: we also need the reviewer's names. But how?
-	  "Comment" => array("limit" => 5,"order"=>"created DESC"),
+	  'Review' => array("fields"=>"Review.review_id,Review.review_title,Review.review_text,Review.user_id","conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5), # TODO: we also need the reviewer's names. But how?
+	  "Comment" => array("limit" => 5,"order"=>"created DESC","conditions"=>array("validated"=>TRUE)),
 	  "Download",
 	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
 	  "Screenshot" => array("order" => "screenshot_id ASC"),
