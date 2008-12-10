@@ -24,8 +24,9 @@ class User extends AppModel {
 	
 	function isAuthorized($user,$controller,$action) {
 		$node = strtolower($controller."/".$action);
-		$allow = $this->query("SELECT Action.allow FROM CWF_groups_actions AS Action LEFT JOIN phpbb_user_group AS UserGroup on UserGroup.group_id = Action.group_id Where user_id = '".$user["User"]["user_id"]."' AND allow = 1 AND action_id = '".$node."' LIMIT 1;");
-		if (Set::check($allow,"0.Action.allow")) return true;
+		$allow = $this->query("SELECT Action.".$action." FROM CWF_groups_actions AS Action LEFT JOIN phpbb_user_group AS UserGroup ON UserGroup.group_id = Action.group_id WHERE user_id = ".$user["User"]["user_id"]." AND action_id = '".Inflector::tableize($controller)."' AND Action.".$action." = 1 LIMIT 1;");
+		if (!empty($allow)) return true;
+		# if (Set::check($allow,"0.Action.".$action)) return true;
 		return false;
 	}
 	
