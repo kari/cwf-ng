@@ -6,7 +6,8 @@ class RatingsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("user_ratings","vote"));
+		$this->Auth->allow(array("user_ratings"));
+		$this->Auth->mapActions(array("create"=>array("vote")));
 	}
 
 	function vote() {

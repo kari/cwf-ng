@@ -24,6 +24,7 @@ class GamesController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view","random","top"));
+		$this->Auth->mapActions(array("queue"=>"admin"));
 	}
 
 	function index() {
