@@ -46,31 +46,28 @@ if (empty($tool["Screenshot"])) {
 </ul>
 <h2>Ratings</h2>
 <? 
-if(!empty($user_id)) { 
-  echo $form->create("Rating",array("controller"=>"ratings","action"=>"vote"));
-  echo $form->hidden("Game.game_id",array("value"=>$tool["Game"]["game_id"]));
+echo $form->create("Rating",array("controller"=>"ratings","action"=>"vote"));
+echo $form->hidden("Game.game_id",array("value"=>$tool["Game"]["game_id"]));
+?>
+<cake:nocache>
+<?
+if ($session->check("Auth.User.user_id")) {
+  $user_ratings = $this->requestAction("/ratings/user_ratings/".$this->data["cached_game_id"]);
 }
 ?>
+</cake:nocache>
 <ul>
 <li>Game hunters' rating: <?=$site->drawStars($tool["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$tool["Game"]["site_rating"]?> of 6)</li>
+<cake:nocache>
 <?
-# Rewriting arrays for better traversal in foreach loops.
-$ratings = array();
-$user_rating = array();
-
-foreach ($tool["Rating"] as $rating) {
-  $ratings[$rating["rating_type"]]["average_rating"] = $rating["Rating"][0]["average_rating"];
-  $ratings[$rating["rating_type"]]["vote_count"] = $rating["Rating"][0]["vote_count"];
-}
-foreach ($user_ratings as $rating) {
-  $user_rating[$rating["Rating"]["rating_type"]]["value"] = $rating["Rating"]["rating_value"];
-  $user_rating[$rating["Rating"]["rating_type"]]["vote_id"] = $rating["Rating"]["vote_id"];
-}
-$key = 0;
+$ratings = $this->data["cached_ratings"];
+$RATING_TYPE = $this->data["cached_RATING_TYPE"];
+$key = 0; # Tool-specific hacks.
 $type = $RATING_TYPE[$key];
+
 # foreach ($RATING_TYPE as $key => $type) {
   echo '<li>'.$type.': '; 
-  if (array_key_exists($key,$ratings)) {
+  if (array_key_exists($key,$ratings)) { 
     echo $site->drawStars($ratings[$key]["average_rating"],6);
     echo " ".$number->precision($ratings[$key]["average_rating"],2);
     echo ' ('.$ratings[$key]["vote_count"].' vote';
@@ -80,21 +77,40 @@ $type = $RATING_TYPE[$key];
     echo "No votes";
   };
   # Placeholders for voting.
-  if(!empty($user_id)) {
+  if($session->check("Auth.User.user_id")) {
     $allowEmpty = false;
-    if (!array_key_exists($key,$user_rating)) {
-      $user_rating[$key]["value"] = "";
+    if (!array_key_exists($key,$user_ratings)) {
+      $user_ratings[$key]["value"] = "";
       $allowEmpty = true;
     }
     echo " Your vote: ";
-    echo $form->hidden("Rating.".$key.".rating_type",array("value"=>$key));
-    echo $form->select("Rating.".$key.".rating_value",array(0=>"0",1=>"1",2=>"2",3=>"3",4=>"4",5=>"5",6=>"6"),$user_rating[$key]["value"],array(),(false OR $allowEmpty));
-  }
+    # echo $form->hidden("Rating.".$key.".rating_type",array("value"=>$key));
+    echo '<input type="hidden" name="data[Rating]['.$key.'][rating_type]" value="'.$key.'" id="Rating'.$key.'RatingType" />';
+    # echo $form->select("Rating.".$key.".rating_value",array(0=>"0",1=>"1",2=>"2",3=>"3",4=>"4",5=>"5",6=>"6"),$user_ratings[$key]["value"],array(),(false OR $allowEmpty));
+    echo '<select name="data[Rating]['.$key.'][rating_value]" id="Rating'.$key.'RatingValue">';
+    if ($allowEmpty == true) { echo '<option value=""></option>'; }
+    for ($i=1;$i<=6;$i++) { 
+      echo '<option value="'.$i.'"';
+      if ($user_ratings[$key]["value"]==$i) { echo ' selected="selected"'; }  
+      echo '>'.$i.'</option>';
+    } 
+    echo "</select>";
+  } 
   echo '</li>';
 # }
 ?>
 </ul>
-<? if(!empty($user_id)) echo $form->end("Vote"); ?>
+<? 
+if($session->check("Auth.User.user_id")) {
+  # echo $form->end("Vote");
+  echo '<div class="submit"><input type="submit" value="Vote" /></div></form>';
+} else {
+  # echo $form->end(array("label"=>"Vote","disabled"=>"disabled"));
+  echo '<div class="submit"><input type="submit" disabled="disabled" value="Vote" /></div></form>';
+}
+?>
+</cake:nocache>
+
 <h2>Downloads</h2>
 <ul class="downloads"><?
 foreach ($tool["Download"] as $file) {
