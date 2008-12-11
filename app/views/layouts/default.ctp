@@ -30,7 +30,7 @@
             <li><?=$html->link("Tools","/tools/")?></li>
             <li><?=$html->link("Forums","/forum")?></li>
           </ul>
-        <div id="flash">
+        <div id="flash"><cake:nocache>
           <?
           	if ($session->check('Message.flash')) {
           		$session->flash();
@@ -39,7 +39,7 @@
           		$session->flash('auth');
           	}
           ?>
-        </div>  
+        </cake:nocache></div>
     </div>
     <div id="bd">
       <div id="yui-main">

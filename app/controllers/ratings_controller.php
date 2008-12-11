@@ -6,7 +6,7 @@ class RatingsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		# $this->Auth->allow(array("user_ratings"));
+		$this->Auth->allow(array("user_ratings","vote"));
 	}
 
 	function vote() {
@@ -42,14 +42,20 @@ class RatingsController extends AppController {
 			$this->redirect("/"); # shouldn't be here if not POSTed.
 		}
 	}
-	/* Some skeleton for possible game ratings element.. 
+	# Some skeleton for possible game ratings element.. 
 	function user_ratings($id=null) {
 		if ((isset($this->params["requested"])) AND (isset($id))) {
-			$user_ratings = $this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id)));
+			$user_ratings_array = $this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id)));
+			$user_ratings = array();
+				foreach ($user_ratings_array as $rating) {
+					$user_ratings[$rating["Rating"]["rating_type"]]["value"] = $rating["Rating"]["rating_value"];
+		  		$user_ratings[$rating["Rating"]["rating_type"]]["vote_id"] = $rating["Rating"]["vote_id"];
+				}
 			return $user_ratings;
 		}
+		if (isset($this->params["requested"])) { return false; }
 		$this->cakeError("error404");
-	} */
+	}
 }
 
 ?>
