@@ -10,6 +10,7 @@ class ReviewsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view"));
+		$this->Auth->mapActions(array("queue"=>"admin"));
 	}
 	
 	function index() {

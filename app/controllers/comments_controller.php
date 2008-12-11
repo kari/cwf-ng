@@ -14,6 +14,7 @@ class CommentsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("add")); # FIXME: No comments/index in production.
+		$this->Auth->mapActions(array("queue"=>"admin"));
 	}
 	
 	function queue() {

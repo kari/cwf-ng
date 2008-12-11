@@ -7,6 +7,7 @@ class DownloadsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view"));
+		$this->Auth->mapActions(array("read"=>array("get")));
 	}
 
 	function get($id=null) {

@@ -7,6 +7,7 @@ class GvsgController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","stats"));
+		$this->Auth->mapActions(array("create"=>array("vote")));
 	}
 	
 	function index() {

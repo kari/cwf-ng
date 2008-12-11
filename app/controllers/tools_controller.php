@@ -19,7 +19,7 @@ class ToolsController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view","random","top"));
+		$this->Auth->allow(array("index","view"));
 	}
 
 	function index() {
