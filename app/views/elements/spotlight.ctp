@@ -3,7 +3,7 @@ if(!isset($game_id)) {
   $game = $this->requestAction('games/random/1');
   $title = "At Spotlights";
 } else {
-  $game = $this->requestAction("games/view/".$game_id);
+  $game = $this->requestAction("games/get/".$game_id);
   $title = $html->link($game["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]));
 }
 ?>
