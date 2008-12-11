@@ -23,7 +23,7 @@ class GamesController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view","random","top"));
+		$this->Auth->allow(array("index","view","random","top","get"));
 		$this->Auth->mapActions(array("queue"=>"admin"));
 	}
 
@@ -73,6 +73,19 @@ class GamesController extends AppController {
 		$this->cakeError("error404");
 	}
 	
+	function get($id = null) {
+		if ($id == null) { $this->cakeError('error404'); }
+		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
+		if (isset($this->params["requested"])) {
+			if (!empty($game)) { 
+				return $game;
+			} else { 
+				return false; 
+			}
+		}
+		$this->cakeError('error404');
+	}
+	
 	function view($id = null) {
 	# FIXME: view decide if $id is a number (primary key) or slug (acidbomb-2-rearmament) and work accordingly. Same thing to all view-actions which'd benefit from friendly urls. 
 	  if ($id == null) { $this->cakeError('error404'); }
@@ -81,9 +94,6 @@ class GamesController extends AppController {
 		# FIXME: Make Game Containable.
 		$this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
-		if (isset($this->params["requested"])) { 
-			if (!empty($game)) { return $game; } else { return false; }
-		}
 		if (empty($game)) { $this->cakeError("error404"); }
 		if ($game["Genres"]["tools"] == 1) {$this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
 		
