@@ -1,18 +1,6 @@
 <? $this->pageTitle = $user["User"]["username"]; ?>
 <h1><?=$user['User']['username']?></h1>
-<?
-switch ($user['User']['user_avatar_type']) {
-  case 0:
-    echo "no avatar";
-    break;
-  case 1:
-    echo $html->image("http://curlysworldoffreeware.com/images/avatars/".$user["User"]["user_avatar"]);
-    break;
-  case 2:
-    echo $html->image($user["User"]["user_avatar"]);
-    break;
-}
-?>
+<?=$site->avatar($user["User"])?>
 <ul>
   <li><?=$html->link("Website",$user["User"]["user_website"])?></li>
   <li>Location: <?=$user["User"]["user_from"]?> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>

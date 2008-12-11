@@ -85,6 +85,24 @@ class SiteHelper extends AppHelper {
 			#$file=md5($url)."-".$size_by.$size
 			
 		}
+		
+	function avatar($user,$options=array()) {
+		$str = "";
+		switch ($user['user_avatar_type']) {
+		  case 1:
+		  case 3:
+		    $str = $this->Html->image("/img/avatars/".$user["user_avatar"],$options);
+		    break;
+		  case 2:
+		    $str = $this->Html->image($user["user_avatar"],$options);
+		    break;
+		  case 0:
+			default:
+			  $str = $this->Html->image("/img/avatars/2816567684410642349aab.gif",$options);
+				break;
+		}
+		return $this->output($str);
+	}
 }
 
 ?>
