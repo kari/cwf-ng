@@ -15,7 +15,7 @@ class ToolsController extends AppController {
 	
 	var $helpers = array('Cache',"Number","Site","javascript");
 	
-	var $cacheAction = array("index" => "+1 day");
+	var $cacheAction = array("index" => "+1 day","view"=>"+1 day");
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -47,9 +47,20 @@ class ToolsController extends AppController {
 		$this->set("DL_TYPE",$this->Download->TYPE);
 		$this->set("PLATFORM",$this->Download->PLATFORM);
 		$this->set("RATING_TYPE",$this->Rating->TYPE);
-		$this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id))));
+		
+		# Caching variables... FIXME.
+		$this->data["cached_RATING_TYPE"] = $this->Rating->TYPE;
+		$this->data["cached_game_id"] = $id;
+
+		$ratings = array(); # Rewriting arrays for better traversal in foreach loops.
+		foreach ($tool["Rating"] as $rating) {
+		  $ratings[$rating["rating_type"]]["average_rating"] = $rating["Rating"][0]["average_rating"];
+		  $ratings[$rating["rating_type"]]["vote_count"] = $rating["Rating"][0]["vote_count"];
+		}
+		$this->data["cached_ratings"] = $ratings;
+		# $this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id))));
 		 # $this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>81,"game_id"=>$this->Game->id))));
-		$this->set("user_id",$this->Auth->user("user_id"));
+#		$this->set("user_id",$this->Auth->user("user_id"));
 		
 	}
 	
