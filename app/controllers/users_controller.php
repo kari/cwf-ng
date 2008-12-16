@@ -1,7 +1,9 @@
 <?php
 class UsersController extends AppController {
     var $name = 'Users';    
-		var $helpers = array("Bbcode");
+		var $helpers = array("Bbcode","Cache");
+		
+		var $cacheAction = array("view/"=>"+1 day");
 		
 		function beforeFilter() {
 			parent::beforeFilter();

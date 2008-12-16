@@ -11,7 +11,7 @@ class NewsController extends AppController {
 	    );
 	var $helpers = array("Time","Cache");
 	var $uses = array("News","User");
-	var $cacheAction = "+1 day";
+	var $cacheAction = array("index"=>"+1 day","view/"=>"+1 day");
 	
 	function beforeFilter() {
 		parent::beforeFilter();
