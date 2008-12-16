@@ -7,6 +7,9 @@ class BlogsController extends AppController {
       # 'order' => array('post_date' => 'desc'),
 			# 'recursive' => 1
 	    );
+	var $helpers = array("cache");
+	
+	var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
 	
 	
 	function beforeFilter() {

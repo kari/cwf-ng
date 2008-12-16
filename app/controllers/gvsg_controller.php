@@ -3,6 +3,8 @@
 class GvsgController extends AppController {
 	var $name = 'Gvsg';
   var $uses = array("Game","GvsgVote","GvsgStats");
+	var $helpers = array("cache");
+	var $cacheAction = array("stats"=>"+3 hours");
 
 	function beforeFilter() {
 		parent::beforeFilter();

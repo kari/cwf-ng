@@ -8,8 +8,9 @@ class WorldNewsController extends AppController {
       'order' => array('wnews_date' => 'desc'),
 			# 'recursive' => 1
 	    );
-	var $helpers = array("Time");
+	var $helpers = array("Time","cache");
 	var $uses = array("WorldNews","User");
+	var $cacheAction = array("view/"=>"+1 day","index"=>"+1 day");
 	
 	function beforeFilter() {
 		parent::beforeFilter();

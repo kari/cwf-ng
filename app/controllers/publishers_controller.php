@@ -3,6 +3,8 @@
 class PublishersController extends AppController {
 	var $name = 'Publishers';
   # var $scaffold;
+	var $helpers = array("cache");
+	var $cacheAction = array("view/"=>"+1 day");
 
 	function beforeFilter() {
 		parent::beforeFilter();
