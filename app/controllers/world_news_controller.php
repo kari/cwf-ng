@@ -2,7 +2,7 @@
 
 class WorldNewsController extends AppController {
 	var $name = 'WorldNews';
-	var $scaffold;
+	# var $scaffold;
 	var $paginate = array(
       'limit' => 25,
       'order' => array('wnews_date' => 'desc'),

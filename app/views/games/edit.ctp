@@ -11,7 +11,7 @@
   echo $form->input("year",array("maxLength"=>4));
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
   echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
-  echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
+  echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
   
   echo $form->input("description");
   echo $form->input("site");
@@ -55,7 +55,7 @@
     echo "</li>";
   }
 ?>
-<li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
+<li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
 <h2>Files</h2>
 <ul>
@@ -67,7 +67,7 @@
     echo '</li>';
   }
 ?>
-<li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"create",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
+<li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
   </div>
 </div>

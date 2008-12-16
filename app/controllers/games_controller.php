@@ -2,7 +2,7 @@
 
 class GamesController extends AppController {
 	var $name = 'Games';
-  # var $scaffold;
+
 	var $paginate = array(
 		"Game" => array(
 	   	'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
@@ -124,7 +124,7 @@ class GamesController extends AppController {
 	function edit($id = null) {
 		if (!empty($this->data)) {
 			if ($this->Game->saveAll($this->data,array("validate"=>"first"))) {
-				$this->flash("Game changes saved.","");
+				$this->Session->setFlash("Game changes saved.");
 			} else {
 				$this->Session->setFlash("There were validation errors"); # FIXME: Validation errors are not visible!
 			}
