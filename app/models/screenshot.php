@@ -10,7 +10,7 @@ class Screenshot extends AppModel {
 	var $primaryKey = 'screenshot_id';
 	# var $displayField = 'OTHER';
 	
-	var $belongsTo = array("Submitter" => array("className" => "User", "foreignKey" => "screenshot_submitter_id","fields" => "username,user_id"),);
+	var $belongsTo = array("User" => array("className" => "User", "foreignKey" => "screenshot_submitter_id","fields" => "username,user_id"),"Game" => array("fields"=>"game_id,game_name"));
 	
 }
 ?>

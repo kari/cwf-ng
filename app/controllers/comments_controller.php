@@ -2,7 +2,6 @@
 
 class CommentsController extends AppController {
 	var $name = 'Comments';
-  # var $scaffold;
 	var $paginate = array(
 	    # 'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
       'limit' => 30,

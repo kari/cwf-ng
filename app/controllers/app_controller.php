@@ -1,7 +1,7 @@
 <?
 class AppController extends Controller {  
 	var $components = array('Auth');
-	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time");
+	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); // FIXME: Move helpers to individual controllers to optimize stuff
 	# var $uses = "User";
 	
 	function beforeFilter() {

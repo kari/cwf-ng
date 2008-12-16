@@ -2,7 +2,7 @@
 
 class ReviewsController extends AppController {
 	var $name = 'Reviews';
-  # var $scaffold;
+
 	var $uses = array("Review","Game");
 	var $helpers = array("Cache");
 	var $cacheAction = array("index"=>"+1 hour","view/"=>"+1 day");

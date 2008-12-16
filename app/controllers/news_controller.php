@@ -2,7 +2,7 @@
 
 class NewsController extends AppController {
 	var $name = 'News';
-	# var $scaffold;
+
 	var $paginate = array(
 	    # 'conditions' => array("download_status" => 0),
       'limit' => 15,

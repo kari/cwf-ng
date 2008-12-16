@@ -11,7 +11,7 @@ class Download extends AppModel {
 	# Relationships
 	var $belongsTo = array(
 		"Game" => array("fields" => "game_id,game_name"), 
-		"Game_Submitter" => array("className" => "User", "foreignKey" => "game_submitter_id","fields" => "username,user_id"),
+		"User" => array("className" => "User", "foreignKey" => "game_submitter_id","fields" => "username,user_id"),
 		);
 		
 	# Validation
