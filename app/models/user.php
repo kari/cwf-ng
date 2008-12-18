@@ -23,7 +23,7 @@ class User extends AppModel {
 	# This model SHOULD NOT add or remove users. These and most user info management should be left to phpbb
 	
 	function isAuthorized($user,$controller,$action) {
-		$node = strtolower($controller."/".$action);
+		# $node = strtolower($controller."/".$action);
 		$allow = $this->query("SELECT Action.".$action." FROM CWF_groups_actions AS Action LEFT JOIN phpbb_user_group AS UserGroup ON UserGroup.group_id = Action.group_id WHERE user_id = ".$user["User"]["user_id"]." AND action_id = '".strtolower($controller)."' AND Action.".$action." = 1 LIMIT 1;");
 		if (!empty($allow)) return true;
 		# if (Set::check($allow,"0.Action.".$action)) return true;
