@@ -1,2 +1,8 @@
-<h1>Add Post</h1><?php
-echo $form->create('Blog');echo $form->input('title');echo $form->input('content', array('rows' => '3'));echo $form->input('user_id', array('type'=>'hidden','value'=>'65'));echo $form->end('Save Post');?>
+<h1>Add Post</h1>
+<?php
+echo $form->create('Blog');
+echo $form->input('title');
+echo $form->input('content', array('rows' => '3'));
+echo $form->input('user_id', array('type'=>'hidden','value'=>$session->read("Auth.User.user_id")));
+echo $form->end('Save Post');
+?>

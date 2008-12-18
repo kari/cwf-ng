@@ -36,8 +36,8 @@ class BlogsController extends AppController {
 	}
 	
 	function delete($id=null) {
-		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id,"Blog.user_id"=>$this->Auth->user("user_id"))));
-		if (!empty($blog)) {
+		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id)));
+		if (!empty($blog) AND (($blog["Blog"]["user_id"] == $this->Auth->user("user_id")) OR $this->Blog->User->isAuthorized($this->Auth->user(),"blogs","admin"))) { # Object exists and it's either User's or User has Admin
 			$this->Blog->del($id);
 			$this->flash('The blog with id '.$id.' has been deleted.', '/blogs');
 		} else {
@@ -46,18 +46,32 @@ class BlogsController extends AppController {
 		}
 	}
 	
-	function edit($id = null) { # FIXME: Edit only own.
-		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id,"Blog.user_id"=>$this->Auth->user("user_id"))));
+	function edit($id = null) {
+		$blog = $this->Blog->find("first",array("conditions"=>array("Blog.entry_id"=>$id)));
 		if (!empty($blog)) {
-			if (empty($this->data)) {
-				$this->data = $blog;
-			} else {
-				if ($this->Blog->save($this->data)) {
-					$this->Session->setFlash('Your post has been updated.');
-					$this->redirect("/blogs");
+			if ($blog["Blog"]["user_id"] == $this->Auth->user("user_id")) { # User's own content
+				if (empty($this->data)) {
+					$this->data = $blog;
+				} else {
+					if ($this->Blog->save($this->data)) {
+						$this->Session->setFlash('Your post has been updated.');
+						$this->redirect("/blogs");
+					}
 				}
+			} elseif ($this->Blog->User->isAuthorized($this->Auth->user(),"blogs","admin")) { # User has Admin access on this controller
+				if (empty($this->data)) {
+					$this->data = $blog;
+				} else {
+					if ($this->Blog->save($this->data)) {
+						$this->Session->setFlash('The post has been updated.');
+						$this->redirect("/blogs");
+					}
+				}
+			} else { # No access
+				$this->Session->setFlash($this->Auth->authError);
+				$this->redirect("/blogs");
 			}
-		} else {
+		} else { # Invalid object ID
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/blogs");
 		}
