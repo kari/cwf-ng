@@ -7,6 +7,8 @@ class Action extends AppModel {
 	var $displayField = "action_id";
 	
 	# Lists actions a certain group is allowed to perform on site.
-		
+	
+	# Objects in the system.
+	var $ACTIONS = array("worldnews","news","ratings","screenshots","tools","users","reviews","publishers","pages","blogs","comments","downloads","games","gvsg","interviews","guides","groups");	
 }
 ?>

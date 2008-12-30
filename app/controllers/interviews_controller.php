@@ -5,6 +5,7 @@ class InterviewsController extends AppController {
   # var $scaffold;
 	var $helpers = array("cache");
 	var $cacheAction = array("index"=>"+1 day","view/"=>"+1 day");
+	var $paginate = array("limit"=>15);
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -12,7 +13,11 @@ class InterviewsController extends AppController {
 	}
 	
 	function index() {
-		$this->set("interviews",$this->Interview->find("all"));
+		$this->set("interviews",$this->paginate("Interview"));
+	}
+	
+	function admin() {
+		$this->set("interviews",$this->paginate("Interview"));
 	}
 	
 	function view($id=null) {

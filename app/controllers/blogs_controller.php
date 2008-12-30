@@ -22,6 +22,10 @@ class BlogsController extends AppController {
 		$this->set("blogs",$this->paginate("Blog"));    		
 	}
 	
+	function admin() {
+		$this->set("blogs",$this->paginate("Blog"));
+	}
+	
 	function view($id = null) {
 		$this->set('blog', $this->Blog->read("",$id));
 	}

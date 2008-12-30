@@ -55,7 +55,7 @@ if (empty($game["Screenshot"])) {
 </ul>
 <h2>Ratings</h2>
 <? 
-echo $form->create("Rating",array("controller"=>"ratings","action"=>"vote"));
+echo $form->create("Rating",array("action"=>"vote"));
 echo $form->hidden("Game.game_id",array("value"=>$game["Game"]["game_id"]));
 ?>
 <cake:nocache>

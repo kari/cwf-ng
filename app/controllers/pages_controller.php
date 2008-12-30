@@ -8,6 +8,7 @@ class PagesController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("home","sitemap"));
+		$this->Auth->mapActions(array("status"=>"admin","admin"=>"admin"));
 	}
 	
 	function home() {
@@ -26,6 +27,10 @@ class PagesController extends AppController {
 	}
 	
 	function status() {
+		
+	}
+	
+	function admin() {
 		
 	}
 	
