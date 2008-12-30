@@ -44,4 +44,8 @@
  * developement.
  */
 	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
+	
+	// Blah
+	Router::connect("/admin",array("controller"=>"pages","action"=>"admin"));
+	Router::connect("/sitemap",array("controller"=>"pages","action"=>"sitemap"));
 ?>

@@ -6,7 +6,7 @@ class NewsController extends AppController {
 	var $paginate = array(
 	    # 'conditions' => array("download_status" => 0),
       'limit' => 15,
-      'order' => array('post_date' => 'desc'),
+      'order' => array('News.post_date' => 'desc'),
 			# 'recursive' => 1
 	    );
 	var $helpers = array("Time","Cache");
@@ -19,6 +19,10 @@ class NewsController extends AppController {
 	}
 	
 	function index() {
+		$this->set("news",$this->paginate("News"));
+	}
+	
+	function admin() {
 		$this->set("news",$this->paginate("News"));
 	}
 	

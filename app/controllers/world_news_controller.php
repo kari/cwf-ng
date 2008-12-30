@@ -21,6 +21,10 @@ class WorldNewsController extends AppController {
 		$this->set("wnews",$this->paginate("WorldNews"));
 	}
 	
+	function admin() {
+		$this->set("wnews",$this->paginate("WorldNews"));
+	}
+	
 	function view($id = null) {
 		if ($id == null) { $this->cakeError("error404"); }
 		$wnews = $this->WorldNews->findByWnews_id($id);

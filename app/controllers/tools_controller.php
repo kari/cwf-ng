@@ -72,6 +72,9 @@ class ToolsController extends AppController {
 		$this->redirect(array("controller"=>"games","action"=>"edit",$id));
 	}
 	
+	function admin() {
+		$this->redirect(array("controller"=>"games","action"=>"admin"));
+	}
 			
 }
 

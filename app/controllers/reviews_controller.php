@@ -6,6 +6,7 @@ class ReviewsController extends AppController {
 	var $uses = array("Review","Game");
 	var $helpers = array("Cache");
 	var $cacheAction = array("index"=>"+1 hour","view/"=>"+1 day");
+	var $paginate = array("limit"=>15,"order"=>"Review.added DESC");
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -14,7 +15,7 @@ class ReviewsController extends AppController {
 	}
 	
 	function index() {
-		$this->set("reviews",$this->Review->find("all",array("conditions"=>array("review_rating >="=>0))));
+		$this->set("reviews",$this->paginate("Review",array("review_rating >="=>0)));
 	}
 	
 	function view($id = null) {
@@ -77,6 +78,10 @@ class ReviewsController extends AppController {
 	function queue() {
 		$reviews = $this->Review->find("all",array("conditions"=>array("review_rating"=>-99),"order"=>"added DESC"));
 		$this->set("reviews",$reviews);
+	}
+	
+	function admin() {
+		$this->set("reviews",$this->paginate("Review",array()));
 	}
 }
 

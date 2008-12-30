@@ -5,7 +5,7 @@ class GamesController extends AppController {
 
 	var $paginate = array(
 		"Game" => array(
-	   	'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
+	   	# 'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
      	'limit' => 15,
      	'order' => array('Game.game_name' => 'asc'),
 			# "fields" => array("game_name","game_id"),
@@ -32,7 +32,7 @@ class GamesController extends AppController {
 		# Remove those associations on the fly.
 		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
 		$this->set('GENRE',$this->Game->GENRE);
-		$this->set("games",$this->paginate('Game'));	
+		$this->set("games",$this->paginate('Game',array("Game.download_status" => 0,"Genres.tools"=>0)));	
 	}
 	
 	function random($limit=1) {
@@ -165,6 +165,12 @@ class GamesController extends AppController {
 /*	function delete($id = null) {
 		# Delete the game. Should set dependencies at model level, too.
 	} */
+	
+	function admin() {
+		$this->set("games",$this->paginate("Game",array()));
+		$this->set('DL_STATUS',$this->Game->DL_STATUS);	
+		
+	}
 	
 	function queue() {
 		# GH voting and validation.

@@ -17,6 +17,10 @@ class CommentsController extends AppController {
 	}
 	
 	function queue() {
+		$this->set("comments",$this->paginate("Comment",array("Comment.validated"=>0)));
+	}
+	
+	function admin() {
 		$this->set("comments",$this->paginate("Comment"));
 	}
 	

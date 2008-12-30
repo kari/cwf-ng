@@ -5,6 +5,7 @@ class GuidesController extends AppController {
   # var $scaffold;
 	var $helpers = array("cache");
 	var $cacheAction = array("index"=>"+1 day","view/"=>"+1 day");
+	var $paginate = array("limit"=>15);
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -12,7 +13,11 @@ class GuidesController extends AppController {
 	}
 	
 	function index() {
-		$this->set("guides",$this->Guide->find("all"));
+		$this->set("guides",$this->paginate("Guide"));
+	}
+	
+	function admin() {
+		$this->set("guides",$this->paginate("Guide"));
 	}
 	
 	function view($id=null) {

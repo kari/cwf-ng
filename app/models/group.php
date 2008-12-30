@@ -11,8 +11,8 @@ class Group extends AppModel {
 	# Relationships
 	var $belongsTo = array("Moderator"=>array("className"=>"User","foreignKey"=>"group_moderator","fields"=>"user_id,username"));
 	
-	# Allowed actions for group, action_id is "controller/action"
-	var $hasMany = array("Action"=>array("conditions"=>array("allow"=>true),"fields"=>"action_id"));
+	# Allowed actions for group, action_id is "controller"
+	var $hasMany = array("Action"=>array("conditions"=>array()));
 	
 	var $hasAndBelongsToMany = array(
 	  "User" => array("joinTable" => "phpbb_user_group", "foreignKey" => "group_id", "associationForeignKey" => "user_id","conditions"=>array("PhpbbUserGroup.user_pending"=>"0"),"fields"=>"user_id,username"));

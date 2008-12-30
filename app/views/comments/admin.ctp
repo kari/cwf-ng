@@ -1,4 +1,4 @@
-<h1>Comment validation queue</h1>
+<h1>Comment admin</h1>
 <p>All validated comments are visible on the site.</p>
 <table>
   <tr><th>Comment</th><th>Game</th><th>Author</th><th>Validated</th><th>Added</th><th>Actions</th></tr>
