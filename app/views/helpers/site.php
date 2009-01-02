@@ -19,15 +19,28 @@ class SiteHelper extends AppHelper {
 		}
 
 	# Site's version of $html->image
+	# $options["width"] and $options["height"] are understood as dimensions to fit the image into and aspect ratio is maintained.
 	function image($url,$options=array()) {	 
 		$cached_url = $this->image_url($url,$options);
 		if (!file_exists(WWW_ROOT.$cached_url)) {
-			$new_size = $this->image_resize($img,WWW_ROOT.$cached_url,$options);
+			$new_size = $this->image_resize($url,WWW_ROOT.$cached_url,$options);
 			if (!$new_size) {
 				$cached_url = "/img/cwf_nosshot.png"; # Caching failed, show placeholder instead.
 			}	else {
 				$options["width"] = $new_size[0]; # new dimensions for HTML attributes.
 				$options["height"] = $new_size[1]; 
+			}
+		} else {
+			if (isset($options["width"]) and isset($options["height"])) {
+				# If both width and height are set, we cannot be certain that they retain the
+				# images original aspect ratio, therefore we throw away the smaller of them.
+				# Another way to do this would be opening the image and checking the size out
+				# (or even storing it in DB), but that's a bit over-kill.
+				if ($options["width"] >= $options["height"]) {
+					unset($options["height"]);
+				} else {
+					unset($options["width"]);
+				}
 			}
 		}
 		$str = $this->Html->image($cached_url,$options);
@@ -66,17 +79,20 @@ class SiteHelper extends AppHelper {
 		return $this->output($cached);	
 	}
 	
-	function image_resize($image,$filename,$options=array()) {
-		if (!extension_loaded("gd")) { 
-			return false; # GD not installed
-		}
+	function image_resize($image="../cwf_nosshot.png",$filename,$options=array()) {
 		$def_options = array("width"=>null,"height"=>null);
 		$options = array_merge($def_options,$options);	
 		$width = $options["width"];
 		$height = $options["height"];
-			
-		$o_img = imagecreatefrompng("/img/originals".$image); # FIXME: We assume originals are PNGs and are at /img/originals/
-		if (!$o_img) { return false; } # Original image missing or failed to load (not png?)
+		$file = WWW_ROOT."img/originals/".basename($image); # FIXME: We assume originals are at /img/originals/
+		if (!file_exists($file)) {
+			return false; # Original image does not exist.
+		}
+		if (!extension_loaded("gd")) { 
+			return false; # GD not installed
+		}
+		$o_img = imagecreatefrompng($file); # FIXME: We assume originals are PNGs
+		if (!$o_img) { return false; } # Original image failed to load (not png?)
 
 		$o_width = imagesx($o_img);
 		$o_height = imagesy($o_img);

@@ -7,7 +7,7 @@ Originally from http://www.phpit.net/code/bbcode-format-function/
 # FIXME: Doesn't handle attributes enclosed in double quotes.
 
 function bbcode_format ($str) { 
-    $str = htmlentities($str,ENT_QUOTES,"UTF-8",false); // ENT_QUOTES added by zyx (ENT_NOQUOTES)
+    $str = htmlentities($str,ENT_QUOTES,"UTF-8"); // ENT_QUOTES added by zyx (ENT_NOQUOTES)
 
     $simple_search = array( 
                 '/\[b\](.*?)\[\/b\]/is',                                 
