@@ -18,87 +18,115 @@ class SiteHelper extends AppHelper {
 				return $this->output($str);
 		}
 
-	function image_url($url,$options=array()) {
-		# Returns url to cached version of image.
-		# FIXME: Problem is, this way in a worst case scenario this function is called multiple times and the script might timeout.
-		
-		# strict =  don't maintain aspect ratio when resizing
-		$def_options = array("width"=>null,"height"=>null,"strict"=>false);
+	# Site's version of $html->image
+	function image($url,$options=array()) {	 
+		$cached_url = $this->image_url($url,$options);
+		if (!file_exists(WWW_ROOT.$cached_url)) {
+			$new_size = $this->image_resize($img,WWW_ROOT.$cached_url,$options);
+			if (!$new_size) {
+				$cached_url = "/img/cwf_nosshot.png"; # Caching failed, show placeholder instead.
+			}	else {
+				$options["width"] = $new_size[0]; # new dimensions for HTML attributes.
+				$options["height"] = $new_size[1]; 
+			}
+		}
+		$str = $this->Html->image($cached_url,$options);
+		return $this->output($str);
+	}
+	
+	function image_url($url,$options=array()) { # Return the cached url 
+		$def_options = array("width"=>null,"height"=>null);
 		$options = array_merge($def_options,$options);
 
 		# FIXME: messy code below...
 		$width = $options["width"];
 		$height = $options["height"];
-		$strict = $options["strict"];
 
-		if (!($width and $height)) { $strict=false; } # can't be strict if only one dimension is set.
-		if ($strict) {
-			$type .= $width."x".$height;
+		if($width and $height) {
+			if ($width >= $height) {
+				$type = "-".$width."w";
+			} else {
+				$type = "-".$height."h";
+			}
+		} elseif ($width and !($height)) {
+			$type = "-".$width."w";
+		} elseif ($height and !($width)) {
+			$type = "-".$width."h";
 		} else {
-			if($width and $height) {
-				if ($width >= $height) {
-					$type = $width."w";
-				} else {
-					$type = $height."h";
-				}
-			} elseif ($width and !($height)) {
-				$type = $width."w";
-			} elseif ($height and !($width)) {
-				$type = $width."h";
-			} else
-			$type = "full"; # FIXME: = null
+			$type = "";
 		}
 		$ext = substr($url,-4,4);
-		$image = basename($url,$ext); # MAYBEFIXME: currently works only for relative urls?
+		$image = basename($url,$ext);
 		# $cached = "/img/cache/".$image."-".md5($url)."-".$type.strtolower($ext);
 		
 		$cached = "/img/cache/".$image;
-		if (isset($type)) { $cached .= "-".$type; }
+		if (isset($type)) { $cached .= $type; }
 		$cached .= strtolower($ext);
 		
-		if (!file_exists(WWW_ROOT.$cached)) {
-			# generate image
-			$cached = "/img/cwf_nosshot.png";
+		return $this->output($cached);	
+	}
+	
+	function image_resize($image,$filename,$options=array()) {
+		if (!extension_loaded("gd")) { 
+			return false; # GD not installed
 		}
-		# $cached = "/screenshots/show/".$image."-".$type.strtolower($ext);
-		return $this->output($cached);
-		
-	}
-	# Site's version of $html->image
-	function image($url,$options=array()) {	 
-		$cached_url = $this->image_url($url,$options);
-		if (isset($options["strict"])) { unset($options["strict"]); }
-		if (isset($options["width"])) { unset($options["width"]); }
-		if (isset($options["height"])) { unset($options["height"]); }
-		$str = $this->Html->image($cached_url,$options);
-		return $this->output($str);
-	}
-		
-		function resize_image($url,$size=null,$size_by="w",$watermarked=false) {
-			$data = fread(fopen($url,"rb"),2*1048576); # read pictures up to 2 MB
-			$im = imagecreatefromstring($data); # requires GD2-library
-			if ($im !== false) {
-				return $this->output($url);
-			} else {
-				return $this->output("img/na.jpg");
-			}
-			#$file=md5($url)."-".$size_by.$size
+		$def_options = array("width"=>null,"height"=>null);
+		$options = array_merge($def_options,$options);	
+		$width = $options["width"];
+		$height = $options["height"];
 			
+		$o_img = imagecreatefrompng("/img/originals".$image); # FIXME: We assume originals are PNGs and are at /img/originals/
+		if (!$o_img) { return false; } # Original image missing or failed to load (not png?)
+
+		$o_width = imagesx($o_img);
+		$o_height = imagesy($o_img);
+		
+		if ($width and $height) {
+			if ($o_width >= $o_height) {
+				$height = $o_height/$o_width*$width; # recalculate height to fit aspect ratio
+			} else {
+				$width = $o_widht/$o_height*$height; # recalculate width to fit aspect ratio
+			}
+		} elseif ($width and !($height)) {
+			$height = $o_height/$o_width*$width; # calculate new height to fit aspect ratio
+		} elseif ($height and !($width)) {
+			$width = $o_width/$o_height*$height; # calculate new width to fit aspect ratio
+		} else {
+			$width = $o_width; # no resizing.
+			$height = $o_height;
 		}
 		
-	function avatar($user,$options=array()) {
+		$img = imagecreatetruecolor($width,$height);
+		imagecopyresampled($img,$o_img,0,0,0,0,$width,$height,$o_width,$o_height);
+		
+		if (imagesx($img)>300 or imagesy($img)>300) { # If target size is wider/taller than 300px, we watermark it
+			$wm = imagecreatefrompng("/img/cwf_watermark.png");
+			if ($wm) {
+					imagecopymerge($img,$wm,imagesx($img)-imagesx($wm)-2,imagesy($img)-imagesy($wm)-2,0,0,imagesx($wm),imagesy($wm),75); # right-margin = 2, bottom-margin = 2, opacity = 75%
+			}
+		}
+		if (!imagepng($img,$filename)) { # Saved as PNG.
+			return false; # image saving failed
+		} else {
+			return array($width,$height); # return new dimensions
+		}
+	}
+	
+	
+	function avatar($user,$options=array()) { # Decodes Avatar path from phpbb2 db.
+		$avatar_path = "/img/avatars/";
 		$str = "";
 		switch ($user['user_avatar_type']) {
 		  case 1:
 		  case 3:
-		    $str = $this->Html->image("/img/avatars/".$user["user_avatar"],$options);
+		    $str = $this->Html->image($avatar_path.$user["user_avatar"],$options);
 		    break;
 		  case 2:
 		    $str = $this->Html->image($user["user_avatar"],$options);
 		    break;
-		  case 0:
+		  case 0: # Avatar missing
 			default:
-			  $str = $this->Html->image("/img/avatars/2816567684410642349aab.gif",$options);
+			  $str = $this->Html->image("/img/avatars/2816567684410642349aab.gif",$options); # FIXME: No avatar -picture.
 				break;
 		}
 		return $this->output($str);
