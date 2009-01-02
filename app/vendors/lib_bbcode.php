@@ -8,6 +8,7 @@ Originally from http://www.phpit.net/code/bbcode-format-function/
 
 function bbcode_format ($str) { 
     $str = htmlentities($str,ENT_QUOTES,"UTF-8"); // ENT_QUOTES added by zyx (ENT_NOQUOTES)
+ 		# $str = htmlentities($str,ENT_QUOTES,"UTF-8",false); # PHP5 version
 
     $simple_search = array( 
                 '/\[b\](.*?)\[\/b\]/is',                                 
