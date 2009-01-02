@@ -14,7 +14,8 @@ class DownloadsController extends AppController {
 		$this->layout = 'ajax';
 		$this->view = 'Media';
 		if ($id == null) return false;
-	  $params = array(
+	  # FIXME: Proper downloading...
+		$params = array(
 	              'id' => 'tikibileet.jpg',
 	              'name' => 'tikibileet',
 	              'download' => false, # true

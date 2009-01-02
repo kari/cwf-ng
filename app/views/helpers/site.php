@@ -44,6 +44,13 @@ class SiteHelper extends AppHelper {
 			}
 		}
 		$str = $this->Html->image($cached_url,$options);
+		
+		# Check that full-size version exists too. FIXME: Find a better place for this.
+		$fullsize = $this->image_url($url);
+		if (!file_exists(WWW_ROOT.$fullsize)) {
+			$this->image_resize($url,WWW_ROOT.$fullsize);
+		}
+		
 		return $this->output($str);
 	}
 	
@@ -101,7 +108,7 @@ class SiteHelper extends AppHelper {
 			if ($o_width >= $o_height) {
 				$height = $o_height/$o_width*$width; # recalculate height to fit aspect ratio
 			} else {
-				$width = $o_widht/$o_height*$height; # recalculate width to fit aspect ratio
+				$width = $o_width/$o_height*$height; # recalculate width to fit aspect ratio
 			}
 		} elseif ($width and !($height)) {
 			$height = $o_height/$o_width*$width; # calculate new height to fit aspect ratio
@@ -116,7 +123,7 @@ class SiteHelper extends AppHelper {
 		imagecopyresampled($img,$o_img,0,0,0,0,$width,$height,$o_width,$o_height);
 		
 		if (imagesx($img)>300 or imagesy($img)>300) { # If target size is wider/taller than 300px, we watermark it
-			$wm = imagecreatefrompng("/img/cwf_watermark.png");
+			$wm = imagecreatefrompng(WWW_ROOT."/img/cwf_watermark.png");
 			if ($wm) {
 					imagecopymerge($img,$wm,imagesx($img)-imagesx($wm)-2,imagesy($img)-imagesy($wm)-2,0,0,imagesx($wm),imagesy($wm),75); # right-margin = 2, bottom-margin = 2, opacity = 75%
 			}
