@@ -10,7 +10,12 @@
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
   <li><?=$html->link("Forum profile","http://curlysworldoffreeware.com/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
   <li>Interests: <?=$user["User"]["user_interests"]?></li>
-  <li>User timzeone: <?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> <?=date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")?> (like <?=timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0)?>)</li>
+  <li>User timzeone: <?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> 
+<?
+ # echo date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")." (like ".timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0).")";
+ 
+?> 
+ </li>
   <li>Forum signature: <blockquote><?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></blockquote></li>
 </ul>
 <div class="yui-g">
