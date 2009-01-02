@@ -20,7 +20,7 @@
   <li><?=$html->link("Manage reviews","/reviews/admin")?></li>
   <li><?=$html->link("Manage guides","/guides/admin")?></li>
   <li><?=$html->link("Manage interviews","/interviews/admin")?></li>
-  <li><?=$html->link("Manage group rights","/groups/admin")?><br>
+  <li><?=$html->link("Manage group rights","/groups/")?><br>
     Add or remove rights to user groups</li>
 </ul>
 <h2>View site <?=$html->link("status",array("action"=>"status"))?></h2>

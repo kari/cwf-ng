@@ -48,7 +48,7 @@
 <ul>
 <?  
   foreach($this->data["Screenshot"] as $screenshot) {
-    echo "<li>".$site->image($screenshot["image_link"],array("width"=>100,"height"=>100));
+    echo "<li>".$site->image($screenshot["image_link"],array("width"=>150,"height"=>150));
     echo "<br>";
     echo $html->link("Edit",array("controller"=>"screenshots","action"=>"edit",$screenshot["screenshot_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
     echo $html->link("Delete",array("controller"=>"screenshots","action"=>"delete",$screenshot["screenshot_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
