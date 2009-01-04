@@ -28,7 +28,7 @@ div#hd ul.nav { margin-left: 0px; background-color: #05328C;}
 div#bd h1 { background-color: #05328C; color: #C3D7FF;
 	padding-top: 2px; padding-bottom: 2px; padding-left: 5px;}
 	
-div#hd div#loginbox { width: 200px; float: right;}
+div#hd div#loginbox { width: 200px; x-float: right;}
 	
 ul#screenshots, ul#screenshots li { display: inline; margin: 0; padding: 0;}
 

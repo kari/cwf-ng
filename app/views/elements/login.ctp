@@ -2,11 +2,11 @@
     # echo debug($session->read());
     # if ($session->check('Message.auth')) $session->flash('auth');
     if ($session->check("Auth.User.user_id")) {
-      echo "<div class=\"yui-gf\"><div class=\"yui-u first\">";
+#      echo "<div class=\"yui-gf\"><div class=\"yui-u first\">";
       echo $site->avatar($session->read("Auth.User"),array("width"=>48,"height"=>48,"align"=>"left"));
-      echo "</div><div class=\"yui-u\">";
+#      echo "</div><div class=\"yui-u\">";
       echo "Hello, ".$html->link($session->read("Auth.User.username"),array("controller"=>"users","action"=>"view",$session->read("Auth.User.user_id"))).".<br> ".$html->link("Logout?",array("controller"=>"users","action"=>"logout"))."<br>";
-      echo "</div></div>";
+#      echo "</div></div>";
       if ($session->read("Auth.User.user_new_privmsg") > 0) { 
         echo $html->image("/img/icons/email.png")." New private messages."; 
       }
