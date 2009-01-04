@@ -12,25 +12,32 @@
 <body>
   <div id="doc4" class="yui-t2">
     <div id="hd">
-            <?=$html->link($html->image("/img/cwf_freeware.png",array("title"=>"CWF-Freeware","alt"=>"CWF-Freeware")),"/",array(),false,false)?>
-            <div id="loginbox">
-              <cake:nocache>
-              <?=$this->element("login")?>
-              </cake:nocache>
-            </div>
-          <ul class="nav">
-            <li><?=$html->link("Main","/")?></li>
-            <li><?=$html->link("Games","/games/")?></li>
-            <li><?=$html->link("Blogs","/blogs/")?></li>
-            <li><?=$html->link("News","/news/")?></li>
-            <li><?=$html->link("World News","/world_news")?></li> <? #FIXME: Should this be in News? ?>
-            <li><?=$html->link("Reviews","/reviews/")?></li>
-            <li><?=$html->link("Guides","/guides/")?></li>
-            <li><?=$html->link("Interviews","/interviews/")?></li>
-            <li><?=$html->link("Tools","/tools/")?></li>
-            <li><?=$html->link("Forums","/forum")?></li>
-          </ul>
-        <div id="flash"><cake:nocache>
+      <div class="yui-ge">
+        <div class="yui-u first"> <?=$html->link($html->image("/img/cwf_freeware.png",array("title"=>"CWF-Freeware","alt"=>"CWF-Freeware")),"/",array(),false,false)?>
+        </div>
+        <div class="yui-u">
+          <div id="loginbox">
+            <cake:nocache>
+            <?=$this->element("login")?>
+            </cake:nocache>
+          </div>
+        </div>
+      </div>
+        <ul class="nav">
+          <li><?=$html->link("Main","/")?></li>
+          <li><?=$html->link("Games","/games/")?></li>
+          <li><?=$html->link("Blogs","/blogs/")?></li>
+          <li><?=$html->link("News","/news/")?></li>
+          <li><?=$html->link("World News","/world_news")?></li> <? #FIXME: Should this be in News? ?>
+          <li><?=$html->link("Reviews","/reviews/")?></li>
+          <li><?=$html->link("Guides","/guides/")?></li>
+          <li><?=$html->link("Interviews","/interviews/")?></li>
+          <li><?=$html->link("Tools","/tools/")?></li>
+          <li><?=$html->link("Forums","/forum")?></li>
+        </ul>
+          
+        <div id="flash">
+          <cake:nocache>
           <?
           	if ($session->check('Message.flash')) {
           		$session->flash();
@@ -39,7 +46,8 @@
           		$session->flash('auth');
           	}
           ?>
-        </cake:nocache></div>
+          </cake:nocache>
+        </div>
     </div>
     <div id="bd">
       <div id="yui-main">
