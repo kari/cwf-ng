@@ -21,7 +21,12 @@ class GroupsController extends AppController {
 			    # $this->redirect('/news');
 				}
 			}
-			$this->set("group",$this->Group->find("first",array("conditions"=>array("Group.group_single_user"=>"0","Group.group_id"=>$id))));
+			
+			if ($id == 1) {
+				$this->set("group",$this->Group->find("first"),array("conditions"=>array("Group.group_id"=>1)));
+			} else {
+				$this->set("group",$this->Group->find("first",array("conditions"=>array("Group.group_single_user"=>"0","Group.group_id"=>$id))));
+			}
 			$this->set("ACTIONS",$this->Group->Action->ACTIONS);
 		}
 }

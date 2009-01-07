@@ -28,6 +28,7 @@ class CommentsController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Auth->user()) { 
 				$this->data["Comment"]["validated"] = true; 
+				$this->data["Comment"]["user_id"] = $this->Auth->user("user_id");
 			} else {
 				$this->data["Comment"]["validated"] = false;
 				$this->data["Comment"]["user_id"] = -1; # FIXME: Magic number
