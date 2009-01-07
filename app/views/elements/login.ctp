@@ -19,6 +19,7 @@
       echo $form->end('Login'); */
     ?>
     <form method="post" action="/~zyx/cwf-ng/users/login"><fieldset style="display:none;"><input type="hidden" name="_method" value="POST" /></fieldset><div class="input text"><label for="UserUsername">Username</label><input name="data[User][username]" type="text" value="" maxlength="25" id="UserUsername" /></div><div class="input password"><label for="UserUserPassword">Password</label><input type="password" name="data[User][user_password]" value="" id="UserUserPassword" /></div><div class="submit"><input type="submit" value="Login" /></div></form>
+    
     <?
     }
 ?>
