@@ -17,6 +17,7 @@ class GamesController extends AppController {
 			);
 	var $uses = array("Game","Download","Rating");
 	
+	var $components = array('Recaptcha');
 	var $helpers = array('Cache',"Number","Site","javascript");
 	
 	var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
@@ -25,6 +26,8 @@ class GamesController extends AppController {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view","random","top","get"));
 		$this->Auth->mapActions(array("queue"=>"admin"));
+		$this->Recaptcha->publickey = Configure::read("Site.captcha_public_key"); 
+		$this->Recaptcha->privatekey = Configure::read("Site.captcha_private_key");
 	}
 
 	function index() {

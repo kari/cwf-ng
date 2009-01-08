@@ -166,13 +166,18 @@ foreach ($comments as $comment) {
 <?=$form->create("Comment");?>
 <?=$form->input("title");?>
 <?=$form->input("text",array("rows"=>3));?>
-<? # TODO: ReCaptcha somewhere about here ?>
-<? if (!empty($user_id)) {
-  echo $form->hidden("user_id",array("value"=>$user_id));
+<cake:nocache>
+<? 
+if ($session->check("Auth.User.user_id")) {
+  # If user is logged in, we think he's a human
+  echo $form->hidden("user_id",array("value"=>$session->read("Auth.User.user_id")));
+} else {
+  # ...otherwise he gets the reCAPTCHA challenge.
+   echo $recaptcha->display_form();
 }
 ?>
+</cake:nocache>
 <?=$form->hidden("game_id",array("value"=>$game["Game"]["game_id"]));?>
-<?# FIXME: Captcha for non-registered ?>
 <?=$form->end("Submit")?>
   </div>
   <div class="yui-u">
