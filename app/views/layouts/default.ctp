@@ -3,7 +3,7 @@
 <head>
     <?=$html->charset("utf-8"); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
-		<?=$html->meta('icon',"/~zyx/cwf-ng/favicon.ico");?> <? # FIXME ?>
+		<?=$html->meta('icon',Configure::read("Site.path")."favicon.ico");?> <? # FIXME ?>
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");?>  
     <?#=$javascript->link("http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/yuiloader/yuiloader-min.js"); ?>
@@ -28,7 +28,7 @@
           <li><?=$html->link("Games","/games/")?></li>
           <li><?=$html->link("Blogs","/blogs/")?></li>
           <li><?=$html->link("News","/news/")?></li>
-          <li><?=$html->link("World News","/world_news")?></li> <? #FIXME: Should this be in News? ?>
+          <li><?=$html->link("World News","/world_news")?></li>
           <li><?=$html->link("Reviews","/reviews/")?></li>
           <li><?=$html->link("Guides","/guides/")?></li>
           <li><?=$html->link("Interviews","/interviews/")?></li>

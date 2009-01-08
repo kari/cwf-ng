@@ -86,12 +86,12 @@ class SiteHelper extends AppHelper {
 		return $this->output($cached);	
 	}
 	
-	function image_resize($image="../cwf_nosshot.png",$filename,$options=array()) {
+	function image_resize($image,$filename,$options=array()) {
 		$def_options = array("width"=>null,"height"=>null);
 		$options = array_merge($def_options,$options);	
 		$width = $options["width"];
 		$height = $options["height"];
-		$file = WWW_ROOT."img/originals/".basename($image); # FIXME: We assume originals are at /img/originals/
+		$file = Configure::read("Site.screenshot_path").basename($image);
 		if (!file_exists($file)) {
 			return false; # Original image does not exist.
 		}
@@ -137,7 +137,7 @@ class SiteHelper extends AppHelper {
 	
 	
 	function avatar($user,$options=array()) { # Decodes Avatar path from phpbb2 db.
-		$avatar_path = "/img/avatars/";
+		$avatar_path = Configure::read("Site.avatar_path");
 		$str = "";
 		switch ($user['user_avatar_type']) {
 		  case 1:
