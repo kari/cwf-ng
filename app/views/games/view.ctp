@@ -179,6 +179,9 @@ if ($session->check("Auth.User.user_id")) {
 </cake:nocache>
 <?=$form->hidden("game_id",array("value"=>$game["Game"]["game_id"]));?>
 <?=$form->end("Submit")?>
+
+<br><p>Do we have a mistake on this page? <?=$html->link("Let us know.",array("action"=>"flag",$game["Game"]["game_id"]))?></p>
+
   </div>
   <div class="yui-u">
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>

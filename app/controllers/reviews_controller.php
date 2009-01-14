@@ -11,7 +11,7 @@ class ReviewsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view"));
-		$this->Auth->mapActions(array("queue"=>"admin"));
+		$this->Auth->mapActions(array("queue"=>"admin","publish"=>"admin"));
 	}
 	
 	function index() {
@@ -45,11 +45,11 @@ class ReviewsController extends AppController {
 		$review = $this->Review->find("first",array("conditions"=>array("Review.review_id"=>$id,"Review.user_id"=>$this->Auth->user("user_id"))));
 		if (!empty($review)) {
 			if (!empty($this->data)) {
-				$this->data["Review"]["review_rating"] = -99; #FIXME: Magic number. 
+				# $this->data["Review"]["review_rating"] = -99; #FIXME: Magic number. 
 				# $this->data["Review"]["last_edit_time"] = date("Y-m-d H:i:s");
 				if($this->Review->save($this->data)) {
 		  		//Set a session flash message and redirect.
-		    	$this->Session->setFlash("Review saved. It will published after validation.");
+		    	$this->Session->setFlash("Changes to review saved.");
 		    	$this->redirect('/reviews');
 				}
 			} else {
@@ -82,6 +82,19 @@ class ReviewsController extends AppController {
 	
 	function admin() {
 		$this->set("reviews",$this->paginate("Review",array()));
+	}
+	
+	function publish($id) {
+		if ($id == null) { $this->redirect("/"); }
+		$review = $this->Review->find("first",array("conditions"=>array("review_id"=>$id))); 
+		if (!empty($review)) {
+			$review["Review"]["review_rating"] = 1;
+			$review["Review"]["validator_id"] = $this->Auth->user("user_id");
+			if ($this->Review->save($review)) {
+				$this->Session->setFlash("Review validated.");
+			}
+		}
+		$this->redirect($this->referer());
 	}
 }
 

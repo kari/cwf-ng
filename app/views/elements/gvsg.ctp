@@ -1,7 +1,8 @@
-<?  # This could also live as some kind of an Element.
-    $this->pageTitle = "Game vs. Game"; ?>
-<h1>Game Vs Game</h1>
-<?=$form->create("",array("action"=>"vote")); ?>
+<?
+$games = $this->requestAction('games/random/2');
+?>
+<h2>Game Vs Game</h2>
+<?=$form->create("",array("url"=>"/gvsg/vote")); ?>
 <table>
   <tr><td>
 <?=$site->image($games[0]["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150))?><br>

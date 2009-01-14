@@ -9,6 +9,7 @@ foreach($reviews as $review) {
   echo "<td>".$review["User"]["username"]."</td>";
   echo "<td>".$review["Review"]["added"]."</td>";
   echo "<td>".$html->link("Edit",array("action"=>"edit",$review["Review"]["review_id"]))." ";
+  echo $html->link("Publish",array("action"=>"publish",$review["Review"]["review_id"]))." ";
   echo $html->link("Delete",array("action"=>"delete",$review["Review"]["review_id"]),array(),"Are you sure you want to delete this review?")." ";
   echo "</td></tr>";
 }

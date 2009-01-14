@@ -14,7 +14,7 @@
 ?>
 <h1>Games</h1>
 <p>Sort by <?=$paginator->sort("Game name","game_name",array("direction"=>"desc"))?>, 
- <?=$paginator->sort("Score","site_rating",array("direction"=>"desc"))?>, <?=$paginator->sort("Date added","created",array("direction"=>"desc"))?><br>
+ <?=$paginator->sort("Score","site_rating",array("direction"=>"desc"))?>, <?=$paginator->sort("Date added","created",array("direction"=>"desc"))?>, <?=$paginator->sort("Release date","year",array("direction"=>"desc"))?><br>
   Filter by Platform, Score, Genre</p>
 <table>
 	<? foreach ($games as $game) { ?>
