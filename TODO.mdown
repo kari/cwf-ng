@@ -1,4 +1,5 @@
 * Latest forum posts -element
+  * Requires either importing phpbb_topics/posts from cwf, or testing on cwf.
 * Sitemap (HTML, XML)
 * Atom feeds (incl. SearchMonkey)
 * Screenshots to latest games (front page)
