@@ -24,7 +24,7 @@ class GamesController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view","random","top","get"));
+		$this->Auth->allow(array("index","view","random","top","get","flag"));
 		$this->Auth->mapActions(array("queue"=>"admin"));
 		$this->Recaptcha->publickey = Configure::read("Site.captcha_public_key"); 
 		$this->Recaptcha->privatekey = Configure::read("Site.captcha_private_key");
@@ -201,6 +201,14 @@ class GamesController extends AppController {
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/games/queue");
 		}
+	}
+	
+	function flag($id = null) {
+		if ($id == null) { $this->redirect("/"); }
+		$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
+		if (empty($game)) { $this->redirect("/"); }
+		$this->set("game",$game);
+			
 	}
 }
 

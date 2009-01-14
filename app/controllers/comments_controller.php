@@ -35,12 +35,18 @@ class CommentsController extends AppController {
 				$this->data["Comment"]["validated"] = true; 
 				$this->data["Comment"]["user_id"] = $this->Auth->user("user_id");
 			} elseif(!$this->Recaptcha->valid($this->params['form'])) {
-					$this->Session->setFlash("Comment wasn't added, because reCAPTCHA was wrong. Please try again.");
-					# FIXME: Form contents are not saved, causing form to be empty!
-					$this->redirect($this->referer());
+				$this->Session->setFlash("Comment wasn't added, because reCAPTCHA was wrong. Please try again.");
+				# FIXME: Form contents are not saved, causing form to be empty!
+				$this->redirect($this->referer());
 			} elseif($this->Recaptcha->valid($this->params['form'])) {
 				$this->data["Comment"]["validated"] = false;
 				$this->data["Comment"]["user_id"] = -1; # FIXME: Magic number
+			}
+			if($this->data["Comment"]["flag"] == true) {
+				$this->Session->setFlash("Thanks for reporting!");
+				$this->data["Comment"]["validated"] = false;
+				$this->Comment->save($this->data);
+				$this->redirect(array("controller"=>"games","action"=>"view",$this->data["Comment"]["game_id"]));
 			}
 			if($this->Comment->save($this->data)) {
 				$this->Session->setFlash("Comment was added and will be published after validation.");

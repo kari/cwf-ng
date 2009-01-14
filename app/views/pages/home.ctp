@@ -1,7 +1,15 @@
 <? $this->pageTitle = "CWF-Freeware"; ?>
 <div class="yui-g">
 <h1>Welcome to CWF-Freeware</h1>
-<?=$this->element("adbox",array("style"=>"pw-leaderboard")) ?>
+<cake:nocache>
+<? 
+if ($session->check("Auth.User.user_id")) {
+  echo $this->element("gvsg");
+} else {
+  echo $this->element("adbox",array("style"=>"pw-leaderboard"));
+}
+?>
+</cake:nocache>
 </div>
 <div class="yui-g">
   <div class="yui-u first">

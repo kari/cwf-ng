@@ -27,7 +27,7 @@
           <li><?=$html->link("Main","/")?></li>
           <li><?=$html->link("Games","/games/")?></li>
           <li><?=$html->link("Blogs","/blogs/")?></li>
-          <li><?=$html->link("News","/news/")?></li>
+          <li><?=$html->link("Site News","/news/")?></li>
           <li><?=$html->link("World News","/world_news")?></li>
           <li><?=$html->link("Reviews","/reviews/")?></li>
           <li><?=$html->link("Guides","/guides/")?></li>

@@ -28,7 +28,8 @@ class UsersController extends AppController {
 			$this->User->recursive = 1; # FIXME: It'd be nice to limit this just to Group
 			$user = $this->User->find("first",array("conditions"=>array("user_id"=>$id,'User.user_active' => '1')));
 			if (empty($user)) { $this->cakeError("error404"); }
-			$this->set('user', $user);			
+			$this->set('user', $user);
+			$this->data["cached_user_id"] = $id;
     }
 }
 

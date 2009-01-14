@@ -24,10 +24,10 @@ class Game extends AppModel {
 	# Relationships
 	var $hasMany = array(
 		"Guide" => array("fields"=>"Guide.id,Guide.title"),
-	  'Review' => array("fields"=>"Review.review_id,Review.review_title,Review.review_text,Review.user_id","conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5), # TODO: we also need the reviewer's names. But how?
+	  'Review' => array("fields"=>"Review.review_id,Review.review_title,Review.review_text,Review.user_id","conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5),
 	  "Comment" => array("limit" => 5,"order"=>"created DESC","conditions"=>array("validated"=>TRUE)),
 	  "Download",
-	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
+	  # "Rating", # FXIME: needs a custom finderquery but no idea how to make it work. Below a hack, which almost works.
 	  "Screenshot" => array("order" => "screenshot_id ASC"),
 		"Rating" => array("className" => "Rating", "finderQuery" => 'SELECT Rating.game_id,Rating.rating_type, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating WHERE Rating.game_id IN ({$__cakeID__$}) GROUP BY Rating.game_id, Rating.rating_type ORDER BY Rating.game_id, Rating.rating_type', # Average ratings. For some reason, merges the ratings wrong, but at least it works.
 		)); 

@@ -1,1 +1,1 @@
-<?=debug($this->data)?>
+<?#=debug($this->data)?>
