@@ -77,7 +77,10 @@
       </div>
     </div>
     <div id="ft">
-      <!-- Footer content -->
+      <!-- Footer conent -->
+      <?
+      if (Configure::read("Site.track") == true) echo $this->element("ga");
+      ?>
     </div>
   </div>
 </body>

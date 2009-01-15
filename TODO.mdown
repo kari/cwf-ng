@@ -1,5 +1,5 @@
 * Latest forum posts -element
-  * Requires either importing phpbb_topics/posts from cwf, or testing on cwf.
+  * Requires importing phpbb_topics/posts to dev db.
 * Sitemap (HTML, XML)
 * Atom feeds (incl. SearchMonkey)
 * Screenshots to latest games (front page)
