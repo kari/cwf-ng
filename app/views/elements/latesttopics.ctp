@@ -1,6 +1,6 @@
-<h1>Latest forum posts</h1>
+<h1>Latest forum topics</h1>
 <?
-$topics = $this->requestAction("/forum/latest_posts");
+$topics = $this->requestAction("/forum/latest_topics");
 # debug($topics);
 ?>
 <table>
