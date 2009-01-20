@@ -18,6 +18,12 @@
  * Popeye can zoom images inline: http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/
 * BBCode handling and editing (Rich text editor?)
 * Model validations
+* Encoding of strings. 
+  * MySQL ISO-8859-15 <=> PHP (iconv) UTF-8 => HTML/XML UTF-8
+  * BBCode => HTML
+  * Right now, there's html-encoded ISO-8859-15 in database. 
+* Script to stage new revisions to CWF
+* Downloads
  
 # TODOs from code
 
