@@ -17,7 +17,7 @@ class GamesController extends AppController {
 			);
 	var $uses = array("Game","Download","Rating");
 	
-	var $components = array('Recaptcha');
+	var $components = array('Recaptcha',"RequestHandler");
 	var $helpers = array('Cache',"Number","Site","javascript");
 	
 	var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
@@ -31,11 +31,14 @@ class GamesController extends AppController {
 	}
 
 	function index() {
-		# FIXME: Do not fetch Reviews and Comments.
-		# Remove those associations on the fly.
-		#$this->set('games', $this->Game->find('all',array("order"=>"Game.game_name","limit"=>25,"fields"=>array("game_name","game_id"))));
-		$this->set('GENRE',$this->Game->GENRE);
-		$this->set("games",$this->paginate('Game',array("Game.download_status" => 0,"Genres.tools"=>0)));	
+		# FIXME: Do not fetch Reviews and Comments. Use Containable behaviour.
+		if ($this->RequestHandler->isAtom()) {
+			$this->Game->recursive = 1;
+			$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0,"Genres.tools"=>0),"order" => "Game.created DESC","limit"=>30)));
+		} else {
+			$this->set('GENRE',$this->Game->GENRE);
+			$this->set("games",$this->paginate('Game',array("Game.download_status" => 0,"Genres.tools"=>0)));
+		}
 	}
 	
 	function random($limit=1) {

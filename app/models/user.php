@@ -26,6 +26,10 @@ class User extends AppModel {
 		# phpbb_groups.group_id = 1 (Anonymous) is used as a group for all users
 		# for non-registered users, access rights are set at controller level
 		
+		if (!in_array($action,array("create","update","read","delete","admin"))) {
+			return false;
+		}
+		
 		$allow = $this->query("SELECT Action.".$action." FROM CWF_groups_actions AS Action LEFT JOIN phpbb_user_group AS UserGroup ON UserGroup.group_id = Action.group_id WHERE (user_id = ".$user["User"]["user_id"]." OR Action.group_id = 1) AND Action.action_id = '".strtolower($controller)."' AND Action.".$action." = 1 LIMIT 1;");
 		if (!empty($allow)) return true;
 		return false;
