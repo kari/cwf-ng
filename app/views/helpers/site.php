@@ -21,7 +21,7 @@ class SiteHelper extends AppHelper {
 	# Site's version of $html->image
 	# $options["width"] and $options["height"] are understood as dimensions to fit the image into and aspect ratio is maintained.
 	function image($url,$options=array()) {	 
-		$cached_url = $this->image_url($url,$options);
+		$cached_url = $this->image_url($url,$options,false);
 		if (!file_exists(WWW_ROOT.$cached_url)) {
 			$new_size = $this->image_resize($url,WWW_ROOT.$cached_url,$options);
 			if (!$new_size) {
@@ -43,6 +43,7 @@ class SiteHelper extends AppHelper {
 				}
 			}
 		}
+		$options["cached_url"] = $cached_url;
 		$str = $this->Html->image($cached_url,$options);
 		
 		# Check that full-size version exists too. FIXME: Find a better place for this.
@@ -54,7 +55,7 @@ class SiteHelper extends AppHelper {
 		return $this->output($str);
 	}
 	
-	function image_url($url,$options=array()) { # Return the cached url 
+	function image_url($url,$options=array(),$full=false) { # Return the cached url 
 		$def_options = array("width"=>null,"height"=>null);
 		$options = array_merge($def_options,$options);
 
@@ -82,7 +83,9 @@ class SiteHelper extends AppHelper {
 		$cached = "/img/cache/".$image;
 		if (isset($type)) { $cached .= $type; }
 		$cached .= strtolower($ext);
-		
+		if ($full == true) {
+			$cached = $this->Html->url($cached,true);
+		}
 		return $this->output($cached);	
 	}
 	

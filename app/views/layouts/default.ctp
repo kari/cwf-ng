@@ -6,7 +6,7 @@
 		<?=$html->meta('icon',Configure::read("Site.path")."favicon.ico");?> <? # FIXME ?>
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");?>  
-    <?#=$javascript->link("http://ajax.googleapis.com/ajax/libs/yui/2.6.0/build/yuiloader/yuiloader-min.js"); ?>
+
     <?=$scripts_for_layout;?>
 </head>
 <body>

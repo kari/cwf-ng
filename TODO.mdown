@@ -1,13 +1,25 @@
-* Latest forum posts -element
-  * Requires importing phpbb_topics/posts to dev db.
-* Sitemap (HTML, XML)
+# Features
+
 * Atom feeds (incl. SearchMonkey)
+  * Sitemap (HTML, XML)
 * Screenshots to latest games (front page)
-* Games/index filter by genre, platform, score
-* Fix sorting from default ASC to DESC. (bug in CakePHP)
+ * Layout? Carousels?
+ * Scrollable makes a nice carousel: http://www.flowplayer.org/tools/scrollable.html
+* Games/index
+  * Games/index filter by genre, platform, score
+  * Fix sorting from default ASC to DESC. (bug in CakePHP)
+  * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
 * Fix Forms styling
-* Paging alphabetically [A] [B]...
+* Containable behavior.
+* Fix screenshot jquery. 
+ * FancyBox will be updated soon. http://fancy.klade.lv/
+ * FaceBox can show DIVs, http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm
+ * Popeye can zoom images inline: http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/
+* BBCode handling and editing (Rich text editor?)
+* Model validations
+ 
+# TODOs from code
 
 `# grep -rn TODO app/*
 app/controllers/games_controller.php:96:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
@@ -16,5 +28,4 @@ app/controllers/tools_controller.php:38:		$this->Game->recursive = 2; # TODO: It
 app/controllers/users_controller.php:18:			# TODO: there should be Remember Me-functionality
 app/models/game.php:30:	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
 app/views/blogs/view.ctp:7:<? #TODO: Comments? ?>
-app/views/world_news/view.ctp:9:  # TODO: Embed YouTube-link into the webpage.
-`
+app/views/world_news/view.ctp:9:  # TODO: Embed YouTube-link into the webpage.`
