@@ -84,4 +84,7 @@ if (isset($filePresent)):
 	?>
 </p>
 <?php endif;?>
+<p>Path to screenshots: <?=Configure::read("Site.screenshot_path")?><br/>
+  Path to avatars: <?=Configure::read("Site.avatar_path")?><br>
+  Site path: <?=Router::url("/")?> vs <?=Configure::read("Site.path")?></p>
 <?=$this->element("license")?>

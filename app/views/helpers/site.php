@@ -139,7 +139,8 @@ class SiteHelper extends AppHelper {
 	}
 	
 	
-	function avatar($user,$options=array()) { # Decodes Avatar path from phpbb2 db.
+	function avatar($user,$options=array()) { 
+		# Decodes Avatar path from phpbb2 db. Has to be public.
 		$avatar_path = Configure::read("Site.avatar_path");
 		$str = "";
 		switch ($user['user_avatar_type']) {
@@ -152,7 +153,7 @@ class SiteHelper extends AppHelper {
 		    break;
 		  case 0: # Avatar missing
 			default:
-			  $str = $this->Html->image("/img/avatars/2816567684410642349aab.gif",$options); # FIXME: No avatar -picture.
+			  $str = $this->Html->image("/img/cwf_nosshot.png",$options); # FIXME: Placeholder, needs a No avatar -picture.
 				break;
 		}
 		return $this->output($str);
