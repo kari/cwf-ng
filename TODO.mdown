@@ -24,6 +24,8 @@
   * Right now, there's html-encoded ISO-8859-15 in database. 
 * Script to stage new revisions to CWF
 * Downloads
+* "Other links" to games. (new DB table, model...)
+  * External links are easy, what about internal links?
  
 # TODOs from code
 
