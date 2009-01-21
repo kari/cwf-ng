@@ -1,10 +1,10 @@
 # Features
 
 * Atom feeds (incl. SearchMonkey)
-  * Sitemap (HTML, XML)
+  * Sitemap (HTML, XML)
 * Screenshots to latest games (front page)
- * Layout? Carousels?
- * Scrollable makes a nice carousel: http://www.flowplayer.org/tools/scrollable.html
+  * Layout? Carousels?
+  * Scrollable makes a nice carousel: http://www.flowplayer.org/tools/scrollable.html
 * Games/index
   * Games/index filter by genre, platform, score
   * Fix sorting from default ASC to DESC. (bug in CakePHP)
@@ -12,10 +12,10 @@
 * Tools/index and others (layout, info)
 * Fix Forms styling
 * Containable behavior.
-* Fix screenshot jquery. 
- * FancyBox will be updated soon. http://fancy.klade.lv/
- * FaceBox can show DIVs, http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm
- * Popeye can zoom images inline: http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/
+* Fix screenshot jquery (Opera support?)
+  * FancyBox will be updated soon. http://fancy.klade.lv/
+  * FaceBox can show DIVs, http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm
+  * Popeye can zoom images inline: http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/
 * BBCode handling and editing (Rich text editor?)
 * Model validations
 * Encoding of strings. 

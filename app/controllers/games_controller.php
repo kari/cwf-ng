@@ -34,6 +34,7 @@ class GamesController extends AppController {
 		# FIXME: Do not fetch Reviews and Comments. Use Containable behaviour.
 		if ($this->RequestHandler->isAtom()) {
 			$this->Game->recursive = 1;
+			$this->cacheAction = null;
 			$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0,"Genres.tools"=>0),"order" => "Game.created DESC","limit"=>30)));
 		} else {
 			$this->set('GENRE',$this->Game->GENRE);
