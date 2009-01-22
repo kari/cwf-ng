@@ -102,5 +102,5 @@ if ($session->check("Auth.User.user_id")) {
   </div>
 </div>
 <div class="yui-g">
-
+<?#=debug($games)?>
 </div>

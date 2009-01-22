@@ -10,6 +10,7 @@ class NewsController extends AppController {
 			# 'recursive' => 1
 	    );
 	var $helpers = array("Time","Cache");
+	var $components = array("RequestHandler");
 	var $uses = array("News","User");
 	var $cacheAction = array("index"=>"+1 day","view/"=>"+1 day");
 	
@@ -19,7 +20,11 @@ class NewsController extends AppController {
 	}
 	
 	function index() {
-		$this->set("news",$this->paginate("News"));
+		if ($this->RequestHandler->isAtom()) {
+			$this->set("news",$this->News->find("all",array("order"=>array("News.post_date"=>"desc"),"limit"=>30)));
+		} else {
+			$this->set("news",$this->paginate("News"));
+		}
 	}
 	
 	function admin() {
