@@ -14,7 +14,7 @@
 ?>
 <h1><?=$tool['Game']['game_name']?></h1>
 <p><small>by <?=$html->link($tool['Publisher']['name'],$tool["Publisher"]["site"])?></small></p>
-<p><?=$bbcode->decode(iconv("ISO-8859-1","UTF-8",$tool['Game']['description']))?></p>
+<p><?=$bbcode->decode($tool['Game']['description'])?></p>
 <h2>Details</h2>
 <ul><li>Tool license: <?=$LICENSE[$tool['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($tool['GameHunter']['username'],array("controller"=>"users","action"=>"view",$tool["GameHunter"]["user_id"]))?></li>

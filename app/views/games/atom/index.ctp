@@ -9,9 +9,9 @@ foreach($games as $game) {
   } else {
     $thumb_url = null;
   }
-  $description = $bbcode->decode(iconv("ISO-8859-1","UTF-8",$game['Game']['description'])); # FIXME: <br>'s and other tags should be encoded. This is part of the bigger MySQL & ISO-8859-
-  $game_name = htmlspecialchars($game["Game"]["game_name"],ENT_QUOTES,"UTF-8");
-  $publisher_name = htmlspecialchars($game["Publisher"]["name"],ENT_QUOTES,"UTF-8");
+  $description = htmlspecialchars($game['Game']['description'],ENT_NOQUOTES,"UTF-8"); # FIXME: <br>'s and other tags should be encoded. This is part of the bigger MySQL & ISO-8859-
+  $game_name = htmlspecialchars($game["Game"]["game_name"],ENT_NOQUOTES,"UTF-8"); # Problem with encodings!
+  $publisher_name = htmlspecialchars($game["Publisher"]["name"],ENT_NOQUOTES,"UTF-8");
   echo "<entry>";
   echo "<id>".$href."</id>"; # Required
   echo "<title>".$game_name."</title>"; # Required 

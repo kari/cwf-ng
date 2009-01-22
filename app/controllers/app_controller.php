@@ -5,6 +5,7 @@ class AppController extends Controller {
 	# var $uses = "User";
 	
 	function beforeFilter() {
+		setlocale(LC_CTYPE,array("en_GB.UTF-8","en_US.UTF-8","da_DK.UTF-8","fi_FI.UTF-8"));
 		Security::setHash("md5"); # phpbb2 uses md5
 		
 		# Access to actions is denied by default, controllers MUST allow public actions in beforeFilter()
