@@ -3,7 +3,7 @@
 <head>
     <?=$html->charset("utf-8"); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
-		<?=$html->meta('icon',Configure::read("Site.path")."favicon.ico");?> <? # FIXME ?>
+		<?=$html->meta('icon',$html->url("/favicon.ico"));?> <? # FIXME ?>
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js");?>  
 

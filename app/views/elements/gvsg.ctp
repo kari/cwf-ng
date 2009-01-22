@@ -4,7 +4,7 @@ $games = $this->requestAction('games/random/2');
 ?>
 <h2>Game Vs Game</h2>
 <?#=$form->create("",array("url"=>"/gvsg/vote")); ?>
-<form method="post" action="<?=Configure::read("Site.path")?>gvsg/vote"><fieldset style="display:none;"><input type="hidden" name="_method" value="POST" /></fieldset>
+<form method="post" action="<?=$html->url("/gvsg/vote")?>"><fieldset style="display:none;"><input type="hidden" name="_method" value="POST" /></fieldset>
 <table>
   <tr><td>
 <?=$site->image($games[0]["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150))?><br>
