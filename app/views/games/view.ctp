@@ -15,9 +15,9 @@
 <div class="yui-ge">
   <div class="yui-u first">
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
-<p>by <?=$html->link(iconv("ISO-8859-1","UTF-8",$game['Publisher']['name']),array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
+<p>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
 <?# FIXME: A bigger thumbnail of "featured" (or first) screenshot would be nice here! ?>
-<p><?=$bbcode->decode(iconv("ISO-8859-1","UTF-8",$game['Game']['description']))?></p>
+<p><?=$bbcode->decode($game['Game']['description'])?></p>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
@@ -137,7 +137,7 @@ foreach ($game["Guide"] as $guide) {
 <?
 foreach ($game["Review"] as $review) {
  echo '<li><h3>'.$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"])).' by '.$review["User"]["username"].'</h3>';
- echo "<p>".nl2br($text->trim(iconv("ISO-8859-1","UTF-8",$review["review_text"]),300))."</p></li>"; # FIXME: encoding (DB iso, site utf-8)
+ echo "<p>".nl2br($text->trim($review["review_text"]),300)."</p></li>";
 }
 if (count($game["Review"]) == 0) {
   echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."</p>";
