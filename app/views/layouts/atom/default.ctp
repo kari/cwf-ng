@@ -12,9 +12,8 @@
   FIXME: All URLs are should be escaped properly for XML.
 */
 echo '<?xml version="1.0" encoding="utf-8"?>'; 
-echo '<?profile http://search.yahoo.com/searchmonkey-profile ?>'; # FIXME: This screws up in caching, because of php short tags.
 ?>
-<feed xmlns="http://www.w3.org/2005/Atom" xmlns:y="http://search.yahoo.com/datarss/">
+<feed xmlns="http://www.w3.org/2005/Atom">
   <id><?=(isset($feedData["id"]) ? $feedData["id"] : "tag:".substr(Router::url(null,true),7))?></id>
   <title type="text"><?=(isset($feedData["title"]) ? $feedData["title"] : $title_for_layout) ?></title>
   <updated><?=(isset($feedData["updated"]) ? $time->toAtom($feedData["updated"]) : $time->toAtom(time()))?></updated>

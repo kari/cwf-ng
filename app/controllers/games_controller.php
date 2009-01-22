@@ -9,7 +9,9 @@ class GamesController extends AppController {
      	'limit' => 15,
      	'order' => array('Game.game_name' => 'asc'),
 			# "fields" => array("game_name","game_id"),
-			'recursive' => 1),
+			#'recursive' => 1
+			"contain"=>array("Screenshot","Rating","Genres")
+			),
 		"Comment" => array(
 			"conditions" => array("Comment.validated"=>TRUE),
 			"order" => array("Comment.created"=>"desc"),
@@ -33,7 +35,8 @@ class GamesController extends AppController {
 	function index() {
 		# FIXME: Do not fetch Reviews and Comments. Use Containable behaviour.
 		if ($this->RequestHandler->isAtom()) {
-			$this->Game->recursive = 1;
+			$this->layout = "datarss";
+			$this->Game->contain(array("Genres.tools","Screenshot","Publisher","Rating"));
 			$this->cacheAction = null;
 			$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0,"Genres.tools"=>0),"order" => "Game.created DESC","limit"=>30)));
 		} else {
@@ -47,7 +50,7 @@ class GamesController extends AppController {
 			if ($limit < 1) $limit = 1;
 			if ($limit > 10) $limit = 10;
 			$this->Game->recursive = 1;
-			$findparams = array("conditions"=>array("download_status" => 0,"Genres.tools"=>0),'limit'=>$limit,"order"=>"rand()");
+			$findparams = array("conditions"=>array("download_status" => 0,"Genres.tools"=>0),'limit'=>$limit,"order"=>"rand()","contain"=>array("Screenshot","Publisher","Rating","Genres.tools"));
 			if ($limit == 1) {
 				return $this->Game->find("first",$findparams);
 			} else {
@@ -62,14 +65,14 @@ class GamesController extends AppController {
 			$this->Game->recursive = 1;
 			switch ($by) {
 				case "download":
-					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0)));
+					$games = $this->Game->find("all",array("fields"=>array("Game.game_id","Game.download_count","Game.game_name"),"limit"=>$limit,"order"=>"Game.download_count DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0),"contain"=>array("Genres.tools")));
 					break;
 				case "rating":
 					$games = $this->Game->query("SELECT Game.game_name, Game.game_id, AVG(Rating.rating_value) AS average_rating, COUNT(Rating.rating_value) AS vote_count FROM CWF_game_ratings AS Rating LEFT JOIN CWF_games AS Game ON Game.game_id = Rating.game_id LEFT JOIN CWF_game_genres AS Genres ON Game.genre_id = Genres.genre_id WHERE Rating.rating_type = 0 AND Genres.tools = 0 GROUP BY Rating.game_id, Rating.rating_type HAVING COUNT(Rating.rating_value) > 2");
 					$games = array_slice(Set::sort($games,'{n}.0.average_rating',"desc"),0,$limit); #TOP ten.
 					break;
 				case "latest":
-					$games = $this->Game->find("all",array("conditions"=>array("Game.download_status"=>0),"fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0)));
+					$games = $this->Game->find("all",array("conditions"=>array("Game.download_status"=>0),"fields"=>array("Game.game_id","Game.game_name","Game.created"),"limit"=>$limit,"order"=>"Game.created DESC","conditions"=>array("download_status"=>0,"Genres.tools"=>0),"contain"=>array("Genres.tools")));
 					break;
 				default:
 					$games = array();
@@ -82,7 +85,7 @@ class GamesController extends AppController {
 	
 	function get($id = null) {
 		if ($id == null) { $this->cakeError('error404'); }
-		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
+		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id),"contain"=>array("Screenshot","Publisher","Rating")));
 		if (isset($this->params["requested"])) {
 			if (!empty($game)) { 
 				return $game;
@@ -96,13 +99,11 @@ class GamesController extends AppController {
 	function view($id = null) {
 	# FIXME: view decide if $id is a number (primary key) or slug (acidbomb-2-rearmament) and work accordingly. Same thing to all view-actions which'd benefit from friendly urls. 
 	  if ($id == null) { $this->cakeError('error404'); }
-	  
-		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
-		# FIXME: Make Game Containable.
-		$this->Game->cacheQueries = true;
+		$this->Game->contain(array("Genres","GameProposer","GameHunter","Specs","Publisher","Review"=>array("User"),"Screenshot","Rating","Download"));
+		# $this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
 		if (empty($game)) { $this->cakeError("error404"); }
-		if ($game["Genres"]["tools"] == 1) {$this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
+		if ($game["Genres"]["tools"] == 1) { $this->redirect("/tools/view/".$game["Game"]["game_id"]); } // Silent redirect to correct view.
 		
 		$this->set("game",$game);
 		$this->set("comments",$this->paginate("Comment",array("Comment.game_id"=>$game["Game"]["game_id"])));

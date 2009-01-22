@@ -137,7 +137,7 @@ foreach ($game["Guide"] as $guide) {
 <?
 foreach ($game["Review"] as $review) {
  echo '<li><h3>'.$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"])).' by '.$review["User"]["username"].'</h3>';
- echo "<p>".nl2br($text->trim($review["review_text"]),300)."</p></li>";
+ echo "<p>".nl2br($text->trim($review["review_text"],300))."</p></li>";
 }
 if (count($game["Review"]) == 0) {
   echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."</p>";
@@ -181,7 +181,7 @@ if ($session->check("Auth.User.user_id")) {
 <?=$form->end("Submit")?>
 
 <br><p>Do we have a mistake on this page? <?=$html->link("Let us know.",array("action"=>"flag",$game["Game"]["game_id"]))?></p>
-
+<?=debug($game)?>
   </div>
   <div class="yui-u">
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>

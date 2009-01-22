@@ -1,3 +1,6 @@
+<?
+  $html->meta("atom","index.atom",array("title"=>"Recent news","rel"=>"alternate"),false);
+?>
 <div class="yui-ge">
   <div class="yui-u first">
 <h1>Site News</h1>

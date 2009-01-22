@@ -1,32 +1,34 @@
-# Features
+# TODO
 
 * Atom feeds (incl. SearchMonkey)
-  * Sitemap (HTML, XML)
+  * Sitemap (HTML, XML) (not all content there yet)
 * Screenshots to latest games (front page)
   * Layout? Carousels?
-  * Scrollable makes a nice carousel: http://www.flowplayer.org/tools/scrollable.html
+  * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
 * Games/index
   * Games/index filter by genre, platform, score
   * Fix sorting from default ASC to DESC. (bug in CakePHP)
   * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
 * Fix Forms styling
-* Containable behavior.
-* Fix screenshot jquery (Opera support?)
-  * FancyBox will be updated soon. http://fancy.klade.lv/
-  * FaceBox can show DIVs, http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm
-  * Popeye can zoom images inline: http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/
+* Containable behavior to optimize pages and DB fetches.
+* Fix screenshot jQuery (Opera support?)
+  * [FancyBox](http://fancy.klade.lv/) will be updated soon. 
+    * Old version doesn't work with jQuery 1.3.0
+  * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
+  * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
 * BBCode handling and editing (Rich text editor?)
 * Model validations
 * Encoding of strings. 
-  * MySQL ISO-8859-15 <=> PHP (iconv) UTF-8 => HTML/XML UTF-8
+  * MySQL CP-1252 <=> PHP (iconv) UTF-8 => HTML/XML UTF-8 (should work now.)
   * BBCode => HTML
   * Right now, there's html-encoded ISO-8859-15 in database. 
 * Script to stage new revisions to CWF
 * Downloads
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
- 
+* Localization and internationalization.
+
 # TODOs from code
 
 `# grep -rn TODO app/*

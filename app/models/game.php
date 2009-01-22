@@ -10,6 +10,8 @@ class Game extends AppModel {
 	
 	var $order = "game_name ASC";
 	
+	var $actsAs = array("Containable");
+	
 	# Validation
 	var $validate = array(
 		"game_name" => "notEmpty",
