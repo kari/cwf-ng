@@ -8,20 +8,139 @@
  **/
 
 class BBCodeHelper extends AppHelper {
-        
-    function decode($bbcode="",$phpbb_code = null) {
-        App::import('Vendor','lib_bbcode');
-        if ($phpbb_code) {
-          $bbcode = preg_replace("/:".$phpbb_code."/", "", $bbcode);
-        }
-        return $this->output(bbcode_format($bbcode));
+  
+	var $search = array(
+ 		'/\</',
+		'/\>/',
+		'/\[b\](.*?)\[\/b\]/is',                                 
+    '/\[i\](.*?)\[\/i\]/is',                                 
+    '/\[u\](.*?)\[\/u\]/is',                                 
+    '/\[url\=(.*?)\](.*?)\[\/url\]/is',                          
+    '/\[url\](.*?)\[\/url\]/is',                              
+    '/\[align\=(left|center|right)\](.*?)\[\/align\]/is',     
+    '/\[img\](.*?)\[\/img\]/is',
+    '/\[img\=(.*?)\](.*?)\[\/img\]/is',
+		'/\[img +src\=\"(.*?)\".*?title\=\"(.*?)\".*?\]/is',
+    '/\[mail\=(.*?)\](.*?)\[\/mail\]/is',                     
+    '/\[mail\](.*?)\[\/mail\]/is',                             
+    '/\[font\=(.*?)\](.*?)\[\/font\]/is',                     
+    '/\[size\=(.*?)\](.*?)\[\/size\]/is',                     
+    '/\[color\=(.*?)\](.*?)\[\/color\]/is',
+		'/\[quote\=(.*?)\](.*?)\[\/quote\]/is',
+		'/\[quote\](.*?)\[\/quote\]/is',
+   	);
+
+	var $decode = array( 
+		'&lt;',
+		'&gt;',
+    '<strong>$1</strong>', 
+    '<em>$1</em>', 
+    '<u>$1</u>', 
+    '<a href="$1">$2</a>', 
+    '<a href="$1">$1</a>', 
+    '<div style="text-align: $1;">$2</div>', 
+    '<img src="$1" />',
+		'<img src="$1" title="$2" />',
+		'<img src="$1" title="$2" />',
+    '<a href="mailto:$1">$2</a>', 
+    '<a href="mailto:$1">$1</a>', 
+    '<span style="font-family: $1;">$2</span>', 
+    '<span style="font-size: $1;">$2</span>', 
+    '<span style="color: $1;">$2</span>',
+		'[quote]$2[/quote]',
+		'[quote]$1[/quote]',
+    );
+
+  var $strip = array( 
+		'&lt;',
+		'&gt;',
+    '$1', 
+    '$1', 
+    '$1', 
+    '<a href="$1">$2</a>', 
+    '<a href="$1">$1</a>', 
+    '$2', 
+    '',
+		'',
+		'',
+    '$2', 
+    '$1', 
+    '$2', 
+    '$2', 
+    '$2',
+		'$1',
+		'$2',
+    );
+
+  var $strip_all = array( 
+		'&lt;',
+		'&gt;',
+    '$1', 
+    '$1', 
+    '$1', 
+    '$2', 
+    '$1', 
+    '$2', 
+    '',
+		'',
+		'',
+    '$2', 
+    '$1', 
+    '$2', 
+    '$2', 
+    '$2',
+		'$1',
+		'$2',
+    );
+
+	function decode($bbcode="",$phpbb_code = null) {
+    if ($phpbb_code) {
+    	$bbcode = preg_replace("/:".$phpbb_code."/", "", $bbcode);
     }
+    $bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8"); # FIXME: For legacy DB.
+		$str = preg_replace ($this->search, $this->decode, $bbcode); 
+    $str = $this->bbcode_quote($str); 
+    $str = nl2br($str);
+    return $this->output($str);
+  }
 
-		function strip($str="") {
-			$match = '/\[[^\]]+\]/'; # FIXME: Doesn't handle images nicely. Implement a better strip() to lib_bbcode
-			$str = preg_replace($match,"",$str);
-			return $this->output($str);
+	# $bbcode->strip($bbcode string, $all boolean)
+	# $all	true = strip all (default), false = decode links
+	function strip($bbcode="",$all=true) {
+		$bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8"); # FIXME: For legacy DB.
+		if ($all) {
+    	$str = preg_replace ($this->search, $this->strip_all, $bbcode);
+		} else {
+			$str = preg_replace ($this->search, $this->strip, $bbcode); 
 		}
-}
+		return $this->output($str);
+	}
 
+
+	function bbcode_quote ($str) { 
+    $open = '<blockquote>'; 
+    $close = '</blockquote>'; 
+
+    // How often is the open tag? 
+    preg_match_all ('/\[quote\]/i', $str, $matches); 
+    $opentags = count($matches['0']); 
+
+    // How often is the close tag? 
+    preg_match_all ('/\[\/quote\]/i', $str, $matches); 
+    $closetags = count($matches['0']); 
+
+    // Check how many tags have been unclosed 
+    // And add the unclosing tag at the end of the message 
+    $unclosed = $opentags - $closetags; 
+    for ($i = 0; $i < $unclosed; $i++) { 
+        $str .= '</blockquote>'; 
+    } 
+
+    // Do replacement 
+    $str = str_replace ('[' . 'quote]', $open, $str); 
+    $str = str_replace ('[/' . 'quote]', $close, $str); 
+
+    return $str; 
+	}
+}
 ?>

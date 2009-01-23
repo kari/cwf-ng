@@ -1,7 +1,7 @@
 # TODO
 
-* Atom feeds (incl. SearchMonkey)
-  * Sitemap (HTML, XML) (not all content there yet)
+* Fix Forms styling
+* Downloads
 * Screenshots to latest games (front page)
   * Layout? Carousels?
   * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
@@ -10,26 +10,25 @@
   * Fix sorting from default ASC to DESC. (bug in CakePHP)
   * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
-* Fix Forms styling
-* Containable behavior to optimize pages and DB fetches.
 * Fix screenshot jQuery (Opera support?)
   * [FancyBox](http://fancy.klade.lv/) will be updated soon. 
-  * Old version doesn't work with jQuery 1.3.0
+  * Old version of Fancybox doesn't work with jQuery 1.3.0
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
 * BBCode handling and editing (Rich text editor?)
 * Model validations
-* Encoding of strings. 
-  * MySQL CP-1252 <=> PHP (iconv) UTF-8 => HTML/XML UTF-8 (should work now.)
-  * BBCode => HTML
-  * Right now, there's html-encoded ISO-8859-15 in database. 
 * Script to stage new revisions to CWF
-* Downloads
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
-* Localization and internationalization.
-* GD-generated headings.
 * Advertising elements
+
+
+## Deferred to v2
+
+* SearchMonkey Atom feeds (can't add until site is live)
+* GD-generated headings (SiteHelper::himg("Something or other") ?)
+* Localization (l10n) and internationalization (i18n)
+* Atom feeds with AtomHelper of a sort
 
 # TODOs from code
 
