@@ -37,7 +37,7 @@ if ($session->check("Auth.User.user_id")) {
     $first = true;
     foreach($worldnews as $item) {
       echo "<li><strong>";
-      echo $time->format("d.m.Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"worldnews","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
+      echo $time->format("d.m.Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"world_news","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
       if ($first) {
         echo $text->trim($bbcode->strip($item["WorldNews"]["wnews_text"]),1000,"...",false);
         $first = false;

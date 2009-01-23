@@ -181,7 +181,7 @@ if ($session->check("Auth.User.user_id")) {
 <?=$form->end("Submit")?>
 
 <br><p>Do we have a mistake on this page? <?=$html->link("Let us know.",array("action"=>"flag",$game["Game"]["game_id"]))?></p>
-<?=debug($game)?>
+<?#=debug($game)?>
   </div>
   <div class="yui-u">
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
