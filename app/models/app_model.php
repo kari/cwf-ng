@@ -53,7 +53,7 @@ class AppModel extends Model {
 
 	function afterFind($results) {
 		# Convert cp1252 to UTF-8
-		if (!function_exists('array_walk_recursive')) {
+		if (!function_exists('array_walk_recursive')) { # PHP4 compat
 			$this->array_walk_recursive($results,array("AppModel","array_toutf8"));
 		} else {
 			array_walk_recursive($results,array("AppModel","array_toutf8"));
@@ -64,7 +64,7 @@ class AppModel extends Model {
 	function beforeSave() {
 		# Convert UTF-8 to cp1252
 		# access $this->data
-		if (!function_exists('array_walk_recursive')) {
+		if (!function_exists('array_walk_recursive')) { # PHP4 compat
 			$ret = $this->array_walk_recursive($this->data,array("AppModel","array_tolatin1"));
 		} else {
 			$ret = array_walk_recursive($this->data,array("AppModel","array_tolatin1"));
