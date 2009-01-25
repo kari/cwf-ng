@@ -7,7 +7,7 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
   echo "<li>".$html->link("Edit profile","/forum/editprofile")."</li>";
 }
 ?>
-  <li><?=$html->link("Website",$user["User"]["user_website"])?></li>
+  <li><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"))?></li>
   <li>Location: <?=$user["User"]["user_from"]?> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>
   <li>Occupation: <?=$user["User"]["user_occ"]?></li>
   <li>Last visit: <?=date("d.m.Y",$user["User"]["user_lastvisit"])?></li>
