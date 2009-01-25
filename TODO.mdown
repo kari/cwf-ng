@@ -21,6 +21,7 @@
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
 * Advertising elements
+* Screenshot uploading
 
 
 ## Deferred to v2
@@ -29,6 +30,7 @@
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
 * Localization (l10n) and internationalization (i18n)
 * Atom feeds with AtomHelper of a sort
+* Game workflow/lifecycle/process
 
 # TODOs from code
 
