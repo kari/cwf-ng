@@ -30,7 +30,7 @@ class AppModel extends Model {
 
       foreach ($input as $key => $item) {
           if (is_array($item)) {
-              array_walk_recursive($item, $funcname, $args);
+              $this->array_walk_recursive($item, $funcname, $args);
               $input[$key] = $item;
           } else {
               $args[0] = &$item;
