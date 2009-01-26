@@ -146,12 +146,36 @@ class SiteHelper extends AppHelper {
 		switch ($user['user_avatar_type']) {
 		  case 1:
 		  case 3:
+			# Locally hosted avatar
 		    $str = $this->Html->image($avatar_path.$user["user_avatar"],$options);
 		    break;
 		  case 2:
+			# Somewhere hosted avatar
 		    $str = $this->Html->image($user["user_avatar"],$options);
 		    break;
+			case 4:
+				# Gravatar from e-mail
+				$gravatar_id = md5(strtolower(trim($user["user_email"]))); # Can we assume this exists?
+				# Determine wanted size
+				if (isset($options["width"])) {
+					if (isset($options["height"])) {
+						if ($options["height"] <= $options["width"]) { # If both are defined, choose smaller of dimensions
+							$size = $options["height"];
+						} else {
+							$size = $options["width"];
+						}
+					} else {
+						$size = $options["width"]; # Only width defined, use that.
+					}
+				} elseif (isset($options["height"])) { # If only height defined, use it.
+					$size = $options["height"];
+				} else {
+					$size = 80;  # Otherwise choose default size (Gravatar default is 80).
+				}
+				$str = $this->Html->image("http://www.gravatar.com/avatar/".$gravatar_id.".jpg?s=".$size."&r=pg");
+				break;
 		  case 0: # Avatar missing
+				# FIXME: Should we try to put a gravatar?
 			default:
 			  $str = $this->Html->image("/img/cwf_nosshot.png",$options); # FIXME: Placeholder, needs a No avatar -picture.
 				break;
