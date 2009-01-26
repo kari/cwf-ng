@@ -22,7 +22,7 @@
   * External links are easy, what about internal links?
 * Advertising elements
 * Screenshot uploading
-
+* Gravatar-support (avatar_type 4?)
 
 ## Deferred to v2
 
