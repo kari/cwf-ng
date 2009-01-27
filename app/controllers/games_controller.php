@@ -10,7 +10,7 @@ class GamesController extends AppController {
      	'order' => array('Game.game_name' => 'asc'),
 			# "fields" => array("game_name","game_id"),
 			#'recursive' => 1
-			"contain"=>array("Screenshot","Rating","Genres")
+			"contain"=>array("Screenshot","Rating","Genres","GameHunter")
 			),
 		"Comment" => array(
 			"conditions" => array("Comment.validated"=>TRUE),

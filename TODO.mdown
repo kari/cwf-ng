@@ -2,7 +2,6 @@
 
 * Fix Forms styling
 * Downloads
-* Screenshot uploading
 * Blog comments
 * Screenshots to latest games (front page)
   * Layout? Carousels?
@@ -25,6 +24,7 @@
 * Advertising elements
 * Pages/view (dynamic pages)
 * One newsfeed for frontpage (maybe?)
+* Enhanced 404 page
 
 ## Deferred to v2
 
