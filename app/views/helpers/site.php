@@ -154,33 +154,42 @@ class SiteHelper extends AppHelper {
 		    $str = $this->Html->image($user["user_avatar"],$options);
 		    break;
 			case 4:
-				# Gravatar from e-mail
-				$gravatar_id = md5(strtolower(trim($user["user_email"]))); # Can we assume this exists?
-				# Determine wanted size
-				if (isset($options["width"])) {
-					if (isset($options["height"])) {
-						if ($options["height"] <= $options["width"]) { # If both are defined, choose smaller of dimensions
-							$size = $options["height"];
-						} else {
-							$size = $options["width"];
-						}
-					} else {
-						$size = $options["width"]; # Only width defined, use that.
-					}
-				} elseif (isset($options["height"])) { # If only height defined, use it.
-					$size = $options["height"];
-				} else {
-					$size = 80;  # Otherwise choose default size (Gravatar default is 80).
-				}
-				$str = $this->Html->image("http://www.gravatar.com/avatar/".$gravatar_id.".jpg?s=".$size."&r=pg");
-				break;
-		  case 0: # Avatar missing
-				# FIXME: Should we try to put a gravatar?
+			# Mystical non-phpbb supported value for Gravatar
+		  case 0: 
+			# No avatar?
+				if (isset($user["user_email"])) { 
+					$url = $this->gravatar($user["user_email"],$options);
+					$str = $this->Html->image($url,$options);
+					break;
+				} # else go to default...
 			default:
 			  $str = $this->Html->image("/img/cwf_nosshot.png",$options); # FIXME: Placeholder, needs a No avatar -picture.
 				break;
 		}
 		return $this->output($str);
+	}
+	
+	function gravatar($email="",$options) {
+		# Gravatar from e-mail
+		$gravatar_id = md5(strtolower(trim($email))); # Can we assume this exists?
+		# Determine wanted size
+		if (isset($options["width"])) {
+			if (isset($options["height"])) {
+				if ($options["height"] <= $options["width"]) { # If both are defined, choose smaller of dimensions
+					$size = $options["height"];
+				} else {
+					$size = $options["width"];
+				}
+			} else {
+				$size = $options["width"]; # Only width defined, use that.
+			}
+		} elseif (isset($options["height"])) { # If only height defined, use it.
+			$size = $options["height"];
+		} else {
+			$size = 80;  # Otherwise choose default size (Gravatar default is 80).
+		}
+		$str = "http://www.gravatar.com/avatar/".$gravatar_id.".jpg?s=".$size."&r=pg"; # FIXME: Set default image to something CWF-specific.
+		return $str;
 	}
 }
 
