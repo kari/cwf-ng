@@ -2,6 +2,8 @@
 
 * Fix Forms styling
 * Downloads
+* Screenshot uploading
+* Blog comments
 * Screenshots to latest games (front page)
   * Layout? Carousels?
   * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
@@ -21,8 +23,8 @@
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
 * Advertising elements
-* Screenshot uploading
-* Gravatar-support (avatar_type 4?)
+* Pages/view (dynamic pages)
+* One newsfeed for frontpage (maybe?)
 
 ## Deferred to v2
 
@@ -32,6 +34,7 @@
 * Atom feeds with AtomHelper of a sort
 * Game workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
+* User <-> Developer mapping (not many right now)
 
 # TODOs from code
 
