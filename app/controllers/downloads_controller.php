@@ -28,7 +28,7 @@ class DownloadsController extends AppController {
 		if (!empty($this->data)) {
 			if($this->Download->save($this->data)) {
 				$this->Session->setFlash("Download was added.");
-				$this->redirect("/games/queue");
+				$this->redirect(array("action"=>"edit",$this->Download->id));
 			}
 		}
 		$this->set("game_id",$id);
@@ -60,7 +60,7 @@ class DownloadsController extends AppController {
 		$download = $this->Download->find("first",array("conditions"=>array("file_id"=>$id)));
 		if (!empty($download)) {
 			$this->Download->del($id);
-			$this->flash('The download with id '.$id.' has been deleted.', '/games/queue');
+			$this->flash('The download with id '.$id.' has been deleted.', array("controller"=>"games","action"=>"edit",$download["Download"]["game_id"]));
 		} else {
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/");
