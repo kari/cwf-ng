@@ -1,7 +1,10 @@
 # TODO
 
+* PHP4 compat. (html_entities multichar...)
 * Fix Forms styling
 * Downloads
+  * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
+  * PEAR isn't in Apple-bundled PHP.
 * Blog comments
 * Screenshots to latest games (front page)
   * Layout? Carousels?
@@ -12,7 +15,7 @@
   * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
 * Fix screenshot jQuery (Opera support?)
-  * [FancyBox](http://fancy.klade.lv/) will be updated soon. 
+  * [FancyBox](http://fancy.klade.lv/) should be updated soon. 
   * Old version of Fancybox doesn't work with jQuery 1.3.0
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
@@ -25,24 +28,28 @@
 * Pages/view (dynamic pages)
 * One newsfeed for frontpage (maybe?)
 * Enhanced 404 page
+* XML/Atom Gzipping
+* $html->link mangles UTF-8 accented characters
 
 ## Deferred to v2
 
 * SearchMonkey Atom feeds (can't add until site is live)
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
+  * GD isn't in Apple-bundled PHP.
 * Localization (l10n) and internationalization (i18n)
 * Atom feeds with AtomHelper of a sort
 * Game workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
 * User <-> Developer mapping (not many right now)
+* [OpenSearch](http://www.opensearch.org/)
 
 # TODOs from code
 
 `# grep -rn TODO app/*
-app/controllers/games_controller.php:96:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
-app/controllers/screenshots_controller.php:16:				// TODO: Some preliminary thumbnailing etc.?
+app/controllers/screenshots_controller.php:51:				die("Hack attempt. IP logged. Please go and die."); # TODO: log IP, ensure attacker is actually dead.
 app/controllers/tools_controller.php:38:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
 app/controllers/users_controller.php:18:			# TODO: there should be Remember Me-functionality
-app/models/game.php:30:	  # "Rating", # TODO: needs a custom finderquery but no idea how to make it work.
 app/views/blogs/view.ctp:7:<? #TODO: Comments? ?>
+app/views/games/atom/index.ctp:32:/* TODO: Maybe simpler way to do this with a (own) AtomHelper. Problem is SearchMonkey DataRSS Adjuncts.  
+app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)
 app/views/world_news/view.ctp:9:  # TODO: Embed YouTube-link into the webpage.`

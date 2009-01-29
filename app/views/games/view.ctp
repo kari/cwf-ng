@@ -120,7 +120,7 @@ if($session->check("Auth.User.user_id")) {
 <h2>Downloads</h2>
 <ul class="downloads"><?
 foreach ($game["Download"] as $file) {
-  echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"get",$file["file_id"])).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
+  echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"get",$file["file_id"])). ' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
 <? if (!empty($game["Guide"])) { ?>
@@ -169,10 +169,14 @@ foreach ($comments as $comment) {
 <cake:nocache>
 <? 
 if ($session->check("Auth.User.user_id")) {
-  # If user is logged in, we think he's a human
+  # If user is logged in, we think he's a human...
   echo $form->hidden("user_id",array("value"=>$session->read("Auth.User.user_id")));
 } else {
-  # ...otherwise he gets the reCAPTCHA challenge.
+  # ...otherwise it gets the reCAPTCHA challenge.
+  echo $javascript->codeBlock("var RecaptchaOptions = {
+      theme : 'white',
+      lang : 'en'
+   };");
    echo $recaptcha->display_form();
 }
 ?>
