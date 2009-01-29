@@ -42,7 +42,7 @@ class CommentsController extends AppController {
 				$this->data["Comment"]["validated"] = false;
 				$this->data["Comment"]["user_id"] = -1; # FIXME: Magic number
 			}
-			if($this->data["Comment"]["flag"] == true) {
+			if(isset($this->data["Comment"]["flag"]) && $this->data["Comment"]["flag"] == true) {
 				$this->Session->setFlash("Thanks for reporting!");
 				$this->data["Comment"]["validated"] = false;
 				$this->Comment->save($this->data);
@@ -74,7 +74,7 @@ class CommentsController extends AppController {
 		$comment = $this->Comment->find("first",array("conditions"=>array("comment_id"=>$id)));
 		if (!empty($comment)) {
 			$this->Comment->del($id);
-			$this->flash('The comment with id '.$id.' has been deleted.', $this->referer());
+			$this->flash('The comment with id '.$id.' has been deleted.', array("action"=>"admin"));
 		} else {
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/");

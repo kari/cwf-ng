@@ -8,6 +8,7 @@ echo $form->input('text', array('rows' => '5'));
 echo $form->hidden("comment_id");
 echo $form->input("validated",array("type"=>"checkbox"));
 echo $form->end('Save');
+echo $html->link("Delete",array("action"=>"delete",$this->data["Comment"]["comment_id"]),array(),"Proceed with delete?");
 ?>
   </div>
   <div class="yui-u">

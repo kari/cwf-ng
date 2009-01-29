@@ -97,7 +97,14 @@ class BBCodeHelper extends AppHelper {
     if ($phpbb_code) {
     	$bbcode = preg_replace("/:".$phpbb_code."/", "", $bbcode);
     }
-    $bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8"); # FIXME: For legacy DB. DOESN'T WORK IN PHP4! (can't decode multibyte chars)
+		$phpver = phpversion(); # FIXME: For legacy DB. DOESN'T WORK IN PHP4! (can't decode multibyte chars) Solution: Fix DB?
+		if (substr($phpver,0,1) == "5") {
+    	$bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8"); 
+		} else { # PHP4:
+			$bbcode = iconv("UTF-8","ISO-8859-1//IGNORE",$bbcode);
+			$bbcode = html_entity_decode($bbcode,ENT_QUOTES);
+			$bbcode = iconv("ISO-8859-1","UTF-8",$bbcode);
+		}
 		$str = preg_replace ($this->search, $this->decode, $bbcode); 
     $str = $this->bbcode_quote($str); 
     $str = nl2br($str);
@@ -107,7 +114,14 @@ class BBCodeHelper extends AppHelper {
 	# $bbcode->strip($bbcode string, $all boolean)
 	# $all	true = strip all (default), false = decode links
 	function strip($bbcode="",$all=true) {
-		$bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8"); # FIXME: For legacy DB. see above!
+		$phpver = phpversion(); # FIXME: For legacy DB. DOESN'T WORK IN PHP4! (can't decode multibyte chars) Solution: Fix DB?
+		if (substr($phpver,0,1) == "5") {
+			$bbcode = html_entity_decode($bbcode,ENT_QUOTES,"UTF-8");
+		} else { # PHP4:
+			$bbcode = iconv("UTF-8","ISO-8859-1//IGNORE",$bbcode);
+			$bbcode = html_entity_decode($bbcode,ENT_QUOTES);
+			$bbcode = iconv("ISO-8859-1","UTF-8",$bbcode);
+		}
 		if ($all) {
     	$str = preg_replace ($this->search, $this->strip_all, $bbcode);
 		} else {
