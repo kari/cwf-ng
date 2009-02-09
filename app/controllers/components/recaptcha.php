@@ -12,8 +12,11 @@
 		Configure::write("Recaptcha.apiServer","http://api.recaptcha.net");
 		Configure::write("Recaptcha.apiSecureServer","https://api-secure.recaptcha.net");
 		Configure::write("Recaptcha.verifyServer","api-verify.recaptcha.net");
-		Configure::write("Recaptcha.pubKey", $this->publickey);
-		Configure::write("Recaptcha.privateKey", $this->privatekey);
+				# Configure::write("Recaptcha.pubKey", $this->publickey);
+				# Configure::write("Recaptcha.privateKey", $this->privatekey);
+				$this->publickey = Configure::read("Recaptcha.pubKey");
+				$this->privatekey = Configure::read("Recaptcha.privateKey");
+		
 		
 		$this->controller =& $controller;
 		$this->controller->helpers[] = "Recaptcha";

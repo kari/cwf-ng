@@ -31,7 +31,8 @@ class RecaptchaHelper extends AppHelper {
 	 */
 	function __form($pubkey, $error = null, $use_ssl = false){
 		if ($pubkey == null || $pubkey == '') {
-			die ("To use reCAPTCHA you must get an API key from <a href='http://recaptcha.net/api/getkey'>http://recaptcha.net/api/getkey</a>");
+			return "reCAPTCHA public key missing. Commenting disabled.";
+			# die ("To use reCAPTCHA you must get an API key from <a href='http://recaptcha.net/api/getkey'>http://recaptcha.net/api/getkey</a>");
 		}
 		
 		if ($use_ssl) {
