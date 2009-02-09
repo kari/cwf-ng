@@ -19,6 +19,7 @@
   * Old version of Fancybox doesn't work with jQuery 1.3.0
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
+  * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery  
 * BBCode handling and editing (Rich text editor?)
 * Model validations
 * Script to stage new revisions to CWF
@@ -37,11 +38,15 @@
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
   * GD isn't in Apple-bundled PHP.
 * Localization (l10n) and internationalization (i18n)
+  * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
 * Game workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
+  * Integration requires JSON, PHP4 needs a library for it
+  * Friend Connect, OpenID etc. to login (or to download?)
 * User <-> Developer mapping (not many right now)
 * [OpenSearch](http://www.opensearch.org/)
+* "Hey, you downloaded this game a week ago. Mind writing a review?"
 
 # TODOs from code
 

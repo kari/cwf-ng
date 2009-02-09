@@ -1,0 +1,14 @@
+^cake/
+^vendors/
+^docs/
+^app/webroot/img/originals/
+^app/webroot/img/cache
+^app/webroot/img/icons
+^app/webroot/img/avatars
+^app/tmp/
+^app/downloads
+\.DS_Store$
+
+syntax: glob
+app/config/core.php
+app/config/database.php
