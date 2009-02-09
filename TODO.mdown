@@ -1,10 +1,10 @@
 # TODO
 
-* PHP4 compat. (html_entities multichar...)
 * Fix Forms styling
 * Downloads
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
-  * PEAR isn't in Apple-bundled PHP.
+    * PEAR isn't in Apple-bundled PHP.
+  * We can use the code from old version?
 * Blog comments
 * Screenshots to latest games (front page)
   * Layout? Carousels?
@@ -22,15 +22,15 @@
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery  
 * BBCode handling and editing (Rich text editor?)
 * Model validations
-* Script to stage new revisions to CWF
+* Build script to stage new revisions to CWF
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
 * Advertising elements
 * Pages/view (dynamic pages)
 * One newsfeed for frontpage (maybe?)
-* Enhanced 404 page
 * XML/Atom Gzipping
-* $html->link mangles UTF-8 accented characters
+* PHP4 compat. (html_entities multichar...)
+  * $html->link mangles UTF-8 accented characters(?)
 
 ## Deferred to v2
 
@@ -40,7 +40,7 @@
 * Localization (l10n) and internationalization (i18n)
   * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
-* Game workflow/lifecycle/process
+* Game (Hunter) workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
   * Integration requires JSON, PHP4 needs a library for it
   * Friend Connect, OpenID etc. to login (or to download?)
