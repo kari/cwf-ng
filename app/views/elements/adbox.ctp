@@ -3,7 +3,7 @@ switch ($style) {
   case "pw-banner":
     $width = 468;
     $height = 60;
-    # probably code would be nice too.
+    # FIXME: probably the ad code would be nice here too.
     break;
   case "pw-square":
     $width = 125;
@@ -33,7 +33,7 @@ switch ($style) {
     $height = 250;
     break;
   default:
-  # if unknown style, we could take the dimensions and other options from the array...
+  # FIXME: if unknown style, we could take the dimensions and other options from the array...
     $width = 125;
     $height = 125;
     break;

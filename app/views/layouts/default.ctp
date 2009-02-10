@@ -26,13 +26,13 @@
         <ul class="nav">
           <li><?=$html->link("Main","/")?></li>
           <li><?=$html->link("Games","/games/")?></li>
-          <li><?=$html->link("Blogs","/blogs/")?></li>
           <li><?=$html->link("Site News","/news/")?></li>
           <li><?=$html->link("World News","/world_news")?></li>
           <li><?=$html->link("Reviews","/reviews/")?></li>
           <li><?=$html->link("Guides","/guides/")?></li>
           <li><?=$html->link("Interviews","/interviews/")?></li>
           <li><?=$html->link("Tools","/tools/")?></li>
+          <li><?=$html->link("Blogs","/blogs/")?></li>
           <li><?=$html->link("Forums","/forum")?></li>
         </ul>
           
