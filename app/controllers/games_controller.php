@@ -7,10 +7,10 @@ class GamesController extends AppController {
 		"Game" => array(
 	   	# 'conditions' => array("Game.download_status" => 0,"Genres.tools"=>0),
      	'limit' => 15,
-     	'order' => array('Game.game_name' => 'asc'),
+     	'order' => array('Game.game_name' => 'asc',"Game.site_rating"=>"desc","Game.created"=>"desc","Game.year"=>"desc"),
 			# "fields" => array("game_name","game_id"),
 			#'recursive' => 1
-			"contain"=>array("Screenshot","Rating","Genres","GameHunter")
+			"contain"=>array("Screenshot","Rating","Genres","GameHunter","Specs")
 			),
 		"Comment" => array(
 			"conditions" => array("Comment.validated"=>TRUE),
@@ -40,8 +40,46 @@ class GamesController extends AppController {
 			$this->cacheAction = null;
 			$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0,"Genres.tools"=>0),"order" => "Game.created DESC","limit"=>30)));
 		} else {
-			$this->set('GENRE',$this->Game->GENRE);
-			$this->set("games",$this->paginate('Game',array("Game.download_status" => 0,"Genres.tools"=>0)));
+			$genres = $this->Game->GENRE;
+			unset($genres["tools"]); # Do not show Tools.
+			asort($genres);
+			$this->set('GENRE',$genres);
+			# $this->set("PLATFORM",$this->Download->PLATFORM);
+			$osystem = $this->Game->OSYSTEM;
+			asort($osystem);
+			$this->set('OSYSTEM',$osystem);
+			$conds = array("Game.download_status"=>0,"Genres.tools"=>0);
+			# Check if set new filtering parameters
+			if (!empty($this->data)) {
+				if(!empty($this->data["Game"]["score"]) && ($this->data["Game"]["score"] >= 0 && $this->data["Game"]["score"] <= 6)) {
+						$conds["Game.site_rating >="] = $this->data["Game"]["score"];
+						$this->Session->write("Game.score",$this->data["Game"]["score"]);
+				}	else {
+					unset($this->data["Game"]["score"]);
+					$this->Session->delete("Game.score");
+				}
+				if(!empty($this->data["Game"]["platform"]) && array_key_exists($this->data["Game"]["platform"],$osystem)) {
+					$conds["Specs.".$this->data["Game"]["platform"]] = 1;
+					$this->Session->write("Game.platform",$this->data["Game"]["platform"]);
+				} else {
+					unset($this->data["Game"]["platform"]);
+					$this->Session->delete("Game.platform");
+				}
+				if(!empty($this->data["Game"]["genre"]) && array_key_exists($this->data["Game"]["genre"],$genres)) {
+					$conds["Genres.".$this->data["Game"]["genre"]] = 1;
+					$this->Session->write("Game.genre",$this->data["Game"]["genre"]);
+				} else {
+					unset($this->data["Game"]["genre"]);
+					$this->Session->delete("Game.genre");
+				}
+			} else {
+				# Read session variables
+				if ($this->Session->check("Game.score")) $conds["Game.site_rating >="] = $this->Session->read("Game.score");
+				if ($this->Session->check("Game.platform")) $conds["Specs.".$this->Session->read("Game.platform")] = 1;
+				if ($this->Session->check("Game.genre")) $conds["Genres.".$this->Session->read("Game.genre")] = 1;
+			}
+			$this->set("conds",$conds);
+			$this->set("games",$this->paginate('Game',$conds));
 		}
 	}
 	

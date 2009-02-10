@@ -20,7 +20,7 @@ class Download extends AppModel {
 	var $PLATFORM = array(0 => "Unknown",
 	1 => "Windows",
 	2 => "Linux",
-	3 => "Mac",
+	3 => "Mac OS X",
 	4 => "Special");
 	
 	var $TYPE = array(0 => "Unknown",
