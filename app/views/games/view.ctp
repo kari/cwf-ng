@@ -22,7 +22,6 @@
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
     <li>Game proposer: <?=$html->link($game['GameProposer']['username'],array("controller"=>"users","action"=>"view",$game["GameProposer"]["user_id"]))?></li>
-    <li>Reviews: <?=$game["Game"]["review_amount"]?></li>
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
     <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
     <li><?=$html->link("Game homepage",$game["Game"]["site"])?></li>
@@ -31,7 +30,9 @@
           if ($platform_set == 1) echo "<li>".$OSYSTEM[$platform]."</li>";
         }
         ?></ul></li>
+    <? if (!empty($game["Game"]["requirements"])) { ?>
     <li>System requirements: <?=nl2br($game["Game"]["requirements"])?></li>
+    <? } ?>
   </ul>
 <h2>Genres</h2>
 <ul><?
@@ -188,6 +189,7 @@ if ($session->check("Auth.User.user_id")) {
 <?#=debug($game)?>
   </div>
   <div class="yui-u">
+    <h1>Advertisement</h1>
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
   </div>
 </div>

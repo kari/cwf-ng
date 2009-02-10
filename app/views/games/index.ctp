@@ -65,10 +65,9 @@ if (array_key_exists(0,$game["Rating"])) { # FIXME: Ugly way, and might not be O
       <p><?=$text->trim($game['Game']['description'],300,"...",false)?></p>
 	</td></tr>
 	<? } ?>
-
 </table>
 
-<?=$paginator->prev('« Previous ', null, null, array('class' => 'disabled'));?>&nbsp;
+<?=$paginator->prev("Previous");?>&nbsp;
 <?=$paginator->numbers(); ?>&nbsp;
-<?=$paginator->next(' Next »', null, null, array('class' => 'disabled'));?> &nbsp;
-<?=$paginator->counter(); ?>
+<?=$paginator->next("Next");?>&nbsp;
+Page&nbsp;<?=$paginator->counter("pages"); ?>
