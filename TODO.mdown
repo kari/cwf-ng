@@ -10,13 +10,11 @@
   * Layout? Carousels?
   * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
 * Games/index
-  * Games/index filter by genre, platform, score
-  * Fix sorting from default ASC to DESC. (bug in CakePHP)
   * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
 * Fix screenshot jQuery (Opera support?)
   * [FancyBox](http://fancy.klade.lv/) should be updated soon. 
-  * Old version of Fancybox doesn't work with jQuery 1.3.0
+    * Old version of Fancybox doesn't work with jQuery 1.3.0
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery  
@@ -30,6 +28,7 @@
 * One newsfeed for frontpage (maybe?)
 * XML/Atom Gzipping
 * PHP4 compat. (html_entities multichar...)
+  * Accented characters look like crap in publisher table?
   * $html->link mangles UTF-8 accented characters(?)
 
 ## Deferred to v2

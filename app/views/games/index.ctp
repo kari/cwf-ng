@@ -14,9 +14,20 @@
   });")
 ?>
 <h1>Games</h1>
-<p>Sort by <?=$paginator->sort("Game name","game_name",array("direction"=>"desc"))?>, 
- <?=$paginator->sort("Score","site_rating",array("direction"=>"desc"))?>, <?=$paginator->sort("Date added","created",array("direction"=>"desc"))?>, <?=$paginator->sort("Release date","year",array("direction"=>"desc"))?><br>
-  Filter by Platform, Score, Genre</p>
+<p>Sort by <?=$paginator->link("Game name",array("sort"=>"game_name","direction"=>"asc"))?>, 
+ <?=$paginator->link("Score",array("sort"=>"site_rating","direction"=>"desc"))?>, <?=$paginator->link("Date added",array("sort"=>"created","direction"=>"desc"))?>, <?=$paginator->link("Release date",array("sort"=>"year","direction"=>"desc"))?><br>
+<?=$form->create("",array("type"=>"post","action"=>"index"))?>
+Platform <?=$form->select("platform",$OSYSTEM,$session->read("Game.platform"),array(),true)?>, 
+Min. Score <?=$form->select("score",array(0,1,2,3,4,5,6),($session->check("Game.score") ? $session->read("Game.score") : 0),array(),false)?>, 
+Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),true)?>
+<?=$form->end("Filter")?>
+<?=$form->create("",array("type"=>"post","action"=>"index"))?>
+<?=$form->hidden("platform",array("value"=>""))?>
+<?=$form->hidden("score",array("value"=>"0"))?>
+<?=$form->hidden("genre",array("value"=>""))?>
+<?=$form->end("Clear filters")?>
+</p>
+
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>
