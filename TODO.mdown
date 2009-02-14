@@ -1,6 +1,10 @@
 # TODO
 
+* Model validations
 * Fix Forms styling
+* BBCode handling and editing
+  * Check how texts are handled at each part of site
+  * Rich text editor
 * Downloads
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
     * PEAR isn't in Apple-bundled PHP.
@@ -17,9 +21,7 @@
     * Old version of Fancybox doesn't work with jQuery 1.3.0
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
-  * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery  
-* BBCode handling and editing (Rich text editor?)
-* Model validations
+  * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
 * Build script to stage new revisions to CWF
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
@@ -30,6 +32,7 @@
 * PHP4 compat. (html_entities multichar...)
   * Accented characters look like crap in publisher table?
   * $html->link mangles UTF-8 accented characters(?)
+* [Canonical urls](http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html)
 
 ## Deferred to v2
 
