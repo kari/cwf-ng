@@ -4,12 +4,10 @@
 * Fix Forms styling
 * BBCode handling and editing
   * Check how texts are handled at each part of site
-  * Rich text editor
 * Downloads
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
     * PEAR isn't in Apple-bundled PHP.
   * We can use the code from old version?
-* Blog comments
 * Screenshots to latest games (front page)
   * Layout? Carousels?
   * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
@@ -22,17 +20,12 @@
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
-* Build script to stage new revisions to CWF
-* "Other links" to games. (new DB table, model...)
-  * External links are easy, what about internal links?
 * Advertising elements
-* Pages/view (dynamic pages)
-* One newsfeed for frontpage (maybe?)
-* XML/Atom Gzipping
+* Blog comments
 * PHP4 compat. (html_entities multichar...)
   * Accented characters look like crap in publisher table?
   * $html->link mangles UTF-8 accented characters(?)
-* [Canonical urls](http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html)
+  * PHP4 DB saving doesn't work
 
 ## Deferred to v2
 
@@ -42,6 +35,7 @@
 * Localization (l10n) and internationalization (i18n)
   * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
+* BBCode Rich text editor
 * Game (Hunter) workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
   * Integration requires JSON, PHP4 needs a library for it
@@ -49,6 +43,14 @@
 * User <-> Developer mapping (not many right now)
 * [OpenSearch](http://www.opensearch.org/)
 * "Hey, you downloaded this game a week ago. Mind writing a review?"
+* Intrasite linking (eg. "game:123", "guide:123")
+* [Canonical urls](http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html)
+* XML/Atom Gzipping
+* One newsfeed for frontpage (maybe?)
+* Pages/view (dynamic pages)
+* Build script to stage new revisions to CWF
+* "Other links" to games. (new DB table, model...)
+  * External links are easy, what about internal links?
 
 # TODOs from code
 
