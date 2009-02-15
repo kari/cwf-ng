@@ -22,7 +22,8 @@ class GamesController extends AppController {
 	var $components = array('Recaptcha',"RequestHandler");
 	var $helpers = array('Cache',"Number","Site","javascript");
 	
-	var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
+	# var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
+	# FIXME: Recaptcha breaks view/ caching, POST/cookie filtering breaks indexing.
 
 	function beforeFilter() {
 		parent::beforeFilter();

@@ -43,7 +43,7 @@ class NewsController extends AppController {
 			$this->data["News"]["post_date"] = date("Y-m-d H:i:s");
 			if($this->News->save($this->data)) {
 				$this->Session->setFlash("News added.");
-				$this->redirect("/news");
+				$this->redirect(array("action"=>"view",$this->News->id));
 			}
 		}
 		$this->set("user_id",$this->Auth->user("user_id"));
@@ -57,9 +57,13 @@ class NewsController extends AppController {
 		  	//Set a session flash message and redirect.
 		    $this->Session->setFlash("News Saved!");
 		    $this->redirect('/news');
+			} else {
+				$this->Session->setFlash("Unable to save.");
 			}
+		} else {
+			# In else-block because otherwise unsaved form info is lost.
+			$this->data = $this->News->findByNews_id($id); # FIXME: we don't check this actually exists.
 		}
-		$this->data = $this->News->findByNews_id($id);
 		$this->set("user_id",$this->Auth->user("user_id"));
 		$this->set("posters",$this->News->User->find('list')); # FIXME: should only list users with relevant access level?
 	}
