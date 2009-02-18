@@ -14,9 +14,17 @@ class Comment extends AppModel {
 		
 	# Validation
 	var $validate = array(        
-		'title' => "notEmpty",
-	  'text' => "notEmpty",
-		# 'user_id' => "notEmpty",
+		#'title' => array(
+		#	"notEmpty" => array("rule" => "notEmpty"),
+		#	"maxLength" => array("rule" => array("maxLength",100)),
+		#	"minLength" => array("rule" => array("minLength",5))
+		#	),
+	  'text' => array(
+			"notEmpty" => array("rule" => "notEmpty"),
+			"maxLength" => array("rule" => array("maxLength",320)), # 2xSMS =)
+			"minLength" => array("rule" => array("minLength",10))
+			),
+		'user_id' => "notEmpty",
 	);
 	
 	

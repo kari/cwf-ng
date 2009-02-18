@@ -31,6 +31,9 @@ class CommentsController extends AppController {
 	
 	function add() {
 		if (!empty($this->data)) {
+			App::import("Sanitize");
+			$this->data["Comment"]["text"] = Sanitize::html($this->data["Comment"]["text"],true);
+			# $this->data["Comment"]["title"] = Sanitize::html($this->data["Comment"]["title"],true);
 			if ($this->Auth->user()) { 
 				$this->data["Comment"]["validated"] = true; 
 				$this->data["Comment"]["user_id"] = $this->Auth->user("user_id");
@@ -43,6 +46,7 @@ class CommentsController extends AppController {
 				$this->data["Comment"]["user_id"] = -1; # FIXME: Magic number
 			}
 			if(isset($this->data["Comment"]["flag"]) && $this->data["Comment"]["flag"] == true) {
+				# FIXME: This is "report mistakes" comment. Could be done in a much more nicer way.
 				$this->Session->setFlash("Thanks for reporting!");
 				$this->data["Comment"]["validated"] = false;
 				$this->Comment->save($this->data);
@@ -50,7 +54,9 @@ class CommentsController extends AppController {
 			}
 			if($this->Comment->save($this->data)) {
 				$this->Session->setFlash("Comment was added and will be published after validation.");
-				$this->redirect($this->referer());
+				# $this->redirect($this->referer());
+			} else {
+				$this->Session->setFlash("There were errors trying to save your comment.");
 			}
 		}
 		$this->redirect($this->referer());

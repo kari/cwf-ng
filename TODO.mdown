@@ -51,6 +51,7 @@
 * Build script to stage new revisions to CWF
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
+* OpenID/oAuth/Facebook Connect/Google Friend Connect...
 
 # TODOs from code
 

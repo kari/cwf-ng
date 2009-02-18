@@ -150,28 +150,27 @@ if (count($game["Review"]) == 0) {
 <ul class="reviews">
 <?
 foreach ($comments as $comment) {
-  echo "<li><strong>".$comment["Comment"]["title"]."</strong> by ";
+  echo "<li>".nl2br($comment["Comment"]["text"])."<br>by ";
   if ($comment["Comment"]["user_id"] <> -1) {
     echo $html->link($comment["User"]["username"],array("controller"=>"users","action"=>"view",$comment["User"]["user_id"]));
   } else {
     echo "Anonymous";
   }
   echo " ".$time->timeAgoInWords($comment["Comment"]["created"],array("format"=>"d.m.Y"));
-  echo "<br>".nl2br($comment["Comment"]["text"])."</li>";
+  # echo "<br>".nl2br($comment["Comment"]["text"])."</li>";
 }
 ?>
 </ul>
-<?=$paginator->prev('« Previous ', null, null, array('class' => 'disabled'));?>&nbsp;
-<?=$paginator->next(' Next »', null, null, array('class' => 'disabled'));?>
+<?=$paginator->prev();?>&nbsp;<?=$paginator->next();?>
 <h3>Add a comment</h3>
 <?=$form->create("Comment");?>
-<?=$form->input("title");?>
-<?=$form->input("text",array("rows"=>3));?>
+<?#=$form->input("title",array("maxLength"=>100));?>
+<?=$form->input("text",array("rows"=>3,"maxLength"=>320,"label"=>""));?>
 <cake:nocache>
 <? 
 if ($session->check("Auth.User.user_id")) {
   # If user is logged in, we think he's a human...
-  echo $form->hidden("user_id",array("value"=>$session->read("Auth.User.user_id")));
+  # echo $form->hidden("user_id",array("value"=>$session->read("Auth.User.user_id"))); # FIXME: User id should be read from session at comments/add. 
 } else {
   # ...otherwise it gets the reCAPTCHA challenge.
   echo $javascript->codeBlock("var RecaptchaOptions = {

@@ -3,7 +3,7 @@
 <h1>Edit comment</h1>
 <?
 echo $form->create('Comment');
-echo $form->input('title');
+# echo $form->input('title');
 echo $form->input('text', array('rows' => '5'));
 echo $form->hidden("comment_id");
 echo $form->input("validated",array("type"=>"checkbox"));
