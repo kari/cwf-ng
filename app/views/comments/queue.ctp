@@ -4,7 +4,7 @@
   <tr><th>Comment</th><th>Game</th><th>Author</th><th>Validated</th><th>Added</th><th>Actions</th></tr>
 <?
 foreach($comments as $comment) {
-  echo "<tr><td>".$comment["Comment"]["title"]."</td>";
+  echo "<tr><td>".$comment["Comment"]["text"]."</td>";
   echo "<td>".$comment["Game"]["game_name"]."</td>";
   echo "<td>".$comment["User"]["username"]."</td>";
   echo "<td>";
