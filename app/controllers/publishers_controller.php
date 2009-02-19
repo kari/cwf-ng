@@ -5,6 +5,7 @@ class PublishersController extends AppController {
   # var $scaffold;
 	var $helpers = array("cache");
 	var $cacheAction = array("view/"=>"+1 day");
+	var $components = array('Recaptcha');
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -19,7 +20,7 @@ class PublishersController extends AppController {
 		if (!empty($this->data)) {
 			if($this->Publisher->save($this->data)) {
 				$this->Session->setFlash("Publisher was added.");
-				$this->redirect("/games/queue");
+				$this->redirect(array("action"=>"edit",$this->Publisher->id));
 			}
 		}
 	}
@@ -27,13 +28,17 @@ class PublishersController extends AppController {
 	function edit($id=null) { # interview/edit allows to edit all news.
 		if ($id == null) { $this->redirect("/"); }
 		if (!empty($this->data)) {
+			$this->data["Publisher"]["publisher_id"] = $id;
 			if($this->Publisher->save($this->data)) {
 		  	//Set a session flash message and redirect.
 		    $this->Session->setFlash("Publisher saved!");
 		    # $this->redirect('/games/queue');
+			} else {
+				# Save failed
 			}
+		} else {
+			$this->data = $this->Publisher->find("first",array("conditions"=>array("publisher_id"=>$id)));
 		}
-		$this->data = $this->Publisher->find("first",array("conditions"=>array("publisher_id"=>$id)));
 	}
 	
 	function delete($id=null) { # interview/delete allows to delete all news.
