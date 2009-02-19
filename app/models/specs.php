@@ -9,6 +9,9 @@ class Specs extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'specs_id';
 	# var $displayField = 'OTHER';
-		
+	
+	var $validate = array(
+		"specs_id" => "notEmpty",
+		);
 }
 ?>

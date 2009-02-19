@@ -9,6 +9,10 @@ class Genres extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'genre_id';
 	var $displayField = 'genre_id';
+	
+	var $validate = array(
+		"genre_id" => "notEmpty"
+		);
 		
 }
 ?>

@@ -20,7 +20,7 @@ class User extends AppModel {
 	var $hasAndBelongsToMany = array(
 	  "Group" => array("joinTable" => "phpbb_user_group", "foreignKey" => "user_id", "associationForeignKey" => "group_id","conditions"=>array("Group.group_single_user"=>"0","PhpbbUserGroup.user_pending"=>"0"),"fields"=>"group_id,group_name,group_description"));
 	
-	# This model SHOULD NOT add or remove users. These and most user info management should be left to phpbb
+	# This model SHOULD NOT add or remove users. These and most user info management should be left to phpbb.
 	
 	function isAuthorized($user,$controller,$action) {
 		# phpbb_groups.group_id = 1 (Anonymous) is used as a group for all users

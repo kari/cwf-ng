@@ -21,8 +21,8 @@ class News extends AppModel {
 		"news_title" => "notEmpty",
 		"news_text" => "notEmpty",
 		"poster_id" => "notEmpty",
-		"post_date" => "notEmpty",
-		"edited_by" => array("rule"=>"notEmpty","on"=>"update"), # When we update field, the editor and time must be known.
-		"last_edit_time" => array("rule"=>"notEmpty","on"=>"update"));
+		"post_date" => "notEmpty", # FIXME: Could use "created" instead
+		"edited_by" => array("rule" => "notEmpty", "on" => "update"), # When we update field, the editor and time must be known.
+		"last_edit_time" => array("rule" => "notEmpty", "on" => "update")); # FIXME: Could use "modified" instead
 }
 ?>
