@@ -15,18 +15,30 @@ class Download extends AppModel {
 		);
 		
 	# Validation
+	var $validate = array(
+		"download_link" => "notEmpty",
+		"file_platform" => array("rule"=>array("between",0,4)),
+		"package_type" => array("rule"=>array("between",0,4)),
+		"game_submitter_id" => "notEmpty",
+		"game_id" => "notEmpty",
+		"size" => array("rule"=>array("comparison",">=",0)),
+		);
 	
-	# See Cookbook's View for Media view and downloads
-	var $PLATFORM = array(0 => "Unknown",
-	1 => "Windows",
-	2 => "Linux",
-	3 => "Mac OS X",
-	4 => "Special");
+	var $PLATFORM = array(
+		0 => "Unknown",
+		1 => "Windows",
+		2 => "Linux",
+		3 => "Mac OS X",
+		4 => "Special"
+	);
 	
-	var $TYPE = array(0 => "Unknown",
-	1 => "Executable",
-	2 => "Source",
-	3 => "Installer",
-	4 => "Other");
+	var $TYPE = array(
+		0 => "Unknown",
+		1 => "Executable",
+		2 => "Source",
+		3 => "Installer",
+		4 => "Other"
+	);
+
 }
 ?>

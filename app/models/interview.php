@@ -14,6 +14,17 @@ class Interview extends AppModel {
 		"Game"=>array("foreignKey"=>"game_id")
 		);
 
+	var $validate = array(
+		"interview_title" => array(
+			"notEmpty" => array("rule" => "notEmpty"),
+			"maxLength" => array("rule" => array("maxLength",160)),
+			"minLength" => array("rule" => array("minLength",10))
+			),
+		"developer_id" => "notEmpty",
+		"interviewer_id" => "notEmpty",
+		"text" => "notEmpty",
+		"game_id" => array("rule" => "numeric", "allowEmpty" => true),
+		);
 		
 }
 ?>

@@ -1,6 +1,7 @@
 # TODO
 
-* Model validations
+* Session/login fixes
+  * Remember me
 * Fix Forms styling
 * BBCode handling and editing
   * Check how texts are handled at each part of site

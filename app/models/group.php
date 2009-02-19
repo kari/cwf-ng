@@ -17,7 +17,7 @@ class Group extends AppModel {
 	var $hasAndBelongsToMany = array(
 	  "User" => array("joinTable" => "phpbb_user_group", "foreignKey" => "group_id", "associationForeignKey" => "user_id","conditions"=>array("PhpbbUserGroup.user_pending"=>"0"),"fields"=>"user_id,username"));
 	
-	# This model SHOULD NOT modify groups table. 
+	# This model SHOULD be read-only and SHOULD NOT modify groups table. 
 	
 	# phpbb_Groups
 	# 2 Admin (single user, so not a group here.)
