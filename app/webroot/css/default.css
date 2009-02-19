@@ -32,7 +32,7 @@ div#hd div#loginbox { width: 200px; x-float: right;}
 	
 ul#screenshots, ul#screenshots li { display: inline; margin: 0; padding: 0;}
 
-div#sidebar { x-background-color: #EAEAEA; }
+/* div#sidebar { background-color: #EAEAEA; } */
 
 ul#screenshots li {
 	margin-left: 5px;
@@ -57,4 +57,16 @@ div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px
 h1 a:visited { color: inherit;}
 h1 a { color: inherit;}
 
-fieldset legend {font-size:123.1%;margin:1em 0;font-weight:bold;}
+fieldset {border-top: 1px solid #999;}
+fieldset legend {font-size:123.1%;margin:1em 0;padding-right:0.5em;font-weight:bold}
+div.input.text > label, div.input.select > label, div.input.datetime > label  {margin-right:0.5em;min-width: 8em;display:inline-block;text-align:left;x-background-color:#EAEAEA}
+input[type=checkbox] {margin-right: 0.5em;}
+div.input > textarea {width:80%;min-width:150px;max-width:500px;}
+fieldset span.pull {margin-left:8.5em;}
+fieldset input[type=text] {width:20em;}
+fieldset table td {border:none;width:33%;vertical-align:top;}
+/* div.input.required > label {color:red;} */
+/* div.input:hover {background-color:#CCCCCC;} */
+/* fieldset {border: 1px solid #999;} */
+
+/* label {padding-right: 1em;} */

@@ -3,6 +3,7 @@
 * Session/login fixes
   * Remember me
 * Fix Forms styling
+  * Changes to edit-views need to be copied over to add-views.
 * BBCode handling and editing
   * Check how texts are handled at each part of site
 * Downloads
