@@ -1,45 +1,64 @@
 <h1>Edit game</h1>
 <div class="yui-gc">
   <div class="yui-u first">
-<h2>Game info</h2>
 <?
   echo $form->create("Game");
   echo $form->hidden("game_id");
   echo $form->hidden("Specs.specs_id");
   echo $form->hidden("Genres.genre_id");
+?>
+<fieldset>
+  <legend>Game info</legend>
+<?
   echo $form->input("game_name");
   echo $form->input("year",array("maxLength"=>4));
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
   echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
   echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
   
-  echo $form->input("description");
+  echo $form->input("description",array("between"=>"<br>","rows"=>10));
+  echo "<em>BBCode enabled. Internal links enabled.</em>";
   echo $form->input("site");
-  echo $form->input("requirements");
+  echo $form->input("requirements",array("between"=>"<br>","rows"=>2));
 ?>
-<h2>Genres</h2>
+</fieldset>
+
+<fieldset>
+  <legend>Genres</legend>
 <?
+  asort($GENRE);
   foreach($GENRE as $genre => $title) {
-    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title));
+    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>" "));
   }
 ?>
-<h2>Platforms</h2>
+</fieldset>
+
+<fieldset>
+  <legend>Platforms</legend>
 <?
+  asort($OSYSTEM);
   foreach($OSYSTEM as $os => $title) {
-    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title));
+    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>" "));
   }
 ?>
-<h2>Site info</h2>
+</fieldset>
+
+<fieldset>
+  <legend>Site info</legend>
 <?
   echo $form->input("forum_link");
-  echo $form->input("site_rating");
+  echo $form->input("site_rating",array("type"=>"select","label"=>"GH Score","options"=>array(0,1,2,3,4,5,6)));
   
   echo $form->input("download_status",array("type"=>"select","options"=>$DL_STATUS));
-  echo $form->input("lisence",array("type"=>"select","options"=>$LICENSE));
+  echo $form->input("lisence",array("type"=>"select","options"=>$LICENSE,"label"=>"License"));
   
   echo $form->input("game_proposer_id");
   echo $form->input("game_hunter_id");
-  
+?>
+</fieldset>
+
+<?  
+  echo $form->button("Reset",array("type"=>"reset","div"=>false));
   echo $form->end("Save");
 ?>
   </div>

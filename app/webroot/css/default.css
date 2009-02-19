@@ -56,3 +56,5 @@ div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px
 
 h1 a:visited { color: inherit;}
 h1 a { color: inherit;}
+
+fieldset legend {font-size:123.1%;margin:1em 0;font-weight:bold;}

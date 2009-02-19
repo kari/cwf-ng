@@ -165,7 +165,7 @@ foreach ($comments as $comment) {
 <h3>Add a comment</h3>
 <?=$form->create("Comment");?>
 <?#=$form->input("title",array("maxLength"=>100));?>
-<?=$form->input("text",array("rows"=>3,"maxLength"=>320,"label"=>""));?>
+<?=$form->input("text",array("rows"=>3,"maxLength"=>320,"label"=>false));?>
 <cake:nocache>
 <? 
 if ($session->check("Auth.User.user_id")) {
