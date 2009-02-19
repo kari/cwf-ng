@@ -11,8 +11,8 @@ class Publisher extends AppModel {
 	
 	var $validate = array(
 		"name" => "notEmpty",
-		"site" => array("rule"=>"url", "allowEmpty"=>true),
-		"email" => array("rule"=>"email","allowEmpty"=>true), # Note: E-mail MUST be hidden (from spambots) when shown publicly.
+		"site" => array("rule"=>"url", "allowEmpty"=>true,"message"=>"Please enter a valid web address, or leave this empty."),
+		"email" => array("rule"=>"email","allowEmpty"=>true,"message"=>"Please enter a valid e-mail address, or leave this empty."), # Note: E-mail MUST be hidden (from spambots) when shown publicly.
 		);
 }
 ?>

@@ -12,8 +12,12 @@ class RecaptchaHelper extends AppHelper {
 			return $data;
 	}
 	
-	function hide_mail($email = '',$output_method = 'return'){
-		$data = $this->recaptcha_mailhide_html(Configure::read('Recaptcha.pubKey'), Configure::read('Recaptcha.privateKey'), $email);
+	function hide_mail($email = '',$output_method = 'return') {
+		if (! function_exists ("mcrypt_encrypt")) {
+			return "E-mail hiding disabled (MCRYPT_MISSING)";
+			#die ("To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.");
+		}
+		$data = $this->recaptcha_mailhide_html(Configure::read('Mailhide.pubKey'), Configure::read('Mailhide.privateKey'), $email);
 		if($output_method == "echo")
 			echo $data;
 		else
@@ -57,9 +61,6 @@ class RecaptchaHelper extends AppHelper {
 
 	/* Mailhide related code */
 	function _recaptcha_aes_encrypt($val,$ky) {
-		if (! function_exists ("mcrypt_encrypt")) {
-			die ("To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.");
-		}
 		$mode=MCRYPT_MODE_CBC;   
 		$enc=MCRYPT_RIJNDAEL_128;
 		$val=$this->_recaptcha_aes_pad($val);
@@ -73,6 +74,7 @@ class RecaptchaHelper extends AppHelper {
 	/* gets the reCAPTCHA Mailhide url for a given email, public key and private key */
 	function recaptcha_mailhide_url($pubkey, $privkey, $email) {
 		if ($pubkey == '' || $pubkey == null || $privkey == "" || $privkey == null) {
+			return "Mailhide keys missing. E-mail display disabled.";
 			die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, " .
 			     "you can do so at <a href='http://mailhide.recaptcha.net/apikey'>http://mailhide.recaptcha.net/apikey</a>");
 		}
@@ -111,7 +113,7 @@ class RecaptchaHelper extends AppHelper {
 	function recaptcha_mailhide_html($pubkey, $privkey, $email) {
 		$emailparts = $this->_recaptcha_mailhide_email_parts ($email);
 		$url = $this->recaptcha_mailhide_url ($pubkey, $privkey, $email);
-		
+		if (count($emailparts)<>2) { return $email; } # We couldn't parse it, so it's invalid and there's no need to hide it.
 		return htmlentities($emailparts[0]) . "<a href='" . htmlentities ($url) .
 			"' onclick=\"window.open('" . htmlentities ($url) . "', '', 'toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=0,width=500,height=300'); return false;\" title=\"Reveal this e-mail address\">...</a>@" . htmlentities ($emailparts [1]);
 	

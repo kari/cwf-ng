@@ -2,7 +2,12 @@
 <h2>Details</h2>
 <ul>
   <li>Site: <?=$html->link($publisher["Publisher"]["site"],$publisher["Publisher"]["site"])?></li>
-  <li>E-mail: <?=$html->link($publisher["Publisher"]["email"],"mailto:".$publisher["Publisher"]["email"])?></li>
+  <? 
+  if (!empty($publisher["Publisher"]["email"])) {
+    # echo $html->link($publisher["Publisher"]["email"],"mailto:".$publisher["Publisher"]["email"])
+    echo "<li>E-mail: ".$recaptcha->hide_mail($publisher["Publisher"]["email"])."</li>"; 
+  }
+    ?>
 </ul>
 <h2>Games</h2>
 <ul>

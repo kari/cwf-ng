@@ -159,6 +159,9 @@ foreach ($comments as $comment) {
   echo " ".$time->timeAgoInWords($comment["Comment"]["created"],array("format"=>"d.m.Y"));
   # echo "<br>".nl2br($comment["Comment"]["text"])."</li>";
 }
+if (count($comments) == 0) {
+  echo "<p>No comments. Be the first!</p>";
+}
 ?>
 </ul>
 <?=$paginator->prev();?>&nbsp;<?=$paginator->next();?>
