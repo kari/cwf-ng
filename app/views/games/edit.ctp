@@ -12,13 +12,14 @@
 <?
   echo $form->input("game_name");
   echo $form->input("year",array("maxLength"=>4));
+  echo $form->input("site");
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
+  echo '<span class="pull">';
   echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
   echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
-  
+  echo '</span>';
   echo $form->input("description",array("between"=>"<br>","rows"=>10));
   echo "<em>BBCode enabled. Internal links enabled.</em>";
-  echo $form->input("site");
   echo $form->input("requirements",array("between"=>"<br>","rows"=>2));
 ?>
 </fieldset>
@@ -27,19 +28,32 @@
   <legend>Genres</legend>
 <?
   asort($GENRE);
+  $cols = ceil(count($GENRE)/3.0);
+  $i = 0;
+  echo "<table></tr><td>";
   foreach($GENRE as $genre => $title) {
-    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>" "));
+    if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
+    $i++;
+    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>"<br>"));
   }
+  echo "</td></tr></table>";
 ?>
+
 </fieldset>
 
 <fieldset>
   <legend>Platforms</legend>
 <?
   asort($OSYSTEM);
+  $cols = ceil(count($OSYSTEM)/3.0);
+  $i = 0;
+  echo "<table></tr><td>";
   foreach($OSYSTEM as $os => $title) {
-    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>" "));
+    if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
+    $i++;
+    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>"<br>"));
   }
+  echo "</td></tr></table>";
 ?>
 </fieldset>
 

@@ -5,7 +5,7 @@
 echo $form->create('Review');
 echo $form->input("game_id");
 echo $form->input('review_title');
-echo $form->input('review_text', array('rows' => '5'));
+echo $form->input('review_text', array('rows' => '15',"label"=>false));
 echo $form->hidden("review_id");
 # echo $form->input('user_id');
 # echo $form->input("review_rating");

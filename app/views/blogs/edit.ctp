@@ -8,9 +8,9 @@ $javascript->link("http://yui.yahooapis.com/combo?2.6.0/build/yahoo-dom-event/ya
 <?php
 	echo $form->create('Blog', array('action' => 'edit'));
 	echo $form->input('title');
-	echo $form->input('content', array("label"=>"",'rows' => '10',"div"=>"yui-skin-sam","value"=>$this->data["Blog"]["content"]));
-  echo $form->input('id', array('type'=>'hidden'));
-  echo $form->input('user_id', array('type'=>'hidden'));
+	echo $form->input('content', array("label"=>"",'rows' => '10',"xdiv"=>"yui-skin-sam","value"=>$this->data["Blog"]["content"]));
+  echo $form->hidden('id');
+  echo $form->hidden('user_id');
 	echo $form->end('Save Post');
 ?>
 <script type="text/javascript">
