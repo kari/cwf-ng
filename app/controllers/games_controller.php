@@ -173,11 +173,11 @@ class GamesController extends AppController {
 			if ($this->Game->saveAll($this->data,array("validate"=>"first"))) {
 				$this->Session->setFlash("Game changes saved.");
 			} else {
-				$this->Session->setFlash("There were validation errors"); # FIXME: Validation errors are not visible!
+				$this->Session->setFlash("There were validation errors");
 			}
-		}
-		
-		$this->data = $this->Game->read("",$id);
+		} else {
+			$this->data = $this->Game->read("",$id);			
+		}		
 		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
 		$this->set("gameHunters",$this->Game->GameHunter->find('list'));
 		$this->set("publishers",$this->Game->Publisher->find('list'));

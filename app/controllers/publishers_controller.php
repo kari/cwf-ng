@@ -35,6 +35,7 @@ class PublishersController extends AppController {
 		    # $this->redirect('/games/queue');
 			} else {
 				# Save failed
+				$this->Session->setFlash("There were errors trying to save changes.");
 			}
 		} else {
 			$this->data = $this->Publisher->find("first",array("conditions"=>array("publisher_id"=>$id)));
