@@ -39,7 +39,7 @@ class CommentsController extends AppController {
 				$this->data["Comment"]["user_id"] = $this->Auth->user("user_id");
 			} elseif(!$this->Recaptcha->valid($this->params['form'])) {
 				$this->Session->setFlash("Comment wasn't added, because reCAPTCHA was wrong. Please try again.");
-				# FIXME: Form contents are not saved, causing form to be empty!
+				# FIXME: Form contents are not saved, causing form to be empty! Can we send $this->data to $this->referer()?
 				$this->redirect($this->referer());
 			} elseif($this->Recaptcha->valid($this->params['form'])) {
 				$this->data["Comment"]["validated"] = false;
