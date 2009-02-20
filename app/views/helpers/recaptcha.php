@@ -59,6 +59,13 @@ class RecaptchaHelper extends AppHelper {
 		</noscript>';
 	}
 
+	# For some reason, this function was missing from the original helper!?
+	function _recaptcha_aes_pad($val) {
+		$block_size = 16;
+		$numpad = $block_size - (strlen ($val) % $block_size);
+		return str_pad($val, strlen ($val) + $numpad, chr($numpad));
+	}
+	
 	/* Mailhide related code */
 	function _recaptcha_aes_encrypt($val,$ky) {
 		$mode=MCRYPT_MODE_CBC;   
@@ -74,7 +81,7 @@ class RecaptchaHelper extends AppHelper {
 	/* gets the reCAPTCHA Mailhide url for a given email, public key and private key */
 	function recaptcha_mailhide_url($pubkey, $privkey, $email) {
 		if ($pubkey == '' || $pubkey == null || $privkey == "" || $privkey == null) {
-			die("Mailhide keys missing. E-mail display disabled.");
+			die("Mailhide keys missing. E-mail display disabled."); # FIXME: Don't die. Check this before.
 			# die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, " .
 			     "you can do so at <a href='http://mailhide.recaptcha.net/apikey'>http://mailhide.recaptcha.net/apikey</a>");
 		}
