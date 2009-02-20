@@ -81,9 +81,8 @@ class RecaptchaHelper extends AppHelper {
 	/* gets the reCAPTCHA Mailhide url for a given email, public key and private key */
 	function recaptcha_mailhide_url($pubkey, $privkey, $email) {
 		if ($pubkey == '' || $pubkey == null || $privkey == "" || $privkey == null) {
-			die("Mailhide keys missing. E-mail display disabled."); # FIXME: Don't die. Check this before.
-			# die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, " .
-			     "you can do so at <a href='http://mailhide.recaptcha.net/apikey'>http://mailhide.recaptcha.net/apikey</a>");
+			die("Mailhide keys missing. E-mail display disabled."); # FIXME: Don't die. Check this before entering this function. (Returning this doesn't do much.)
+			# die ("To use reCAPTCHA Mailhide, you have to sign up for a public and private key, you can do so at <a href='http://mailhide.recaptcha.net/apikey'>http://mailhide.recaptcha.net/apikey</a>");
 		}
 		
 	
