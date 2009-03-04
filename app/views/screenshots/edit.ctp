@@ -1,6 +1,6 @@
 <? # View initialization
-		$html->css("fancy","stylesheet",array("media"=>"screen"),false);
-		$javascript->link("/js/jquery.fancybox.js",false);
+  $html->css("jquery.fancybox","stylesheet",array("media"=>"screen"),false);
+  $javascript->link("/js/jquery.fancybox-1.2.0.js",false);
 ?>
 <? # Page-specific jQuery code: 
   echo $javascript->codeBlock("$(document).ready(function() {

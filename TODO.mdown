@@ -1,5 +1,6 @@
 # TODO
 
+* Rewrite Media-view with absolute paths.
 * Session/login fixes
   * Remember me
 * Fix Forms styling
@@ -16,12 +17,6 @@
 * Games/index
   * Paging alphabetically [A] [B]...
 * Tools/index and others (layout, info)
-* Fix screenshot jQuery (Opera support?)
-  * [FancyBox](http://fancy.klade.lv/) should be updated soon. 
-    * Old version of Fancybox doesn't work with jQuery 1.3.0
-  * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
-  * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
-  * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
 * Advertising elements
 * Blog comments
 * PHP4 compat. (html_entities multichar...)
@@ -54,6 +49,10 @@
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
 * OpenID/oAuth/Facebook Connect/Google Friend Connect...
+* FancyBox alternatives
+  * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
+  * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
+  * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
 
 # TODOs from code
 
