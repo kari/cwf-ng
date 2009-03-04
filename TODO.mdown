@@ -1,6 +1,7 @@
 # TODO
 
-* Rewrite Media-view with absolute paths.
+## Backlog to v1
+
 * Session/login fixes
   * Remember me
 * Fix Forms styling
@@ -24,7 +25,12 @@
   * $html->link mangles UTF-8 accented characters(?)
   * PHP4 DB saving doesn't work
 
-## Deferred to v2
+## Deferred to v1.1
+
+* Game (Hunter) workflow/lifecycle/process
+  * This is huge.
+
+## Deferred to v2 or later
 
 * SearchMonkey Atom feeds (can't add until site is live)
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
@@ -33,11 +39,10 @@
   * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
 * BBCode Rich text editor
-* Game (Hunter) workflow/lifecycle/process
 * Social web features (integration to Twitter etc.)
   * Integration requires JSON, PHP4 needs a library for it
   * Friend Connect, OpenID etc. to login (or to download?)
-* User <-> Developer mapping (not many right now)
+* User <--> Developer mapping (not many right now)
 * [OpenSearch](http://www.opensearch.org/)
 * "Hey, you downloaded this game a week ago. Mind writing a review?"
 * Intrasite linking (eg. "game:123", "guide:123")
@@ -57,10 +62,10 @@
 # TODOs from code
 
 `# grep -rn TODO app/*
+app/controllers/downloads_controller.php:35:		$this->view = 'Media'; # TODO: Rewrite built-in media view to support throttling, additional mime types...
 app/controllers/screenshots_controller.php:51:				die("Hack attempt. IP logged. Please go and die."); # TODO: log IP, ensure attacker is actually dead.
 app/controllers/tools_controller.php:38:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
 app/controllers/users_controller.php:18:			# TODO: there should be Remember Me-functionality
 app/views/blogs/view.ctp:7:<? #TODO: Comments? ?>
 app/views/games/atom/index.ctp:32:/* TODO: Maybe simpler way to do this with a (own) AtomHelper. Problem is SearchMonkey DataRSS Adjuncts.  
-app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)
-app/views/world_news/view.ctp:9:  # TODO: Embed YouTube-link into the webpage.`
+app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)`
