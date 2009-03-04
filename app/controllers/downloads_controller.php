@@ -15,8 +15,8 @@ class DownloadsController extends AppController {
 		$download = $this->Download->find("first",array("conditions"=>array("file_id"=>$id)));
 		if (!$download) { $this->cakeError("error404"); }	
 		$file_info = pathinfo($download["Download"]["download_link"]); # For extension.
-		if (!file_exists(APP.Configure::read("Site.file_path").basename($download["Download"]["download_link"]))) { 
-			$this->log("File '".basename($download["Download"]["download_link"])."' is missing.");
+		if (!file_exists(Configure::read("Site.file_path").basename($download["Download"]["download_link"]))) { 
+			$this->log("File '".Configure::read("Site.file_path").basename($download["Download"]["download_link"])."' is missing.");
 			$this->cakeError("error404"); 	
 		}
 		
@@ -38,7 +38,7 @@ class DownloadsController extends AppController {
 	              'name' => basename($download["Download"]["download_link"],".".$file_info["extension"]), # Alternate file name to be sent to the user (without extension)
 	              'download' => true, # Force download
 	              'extension' => $file_info["extension"], # Extension to be matched with internal list of MIME-types
-	              'path' => Configure::read("Site.file_path"), # file location relative to /app/
+	              'path' => Configure::read("Site.file_path"), # absolute filesystem path to file location 
 								# Some mime types are not defined in Media view.
 								# Built-in media view shows blank if extension is not in mimeType array.
 								# The current zoo of file extensions can be checked for example with
