@@ -7,5 +7,8 @@ Silk icon set by <a href="http://www.famfamfam.com/lab/icons/silk/">Mark James</
 Yahoo! UI Library Copyright &copy; 2008 Yahoo! Inc.<br>
 jQuery Copyright &copy; 2008 John Resig (jquery.com)<br>
 FancyBox Copyright &copy; 2008 Janis Skarnelis<br>
-reCAPTCHA Component &amp; Helper for CakePHP &copy; Howard Lince
+reCAPTCHA Component &amp; Helper for CakePHP &copy; Howard Lince<br>
+reCAPTCHA Copyright &copy; 2009 Carnegie Mellon University<br>
+Scrollable Copyright &copy; 2009 <a href="http://flowplayer.org/tools/scrollable.html">Tero Piirainen</a><br>
+
 </p>
