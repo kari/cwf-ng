@@ -2,8 +2,10 @@
 <?php
     if ($session->check('Message.auth')) $session->flash('auth');
     echo $form->create('User', array('action' => 'login'));
+    # echo "<fieldset><legend>Login</legend>";
     echo $form->input('username',array("label"=>"User name"));
-    echo $form->input('user_password',array('type' => 'password'));
+    echo $form->input('user_password',array('type' => 'password',"label"=>"Password"));
+    # echo "</fieldset>";
     echo $form->end('Login');
 ?>
 <p><a href="/resetpassword">Forgot your password?</a></p>
