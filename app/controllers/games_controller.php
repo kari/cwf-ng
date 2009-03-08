@@ -172,6 +172,7 @@ class GamesController extends AppController {
 		if (!empty($this->data)) {
 			if ($this->Game->saveAll($this->data,array("validate"=>"first"))) {
 				$this->Session->setFlash("Game changes saved.");
+				$this->data = $this->Game->read("",$id); // FIXME: Otherwise doesn't load publisher, screenshots, etc.
 			} else {
 				$this->Session->setFlash("There were validation errors");
 			}

@@ -68,6 +68,7 @@
   
   echo $form->input("game_proposer_id");
   echo $form->input("game_hunter_id");
+  echo $form->input("adult",array("label"=>"Adult only?","type"=>"checkbox","div"=>false));
 ?>
 </fieldset>
 
