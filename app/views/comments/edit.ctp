@@ -4,7 +4,10 @@
 <?
 echo $form->create('Comment');
 # echo $form->input('title');
-echo $form->input('text', array('rows' => '5'));
+# debug($this->data);
+echo "Written by ".$html->link($this->data["User"]["username"],array("controller"=>"users","action"=>"view",$this->data["User"]["user_id"]));
+echo " ".$time->timeAgoInWords($this->data["Comment"]["created"],array("format"=>"d.m.Y"))."<br>";
+echo $form->input('text', array('rows' => '5',"label"=>false,));
 echo $form->hidden("comment_id");
 echo $form->input("validated",array("type"=>"checkbox"));
 echo $form->end('Save');

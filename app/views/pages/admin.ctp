@@ -1,3 +1,6 @@
+<?
+$this->pageTitle = "Site admininstartion";
+?>
 <h1>Site administartion</h1>
 <p>Welcome to the admin interface of CWF. Here you can manage all essential features of the site.</p>
 <h2>Validation queues</h2>

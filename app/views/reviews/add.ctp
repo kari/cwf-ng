@@ -4,7 +4,7 @@
 <?
 echo $form->create('Review');
 echo $form->input('review_title');
-echo $form->input('review_text', array('rows' => '5'));
+echo $form->input('review_text', array('rows' => 20,"label"=>false,"between"=>"<br>"));
 echo $form->hidden('user_id', array('value'=>$user_id));
 echo $form->hidden("game_id",array("value"=>$game["Game"]["game_id"]));
 echo $form->end('Save');
