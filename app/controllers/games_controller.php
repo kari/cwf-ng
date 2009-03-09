@@ -169,15 +169,20 @@ class GamesController extends AppController {
 	}
 	
 	function edit($id = null) {
+		$this->Game->contain(array("Publisher","Screenshot","Download","Specs","Genres"));
 		if (!empty($this->data)) {
 			if ($this->Game->saveAll($this->data,array("validate"=>"first"))) {
 				$this->Session->setFlash("Game changes saved.");
-				$this->data = $this->Game->read("",$id); // FIXME: Otherwise doesn't load publisher, screenshots, etc.
+				$this->data = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id))); // FIXME: Otherwise doesn't load publisher, screenshots, etc.
 			} else {
 				$this->Session->setFlash("There were validation errors");
+				# debug($this->Game->invalidFields());
+				$this->data = Set::merge($this->Game->find("first",array("conditions"=>array("Game.game_id"=>$this->Game->id))),$this->data); // FIXME: Otherwise doesn't load publisher, screenshots, etc. AND keep validation errors.
 			}
 		} else {
-			$this->data = $this->Game->read("",$id);			
+			$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
+			if (empty($game)) { $this->cakeError("error404"); }
+			$this->data = $game;	
 		}		
 		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
 		$this->set("gameHunters",$this->Game->GameHunter->find('list'));

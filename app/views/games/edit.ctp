@@ -60,7 +60,7 @@
 <fieldset>
   <legend>Site info</legend>
 <?
-  echo $form->input("forum_link");
+  echo $form->input("forum_link",array("label"=>"Forum topic"));
   echo $form->input("site_rating",array("type"=>"select","label"=>"GH Score","options"=>array(0,1,2,3,4,5,6)));
   
   echo $form->input("download_status",array("type"=>"select","options"=>$DL_STATUS));
