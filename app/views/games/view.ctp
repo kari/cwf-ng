@@ -16,10 +16,23 @@
 <h1><?=$game['Game']['game_name']?> (<?=$game["Game"]["year"]?>)</h1>
 <p>by <?=$html->link($game['Publisher']['name'],array("controller"=>"publishers","action"=>"view",$game["Publisher"]["publisher_id"]))?></p>
 <?# FIXME: A bigger thumbnail of "featured" (or first) screenshot would be nice here! ?>
-<? if ($game["Game"]["adult"]) { ?>
-<p><strong>Warning:</strong> This game contains pr0n. You probably knew it and that's why you are probably here in the first place. You shouldn't download this unless you're 18 or therearound - otherwise you will have nightmares and/or problems getting out of the bed quickly in the morning. You have been warned.</p>
+<? if (($game["Game"]["adult"]) or ($game["Genres"]["adult"] == 1)) { ?>
+<p><strong>Warning:</strong> This game contains pr0n or strong violence. You probably knew it and that might be the reason you are here in the first place. You shouldn't download this unless you're 18 or therearound - otherwise you will have nightmares and/or problems getting out of the bed quickly in the morning. You have been warned.</p>
 <? } ?>
 <p><?=$bbcode->decode($game['Game']['description'])?></p>
+<h2>Screenshots</h2>
+<ul id="screenshots"><?
+foreach ($game["Screenshot"] as $screenshot) {
+  echo "<li>".$html->link($site->image($screenshot["image_link"],array("width"=>150,"height"=>150,"title"=>"Screenshot")),$site->image_url($screenshot["image_link"]),array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
+  # $html->image => $site->image for resizing.
+}
+?>
+<?
+if (empty($game["Screenshot"])) {
+  echo "<li>".$html->image("/img/cwf_nosshot.png",array("width"=>150,"height"=>150,"title"=>"No screenshot"))."</li>";
+}
+?>
+</ul>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
@@ -43,19 +56,7 @@ foreach ($game["Genres"] as $genre => $genre_set) {
 }
 ?>  
 </ul>
-<h2>Screenshots</h2>
-<ul id="screenshots"><?
-foreach ($game["Screenshot"] as $screenshot) {
-  echo "<li>".$html->link($site->image($screenshot["image_link"],array("width"=>150,"height"=>150,"title"=>"Screenshot")),$site->image_url($screenshot["image_link"]),array("rel"=>"ssg1","title"=>$game["Game"]["game_name"]),false,false)."</li>";
-  # $html->image => $site->image for resizing.
-}
-?>
-<?
-if (empty($game["Screenshot"])) {
-  echo "<li>".$html->image("/img/cwf_nosshot.png",array("width"=>150,"height"=>150,"title"=>"No screenshot"))."</li>";
-}
-?>
-</ul>
+
 <h2>Ratings</h2>
 <? 
 echo $form->create("Rating",array("action"=>"vote"));

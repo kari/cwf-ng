@@ -1,37 +1,60 @@
 <h1>Add game</h1>
-<h2>Game info</h2>
 <?
   echo $form->create("Game");
-  echo $form->input("game_name");
+  echo "<fieldset><legend>Basic information</legend>";
+  echo $form->input("game_name",array("label"=>"Game name"));
   echo $form->input("year",array("maxLength"=>4));
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
-  echo $form->input("description");
-  echo $form->input("site");
-  echo $form->input("requirements");
+  echo "<em>If publisher is not listed, leave this empty. You can add new publishers in the next screen.</em>";
+  echo $form->input("site",array("label"=>"Website","value"=>"http://"));
+  echo $form->input("description",array("between"=>"<br>","rows"=>10));
+  echo $form->input("requirements",array("between"=>"<br>","rows"=>2));
+  echo "</fieldset>";
 ?>
-<h2>Genres</h2>
+<fieldset>
+  <legend>Genres</legend>
 <?
+  asort($GENRE);
+  $cols = ceil(count($GENRE)/3.0);
+  $i = 0;
+  echo "<table></tr><td>";
   foreach($GENRE as $genre => $title) {
-    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title));
+    if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
+    $i++;
+    echo $form->input("Genres.".$genre,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>"<br>"));
   }
+  echo "</td></tr></table>";
 ?>
-<h2>Platforms</h2>
+
+</fieldset>
+
+<fieldset>
+  <legend>Platforms</legend>
 <?
+  asort($OSYSTEM);
+  $cols = ceil(count($OSYSTEM)/3.0);
+  $i = 0;
+  echo "<table></tr><td>";
   foreach($OSYSTEM as $os => $title) {
-    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title));
+    if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
+    $i++;
+    echo $form->input("Specs.".$os,array("type"=>"checkbox","label"=>$title,"div"=>false,"after"=>"<br>"));
   }
+  echo "</td></tr></table>";
 ?>
-<h2>Site info</h2>
+</fieldset>
+<fieldset><legend>Site info</legend>
 <?
-  echo $form->input("forum_link");
-  echo $form->input("site_rating",array("value"=>0));
+  echo $form->input("forum_link",array("label"=>"Forum topic","value"=>"http://"));
+  echo $form->input("site_rating",array("type"=>"select","label"=>"GH Score","options"=>array(0,1,2,3,4,5,6)));
   
-  echo $form->input("download_status",array("type"=>"select","options"=>$DL_STATUS,"selected"=>-1));
-  echo $form->input("lisence",array("type"=>"select","options"=>$LICENSE,"selected"=>1));
+  echo $form->input("download_status",array("type"=>"select","options"=>$DL_STATUS,"selected"=>-1,"disabled"=>true));
+  echo $form->input("lisence",array("label"=>"License","type"=>"select","options"=>$LICENSE,"selected"=>1));
   
   echo $form->input("game_proposer_id",array("selected"=>$user_id));
   echo $form->input("game_hunter_id",array("selected"=>$user_id));
-  
+?>
+</fieldset>
+<?
   echo $form->end("Save");
 ?>
-<?#=debug($this->data)?>

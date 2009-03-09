@@ -19,8 +19,12 @@ class Game extends AppModel {
 		"genre_id" => "notEmpty",
 		"site_rating" => array("rule"=>"numeric","allowEmpty"=>false),
 		"year" => array("rule"=>array("range",1900,3000)), # FIXME: possible Y3K problem.
-		"site" => array("rule"=>"url","allowEmpty"=>true),
-		"forum_link" => array("rule"=>"url","allowEmpty"=>true),
+		"site" => array(
+			"url"=>array("rule"=>"url","allowEmpty"=>true,"message"=>"Please enter a valid URL or leave empty."),
+			"custom"=>array("rule"=>array("custom","/^http\:\/\/.+/i"),"message"=>"URL must begin with \"http://\"")),
+		"forum_link" => array(
+			"url"=>array("rule"=>"url","allowEmpty"=>true,"message"=>"Please enter a valid URL or leave empty."),
+			"custom"=>array("rule"=>array("custom","/^http\:\/\/.+/i"),"message"=>"URL must begin with \"http://\"")),
 		);
 	
 	# Relationships

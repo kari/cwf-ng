@@ -16,7 +16,7 @@ $javascript->link("/js/jquery.scrollable-1.0.2.min.js",false);
 <? 
 # Show different content to registered users.
 if ($session->check("Auth.User.user_id")) {
-  echo $this->element("gvsg");
+  # echo $this->element("gvsg");
 } else {
   echo $this->element("adbox",array("style"=>"pw-leaderboard"));
 }
