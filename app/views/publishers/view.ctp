@@ -1,3 +1,4 @@
+<? $this->pageTitle = $publisher["Publisher"]["name"]; ?>
 <h1><?=$publisher["Publisher"]["name"]?></h1>
 <h2>Details</h2>
 <ul>

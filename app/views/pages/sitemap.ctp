@@ -1,3 +1,4 @@
+<? $this->pageTitle = "Sitemap"; ?>
 <h1>Sitemap</h1>
 <p>Welcome to Curly's World of Freeware, the home for all quality freeware games. This sitemap should aid you navigate around the site.</p>
 <h2><?=$html->link("Main page",Router::url("/",true))?></h2>
