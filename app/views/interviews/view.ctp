@@ -1,5 +1,5 @@
 <?
-  $this->pageTitle = "Interview - ".$interview["Interview"]["interview_title"];
+  $this->pageTitle = $interview["Interview"]["interview_title"];
 ?>
 <div class="yui-ge">
   <div class="yui-u first">
