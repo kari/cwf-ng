@@ -73,7 +73,7 @@
           echo $this->element("gvsg");
         }
         ?>
-        <?=$this->element("toplatest",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
+        <?#=$this->element("toplatest",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
         <?=$this->element("toprated",array("cache"=>array("key"=>"","time"=>"+6 hour")))?>
         <?=$this->element("topdownloads",array("cache"=>array("key"=>"","time"=>"+1 day")))?>
         <?=$this->element("adbox",array("style"=>"pw-square"))?>

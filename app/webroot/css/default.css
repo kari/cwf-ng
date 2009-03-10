@@ -70,3 +70,5 @@ fieldset table td {border:none;width:33%;vertical-align:top;}
 /* fieldset {border: 1px solid #999;} */
 
 /* label {padding-right: 1em;} */
+
+table.clean td, table.clean th { border: 0px none #999;}

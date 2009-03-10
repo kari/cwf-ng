@@ -52,8 +52,8 @@
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
   * [Colorbox](http://colorpowered.com/colorbox/) is something new and shiny, but couldn't notice any advantages.
-  * Games/index
-    * Paging alphabetically [A] [B]...
+* Games/index
+  * Paging alphabetically [A] [B]...
     
 # TODOs from code
 
