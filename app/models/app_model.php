@@ -10,6 +10,7 @@ class AppModel extends Model {
 	
 	function array_walk_recursive(&$input, $funcname)
 	# PHP4 compatibility. From PEAR/PHP/Compat.
+	# FIXME: Does this return anything? It doesn't look like that it returns like PHP5...
   {
       if (!is_callable($funcname)) {
           if (is_array($funcname)) {
@@ -58,7 +59,7 @@ class AppModel extends Model {
 		} else {
 			$ret = array_walk_recursive($results,array("AppModel","array_toutf8"));
 		}
-		if (!$ret) { $this->log("Couldn't convert DB find results to UTF-8."); }
+		# if (!$ret) { $this->log("Couldn't convert DB find results to UTF-8."); }
 		return $results;
 	}
 	
