@@ -10,5 +10,6 @@ FancyBox Copyright &copy; 2008 Janis Skarnelis<br>
 reCAPTCHA Component &amp; Helper for CakePHP &copy; Howard Lince<br>
 reCAPTCHA Copyright &copy; 2009 Carnegie Mellon University<br>
 Scrollable Copyright &copy; 2009 <a href="http://flowplayer.org/tools/scrollable.html">Tero Piirainen</a><br>
+RememberMe Component for CakePHP &copy; 2008 NeutrinoCMS<br>
 
 </p>

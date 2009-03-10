@@ -1,6 +1,6 @@
 <?
 class AppController extends Controller {  
-	var $components = array('Auth');
+	var $components = array('Auth',"RememberMe");
 	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); // FIXME: Move helpers to individual controllers to optimize stuff
 	# var $uses = "User";
 	
@@ -20,6 +20,7 @@ class AppController extends Controller {
 	    'password' => 'user_password'
 	    );
 		$this->Auth->userScope = array('User.user_active' => '1'); # only allow activated (non-banned) users
+		$this->RememberMe->check();
 	}
 	
 }

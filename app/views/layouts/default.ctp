@@ -1,7 +1,7 @@
 <?=$html->docType("html4-strict");?>
 <html>
 <head>
-    <?=$html->charset("utf-8"); ?>
+    <?=$html->charset(); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
 		<?=$html->meta('icon',$html->url("/favicon.ico"));?> <? # FIXME ?>
     <?=$html->css('default');?>

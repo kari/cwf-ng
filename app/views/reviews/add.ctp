@@ -1,6 +1,7 @@
 <div class="yui-ge">
   <div class="yui-u first">
 <h1>Add Review for <?=$game["Game"]["game_name"]?></h1>
+<p>At CWF, we have some guidelines for reviews. If you haven't read them before, please do so. If you only want to shortly comment on the game, write a comment instead.</p>
 <?
 echo $form->create('Review');
 echo $form->input('review_title');

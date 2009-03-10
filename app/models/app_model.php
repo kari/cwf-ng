@@ -48,16 +48,17 @@ class AppModel extends Model {
 	
 	function array_tolatin1(&$item,$key) {
 		$item = iconv("UTF-8","cp1252//TRANSLIT",$item);
-		# FIXME: We can't preserve UTF-8 characters that do not have representation in cp1262.
+		# FIXME: We can't preserve UTF-8 characters that do not have representation in cp1252.
 	}
 
 	function afterFind($results) {
 		# Convert cp1252 to UTF-8
 		if (!function_exists('array_walk_recursive')) { # PHP4 compat
-			$this->array_walk_recursive($results,array("AppModel","array_toutf8"));
+			$ret = $this->array_walk_recursive($results,array("AppModel","array_toutf8"));
 		} else {
-			array_walk_recursive($results,array("AppModel","array_toutf8"));
+			$ret = array_walk_recursive($results,array("AppModel","array_toutf8"));
 		}
+		if (!$ret) { $this->log("Couldn't convert DB find results to UTF-8."); }
 		return $results;
 	}
 	
@@ -69,6 +70,7 @@ class AppModel extends Model {
 		} else {
 			$ret = array_walk_recursive($this->data,array("AppModel","array_tolatin1"));
 		}
+		if (!$ret) { $this->log("Couldn't convert data into CP1252 for DB save."); }
 		return $ret;
 	}
 }

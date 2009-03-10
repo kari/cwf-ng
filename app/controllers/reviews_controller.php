@@ -11,7 +11,7 @@ class ReviewsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("index","view"));
-		$this->Auth->mapActions(array("queue"=>"admin","publish"=>"admin"));
+		$this->Auth->mapActions(array("queue"=>"admin","publish"=>"admin","unpublish"=>"admin"));
 	}
 	
 	function index() {
@@ -92,6 +92,19 @@ class ReviewsController extends AppController {
 			$review["Review"]["validator_id"] = $this->Auth->user("user_id");
 			if ($this->Review->save($review)) {
 				$this->Session->setFlash("Review validated.");
+			}
+		}
+		$this->redirect($this->referer());
+	}
+	
+	function unpublish($id) {
+		if ($id == null) { $this->redirect("/"); }
+		$review = $this->Review->find("first",array("conditions"=>array("review_id"=>$id))); 
+		if (!empty($review)) {
+			$review["Review"]["review_rating"] = -99;
+			$review["Review"]["validator_id"] = $this->Auth->user("user_id");
+			if ($this->Review->save($review)) {
+				$this->Session->setFlash("Review unpublished");
 			}
 		}
 		$this->redirect($this->referer());

@@ -145,6 +145,8 @@ foreach ($game["Review"] as $review) {
 }
 if (count($game["Review"]) == 0) {
   echo "<p>No reviews. ".$html->link("Write one?",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."</p>";
+} elseif ($session->check("Auth.User.user_id")) {
+  echo "<p>".$html->link("Add your review of this game.",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."</p>";
 }
 ?>
 </ul>

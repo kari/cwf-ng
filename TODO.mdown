@@ -2,20 +2,13 @@
 
 ## Backlog to v1
 
-* Session/login fixes
-  * Remember me
-* Fix Forms styling
-  * Changes to edit-views need to be copied over to add-views.
 * BBCode handling and editing
   * Check how texts are handled at each part of site
 * Downloads
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
     * PEAR isn't in Apple-bundled PHP
-  * We can use the code from old version?
+  * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
-* Screenshots to latest games (front page)
-  * Layout? Carousels?
-  * [Scrollable](http://www.flowplayer.org/tools/scrollable.html) makes a nice carousel
 * Tools/index and others (layout, info)
 * Advertising elements
 * Blog comments
