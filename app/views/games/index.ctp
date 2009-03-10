@@ -28,7 +28,7 @@ Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),true)
 <?=$form->end("Clear filters")?>
 </p>
 
-<table>
+<table class="clean">
 	<? foreach ($games as $game) { ?>
 	<tr><td>
 	 <?
@@ -62,7 +62,7 @@ if (array_key_exists(0,$game["Rating"])) { # FIXME: Ugly way, and might not be O
 }
 ?>
 <?=$site->drawStars($average_rating,6)?></p>
-      <p><?=$text->trim($game['Game']['description'],300,"...",false)?></p>
+      <p><?=$text->trim($bbcode->strip($game['Game']['description']),300,"...",false)?></p>
 	</td></tr>
 	<? } ?>
 </table>
