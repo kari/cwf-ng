@@ -7,9 +7,9 @@ foreach($reviews as $review) {
   echo "<td>".$review["Game"]["game_name"]."</td>";
   echo "<td>".$review["User"]["username"]."</td>";
   if ($review["Review"]["review_rating"] > 0) {
-    echo "<td>Yes</td>";
+    echo "<td>Yes, ".$html->link("Unpublish",array("action"=>"unpublish",$review["Review"]["review_id"])).".</td>";
   } else {
-    echo "<td>No</td>";
+    echo "<td>No, ".$html->link("Publish",array("action"=>"publish",$review["Review"]["review_id"])).".</td>";
   }
   echo "<td>".$review["Review"]["added"]."</td>";
   echo "<td>".$html->link("Edit",array("action"=>"edit",$review["Review"]["review_id"]))." ";

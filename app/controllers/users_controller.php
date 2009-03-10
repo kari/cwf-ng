@@ -15,11 +15,26 @@ class UsersController extends AppController {
      *  for login, so you can leave this function blank.
      */
     function login() {
-			# TODO: there should be Remember Me-functionality
+			if (!$this->Auth->user()) {  
+				return;  
+			}
+			
+      if (empty($this->data)) {
+				$this->redirect($this->Auth->redirect()); 
+			}
+       
+      if (empty($this->data['User']['remember_me'])) { 
+				$this->RememberMe->delete(); 
+			} else { 
+				$this->RememberMe->remember($this->data['User']['username'],$this->data['User']['user_password']); 
+			}
+			
+			unset($this->data['User']['remember_me']); $this->redirect($this->Auth->redirect());
     }
 
     function logout() {
-        $this->redirect($this->Auth->logout());
+			$this->RememberMe->delete();
+			$this->redirect($this->Auth->logout());
     }
     
     function view($id = null) {

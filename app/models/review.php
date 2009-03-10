@@ -25,7 +25,7 @@ class Review extends AppModel {
 		"validator_id" => "notEmpty",
 		"review_text" => "notEmpty",
 		"game_id" => "notEmpty",
-		"review_rating" => array("inList",array(-99,0,1,2,3,4,5,6)),
+		"review_rating" => array("rule"=>array("inList",array(-99,0,1,2,3,4,5,6))),
 		# "review_lang" => array("rule"=>array("inList",array("en","dk","fi")),"allowEmpty"=>true),
 		);
 }
