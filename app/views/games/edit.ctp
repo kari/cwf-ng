@@ -1,4 +1,4 @@
-<h1>Edit game</h1>
+<h1>Edit Game "<?=$html->link($this->data["Game"]["game_name"],array("action"=>"view",$this->data["Game"]["game_id"]))?>"</h1>
 <div class="yui-gc">
   <div class="yui-u first">
 <?
@@ -78,7 +78,8 @@
 ?>
   </div>
   <div class="yui-u">
-<h2>Screenshots</h2>
+    <form><fieldset>
+<legend>Screenshots</legend>
 <ul>
 <?  
   foreach($this->data["Screenshot"] as $screenshot) {
@@ -91,7 +92,8 @@
 ?>
 <li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
-<h2>Files</h2>
+</fieldset>
+<fieldset><legend>Files</legend>
 <ul>
 <?
   foreach($this->data["Download"] as $file) {
@@ -103,6 +105,7 @@
 ?>
 <li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
+</fieldset>
   </div>
 </div>
 
