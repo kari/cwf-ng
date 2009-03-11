@@ -177,7 +177,8 @@ class GamesController extends AppController {
 			} else {
 				$this->Session->setFlash("There were validation errors");
 				# debug($this->Game->invalidFields());
-				$this->data = Set::merge($this->Game->find("first",array("conditions"=>array("Game.game_id"=>$this->Game->id))),$this->data); // FIXME: Otherwise doesn't load publisher, screenshots, etc. AND keep validation errors.
+				$old_data = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
+				$this->data = Set::merge($old_data,$this->data); // FIXME: Otherwise doesn't load publisher, screenshots, etc. AND keep validation errors.
 			}
 		} else {
 			$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
