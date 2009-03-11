@@ -47,7 +47,7 @@ if (empty($game["Screenshot"])) {
         }
         ?></ul></li>
     <? if (!empty($game["Game"]["requirements"])) { ?>
-    <li>System requirements: <?=nl2br($game["Game"]["requirements"])?></li>
+    <li>System requirements:<br> <?=nl2br($game["Game"]["requirements"])?></li>
     <? } ?>
   </ul>
 <h2>Genres</h2>
