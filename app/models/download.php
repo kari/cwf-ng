@@ -8,9 +8,11 @@ class Download extends AppModel {
 	var $primaryKey = 'file_id';
 	var $displayField = 'download_link';
 	
+	# var $actsAs = array("Containable");
+	
 	# Relationships
 	var $belongsTo = array(
-		"Game" => array("fields" => "game_id,game_name"), 
+		"Game" => array("fields" => "game_id,game_name,adult"), 
 		"User" => array("className" => "User", "foreignKey" => "game_submitter_id","fields" => "username,user_id"),
 		);
 		
