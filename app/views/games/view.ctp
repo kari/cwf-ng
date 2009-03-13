@@ -125,7 +125,7 @@ if($session->check("Auth.User.user_id")) {
 <h2>Downloads</h2>
 <ul class="downloads"><?
 foreach ($game["Download"] as $file) {
-  echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"get",$file["file_id"]),array(),((($game["Game"]["adult"]) or ($game["Genres"]["adult"] == 1)) ? "Reminder: This game is meant for adults. Please proceed only if you're comfortable with mature content.": false)). ' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
+  echo '<li>'.$html->link(basename($file["download_link"]),array("controller"=>"downloads","action"=>"get",$file["file_id"]),array(),false). ' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i></li>';
 }
 ?></ul>
 <? if (!empty($game["Guide"])) { ?>

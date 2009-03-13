@@ -26,6 +26,7 @@
 
 ## Deferred to v2 or later
 
+* game/index and other filtering using GET
 * SearchMonkey Atom feeds (can't add until site is live)
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
   * GD isn't in Apple-bundled PHP.
