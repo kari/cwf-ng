@@ -221,6 +221,8 @@ class GamesController extends AppController {
 	} */
 	
 	function admin() {
+		$this->paginate["Game"]["limit"] = 30;
+		$this->paginate["Game"]["order"] = array("Game.created"=>"desc");
 		$conds = array();
 		if (!empty($this->passedArgs["status"])) {
 			switch($this->passedArgs["status"]) {

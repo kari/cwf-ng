@@ -33,7 +33,7 @@ if ($session->check("Auth.User.user_id")) {
     <!-- root element for the items --> 
     <div class="items"> 
       <? 
-      foreach($games as $game) {
+      foreach($scrollable_games as $game) {
         echo "<div>".$site->image($game["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150,"title"=>$game["Game"]["game_name"])).$html->link("<h3>".$game["Game"]["game_name"]."</h3>",array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array(),false,false)."</div>";
       }
       ?>
