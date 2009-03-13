@@ -9,7 +9,7 @@
     echo "</li>";
 }?>
 </ul>
-<?=$paginator->prev('« Previous ', null, null, array('class' => 'disabled'));?>&nbsp;
+<?=$paginator->prev();?>&nbsp;
 <?=$paginator->numbers(); ?>&nbsp;
-<?=$paginator->next(' Next »', null, null, array('class' => 'disabled'));?> &nbsp;
+<?=$paginator->next();?> &nbsp;
 <?=$paginator->counter(); ?>
