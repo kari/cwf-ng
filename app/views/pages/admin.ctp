@@ -5,7 +5,7 @@ $this->pageTitle = "Site admininstartion";
 <p>Welcome to the admin interface of CWF. Here you can manage all essential features of the site.</p>
 <h2>Validation queues</h2>
 <ul>
-  <li><?=$html->link("Game validation queue","/games/queue")?><br>
+  <li><?=$html->link("Game validation queue","/games/admin/status:2")?><br>
     Manage game validation queue</li>
   <li><?=$html->link("Comment validation queue","/comments/queue")?><br>
     Manage game comment validation queue</li>

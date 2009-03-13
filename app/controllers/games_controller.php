@@ -221,7 +221,22 @@ class GamesController extends AppController {
 	} */
 	
 	function admin() {
-		$this->set("games",$this->paginate("Game",array()));
+		$conds = array();
+		if (!empty($this->passedArgs["status"])) {
+			switch($this->passedArgs["status"]) {
+				case 1:
+				$conds["download_status"] = 0;
+				break;
+				case 2:
+				$conds["download_status"] = -1;
+				break;
+				case 3:
+				$conds["download_status >"] = 0;
+				break;
+				default:
+			}
+		}
+		$this->set("games",$this->paginate("Game",$conds));
 		$this->set('DL_STATUS',$this->Game->DL_STATUS);	
 		
 	}
