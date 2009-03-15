@@ -8,12 +8,23 @@ $paginator->options(array('url' => $this->passedArgs));
 <table>
   <tr><th><?=$paginator->sort("Game name","Game.game_name")?></th><th><?=$paginator->sort("Game status","Game.download_status")?></th><th>Game Hunter</th><th>GH score</th><th><?=$paginator->sort("Date added","Game.created")?></th><th>Actions</th></tr>
 <?
+#debug($games[0]);
 foreach($games as $game) {
   if ($game["Game"]["download_status"] == 0) {
-    echo "<tr><td>".$html->link($text->trim($game["Game"]["game_name"],35,"..."),array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array("title"=>$game["Game"]["game_name"]))."</td>";
+    echo "<tr><td>".$html->link($text->trim($game["Game"]["game_name"],35,"..."),array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array("title"=>$game["Game"]["game_name"]));
   } else {
-    echo "<tr><td>".$game["Game"]["game_name"]."</td>";
+    echo "<tr><td>".$game["Game"]["game_name"];
   }
+  if (empty($game["Screenshot"])) {
+    echo "<br>Game has not screenshots!";
+  }
+  if (empty($game["Download"])) {
+    echo "<br>Game has no files!";
+  }
+  if (empty($game["Publisher"]["publisher_id"])) {
+    echo "<br>Game has no publisher!";
+  }
+  echo "</td>";
   echo "<td>".$DL_STATUS[$game["Game"]["download_status"]]."</td>";
   echo "<td>".$game["GameHunter"]["username"]."</td>";
   echo "<td>".$game["Game"]["site_rating"]."</td>";

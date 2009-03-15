@@ -34,7 +34,6 @@ class GamesController extends AppController {
 	}
 
 	function index() {
-		# FIXME: Do not fetch Reviews and Comments. Use Containable behaviour.
 		if ($this->RequestHandler->isAtom()) {
 			$this->layout = "datarss";
 			$this->Game->contain(array("Genres.tools","Screenshot","Publisher","Rating"));
@@ -221,6 +220,7 @@ class GamesController extends AppController {
 	} */
 	
 	function admin() {
+		$this->paginate["Game"]["contain"] = array("Genres","GameProposer","GameHunter","Specs","Publisher","Screenshot","Download");
 		$this->paginate["Game"]["limit"] = 30;
 		$this->paginate["Game"]["order"] = array("Game.created"=>"desc");
 		$conds = array();
