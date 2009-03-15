@@ -8,6 +8,7 @@ class BlogsController extends AppController {
 			# 'recursive' => 1
 	    );
 	var $helpers = array("cache");
+	var $components = array("RequestHandler");
 	
 	var $cacheAction = array("view/" => "+1 hour","index" => "+1 hour");
 	
@@ -17,9 +18,21 @@ class BlogsController extends AppController {
 		$this->Auth->allow(array("index","view"));
 	}
 	
-	function index() {        
-		# $this->set('blogs', $this->Blog->find('all',array("order"=>"created DESC")));
-		$this->set("blogs",$this->paginate("Blog"));    		
+	function index($id = null) {
+		if ($id == null) {        
+			$this->set("blogs",$this->paginate("Blog"));
+		} else {
+			$user = $this->Blog->User->findByUser_id($id);
+			$this->set("user",$user);
+			if (empty($user)) { $this->cakeError("error404"); }
+			if ($this->RequestHandler->isAtom()) {
+				# $this->layout = "datarss";
+				$this->cacheAction = null;
+				$this->set("blogs",$this->Blog->find("all",array("conditions"=>array("Blog.user_id"=>$user["User"]["user_id"]),"limit"=>30)));
+			} else {
+				$this->set("blogs",$this->paginate("Blog",array("Blog.user_id"=>$user["User"]["user_id"])));
+			}
+		}
 	}
 	
 	function admin() {

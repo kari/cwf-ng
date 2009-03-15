@@ -1,4 +1,12 @@
-<h1>Blog posts</h1>
+<?
+if (isset($user)) {
+  $this->pageTitle = $user["User"]["username"]."'s Blog";
+  $html->meta("atom","index/".$user["User"]["user_id"].".atom",array("title"=>$this->pageTitle,"rel"=>"alternate"),false);
+} else {
+  $this->pageTitle = "Blogs";
+}
+?>
+<h1><?=$this->pageTitle?></h1>
 <cake:nocache>
 <?
 if ($session->check("Auth.User.user_id")) { ?>
