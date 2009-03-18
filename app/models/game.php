@@ -58,7 +58,8 @@ class Game extends AppModel {
   "OS_vista" => "Windows Vista",
   "OS_DosBox" => "DosBox",
   "OS_mac" => "Mac OS X",
-  "OS_linux" => "Linux");
+  "OS_linux" => "Linux"
+	);
   
   var $GENRE = array("platform" => "Platform",
   "logipuzz" => "Logic/Puzzle",
@@ -69,7 +70,7 @@ class Game extends AppModel {
   "sports" => "Sports",
   "simulation" => "Simulation",
   "managing" => "Managing",
-  "boardgame" => "Board game",
+  "boardgame" => "Board / Card game",
   "flying" => "Flying",
   "sidescroller" => "Sidescroller",
   "arcade" => "Arcade",
@@ -83,7 +84,8 @@ class Game extends AppModel {
   "remake" => "Remake",
   "tools" => "Tools",
   "Action" => "Action",
-  "ShootemUp" => "Shoot'em Up"
+  "ShootemUp" => "Shoot'em Up",
+	"online" => "Online only",
   );
 	
 	var $LICENSE = array(0 => "Freeware (GPL)",
