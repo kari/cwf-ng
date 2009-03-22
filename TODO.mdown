@@ -3,6 +3,7 @@
 ## Backlog to v1
 
 * Fold Queue.ctp's into one Admin.ctp that has filters and sorting like game/index.
+  * Add all games drop-down to games/admin for quick game selection.
 * Style Flash notices and form validation errors.
 * BBCode handling and editing
   * Check how texts are handled at each part of site

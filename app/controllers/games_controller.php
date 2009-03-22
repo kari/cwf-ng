@@ -164,8 +164,22 @@ class GamesController extends AppController {
 		$this->data["cached_ratings"] = $ratings;
 #		$this->set("user_ratings",$this->Rating->find("all",array("conditions"=>array("user_id"=>$this->Auth->user("user_id"),"game_id"=>$id))));
 #		$this->set("user_id",$this->Auth->user("user_id"));
-		
-	}
+
+	# Check if user has downloaded this game and hasn't written a review yet.
+	# Check if we have a logged in user
+		$this->set("review_notify",false);
+		if ($this->Auth->user()) {
+		# Check if query "SELECT reviews.id FROM reviews LEFT JOIN downloads ON game_id WHERE user_id = loggedinuser" returns empty.
+			$review_notify = $this->Game->query("SELECT stats.date < NOW() - INTERVAL 1 DAY AS notify FROM CWF_download_stats AS stats LEFT JOIN CWF_reviews AS review ON (stats.gameid = review.game_id AND review.user_id = stats.user_id) WHERE stats.user_id = ".$this->Auth->user("user_id")." AND stats.gameid = ".$game["Game"]["game_id"]." AND review.review_id IS NULL ORDER BY stats.date DESC LIMIT 1;"); # Find if the latest download for this game, for which there is no review written by the logged in user, happened at least a day ago. This statement puts BI tools to shame.
+			if (!empty($review_notify)) {
+				$this->set("review_notify",true);
+			}
+			# debug($review_notify);
+		} else {
+			
+		}
+	}	
+
 	
 	function edit($id = null) {
 		$this->Game->contain(array("Publisher","Screenshot","Download","Specs","Genres"));
