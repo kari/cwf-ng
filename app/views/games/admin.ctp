@@ -1,10 +1,24 @@
+<?
+$this->pageTitle = "Games administration";
+echo $javascript->codeBlock("
+$(document).ready(function() {
+  $('select#game').change(function() {
+      var selected = $('select#game option:selected');
+      if (selected.val() > 0) {
+        window.location.href = '".$html->url(array("action"=>"edit"))."/'+selected.val();
+      }
+    });
+});");
+
+?>
 <h1>Game admin</h1>
 <? $paginator->options(array("url"=>array("page"=>1))); ?>
 Filter by Download status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Accepted",array("status"=>1))?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>] [<?=$paginator->link("Others",array("status"=>3))?>]
 
 <?
 $paginator->options(array('url' => $this->passedArgs)); 
-?>
+?><br>
+Quick choose: <?=$form->select("game",$allgames,false,array(),true)?>
 <table>
   <tr><th><?=$paginator->sort("Game name","Game.game_name")?></th><th><?=$paginator->sort("Game status","Game.download_status")?></th><th>Game Hunter</th><th>GH score</th><th><?=$paginator->sort("Date added","Game.created")?></th><th>Actions</th></tr>
 <?

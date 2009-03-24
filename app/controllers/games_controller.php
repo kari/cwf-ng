@@ -254,7 +254,7 @@ class GamesController extends AppController {
 		}
 		$this->set("games",$this->paginate("Game",$conds));
 		$this->set('DL_STATUS',$this->Game->DL_STATUS);	
-		
+		$this->set("allgames",$this->Game->find("list",array("contain"=>array(),"fields"=>array("Game.game_id","Game.game_name"),"order"=>"Game.game_name")));
 	}
 	
 	function queue() {
