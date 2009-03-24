@@ -9,7 +9,7 @@
     $('a.thumb').fancybox({
       'hideOnContentClick': true,
       'overlayShow': true,
-      'overlayOpacity': 0,  
+      'overlayOpacity': 0,
       });
   });")
 ?>
