@@ -66,6 +66,14 @@ class DownloadsController extends AppController {
 	
 	function add($id = null) {
 		if (!empty($this->data)) {
+			$file = Configure::read("Site.file_path").basename($this->data["Download"]["download_link"]);
+			# Add file size information if file exists.
+			if (file_exists($file) && filesize($file)) {
+				$this->data["Download"]["size"] = filesize($file)/1024;
+			} else {
+				$this->data["Download"]["size"] = 0; # DB field is NOT NULL
+				$this->log("File '".$file."' is missing.");
+			}
 			if($this->Download->save($this->data)) {
 				$this->Session->setFlash("Download was added.");
 				$this->redirect(array("action"=>"edit",$this->Download->id));
@@ -82,6 +90,14 @@ class DownloadsController extends AppController {
 	function edit($id=null) { # interview/edit allows to edit all news.
 		if ($id == null) { $this->redirect("/"); }
 		if (!empty($this->data)) {
+			$file = Configure::read("Site.file_path").basename($this->data["Download"]["download_link"]);
+			# Add file size information if file exists.
+			if (file_exists($file) && filesize($file)) {
+				$this->data["Download"]["size"] = filesize($file)/1024;
+				# $this->log("File '".$file."' is ".(filesize($file)/1024)." kB in size");
+			} else { 
+				$this->log("File '".$file."' is missing.");
+			}
 			if($this->Download->save($this->data)) {
 		  	//Set a session flash message and redirect.
 		    $this->Session->setFlash("Download saved!");
@@ -99,6 +115,7 @@ class DownloadsController extends AppController {
 		if ($id == null) { $this->redirect("/"); }
 		$download = $this->Download->find("first",array("conditions"=>array("file_id"=>$id)));
 		if (!empty($download)) {
+			# FIXME: Delete file on the file system too. 
 			$this->Download->del($id);
 			$this->flash('The download with id '.$id.' has been deleted.', array("controller"=>"games","action"=>"edit",$download["Download"]["game_id"]));
 		} else {

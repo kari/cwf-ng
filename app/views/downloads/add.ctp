@@ -7,7 +7,7 @@ echo $form->input('download_link');
 echo $form->input("game_id",array("default"=>$game_id));
 echo $form->input("file_platform",array("options"=>$PLATFORM));
 echo $form->input("package_type",array("options"=>$DL_TYPE));
-echo $form->input("size",array("after"=>" kB"));
+# echo $form->input("size",array("after"=>" kB"));
 echo $form->input("game_submitter_id",array("options"=>$game_submitters,"default"=>$session->read("Auth.User.user_id")));
 echo $form->input("explanation",array("rows"=>2,"between"=>"<br>"));
 echo $form->input("download_server",array("disabled"=>true));
