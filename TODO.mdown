@@ -19,7 +19,7 @@
   * $html->link mangles UTF-8 accented characters(?)
   * PHP4 DB saving doesn't work
 
-## Deferred to v1.1
+## Deferred to v1.5
 
 * Game (Hunter) workflow/lifecycle/process
   * This is huge.
