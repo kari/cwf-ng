@@ -86,6 +86,7 @@ class Game extends AppModel {
   "Action" => "Action",
   "ShootemUp" => "Shoot'em Up",
 	"online" => "Online only",
+	"casual" => "Casual",
   );
 	
 	var $LICENSE = array(0 => "Freeware (GPL)",
