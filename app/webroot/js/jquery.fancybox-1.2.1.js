@@ -1,7 +1,7 @@
 /*
- * FancyBox - simple jQuery plugin for fancy image zooming
+ * FancyBox - simple and fancy jQuery plugin
  * Examples and documentation at: http://fancy.klade.lv/
- * Version: 1.2.0 (27/02/2009)
+ * Version: 1.2.1 (13/03/2009)
  * Copyright (c) 2009 Janis Skarnelis
  * Licensed under the MIT License: http://en.wikipedia.org/wiki/MIT_License
  * Requires: jQuery v1.3+
@@ -30,7 +30,7 @@
 	var isIE = ($.browser.msie && parseInt($.browser.version.substr(0,1)) < 8);
 
 	$.fn.fancybox = function(settings) {
-		settings	= $.extend({}, $.fn.fancybox.defaults, settings);
+		settings = $.extend({}, $.fn.fancybox.defaults, settings);
 
 		var matchedGroup = this;
 
@@ -59,19 +59,35 @@
 			} else {
 				var item = {};
 
-				for (var i = 0; i < matchedGroup.length; i++) {
-					item = {href: matchedGroup[i].href, title: matchedGroup[i].title};
+				if (!elem.rel || elem.rel == '') {
+					var item = {href: elem.href, title: elem.title};
 
-					if ($(matchedGroup[i]).children("img:first").length) {
-						item.orig = $(matchedGroup[i]).children("img:first");
+					if ($(elem).children("img:first").length) {
+						item.orig = $(elem).children("img:first");
 					}
 
 					opts.itemArray.push( item );
-				}
-			}
 
-			while ( opts.itemArray[ opts.itemCurrent ].href != elem.href ) {
-				opts.itemCurrent++;
+				} else {
+					
+					var subGroup = $(matchedGroup).filter("a[rel=" + elem.rel + "]");
+
+					var item = {};
+
+					for (var i = 0; i < subGroup.length; i++) {
+						item = {href: subGroup[i].href, title: subGroup[i].title};
+
+						if ($(subGroup[i]).children("img:first").length) {
+							item.orig = $(subGroup[i]).children("img:first");
+						}
+
+						opts.itemArray.push( item );
+					}
+
+					while ( opts.itemArray[ opts.itemCurrent ].href != elem.href ) {
+						opts.itemCurrent++;
+					}
+				}
 			}
 
 			if (opts.overlayShow) {
@@ -91,7 +107,7 @@
 			var href = opts.itemArray[ opts.itemCurrent ].href;
 
 			if (href.match(/#/)) {
-				var target = window.location.href.split('#')[0]; target = href.replace(target, '');
+				var target = window.location.href.split('#')[0]; target = href.replace(target, ''); target = target.substr(target.indexOf('#'));
 
 				_set_content('<div id="fancy_div">' + $(target).html() + '</div>', opts.frameWidth, opts.frameHeight);
 
@@ -106,11 +122,12 @@
 
 					$(imagePreloader).unbind().bind('load', function() {
 						$(".fancy_loading").hide();
+
 						_proceed_image();
 					});
 				}
 
-			} else if ( href.match("iframe")) {
+			 } else if (href.match("iframe") || elem.className.indexOf("iframe") >= 0) {
 				_set_content('<iframe id="fancy_frame" onload="$.fn.fancybox.showIframe()" name="fancy_iframe' + Math.round(Math.random()*1000) + '" frameborder="0" hspace="0" src="' + href + '"></iframe>', opts.frameWidth, opts.frameHeight);
 
 			} else {
@@ -135,12 +152,10 @@
 			}
 
 			_set_content('<img alt="" id="fancy_img" src="' + imagePreloader.src + '" />', width, height);
-
-			_preload_neighbor_images();
 		};
 
 		function _preload_neighbor_images() {
-			if ( (opts.itemArray.length -1) > opts.itemCurrent ) {
+			if ((opts.itemArray.length -1) > opts.itemCurrent) {
 				var href = opts.itemArray[opts.itemCurrent + 1].href;
 
 				if (href.match(imageRegExp)) {
@@ -149,7 +164,7 @@
 				}
 			}
 
-			if ( opts.itemCurrent > 0 ) {
+			if (opts.itemCurrent > 0) {
 				var href = opts.itemArray[opts.itemCurrent -1].href;
 
 				if (href.match(imageRegExp)) {
@@ -160,6 +175,54 @@
 		};
 
 		function _set_content(value, width, height) {
+			busy = true;
+
+			var pad = opts.padding;
+
+			if (isIE) {
+				$("#fancy_content")[0].style.removeExpression("height");
+				$("#fancy_content")[0].style.removeExpression("width");
+			}
+
+			if (pad > 0) {
+				width	+= pad * 2;
+				height	+= pad * 2;
+
+				$("#fancy_content").css({
+					'top'		: pad + 'px',
+					'right'		: pad + 'px',
+					'bottom'	: pad + 'px',
+					'left'		: pad + 'px',
+					'width'		: 'auto',
+					'height'	: 'auto'
+				});
+
+				if (isIE) {
+					$("#fancy_content")[0].style.setExpression('height',	'(this.parentNode.clientHeight - 20)');
+					$("#fancy_content")[0].style.setExpression('width',		'(this.parentNode.clientWidth - 20)');
+				}
+
+			} else {
+				$("#fancy_content").css({
+					'top'		: 0,
+					'right'		: 0,
+					'bottom'	: 0,
+					'left'		: 0,
+					'width'		: '100%',
+					'height'	: '100%'
+				});
+			}
+
+			if ($("#fancy_outer").is(":visible") && width == $("#fancy_outer").width() && height == $("#fancy_outer").height()) {
+				$("#fancy_content").fadeOut("fast", function() {
+					$("#fancy_content").empty().append($(value)).fadeIn("normal", function() {
+						_finish();
+					});
+				});
+
+				return;
+			}
+
 			var w = $.fn.fancybox.getViewport();
 
 			var itemLeft	= (width + 36)	> w[0] ? w[2] : (w[2] + Math.round((w[0] - width - 36) / 2));
@@ -173,24 +236,14 @@
 			};
 
 			if ($("#fancy_outer").is(":visible")) {
-				if (width == $("#fancy_content").width() && height == $("#fancy_content").height()) {
-					$("#fancy_content").fadeOut("fast", function() {
-						$("#fancy_content").empty().append($(value)).fadeIn("fast", function() {
+				$("#fancy_content").fadeOut("normal", function() {
+					$("#fancy_content").empty();
+					$("#fancy_outer").animate(itemOpts, opts.zoomSpeedChange, opts.easingChange, function() {
+						$("#fancy_content").append($(value)).fadeIn("normal", function() {
 							_finish();
 						});
 					});
-
-				} else {
-				
-					$("#fancy_content").fadeOut("fast", function() {
-						$("#fancy_content").empty();
-						$("#fancy_outer").animate(itemOpts, opts.zoomSpeedChange, opts.easingChange, function() {
-							$("#fancy_content").append($(value)).fadeIn("fast", function() {
-								_finish();
-							});
-						});
-					});
-				}
+				});
 
 			} else {
 
@@ -199,15 +252,13 @@
 
 					var orig_item	= opts.itemArray[opts.itemCurrent].orig;
 					var orig_pos	= $.fn.fancybox.getPosition(orig_item);
-					
+
 					$("#fancy_outer").css({
 						'left':		(orig_pos.left - 18) + 'px',
 						'top':		(orig_pos.top  - 18) + 'px',
 						'width':	$(orig_item).width(),
 						'height':	$(orig_item).height()
 					});
-
-					busy = true;
 
 					if (opts.zoomOpacity) {
 						itemOpts.opacity = 'show';
@@ -219,10 +270,7 @@
 
 				} else {
 
-					$("#fancy_content").empty().append($(value));
-
-					busy = true;
-
+					$("#fancy_content").hide().empty().append($(value)).show();
 					$("#fancy_outer").css(itemOpts).fadeIn("normal", function() {
 						_finish();
 					});
@@ -231,7 +279,7 @@
 		};
 
 		function _set_navigation() {
-			if ( opts.itemCurrent != 0 ) {
+			if (opts.itemCurrent != 0) {
 				$("#fancy_left, #fancy_left_ico").unbind().bind("click", function(e) {
 					e.stopPropagation();
 
@@ -240,11 +288,11 @@
 
 					return false;
 				});
-				
+
 				$("#fancy_left").show();
 			}
 
-			if ( opts.itemCurrent != ( opts.itemArray.length -1 ) ) {
+			if (opts.itemCurrent != ( opts.itemArray.length -1)) {
 				$("#fancy_right, #fancy_right_ico").unbind().bind("click", function(e) {
 					e.stopPropagation();
 
@@ -260,6 +308,8 @@
 
 		function _finish() {
 			_set_navigation();
+
+			_preload_neighbor_images();
 
 			$(document).keydown(function(e) {
 				if (e.keyCode == 27) {
@@ -286,9 +336,9 @@
 
 			if (opts.hideOnContentClick) {
 				$("#fancy_wrap").click($.fn.fancybox.close);
-			} else {
-				$("#fancy_wrap").unbind();
 			}
+
+			$("#fancy_overlay, #fancy_close").bind("click", $.fn.fancybox.close);
 
 			$("#fancy_close").show();
 
@@ -298,7 +348,11 @@
 			}
 
 			if (opts.overlayShow && isIE) {
-				$('#fancy_content').find('embed, object, select').css('visibility', 'visible');
+				$('embed, object, select', $('#fancy_content')).css('visibility', 'visible');
+			}
+
+			if ($.isFunction(opts.callbackOnShow)) {
+				opts.callbackOnShow();
 			}
 
 			busy = false;
@@ -362,27 +416,41 @@
 	};
 
 	$.fn.fancybox.close = function() {
+		busy = true;
+
 		$(imagePreloader).unbind();
 
+		$("#fancy_overlay, #fancy_close").unbind();
+
+		if (opts.hideOnContentClick) {
+			$("#fancy_wrap").unbind();
+		}
+
 		$("#fancy_close, .fancy_loading, #fancy_left, #fancy_right, #fancy_title").hide();
+
+		if (opts.centerOnScroll) {
+			$(window).unbind("resize scroll");
+		}
 
 		__cleanup = function() {
 			$("#fancy_overlay, #fancy_outer").hide();
 
+			if (opts.centerOnScroll) {
+				$(window).unbind("resize scroll");
+			}
+
 			if (isIE) {
 				$('embed, object, select').css('visibility', 'visible');
 			}
-			
+
 			if ($.isFunction(opts.callbackOnClose)) {
 				opts.callbackOnClose();
 			}
-			
+
 			busy = false;
 		};
 
 		if ($("#fancy_outer").is(":visible") !== false) {
-			busy = true;
-
 			if (opts.zoomSpeedOut > 0 && opts.itemArray[opts.itemCurrent].orig !== undefined) {
 				var orig_item	= opts.itemArray[opts.itemCurrent].orig;
 				var orig_pos	= $.fn.fancybox.getPosition(orig_item);
@@ -398,10 +466,10 @@
 					itemOpts.opacity = 'hide';
 				}
 
-				$("#fancy_outer").animate(itemOpts, opts.zoomSpeedOut, opts.easingOut, __cleanup);
+				$("#fancy_outer").stop(false, true).animate(itemOpts, opts.zoomSpeedOut, opts.easingOut, __cleanup);
 
 			} else {
-				$("#fancy_outer").stop().fadeOut("fast", __cleanup);
+				$("#fancy_outer").stop(false, true).fadeOut("fast", __cleanup);
 			}
 
 		} else {
@@ -448,11 +516,10 @@
 			$("#fancy_inner").prepend('<iframe class="fancy_bigIframe" scrolling="no" frameborder="0"></iframe>');
 			$("#fancy_close, .fancy_bg, .fancy_title, .fancy_ico").fixPNG();
 		}
-
-		$("#fancy_overlay, #fancy_bigIframe, #fancy_loading, #fancy_close").bind("click", $.fn.fancybox.close);
 	};
 
 	$.fn.fancybox.defaults = {
+		padding				:	10,
 		imageScale			:	true,
 		zoomOpacity			:	false,
 		zoomSpeedIn			:	0,
@@ -469,6 +536,7 @@
 		centerOnScroll		:	true,
 		itemArray			:	[],
 		callbackOnStart		:	null,
+		callbackOnShow		:	null,
 		callbackOnClose		:	null
 	};
 
