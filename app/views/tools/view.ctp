@@ -1,7 +1,7 @@
 <? # View initialization
 		$this->pageTitle = $tool["Game"]["game_name"];
 		$html->css("jquery.fancybox","stylesheet",array("media"=>"screen"),false);
-		$javascript->link("/js/jquery.fancybox-1.2.0.js",false);
+		$javascript->link("/js/jquery.fancybox-1.2.1.js",false);
 ?>
 <? # Page-specific jQuery code: 
   echo $javascript->codeBlock("$(document).ready(function() {
