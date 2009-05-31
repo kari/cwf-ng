@@ -40,17 +40,17 @@ ul#screenshots li {
 	list-style-type: none;
 }
 
-ul.downloads li {list-style: none outside url("/~zyx/cwf-ng/img/icons/disk.png");}
+ul.downloads li {list-style: none outside url("../img/icons/disk.png");}
 
-ul.news li {list-style: none outside url("/~zyx/cwf-ng/img/icons/newspaper.png");}
+ul.news li {list-style: none outside url("../img/icons/newspaper.png");}
 
-ul.games li {list-style: none outside url("/~zyx/cwf-ng/img/icons/joystick.png");}
+ul.games li {list-style: none outside url("../img/icons/joystick.png");}
 
-ul.blogs li {list-style: none outside url("/~zyx/cwf-ng/img/icons/book.png");}
+ul.blogs li {list-style: none outside url("../img/icons/book.png");}
 
-ul.reviews li {list-style: none outside url("/~zyx/cwf-ng/img/icons/user_comment.png");}
+ul.reviews li {list-style: none outside url("../img/icons/user_comment.png");}
 
-ul.tools li {list-style: none outside url("/~zyx/cwf-ng/img/icons/cog.png");}
+ul.tools li {list-style: none outside url("../img/icons/cog.png");}
 
 div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px;}
 

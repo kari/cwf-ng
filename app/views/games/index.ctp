@@ -1,6 +1,6 @@
 <? # View initialization
 		$html->css("jquery.fancybox","stylesheet",array("media"=>"screen"),false);
-		$javascript->link("/js/jquery.fancybox-1.2.0.js",false);
+		$javascript->link("/js/jquery.fancybox-1.2.1.js",false);
 		$html->meta("atom","index.atom",array("title"=>"Recent games","rel"=>"alternate"),false);
 ?>
 <? # Page-specific jQuery code: 
