@@ -1,6 +1,6 @@
 <? # View initialization
   $html->css("jquery.fancybox","stylesheet",array("media"=>"screen"),false);
-  $javascript->link("/js/jquery.fancybox-1.2.0.js",false);
+  $javascript->link("/js/jquery.fancybox-1.2.1.js",false);
   $this->pageTitle = $game["Game"]["game_name"];
 ?>
 <? # Page-specific jQuery code: 

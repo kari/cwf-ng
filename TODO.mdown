@@ -14,7 +14,9 @@
 * Tools/index and others (layout, info)
 * Advertising elements
 * Blog comments
+  * Defer to v1.5 or v2 with other blog functionalities?
 * PHP4 compat. (html_entities multichar...)
+  * Solution: Migrate surftown account to PHP5.
   * Accented characters look like crap in publisher table?
   * $html->link mangles UTF-8 accented characters(?)
   * PHP4 DB saving doesn't work
@@ -28,6 +30,8 @@
 
 * game/index and other filtering using GET
 * SearchMonkey Atom feeds (can't add until site is live)
+  * Google implements same with Microformats (hReview etc.) or RDF+XHTML, but our site
+    is HTML4 so microformats are the only way forward.
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
   * GD isn't in Apple-bundled PHP.
 * Localization (l10n) and internationalization (i18n)
