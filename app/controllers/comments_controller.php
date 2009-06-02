@@ -16,7 +16,7 @@ class CommentsController extends AppController {
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("add")); # FIXME: No comments/index in production.
-		$this->Auth->mapActions(array("queue"=>"admin"));
+		$this->Auth->mapActions(array("queue"=>"admin","publish"=>"admin","unpublish"=>"admin"));
 		$this->Recaptcha->publickey = Configure::read("Site.captcha_public_key"); 
 		$this->Recaptcha->privatekey = Configure::read("Site.captcha_private_key");
 	}
@@ -26,7 +26,19 @@ class CommentsController extends AppController {
 	}
 	
 	function admin() {
-		$this->set("comments",$this->paginate("Comment"));
+		$conds = array();
+		if (!empty($this->passedArgs["status"])) {
+			switch($this->passedArgs["status"]) {
+				case 2:
+				$conds["validated"] = 0;
+				break;
+				case 1:
+				$conds["validated"] = 1;
+				break;
+				default:
+			}
+		}
+		$this->set("comments",$this->paginate("Comment",$conds));
 	}
 	
 	function add() {
@@ -86,6 +98,30 @@ class CommentsController extends AppController {
 			$this->redirect("/");
 		}
 		
+	}
+	
+	function publish($id) {
+		if ($id == null) { $this->redirect("/"); }
+		$comment = $this->Comment->find("first",array("conditions"=>array("comment_id"=>$id))); 
+		if (!empty($comment)) {
+			$comment["Comment"]["validated"] = true;
+			if ($this->Comment->save($comment)) {
+				$this->Session->setFlash("Comment validated.");
+			}
+		}
+		$this->redirect($this->referer());
+	}
+	
+	function unpublish($id) {
+		if ($id == null) { $this->redirect("/"); }
+		$comment = $this->Comment->find("first",array("conditions"=>array("comment_id"=>$id))); 
+		if (!empty($comment)) {
+			$comment["Comment"]["validated"] = false;
+			if ($this->Comment->save($comment)) {
+				$this->Session->setFlash("Comment unpublished.");
+			}
+		}
+		$this->redirect($this->referer());
 	}
 }
 

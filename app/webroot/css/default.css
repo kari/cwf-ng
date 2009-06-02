@@ -52,6 +52,23 @@ ul.reviews li {list-style: none outside url("../img/icons/user_comment.png");}
 
 ul.tools li {list-style: none outside url("../img/icons/cog.png");}
 
+li.email {list-style: none outside url("../img/icons/email.png");}
+
+li.site {list-style: none outside url("../img/icons/world.png");}
+
+/* game rating icons */
+li.overall {list-style: none outside url("../img/icons/world.png");}
+li.playability {list-style: none outside url("../img/icons/joystick.png");}
+li.idea {list-style: none outside url("../img/icons/lightbulb.png");}
+li.technical {list-style: none outside url("../img/icons/cog.png");}
+li.graphics {list-style: none outside url("../img/icons/palette.png");}
+li.music {list-style: none outside url("../img/icons/music.png");}
+li.extras {list-style: none outside url("../img/icons/attach.png");}
+li.group {list-style: none outside url("../img/icons/group.png");}
+
+
+ul.groups li {list-style: none outside url("../img/icons/group.png");}
+
 div#loginbox {background-color: #FEFEFE; border: 1px solid #001937; padding: 5px;}
 
 h1 a:visited { color: inherit;}
@@ -76,6 +93,5 @@ table.clean td, table.clean th { border: 0px none #999;}
 table.slim {margin: 0; padding:0;}
 table.slim td {margin: 0; padding:0; padding-bottom: 5px; padding-right: 5px; vertical-align: top;}
 
-div#flashMessage {background-color: #FEFEFE; border: 1px solid #001937; padding: 2px;}
-
+div#flashMessage,div#authMessage {background-color: #FEFEFE; border: 1px solid #001937; padding: 2px;}
 div.error-message {color: red;}

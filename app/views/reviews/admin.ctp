@@ -1,6 +1,8 @@
 <h1>Review admin</h1>
+<p>Filter by Review status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Published",array("status"=>1))?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>]</p>
+<?$paginator->options(array('url' => $this->passedArgs));?>
 <table>
-  <tr><th>Review title</th><th><?=$paginator->sort("Game","Game.game_name")?></th><th>Author</th><th>Validated</th><th><?=$paginator->sort("Added","Review.added")?></th><th>Actions</th></tr>
+  <tr><th>Review title</th><th><?=$paginator->sort("Game","Game.game_name")?></th><th><?=$paginator->sort("Author","User.username")?></th><th>Validated</th><th><?=$paginator->sort("Added","Review.added")?></th><th>Actions</th></tr>
 <?
 foreach($reviews as $review) {
   echo "<tr><td>".$review["Review"]["review_title"]."</td>";
