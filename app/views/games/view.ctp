@@ -71,14 +71,14 @@ if ($session->check("Auth.User.user_id")) {
 ?>
 </cake:nocache>
 <ul>
-<li>Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$game["Game"]["site_rating"]?> of 6)</li>
+<li class="group">Game hunters' rating: <?=$site->drawStars($game["Game"]["site_rating"],6,false,array("/img/icons/award_star_gold_3.png","/img/icons/award_star_silver_3.png"))?> (<?=$game["Game"]["site_rating"]?> of 6)</li>
 <cake:nocache>
 <?
 $ratings = $this->data["cached_ratings"];
 $RATING_TYPE = $this->data["cached_RATING_TYPE"];
 
 foreach ($RATING_TYPE as $key => $type) {
-  echo '<li>'.$type.': '; 
+  echo '<li class="'.strtolower($type).'">'.$type.': '; 
   if (array_key_exists($key,$ratings)) { 
     echo $site->drawStars($ratings[$key]["average_rating"],6);
     echo " ".$number->precision($ratings[$key]["average_rating"],2);

@@ -1,7 +1,8 @@
 <h1>Comment admin</h1>
 <p>All validated comments are visible on the site.</p>
-<table>
-  <tr><th>Comment</th><th>Game</th><th>Author</th><th>Validated</th><th>Added</th><th>Actions</th></tr>
+<p>Filter by Download status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>] [<?=$paginator->link("Validated",array("status"=>1))?>]</p>
+<?$paginator->options(array('url' => $this->passedArgs));?>
+<table> <tr><th>Comment</th><th><?=$paginator->sort("Game","Game.game_name")?></th><th><?=$paginator->sort("Author","User.username")?></th><th>Validated</th><th><?=$paginator->sort("Added","Comment.created")?></th><th>Actions</th></tr>
 <?
 foreach($comments as $comment) {
   echo "<tr><td>".$comment["Comment"]["text"]."</td>";
@@ -9,9 +10,9 @@ foreach($comments as $comment) {
   echo "<td>".$comment["User"]["username"]."</td>";
   echo "<td>";
   if ($comment["Comment"]["validated"] == TRUE) {
-    echo "Yes";
+    echo "Yes, ".$html->link("unpublish",array("action"=>"unpublish",$comment["Comment"]["comment_id"])).".";
   } else {
-      echo "No";
+      echo "No, ".$html->link("publish",array("action"=>"publish",$comment["Comment"]["comment_id"])).".";
   }
   echo "</td>";
   echo "<td>".$comment["Comment"]["created"]."</td>";

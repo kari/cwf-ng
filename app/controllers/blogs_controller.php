@@ -81,7 +81,7 @@ class BlogsController extends AppController {
 				} else {
 					if ($this->Blog->save($this->data)) {
 						$this->Session->setFlash('The post has been updated.');
-						$this->redirect("/blogs");
+						$this->redirect("/blogs/admin");
 					}
 				}
 			} else { # No access
