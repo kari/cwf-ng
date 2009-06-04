@@ -1,6 +1,6 @@
 <h1>Top rated games</h1>
 <? $games = $this->requestAction("/games/top/rating");?>
-<table>
+<table class="clean">
   <tr><th>Game</th><th>Rating</th></tr>
 <?
 foreach($games as $game) {

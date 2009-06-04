@@ -5,7 +5,7 @@ $games = $this->requestAction('games/random/2');
 <h1>Game VS Game</h1>
 <?#=$form->create("",array("url"=>"/gvsg/vote")); ?>
 <form method="post" action="<?=$html->url("/gvsg/vote")?>"><fieldset style="display:none;"><input type="hidden" name="_method" value="POST" /></fieldset>
-<table class="clean">
+<table>
   <tr><td>
 <label for="gvsg1"><?=$site->image($games[0]["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150))?></label><br>
 <input type="radio" name="data[gvsg][winner]" value="0" id="gvsg1">&nbsp;<?=$html->link($games[0]["Game"]["game_name"],array("controller"=>"games","action"=>"view",$games[0]["Game"]["game_id"]))?>

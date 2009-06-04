@@ -1,6 +1,6 @@
 <h1>Top downloads</h1>
 <? $games = $this->requestAction("/games/top/download");?>
-<table>
+<table class="clean">
   <tr><th>Game</th><th>DLs</th></tr>
 <?
 foreach($games as $game) {

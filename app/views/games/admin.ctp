@@ -19,7 +19,7 @@ Filter by Download status: [<?=$paginator->link("All",array())?>] [<?=$paginator
 $paginator->options(array('url' => $this->passedArgs)); 
 ?><br>
 Quick choose: <?=$form->select("game",$allgames,false,array(),true)?>
-<table>
+<table class="clean">
   <tr><th><?=$paginator->sort("Game name","Game.game_name")?></th><th><?=$paginator->sort("Game status","Game.download_status")?></th><th>Game Hunter</th><th>GH score</th><th><?=$paginator->sort("Date added","Game.created")?></th><th>Actions</th></tr>
 <?
 #debug($games[0]);

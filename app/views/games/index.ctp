@@ -28,7 +28,7 @@ Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),true)
 <?=$form->end("Clear filters")?>
 </p>
 
-<table class="clean">
+<table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>
 	 <?
