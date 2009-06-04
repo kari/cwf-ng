@@ -1,7 +1,7 @@
 <? # Page initalization
 $this->pageTitle = "CWF-Freeware"; 
 $html->css("jquery.scrollable","stylesheet",array("media"=>"screen"),false);
-$javascript->link("/js/jquery.scrollable-1.0.2.min.js",false);
+$javascript->link("/js/jquery.tools.min.js",false);
 ?>
 <? # Page-specific jQuery code: 
   echo $javascript->codeBlock("$(document).ready(function() {

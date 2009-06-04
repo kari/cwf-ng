@@ -89,9 +89,16 @@ fieldset table td {border:none;width:33%;vertical-align:top;}
 
 /* label {padding-right: 1em;} */
 
-table.clean td, table.clean th { border: 0px none #999;}
+table td, table th {border: 0px none #999;}
+table.clean td { border-bottom: 1px solid #999;}
+table.clean th { border-bottom: 2px solid #666;}
 table.slim {margin: 0; padding:0;}
 table.slim td {margin: 0; padding:0; padding-bottom: 5px; padding-right: 5px; vertical-align: top;}
 
 div#flashMessage,div#authMessage {background-color: #FEFEFE; border: 1px solid #001937; padding: 2px;}
 div.error-message {color: red;}
+
+div#yui-main > div.yui-b { min-height: 400px;}
+
+div#yui-main > div.yui-b > div.adbox { margin-left: auto; margin-right: auto; width: 470px;}
+div#ft p {font-size: 77%; color: #999;width:650px;margin-left:auto;margin-right:auto;text-align:center;margin-top:0.5em;}

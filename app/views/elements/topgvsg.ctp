@@ -1,6 +1,6 @@
 <h1>Top Game vs. Game</h1>
 <? $games = $this->requestAction("/gvsg/stats");?>
-<table>
+<table class="clean">
   <tr><th>Game</th><th>Points</th></tr>
 <?
 foreach($games as $game) {

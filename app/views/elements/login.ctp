@@ -3,7 +3,7 @@
     # if ($session->check('Message.auth')) $session->flash('auth');
     if ($session->check("Auth.User.user_id")) {
 #      echo "<div class=\"yui-gf\"><div class=\"yui-u first\">";
-      echo "<table class=\"clean slim\"><tr><td>";
+      echo "<table class=\"slim\"><tr><td>";
       echo $site->avatar($session->read("Auth.User"),array("width"=>48,"height"=>48,"align"=>"left"));
 #      echo "</div><div class=\"yui-u\">";
       echo "</td><td>";

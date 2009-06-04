@@ -54,10 +54,10 @@
          <!-- Main block -->
           <!-- can be split with yui-u div-classes -->
             <?=$content_for_layout ?>
-          <div class="yui-g">
+          <div class="yui-g adbox">
             <p>&nbsp;</p>
             <cake:nocache>
-            <?=$this->element("adbox",array("style"=>"pw-leaderboard")) ?>
+            <?=$this->element("adbox",array("style"=>"pw-footer")) ?>
             </cake:nocache>
             <p>&nbsp;</p>
           </div>
@@ -76,13 +76,13 @@
         <?#=$this->element("toplatest",array("cache"=>array("key"=>"","time"=>"+1 hour")))?>
         <?=$this->element("toprated",array("cache"=>array("key"=>"","time"=>"+6 hour")))?>
         <?=$this->element("topdownloads",array("cache"=>array("key"=>"","time"=>"+1 day")))?>
-        <?=$this->element("adbox",array("style"=>"pw-square"))?>
+        <?#=$this->element("adbox",array("style"=>"pw-square"))?>
         </cake:nocache>
       </div>
     </div>
     <div id="ft">
       <!-- Footer conent -->
-      <!-- All trademarks and copyrights on this page are owned by their respective owners. User generated content is owned by their authors. Site &copy; 2009 CWF-Freeware. -->
+      <p>All trademarks and copyrights on this page are owned by their respective owners. User generated content is owned by their authors.<br/> Site &copy; 2009 CWF-Freeware. Terms of Service and Privacy Policy.</p>
       <?
       if (Configure::read("Site.track") == true) echo $this->element("ga");
       ?>
