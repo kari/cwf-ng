@@ -5,6 +5,7 @@ class Action extends AppModel {
 	var $useTable = "groups_actions";
 	var $tablePrefix = "CWF_";
 	var $displayField = "action_id";
+	var $order = "action_id ASC";
 	
 	# Lists actions a certain group is allowed to perform on site.
 	

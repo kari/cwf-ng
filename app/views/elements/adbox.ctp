@@ -1,4 +1,5 @@
 <?
+$enabled = Configure::read("Site.ads");
 $code = false;
 switch ($style) {
   case "pw-banner":
@@ -85,9 +86,11 @@ switch ($style) {
     $height = 125;
     break;
 }
-if (!$code) {
+if (!$code or $enabled == false) {
+  if(!isset($width)) { $width = 100; }
+  if(!isset($height)) { $height = 100; }
   echo "<div style=\"width: $width px;height: $height px;border:1px solid black;background-color:#C3D7FF;color:#001937;\">
-  <p style=\"margin-left:auto;margin-right:auto;width: $width px\"><strong>I'm an advertisement. Fear me. I'm '$style' ($width x $height).</strong></p></div>";
+  <p style=\"margin-left:auto;margin-right:auto;width: $width px\"><strong>I'm an advertisement. Fear me!<br>Seriously, there's something wrong with me. Either my code is missing or advertisements are disabled.</strong></p></div>";
 } else {
   echo $code;
 }

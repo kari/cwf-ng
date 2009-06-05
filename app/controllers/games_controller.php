@@ -17,7 +17,7 @@ class GamesController extends AppController {
 			"order" => array("Comment.created"=>"desc"),
 			"limit" => 10)
 			);
-	var $uses = array("Game","Download","Rating");
+	var $uses = array("Game","Download","Rating","User");
 	
 	var $components = array('Recaptcha',"RequestHandler");
 	var $helpers = array('Cache',"Number","Site","javascript");
@@ -80,6 +80,10 @@ class GamesController extends AppController {
 			}
 			$this->set("conds",$conds);
 			$this->set("games",$this->paginate('Game',$conds));
+			
+/*			if ($this->User->isAuthorized($this->Auth->user(),"games","admin")) {
+				$this->set("admin_mode",true);
+			} */
 		}
 	}
 	

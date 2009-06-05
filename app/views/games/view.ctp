@@ -10,7 +10,7 @@
       'overlayShow': true,
       'overlayOpacity': 0,
       });
-    });")
+    });");
 ?>
 <div class="yui-ge">
   <div class="yui-u first">
@@ -34,6 +34,7 @@ if (empty($game["Screenshot"])) {
 }
 ?>
 </ul>
+<table class="full"><tr><td>
 <h2>Details</h2>
 <ul><li>Game license: <?=$LICENSE[$game['Game']['lisence']]?></li>
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
@@ -50,6 +51,7 @@ if (empty($game["Screenshot"])) {
     <li>System requirements:<br> <?=nl2br($game["Game"]["requirements"])?></li>
     <? } ?>
   </ul>
+</td><td>
 <h2>Genres</h2>
 <ul><?
 foreach ($game["Genres"] as $genre => $genre_set) {
@@ -57,7 +59,7 @@ foreach ($game["Genres"] as $genre => $genre_set) {
 }
 ?>  
 </ul>
-
+</td></tr></table>
 <h2>Ratings</h2>
 <? 
 echo $form->create("Rating",array("action"=>"vote"));
@@ -111,17 +113,19 @@ foreach ($RATING_TYPE as $key => $type) {
   echo '</li>';
 }
 ?>
+</cake:nocache>
 </ul>
+<cake:nocache>
 <? 
 if($session->check("Auth.User.user_id")) {
   # echo $form->end("Vote");
-  echo '<div class="submit"><input type="submit" value="Vote" /></div></form>';
+  echo '<div class="submit"><input type="submit" value="Vote" /></div>';
 } else {
   # echo $form->end(array("label"=>"Vote","disabled"=>"disabled"));
-  echo '<div class="submit"><input type="submit" disabled="disabled" value="Vote" /></div></form>';
+  echo '<div class="submit"><input type="submit" disabled="disabled" value="Vote" /></div>';
 }
 ?>
-</cake:nocache>
+</cake:nocache></form>
 <h2>Downloads</h2>
 <ul class="downloads"><?
 foreach ($game["Download"] as $file) {

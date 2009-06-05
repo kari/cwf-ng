@@ -5,21 +5,15 @@
 * Fold Queue.ctp's into one Admin.ctp that has filters and sorting like game/index.
 * Style Flash notices and form validation errors.
 * BBCode handling and editing
-  * Check how texts are handled at each part of site
-* Downloads
+  * Check how texts are handled at each part of site, because some of them are missing BBcode decoding
+* Downloads 
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
     * PEAR isn't in Apple-bundled PHP
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
 * Tools/index and others (layout, info)
-* Advertising elements
 * Blog comments
   * Defer to v1.5 or v2 with other blog functionalities?
-* PHP4 compat. (html_entities multichar...)
-  * Solution: Migrate surftown account to PHP5.
-  * Accented characters look like crap in publisher table?
-  * $html->link mangles UTF-8 accented characters(?)
-  * PHP4 DB saving doesn't work
 
 ## Deferred to v1.5
 
@@ -51,10 +45,12 @@
 * One newsfeed for frontpage (maybe?)
 * Pages/view (dynamic pages)
 * Build script to stage new revisions to CWF
+  * It's much easier with HG+SSH. Other tasks can be added to the Rakefile
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
 * OpenID/oAuth/Facebook Connect/Google Friend Connect...
 * FancyBox alternatives
+  * We have jQuery Tools that has some nice overlays.
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
@@ -65,10 +61,14 @@
 # TODOs from code
 
 `# grep -rn TODO app/*
-app/controllers/downloads_controller.php:35:		$this->view = 'Media'; # TODO: Rewrite built-in media view to support throttling, additional mime types...
+app/controllers/downloads_controller.php:41:			$this->view = 'Media'; # TODO: Rewrite built-in media view to support throttling, additional mime types...
+app/controllers/reviews_controller.php:49:					# TODO: Should editing a published review push it back to moderation queue?
 app/controllers/screenshots_controller.php:51:				die("Hack attempt. IP logged. Please go and die."); # TODO: log IP, ensure attacker is actually dead.
 app/controllers/tools_controller.php:38:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
-app/controllers/users_controller.php:18:			# TODO: there should be Remember Me-functionality
 app/views/blogs/view.ctp:7:<? #TODO: Comments? ?>
 app/views/games/atom/index.ctp:32:/* TODO: Maybe simpler way to do this with a (own) AtomHelper. Problem is SearchMonkey DataRSS Adjuncts.  
-app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)`
+app/views/media.php:20:	// TODO: Update mimeType array from downloads_controller. There's also lots of types we probably don't want to EVER serve in CWF-ng context (fe. Javascript).
+app/views/media.php:97:			// TODO: We shouldn't be here. Fix error message.
+app/views/media.php:133:				header("X-Real-Content-Type: ".$this->mimeType[$extension]); # TODO: We probably should use this one.
+app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)
+

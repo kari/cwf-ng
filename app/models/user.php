@@ -30,6 +30,8 @@ class User extends AppModel {
 			return false;
 		}
 		
+		if(!isset($user)) { return false; }
+		
 		$allow = $this->query("SELECT Action.".$action." FROM CWF_groups_actions AS Action LEFT JOIN phpbb_user_group AS UserGroup ON UserGroup.group_id = Action.group_id WHERE (user_id = ".$user["User"]["user_id"]." OR Action.group_id = 1) AND Action.action_id = '".strtolower($controller)."' AND Action.".$action." = 1 LIMIT 1;");
 		if (!empty($allow)) return true;
 		return false;

@@ -7,6 +7,7 @@ class Group extends AppModel {
 	var $tablePrefix = 'phpbb_';
 	var $primaryKey = 'group_id';
 	var $displayField = 'group_name';
+	var $order = "group_name ASC";
 	
 	# Relationships
 	var $belongsTo = array("Moderator"=>array("className"=>"User","foreignKey"=>"group_moderator","fields"=>"user_id,username"));

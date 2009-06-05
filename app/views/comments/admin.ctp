@@ -6,7 +6,7 @@
 <?
 foreach($comments as $comment) {
   echo "<tr><td>".$comment["Comment"]["text"]."</td>";
-  echo "<td>".$comment["Game"]["game_name"]."</td>";
+  echo "<td>".$html->link($comment["Game"]["game_name"],array("controller"=>"games","action"=>"view",$comment["Game"]["game_id"]))."</td>";
   echo "<td>".$comment["User"]["username"]."</td>";
   echo "<td>";
   if ($comment["Comment"]["validated"] == TRUE) {

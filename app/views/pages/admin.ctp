@@ -7,9 +7,9 @@ $this->pageTitle = "Site admininstartion";
 <ul>
   <li><?=$html->link("Game validation queue","/games/admin/status:2")?><br>
     Manage game validation queue</li>
-  <li><?=$html->link("Comment validation queue","/comments/queue")?><br>
+  <li><?=$html->link("Comment validation queue","/comments/admin/status:2")?><br>
     Manage game comment validation queue</li>
-  <li><?=$html->link("Review validation queue","/reviews/queue")?></li>
+  <li><?=$html->link("Review validation queue","/reviews/admin/status:2")?></li>
 </ul>
 <h2>Object management</h2>
 <ul>

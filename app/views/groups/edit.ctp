@@ -6,6 +6,7 @@
 <table> <tr><th>Object</th><th>create</th><th>read</th><th>update</th><th>delete</th><th>admin</th></tr>
 <?
 $ops = array("create","read","update","delete","admin");
+sort($ACTIONS);
 foreach ($ACTIONS as $key => $action) {
   echo "<tr><th>".$action."</th>";
   echo $form->hidden("Action.".$key.".action_id",array("value"=>$action));
