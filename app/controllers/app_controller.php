@@ -2,7 +2,7 @@
 class AppController extends Controller {  
 	var $components = array('Auth',"RememberMe");
 	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); // FIXME: Move helpers to individual controllers to optimize stuff
-	# var $uses = "User";
+	var $uses = array("User");
 	
 	function beforeFilter() {
 		setlocale(LC_CTYPE,array("en_GB.UTF-8","en_US.UTF-8","da_DK.UTF-8","fi_FI.UTF-8"));
@@ -21,6 +21,9 @@ class AppController extends Controller {
 	    );
 		$this->Auth->userScope = array('User.user_active' => '1'); # only allow activated (non-banned) users
 		$this->RememberMe->check();
+		if ($this->User->isAuthorized($this->Auth->user(),$this->params["controller"],"admin")) {
+			$this->set("admin_mode",true);
+		}
 	}
 	
 }

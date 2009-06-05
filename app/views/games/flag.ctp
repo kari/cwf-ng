@@ -1,8 +1,8 @@
 <h1>Report a mistake in <?=$html->link($game["Game"]["game_name"],array("action"=>"view",$game["Game"]["game_id"]))?></h1>
 <?=$form->create("Comment");?>
 <?=$form->hidden("flag",array("value"=>true))?>
-<?=$form->hidden("title",array("value"=>"There's a mistake here"));?>
-<?=$form->input("text",array("rows"=>3));?>
+<?=$form->hidden("title",array("value"=>"FLAGGED: There's a mistake here"));?>
+<?=$form->input("text",array("label"=>false,"rows"=>3));?>
 <cake:nocache>
 <? 
 if ($session->check("Auth.User.user_id")) {

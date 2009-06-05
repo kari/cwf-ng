@@ -30,7 +30,7 @@
   asort($GENRE);
   $cols = ceil(count($GENRE)/3.0);
   $i = 0;
-  echo "<table></tr><td>";
+  echo "<table><tr><td>";
   foreach($GENRE as $genre => $title) {
     if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
     $i++;

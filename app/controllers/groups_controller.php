@@ -6,6 +6,10 @@ class GroupsController extends AppController {
 			parent::beforeFilter();
 		}
 		
+		function admin() {
+			$this->redirect(array("action"=>"index"));
+		}
+		
 		function index() {
 			$this->set("groups",$this->Group->find("all",array("conditions"=>array("Group.group_single_user"=>"0"))));
 		}

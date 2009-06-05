@@ -33,6 +33,9 @@
           <li><?=$html->link("Tools","/tools/")?></li>
           <li><?=$html->link("Blogs","/blogs/")?></li>
           <li><?=$html->link("Forums","/forum")?></li>
+          <? if (isset($admin_mode) AND $admin_mode==true) {
+            echo "<li>".$html->link("Admin",array("action"=>"admin"))."</li>";
+          }?>
         </ul>
           
         <div id="flash">

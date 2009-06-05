@@ -27,7 +27,10 @@ Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),true)
 <?=$form->hidden("genre",array("value"=>""))?>
 <?=$form->end("Clear filters")?>
 </p>
-
+<?=$paginator->prev("Previous");?>&nbsp;
+<?=$paginator->numbers(); ?>&nbsp;
+<?=$paginator->next("Next");?>&nbsp;
+Page&nbsp;<?=$paginator->counter("pages"); ?>
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>

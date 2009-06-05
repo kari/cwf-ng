@@ -10,6 +10,7 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
   <li class="site"><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"))?></li>
   <li>Location: <?=$user["User"]["user_from"]?> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>
   <li>Occupation: <?=$user["User"]["user_occ"]?></li>
+  <li>Birthday: <?=date("d.m.Y",strtotime("+".$user["User"]["user_birthday"]." days",0))?></li> 
   <li>Last visit: <?=date("d.m.Y",$user["User"]["user_lastvisit"])?></li>
   <li>User since: <?=date("d.m.Y",$user["User"]["user_regdate"])?></li>
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
