@@ -1,8 +1,9 @@
 <? $this->pageTitle = $publisher["Publisher"]["name"]; ?>
-<h1><?=$publisher["Publisher"]["name"]?></h1>
+<div class="vcard">
+<h1 class="fn"><?=$publisher["Publisher"]["name"]?></h1>
 <h2>Details</h2>
 <ul>
-  <li class="site"><?=$html->link($publisher["Publisher"]["site"],$publisher["Publisher"]["site"])?></li>
+  <li class="site"><?=$html->link($publisher["Publisher"]["site"],$publisher["Publisher"]["site"],array("class"=>"url"))?></li>
   <? 
   if (!empty($publisher["Publisher"]["email"])) {
     # echo $html->link($publisher["Publisher"]["email"],"mailto:".$publisher["Publisher"]["email"])
@@ -10,6 +11,7 @@
   }
     ?>
 </ul>
+</div>
 <h2>Games</h2>
 <ul class="games">
 <?

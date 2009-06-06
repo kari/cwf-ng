@@ -1,5 +1,6 @@
 <? $this->pageTitle = $user["User"]["username"]; ?>
-<h1><?=$user['User']['username']?></h1>
+<div class="vcard">
+<h1 class="fn nickname"><?=$user['User']['username']?></h1>
 <?=$site->avatar($user["User"])?>
 <ul>
 <?
@@ -7,8 +8,8 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
   echo "<li>".$html->link("Edit profile","/forum/editprofile")."</li>";
 }
 ?>
-  <li class="site"><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"))?></li>
-  <li>Location: <?=$user["User"]["user_from"]?> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>
+  <li class="site"><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"),array("class"=>"url"))?></li>
+  <li>Location: <span class="adr label"><?=$user["User"]["user_from"]?></span> <?=$html->image("http://curlysworldoffreeware.com/images/flags/".$user["User"]["user_from_flag"])?></li>
   <li>Occupation: <?=$user["User"]["user_occ"]?></li>
   <li>Birthday: <?=date("d.m.Y",strtotime("+".$user["User"]["user_birthday"]." days",0))?></li> 
   <li>Last visit: <?=date("d.m.Y",$user["User"]["user_lastvisit"])?></li>
@@ -16,7 +17,7 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
   <li><?=$html->link("Forum profile","http://curlysworldoffreeware.com/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
   <li>Interests: <?=$user["User"]["user_interests"]?></li>
-  <li>User timzeone: <?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> 
+  <li>User timzeone: <span class="tz"><?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> </span>
 <?
  # echo date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")." (like ".timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0).")";
  
@@ -24,6 +25,8 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
  </li>
   <li>Forum signature: <blockquote><?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></blockquote></li>
 </ul>
+</div>
+
 <div class="yui-g">
   <div class="yui-u first">
 <h2>Proposed games (<?=count($user["Game_Proposed"])?>)</h2>
