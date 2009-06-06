@@ -3,14 +3,16 @@
 ?>
 <div class="yui-ge">
   <div class="yui-u first">
-<h1><?=$review["Review"]["review_title"]?></h1>
-<p>A review of <?=$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]))?> by <?=$html->link($review["User"]["username"],array("controller"=>"users","action"=>"view",$review["User"]["user_id"]))?> on <?=$time->format("d.m.Y",$review["Review"]["added"])?></p>
-<p>
-  <?=$bbcode->decode($review["Review"]["review_text"])?>
-</p>
+    <div class="hreview" lang="en">
+      <h1 class="summary"><?=$review["Review"]["review_title"]?></h1>
+      <p>A review of <span class="item"><?=$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]),array("class"=>"url fn"))?></span> by <span class="reviewer vcard"><?=$html->link($review["User"]["username"],array("controller"=>"users","action"=>"view",$review["User"]["user_id"]),array("class"=>"fn url"))?></span> on <span class="dtreviewed" title="<?=$time->format("c",$review["Review"]["added"])?>"><?=$time->format("d.m.Y",$review["Review"]["added"])?></span></p>
+      <div class="description">
+        <p><?=$bbcode->decode($review["Review"]["review_text"])?></p>
+      </div>
+    </div>
   </div>
   <div class="yui-u">
-    <!-- right bar -->
+  <!-- right bar -->
     <?=$this->element("spotlight",array("game_id"=>$review["Game"]["game_id"],"cache"=>array("key"=>$review["Game"]["game_id"],"time"=>"+1 day")));?>
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
     
