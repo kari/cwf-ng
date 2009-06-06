@@ -4,6 +4,7 @@
     <?=$html->charset(); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
 		<?=$html->meta('icon',$html->url("/favicon.ico"));?> <? # FIXME ?>
+		<link rel="home" href="<?=$html->url("/")?>">
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js");?>
     <?=$scripts_for_layout;?>
