@@ -1,3 +1,23 @@
+<?
+$this->pageTitle = "Editing '".$this->data["Game"]["game_name"]."'";
+echo $javascript->codeBlock("
+$(document).ready(function() {
+  if (".($this->data["Publisher"]["publisher_id"]?$this->data["Publisher"]["publisher_id"]:"0")." > 0) {
+    $('a#edit_pub').attr('href','".$html->url(array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]))."');
+  } else {
+    $('a#edit_pub').removeAttr('href');
+  }
+  
+  $('select#GamePublisherId').change(function() {
+      var selected = $('select#GamePublisherId option:selected');
+      if (selected.val() > 0) {
+      $('a#edit_pub').attr('href','".$html->url(array("controller"=>"publishers","action"=>"edit"))."/'+selected.val());
+      } else {
+        $('a#edit_pub').removeAttr('href');
+      }
+    });
+});");
+?>
 <h1>Edit Game "<?=$html->link($this->data["Game"]["game_name"],array("action"=>"view",$this->data["Game"]["game_id"]))?>"</h1>
 <div class="yui-gc">
   <div class="yui-u first">
@@ -15,7 +35,7 @@
   echo $form->input("site");
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
   echo '<span class="pull">';
-  echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
+  echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array("id"=>"edit_pub"),"This will navigate away from this page. All unsaved changes will be lost.")." ";
   echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
   echo '</span>';
   echo $form->input("description",array("between"=>"<br>","rows"=>10));
@@ -47,7 +67,7 @@
   asort($OSYSTEM);
   $cols = ceil(count($OSYSTEM)/3.0);
   $i = 0;
-  echo "<table></tr><td>";
+  echo "<table><tr><td>";
   foreach($OSYSTEM as $os => $title) {
     if (($i % $cols == 0) && ($i >0)) { echo '</td><td>'; }
     $i++;

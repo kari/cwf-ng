@@ -8,7 +8,7 @@
   echo "<em>If publisher is not listed, leave this empty. You can add new publishers in the next screen.</em>";
   echo $form->input("site",array("label"=>"Website","value"=>"http://"));
   echo $form->input("description",array("between"=>"<br>","rows"=>10));
-  echo $form->input("requirements",array("between"=>"<br>","rows"=>2));
+  echo $form->input("requirements",array("label"=>"Requirements (optional)","between"=>"<br>","rows"=>2));
   echo "</fieldset>";
 ?>
 <fieldset>

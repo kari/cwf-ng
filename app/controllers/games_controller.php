@@ -127,7 +127,7 @@ class GamesController extends AppController {
 	
 	function get($id = null) {
 		if ($id == null) { $this->cakeError('error404'); }
-		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id),"contain"=>array("Screenshot","Publisher","Rating")));
+		$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id),"contain"=>array("Screenshot","Publisher","Rating")));
 		if (isset($this->params["requested"])) {
 			if (!empty($game)) { 
 				return $game;
@@ -219,8 +219,13 @@ class GamesController extends AppController {
 			$this->data["Game"]["specs_id"] = $this->Game->Specs->id;
 			$this->Game->Genres->save($this->data);
 			$this->data["Game"]["genre_id"] = $this->Game->Genres->id;
-			$this->Game->save($this->data);
-			$this->flash("Game created.",array("action"=>"edit",$this->Game->id));
+			if ($this->Game->save($this->data)) {
+				$this->Session->setFlash("Game added, you can now add a new publisher, screenshots and other information.");
+				$this->redirect(array("action"=>"edit",$this->Game->id));
+			} else {
+				# FIXME: something went wrong...
+			}
+			# $this->flash("Game created.",array("action"=>"edit",$this->Game->id));
 		}
 		$this->set("gameProposers",$this->Game->GameProposer->find('list'));
 		$this->set("gameHunters",$this->Game->GameHunter->find('list'));

@@ -9,6 +9,7 @@ class ForumController extends AppController {
 	}
 	
 	function index() {
+		$this->redirect("http://www.curlysworldoffreeware.com/index.php"); # FIXME: before release
 		# $this->cakeError("error404");
 	}
 	

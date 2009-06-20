@@ -1,6 +1,6 @@
 <div class="yui-ge">
   <div class="yui-u first">
-<h1>Add Download</h1>
+<h1>Add Download<?=($game_id?" for ".$html->link($games[$game_id],array("controller"=>"games","action"=>"edit",$game_id)):"")?></h1>
 <?
 echo $form->create('Download');
 echo $form->input('download_link');

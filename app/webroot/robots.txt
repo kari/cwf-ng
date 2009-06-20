@@ -1,0 +1,12 @@
+# This should stop Googlebots and other crawlers from browsing calendar endlessly
+User-agent: *
+Disallow: /calendar_scheduler.php
+Disallow: /dl.php
+Disallow: /dl_request.php
+Disallow: /viewonline.php
+Disallow: /export.php
+Disallow: /printview.php
+Disallow: /dlstats.php
+Disallow: /downloads/
+
+Sitemap: http://www.curlysworldoffreeware.com/sitemap.xml

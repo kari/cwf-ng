@@ -1,4 +1,16 @@
+<?
+echo $javascript->codeBlock("
+$(document).ready(function() {
+  $('select#game').change(function() {
+      var selected = $('select#game option:selected');
+      if (selected.val() > 0) {
+        window.location.href = '".$html->url(array("action"=>"add"))."/'+selected.val();
+      }
+    });
+});");
+?>
 <h1>Review admin</h1>
+<p>Add a review for <?=$form->select("game",$games,false,array(),true)?></p>
 <p>Filter by Review status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Published",array("status"=>1))?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>]</p>
 <?$paginator->options(array('url' => $this->passedArgs));?>
 <table>

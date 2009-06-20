@@ -48,5 +48,6 @@
 	// Blah
 	Router::connect("/admin",array("controller"=>"pages","action"=>"admin"));
 	Router::connect("/sitemap",array("controller"=>"pages","action"=>"sitemap"));
+	Router::connect("/signup",array("controller"=>"users","action"=>"signup"));
 	Router::parseExtensions('atom','xml');
 ?>

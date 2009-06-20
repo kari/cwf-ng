@@ -12,6 +12,7 @@ $(document).ready(function() {
 
 ?>
 <h1>Game admin</h1>
+<p><?=$html->link("Add a game",array("action"=>"add"))?></p>
 <? $paginator->options(array("url"=>array("page"=>1))); ?>
 Filter by Download status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Accepted",array("status"=>1))?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>] [<?=$paginator->link("Others",array("status"=>3))?>]
 
