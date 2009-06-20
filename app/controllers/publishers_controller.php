@@ -16,12 +16,25 @@ class PublishersController extends AppController {
     $this->set('publisher', $this->Publisher->read('',$id));
   }
 
-	function add() {
+	function add($game_id = null) {
 		if (!empty($this->data)) {
 			if($this->Publisher->save($this->data)) {
 				$this->Session->setFlash("Publisher was added.");
-				$this->redirect(array("action"=>"edit",$this->Publisher->id));
+				if ($game_id) {
+					# FIXME: Save publisher as game's publisher.
+					$pub = array("Game"=>array("game_id"=>$game_id,"publisher_id"=>$this->Publisher->id));
+					$this->Publisher->Game->save($pub);
+					$this->redirect(array("controller"=>"games","action"=>"edit",$game_id));
+				} else {
+					$this->redirect(array("action"=>"edit",$this->Publisher->id));
+				}
 			}
+		}
+		if ($game_id) {
+			$game = $this->Publisher->Game->find("first",array("conditions"=>array("Game.game_id"=>$game_id)));
+			if (empty($game)) { $this->cakeError("error404"); }
+			$this->set("game",$game);
+			$this->set("game_redirect",$game_id);
 		}
 	}
 	

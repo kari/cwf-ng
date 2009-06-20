@@ -112,6 +112,7 @@ class ReviewsController extends AppController {
 			}
 		}
 		$this->set("reviews",$this->paginate("Review",$conds));
+		$this->set("games",$this->Game->find("list",array("contain"=>array(),"fields"=>array("Game.game_id","Game.game_name"),"order"=>"Game.game_name")));
 	}
 	
 	function publish($id) {

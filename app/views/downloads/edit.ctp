@@ -1,3 +1,5 @@
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1>Edit Download for <?=$html->link($this->data["Game"]["game_name"],array("controller"=>"games","action"=>"edit",$this->data["Game"]["game_id"]))?></h1>
 <?
 echo $form->create('Download');
@@ -18,3 +20,9 @@ echo "</fieldset>";
 echo $form->end('Save');
 echo $html->link("Delete",array("action"=>"delete",$this->data["Download"]["file_id"]),array(),"Proceed with delete?");
 ?>
+ </div>
+  <div class="yui-u">
+    <!-- right bar -->
+    <?=$this->element("spotlight",array("game_id"=>$game_id,"cache"=>array("key"=>$game_id,"time"=>"+1 day")));?> 
+  </div>
+</div>

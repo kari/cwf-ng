@@ -7,7 +7,7 @@ class UsersController extends AppController {
 		
 		function beforeFilter() {
 			parent::beforeFilter();
-			$this->Auth->allow(array("logout","view"));
+			$this->Auth->allow(array("logout","view","signup"));
 		}
  
     /**
@@ -46,6 +46,10 @@ class UsersController extends AppController {
 			$this->set('user', $user);
 			$this->data["cached_user_id"] = $id;
     }
+
+		function signup() {
+			$this->redirect("http://www.curlysworldoffreeware.com/profile.php?mode=register"); #FIXME: before release
+		}
 }
 
 ?>

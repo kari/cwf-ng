@@ -12,18 +12,19 @@
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
 * Tools/index and others (layout, info)
-* Blog comments
-  * Defer to v1.5 or v2 with other blog functionalities?
 
 ## Deferred to v1.5
 
 * Game (Hunter) workflow/lifecycle/process
   * This is huge.
+* Blog comments
+  * Defer to v1.5 or v2 with other blog functionalities?
 
 ## Deferred to v2 or later
 
-* game/index and other filtering using GET
-* SearchMonkey Atom feeds (can't add until site is live)
+* game/index and other filtering using GET instead of cookies
+* Semantic Web
+  * SearchMonkey Atom feeds (can't add until site is live)
   * Google implements same with Microformats (hReview etc.) or RDF+XHTML, but our site
     is HTML4 so microformats are the only way forward.
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
@@ -32,7 +33,7 @@
   * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
 * BBCode Rich text editor
-* Social web features (integration to Twitter etc.)
+* Social Web features (integration to Twitter etc.)
   * Integration requires JSON, PHP4 needs a library for it
   * oAuth, OpenID etc. to login (or to download?)
   * Facebook Connect, Google Connect, [Yahoo Updates](http://developer.yahoo.com/social/updates/)

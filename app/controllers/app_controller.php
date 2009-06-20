@@ -21,7 +21,8 @@ class AppController extends Controller {
 	    );
 		$this->Auth->userScope = array('User.user_active' => '1'); # only allow activated (non-banned) users
 		$this->RememberMe->check();
-		if ($this->User->isAuthorized($this->Auth->user(),$this->params["controller"],"admin")) {
+		$controller = str_replace("_","",$this->params["controller"]);
+		if ($this->User->isAuthorized($this->Auth->user(),$controller,"admin")) { # FIXME: Controller name here is not set by the same function as with authorization. Works, though.
 			$this->set("admin_mode",true);
 		}
 	}
