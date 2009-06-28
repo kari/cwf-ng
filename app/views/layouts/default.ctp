@@ -86,7 +86,7 @@
     </div>
     <div id="ft">
       <!-- Footer conent -->
-      <p>All trademarks and copyrights on this page are owned by their respective owners. User generated content is owned by their authors.<br/> Site &copy; 2009 CWF-Freeware. Terms of Service and Privacy Policy.</p>
+      <p>All trademarks and copyrights on this page are owned by their respective owners. User generated content is owned by their authors.<br/> Site &copy; 2009 CWF-Freeware. <?=$html->link("Terms of Service and Privacy Policy",array("controller"=>"pages","action"=>"disclaimer"))?>.</p>
       <?
       if (Configure::read("Site.track") == true) echo $this->element("ga");
       ?>
