@@ -8,11 +8,15 @@ class PagesController extends AppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("home","sitemap","disclaimer"));
+		$this->Auth->allow(array("home","sitemap","disclaimer","link_exchange"));
 		$this->Auth->mapActions(array("status"=>"admin","admin"=>"admin"));
 	}
 	
 	function disclaimer() {
+		
+	}
+	
+	function link_exchange() {
 		
 	}
 	
