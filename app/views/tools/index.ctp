@@ -1,3 +1,5 @@
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1>Tools</h1>
 <ul class="tools">
 <?foreach ($tools as $tool) {
@@ -7,3 +9,8 @@
 }
 ?>
 </ul>
+  </div>
+  <div class="yui-u">
+    <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>

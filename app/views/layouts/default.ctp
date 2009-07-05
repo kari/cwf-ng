@@ -5,6 +5,8 @@
     <title>CWF - <?=$title_for_layout; ?></title>
 		<?=$html->meta('icon',$html->url("/favicon.ico"));?> <? # FIXME ?>
 		<link rel="home" href="<?=$html->url("/")?>">
+		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css"> 
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.7.0/build/base/base-min.css">
     <?=$html->css('default');?>
     <?=$javascript->link("http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js");?>
     <?=$scripts_for_layout;?>
