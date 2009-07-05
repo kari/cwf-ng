@@ -81,6 +81,7 @@
         <?=$this->element("toprated",array("cache"=>array("key"=>"","time"=>"+6 hour")))?>
         <?=$this->element("topdownloads",array("cache"=>array("key"=>"","time"=>"+1 day")))?>
         <?#=$this->element("adbox",array("style"=>"pw-square"))?>
+        <?=$this->element("link_exchange",array("cache"=>array("key"=>"","time"=>"+1 day")))?>
         </cake:nocache>
       </div>
     </div>
