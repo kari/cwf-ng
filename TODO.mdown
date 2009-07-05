@@ -12,6 +12,7 @@
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
 * Tools/index and others (layout, info)
+* Link exchange banner element
 
 ## Deferred to v1.5
 
