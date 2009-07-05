@@ -1,7 +1,4 @@
-/* FIXME: could get these from Google CDN */
-@import url("reset-fonts-grids.css");
-@import url("base-min.css");
-
+/* Default stylesheet for CWF */
 x.cake-sql-log { display:none;}
 
 /* Colors:
@@ -14,7 +11,7 @@ yellow 250 230 90 #F0E65A
 */
 
 html { background-color: #C3D7FF; }
-
+input[type=text],input[type=password],textarea {width:12.25em;*width:11.9em;}
 div#bd { background-color: #FEFEFE; padding: 0px 2px; margin-top: 5px; border: 1px solid #001937;}
 
 div#hd { margin-top: 10px;}
@@ -108,4 +105,4 @@ div#ft p {font-size: 77%; color: #999;width:650px;margin-left:auto;margin-right:
 div.tooltip {display:none;background-color:#000000;color:#ffffff;}
 
 ul.link_exchange {margin-left:0px;}
-ul.link_exchange li {list-style: none; width: 88px; min-height: 31px; text-align: center; vertical-align: middle; background-color: #efefef;}
+ul.link_exchange li {list-style: none; width: 88px; min-height: 31px; text-align: center; vertical-align: middle; background-color: #efefef;margin-left: auto; margin-right: auto;}

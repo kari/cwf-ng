@@ -1,3 +1,5 @@
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1>Guides</h1>
 <ul class="blogs">
 <?foreach ($guides as $guide) {
@@ -9,3 +11,8 @@
 <?=$paginator->numbers(); ?>&nbsp;
 <?=$paginator->next();?> &nbsp;
 <?=$paginator->counter(); ?>
+  </div>
+  <div class="yui-u">
+    <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>
