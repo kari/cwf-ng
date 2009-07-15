@@ -20,6 +20,10 @@ class PagesController extends AppController {
 		
 	}
 	
+	function acknowledgments() {
+		
+	}
+	
 	function home() {
 		$this->cacheAction = "+1 hour";
 		$this->set("news",$this->News->find("all",array("order" => "post_date DESC","limit"=>5)));
