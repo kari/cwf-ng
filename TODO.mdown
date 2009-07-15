@@ -2,6 +2,8 @@
 
 ## Backlog to v1
 
+* Disable blogs
+* Write DB migration scripts
 * Fold Queue.ctp's into one Admin.ctp that has filters and sorting like game/index.
 * Style Flash notices and form validation errors.
 * BBCode handling and editing
@@ -12,7 +14,6 @@
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
 * Tools/index and others (layout, info)
-* Link exchange banner element
 
 ## Deferred to v1.5
 
