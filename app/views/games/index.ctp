@@ -11,26 +11,36 @@
       'overlayShow': true,
       'overlayOpacity': 0,
       });
-  });")
+
+    $('#filter > select').change(function() {
+      $('#filter').submit();
+    });
+  });");
 ?>
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1>Games</h1>
-<p>Sort by <?=$paginator->link("Game name",array("sort"=>"game_name","direction"=>"asc"))?>, 
- <?=$paginator->link("Score",array("sort"=>"site_rating","direction"=>"desc"))?>, <?=$paginator->link("Date added",array("sort"=>"created","direction"=>"desc"))?>, <?=$paginator->link("Release date",array("sort"=>"year","direction"=>"desc"))?><br>
-<?=$form->create("",array("type"=>"post","action"=>"index"))?>
-Platform <?=$form->select("platform",$OSYSTEM,$session->read("Game.platform"),array(),true)?>, 
-Min. Score <?=$form->select("score",array(0,1,2,3,4,5,6),($session->check("Game.score") ? $session->read("Game.score") : 0),array(),false)?>, 
-Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),true)?>
-<?=$form->end("Filter")?>
-<?=$form->create("",array("type"=>"post","action"=>"index"))?>
+<div class="filters">
+<p>Sort by <?=$paginator->link("Game name",array("sort"=>"game_name","direction"=>"asc"))?>,
+<?=$paginator->link("Score",array("sort"=>"site_rating","direction"=>"desc"))?>, <?=$paginator->link("Date added",array("sort"=>"created","direction"=>"desc"))?>, <?=$paginator->link("Release date",array("sort"=>"year","direction"=>"desc"))?></p>
+<?=$form->create(null,array("type"=>"post","action"=>"index","id"=>"filter"))?>
+Platform <?=$form->select("platform",$OSYSTEM,$session->read("Game.platform"),array(),"(All)")?>&nbsp;
+Min. Score <?=$form->select("score",array(0,1,2,3,4,5,6),($session->check("Game.score") ? $session->read("Game.score") : 0),array(),false)?>&nbsp;
+Genre <?=$form->select("genre",$GENRE,$session->read("Game.genre"),array(),"(All)")?><br>
+<?=$form->end()?>&nbsp;
+<? /*
+<?=$form->create(null,array("type"=>"post","action"=>"index","id"=>"clearfiter"))?>
 <?=$form->hidden("platform",array("value"=>""))?>
 <?=$form->hidden("score",array("value"=>"0"))?>
 <?=$form->hidden("genre",array("value"=>""))?>
 <?=$form->end("Clear filters")?>
-</p>
-<?=$paginator->prev("Previous");?>&nbsp;
+*/ ?>
+</div>
+<div class="nav"><?=$paginator->prev("Previous");?>&nbsp;
 <?=$paginator->numbers(); ?>&nbsp;
 <?=$paginator->next("Next");?>&nbsp;
 Page&nbsp;<?=$paginator->counter("pages"); ?>
+</div>
 <table>
 	<? foreach ($games as $game) { ?>
 	<tr><td>
@@ -69,8 +79,14 @@ if (array_key_exists(0,$game["Rating"])) { # FIXME: Ugly way, and might not be O
 	</td></tr>
 	<? } ?>
 </table>
-
+<div class="nav">
 <?=$paginator->prev("Previous");?>&nbsp;
 <?=$paginator->numbers(); ?>&nbsp;
 <?=$paginator->next("Next");?>&nbsp;
 Page&nbsp;<?=$paginator->counter("pages"); ?>
+</div class="nav">
+  </div>
+  <div class="yui-u">
+    <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>

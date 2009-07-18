@@ -34,12 +34,20 @@
           <li><?=$html->link("Guides","/guides/")?></li>
           <li><?=$html->link("Interviews","/interviews/")?></li>
           <li><?=$html->link("Tools","/tools/")?></li>
-          <li><?=$html->link("Blogs","/blogs/")?></li>
           <li><?=$html->link("Forums","/forum")?></li>
-          <? if (isset($admin_mode) AND $admin_mode==true) {
-            echo "<li>".$html->link("Admin",array("action"=>"admin"))."</li>";
-          }?>
-        </ul>
+          <li><?=$html->link("About us","/about")?></li>
+          <? 
+          if (isset($admin_mode) AND $admin_mode==true) {
+          ?>
+          <li class="admin"><?=$html->link("Admin",array("action"=>"admin"))?></li>
+          <? 
+            if (isset($this->params["pass"][0]) && $this->params["action"]=="view") { ?>    
+          <li class="admin"><?=$html->link("Edit this",array("action"=>"edit",$this->params["pass"][0]))?></li>
+          <? 
+            } 
+          }
+          ?>
+        </ul>  
           
         <div id="flash">
           <cake:nocache>

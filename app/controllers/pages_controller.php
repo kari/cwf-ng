@@ -8,7 +8,7 @@ class PagesController extends AppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("home","sitemap","disclaimer","link_exchange"));
+		$this->Auth->allow(array("home","sitemap","disclaimer","link_exchange","acknowledgments","about"));
 		$this->Auth->mapActions(array("status"=>"admin","admin"=>"admin"));
 	}
 	
@@ -24,13 +24,17 @@ class PagesController extends AppController {
 		
 	}
 	
+	function about() {
+		
+	}
+	
 	function home() {
 		$this->cacheAction = "+1 hour";
 		$this->set("news",$this->News->find("all",array("order" => "post_date DESC","limit"=>5)));
-		$this->set("blogs",$this->Blog->find("all",array("order" => "created DESC","limit"=>10)));
+		# $this->set("blogs",$this->Blog->find("all",array("order" => "created DESC","limit"=>10)));
 		$this->set("reviews",$this->Review->find("all",array("conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5)));
 		$this->set("scrollable_games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>12,"contain"=>array("Screenshot","Publisher"))));
-		$this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>10,"contain"=>array("Screenshot","Publisher"))));
+		# $this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>10,"contain"=>array("Screenshot","Publisher"))));
 		$this->set("interviews",$this->Interview->find("all",array("limit"=>5)));
 		$this->set("worldnews",$this->WorldNews->find("all",array("limit"=>5)));
 		# $this->set('Auth',$this->Auth->user());

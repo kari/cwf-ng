@@ -21,4 +21,4 @@
 <li><a href="http://www.firestormproductions.co.uk/" target="_blank"><img src="<?=$html->url("/img/links/banner_fstorm2.png")?>" title="Firestorm Productions" alt="www.firestormproductions.co.uk"></a></li>
 
 </ul>
-Liked us? <?=$html->link("Link to us or consider banner exchange","/pages/link_exchange")?>
+<p>Liked us? <?=$html->link("Link to us or consider banner exchange","/pages/link_exchange")?></p>

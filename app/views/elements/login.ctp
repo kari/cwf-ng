@@ -12,7 +12,7 @@
       echo "</td></tr></table>";
 #      echo "</div></div>";
       if ($session->read("Auth.User.user_new_privmsg") > 0) { 
-        echo $html->image("/img/icons/email.png")." New private messages."; 
+        echo $html->image("/img/icons/email.png")." ".$html->link("New private messages.","http://curlysworldoffreeware.com/privmsg.php?folder=inbox",null,null,false); 
       }
       # echo debug($session->read());
     } else {

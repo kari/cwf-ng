@@ -1,4 +1,4 @@
-<h1><?=$group["Group"]["group_name"]?></h1>
+<h1><?=($group["Group"]["group_id"]==1) ? "All users" : $group["Group"]["group_name"]?></h1>
 <div class="yui-gc">
   <div class="yui-u first">
 <h2>Group access rights</h2>
@@ -39,6 +39,7 @@ foreach ($ACTIONS as $key => $action) {
 <?=$form->end("Save")?>
 </div>
 <div class="yui-u">
+<? if ($group["Group"]["group_id"]>1) { ?>
 <p><em><?=$group["Group"]["group_description"]?></em></p><p>Moderator: <?=$html->link($group["Moderator"]["username"],array("controller"=>"users","action"=>"view",$group["Moderator"]["user_id"]))?><br>Members:
 <ul>
 <? 
@@ -49,5 +50,8 @@ foreach($group["User"] as $user) {
 </ul>
 <em>Please use phpBB control panel to add/edit group memberships.</em>
 </p>
+<? } else { ?>
+<p><em>These rights apply to all registered users.</em></p>
+<? } ?>
 </div>
 </div>

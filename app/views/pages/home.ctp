@@ -2,6 +2,7 @@
 $this->pageTitle = "CWF-Freeware"; 
 $html->css("jquery.scrollable","stylesheet",array("media"=>"screen"),false);
 $javascript->link("/js/jquery.tools.min.js",false);
+$html->meta("atom","/games/index.atom",array("title"=>"CWF – Recent games","rel"=>"alternate"),false);
 ?>
 <? # Page-specific jQuery code: 
   echo $javascript->codeBlock("$(document).ready(function() {
@@ -81,32 +82,7 @@ if ($session->check("Auth.User.user_id")) {
 </ul>
   </div>
 </div>
-<div class="yui-g">
-  <div class="yui-u first">
-<h2>Latest games</h2>
-<ul class="games">
-<? foreach($games as $game) {
-  echo "<li><strong>";
-  # echo date("d.m.Y",strtotime($item["News"]["post_date"]))." - ";
-  echo $html->link($game["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]));
-  echo "</strong><br>".$text->trim($bbcode->strip($game["Game"]["description"]),200,"...",false);
-  echo "</li>";
-}?>
-</ul>
-  </div>
-  <div class="yui-u">
-<h2>Latest blogs</h2>
-<ul class="blogs">
-<? foreach($blogs as $blog) {
-  echo "<li><strong>";
-  echo $time->format("d.m.Y",$blog["Blog"]["created"]);
-  echo " - ".$html->link($blog["Blog"]["title"],array("controller"=>"blogs","action"=> "view",$blog["Blog"]["entry_id"]))." by ".$blog["User"]["username"];
-  echo "</strong><br>".$text->trim($bbcode->strip($blog["Blog"]["content"]),200,"...",false);
-  echo "</li>";  
-}?>
-</ul>
-  </div>
-</div>
+
 <div class="yui-g">
   <div class="yui-u first">
 <h2>Latest reviews</h2>

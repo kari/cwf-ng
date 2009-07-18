@@ -15,7 +15,7 @@ class BlogsController extends AppController {
 	
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view"));
+		# $this->Auth->allow(array("index","view"));
 	}
 	
 	function index($id = null) {
