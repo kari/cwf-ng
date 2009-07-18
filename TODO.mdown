@@ -2,10 +2,6 @@
 
 ## Backlog to v1
 
-* Disable blogs
-* Write DB migration scripts
-* Fold Queue.ctp's into one Admin.ctp that has filters and sorting like game/index.
-* Style Flash notices and form validation errors.
 * BBCode handling and editing
   * Check how texts are handled at each part of site, because some of them are missing BBcode decoding
 * Downloads 
@@ -13,7 +9,11 @@
     * PEAR isn't in Apple-bundled PHP
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
-* Tools/index and others (layout, info)
+
+## Pre-launch v1
+
+* Migrate DB
+* Handle legacy URL rewrites
 
 ## Deferred to v1.5
 
@@ -21,6 +21,9 @@
   * This is huge.
 * Blog comments
   * Defer to v1.5 or v2 with other blog functionalities?
+* Birthday list
+* Similar games
+  * Dont think if it is planned, but we might think of "similar games" or "more games from this creator" or "people who downloaded game x also downloaded game y" option displayed in gameinfo panel. Showing three games for example, like it is usually done.
 
 ## Deferred to v2 or later
 

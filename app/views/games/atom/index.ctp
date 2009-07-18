@@ -1,6 +1,6 @@
 <?
 # Set Feed data.
-$this->set("feedData",array("title"=>"Recent Games"));
+$this->set("feedData",array("title"=>"CWF – Recent Games"));
 
 foreach($games as $game) {
   $href = $html->url(array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),true);

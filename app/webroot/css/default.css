@@ -20,15 +20,17 @@ div#hd ul.nav li { display: inline; margin: 0; padding: 0; font-size: 123.1%; co
 div#hd ul.nav li a:visited { color: #C3D7FF;}
 div#hd ul.nav li a { color: #C3D7FF; text-decoration: none;}
 div#hd ul.nav li a:hover { color:#FEFEFE;}
-div#hd ul.nav { margin-left: 0px; background-color: #05328C;}
-
+div#hd ul.nav { margin-left: 0px; background-color: #05328C; }
+div#hd ul.nav li.admin {font-weight: bold;}
+div#sidebar p, div#sidebar td {font-size: 93%;}
+td p {font-size: 93%; max-width: 35em;}
 div#bd h1 { background-color: #05328C; color: #C3D7FF;
 	padding-top: 2px; padding-bottom: 2px; padding-left: 5px;}
-	
+div.filters {font-size: 93%;}	
 div#hd div#loginbox { width: 200px; x-float: right; height:80px;}
-	
+div.nav {width:400px;margin:auto;font-size: 93%;margin-top:0.5em;margin-bottom:0.5em;}	
 ul#screenshots, ul#screenshots li { display: inline; margin: 0; padding: 0;}
-
+div.filters form, div.filters form div {display: inline;}
 /* div#sidebar { background-color: #EAEAEA; } */
 
 ul#screenshots li {
@@ -94,14 +96,16 @@ table.clean th { border-bottom: 2px solid #666;}
 table.slim {margin: 0; padding:0;}
 table.slim td {margin: 0; padding:0; padding-bottom: 5px; padding-right: 5px; vertical-align: top;}
 
-div#flashMessage,div#authMessage {background-color: #FEFEFE; border: 1px solid #001937; padding: 2px;}
+div#flashMessage {background-color: #FEFEFE; background-image: url("../img/icons/information.png"); background-repeat: no-repeat; background-position: 2px center; border: 1px solid #001937; padding: 2px; padding-left: 20px;}
+div#authMessage {background-color: #FEFEFE; background-image: url("../img/icons/error.png"); background-repeat: no-repeat; background-position: 2px center; border: 1px solid #001937; padding: 2px; padding-left: 20px;}
 div#adminMessage {margin-left: auto; margin-right: auto; padding:0; width: 500px;}
-div.error-message {color: red;}
+div.error-message {color: red; padding-left: 20px; background-image: url("../img/icons/exclamation.png"); background-position: 2px center; background-repeat: no-repeat;}
 
 div#yui-main > div.yui-b { min-height: 400px;}
 
 div#yui-main > div.yui-b > div.adbox { margin-left: auto; margin-right: auto; width: 470px;}
-div#ft p {font-size: 77%; color: #999;width:650px;margin-left:auto;margin-right:auto;text-align:center;margin-top:0.5em;}
+div#ft p {font-size: 77%; color: #555;width:650px;margin-left:auto;margin-right:auto;text-align:center;margin-top:0.5em;}
+div#ft a, div#ft a:visited {color:#222;}
 div.tooltip {display:none;background-color:#000000;color:#ffffff;}
 
 ul.link_exchange {margin-left:0px;}

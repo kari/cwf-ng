@@ -1,7 +1,11 @@
 <? $this->pageTitle = $user["User"]["username"]; ?>
 <div class="vcard">
 <h1 class="fn nickname"><?=$user['User']['username']?></h1>
+<div class="yui-gf">
+  <div class="yui-u first">
 <?=$site->avatar($user["User"])?>
+  </div>
+  <div class="yui-u">
 <ul>
 <?
 if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
@@ -25,6 +29,8 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
  </li>
   <li>Forum signature: <blockquote><?=$bbcode->decode($user["User"]["user_sig"],$user["User"]["user_sig_bbcode_uid"])?></blockquote></li>
 </ul>
+  </div>
+</div>
 </div>
 
 <div class="yui-g">
@@ -32,12 +38,16 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
 <h2>Proposed games (<?=count($user["Game_Proposed"])?>)</h2>
 <ul class="games">
   <?
+if (count($user["Game_Proposed"])>0) {
   $i = 0;
   shuffle($user["Game_Proposed"]); # FIXME: Is this really useful? Default oder is DESC by date.
   foreach($user["Game_Proposed"] as $game) {
     if ($i++>=10) { echo "<li>and many more...</li>"; break; };
     echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>";     
   }
+} else {
+  echo "<li>No proposed games</li>";
+}
   ?>
 </ul>
   </div>
@@ -45,28 +55,45 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
 <h2>Hunted games (<?=count($user["Game_Hunted"])?>)</h2>
 <ul class="games">
   <?
+if (count($user["Game_Hunted"])>0) {
   $i = 0;
   shuffle($user["Game_Hunted"]); # FIXME: See above.
   foreach($user["Game_Hunted"] as $game) {
     if ($i++>=10) { echo "<li>and many more...</li>"; break; };
     echo "<li>".$html->link($game["game_name"],array("controller"=>"games","action"=>"view",$game["game_id"]))."</li>";
   }
+} else {
+  echo "<li>No hunted games</li>";
+}
   ?>
 </ul>
   </div>
 </div>
+<div class="yui-g">
+  <div class="yui-u first">
 <h2>Reviews</h2>
 <ul class="reviews">  <?
+if (count($user["Review"])>0) {
   foreach($user["Review"] as $review) {
     echo "<li>".$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"]))."</li>";
   }
-  
+} else {
+  echo "<li>".$user["User"]["username"]." hasn't written any reviews… yet.</li>";
+}  
   ?></ul>
+</div>
+<div class="yui-u">
 <h2>Groups</h2>
 <ul class="groups">
-  <? 
+  <?
+if (count($user["Group"])>0) {
   foreach($user["Group"] as $group) {
     echo "<li>".$group["group_name"]." <i>(".$group["group_description"].")</i></li>";
   }
+} else {
+  echo "<li>".$user["User"]["username"]." doesn't belong to any groups.</li>";
+}
   ?>
 </ul>
+</div>
+</div>

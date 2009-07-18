@@ -122,7 +122,7 @@ if($session->check("Auth.User.user_id")) {
   echo '<div class="submit"><input type="submit" value="Vote" /></div>';
 } else {
   # echo $form->end(array("label"=>"Vote","disabled"=>"disabled"));
-  echo '<div class="submit"><input type="submit" disabled="disabled" value="Vote" /></div>';
+  echo '<div class="submit"><input type="submit" disabled="disabled" value="Vote" /></div> <em>'.$html->link("Log in",array("controller"=>"users","action"=>"login")).' to vote.</em>';
 }
 ?>
 </cake:nocache></form>

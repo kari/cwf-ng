@@ -4,7 +4,7 @@
 <?
 echo $form->create('Interview');
 echo $form->input('interview_title',array("type"=>"text"));
-echo $form->input("game_id");
+echo $form->input("game_id",array("empty"=>"(No game)"));
 echo $form->input("developer_id");
 echo $form->input("answerer",array("label"=>"Interviewee","after"=>" (optional)"));
 echo $form->input("interviewer_id");
