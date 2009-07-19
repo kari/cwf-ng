@@ -4,6 +4,7 @@
     <?=$html->charset(); ?>
     <title>CWF - <?=$title_for_layout; ?></title>
 		<?=$html->meta('icon',$html->url("/favicon.ico"));?> <? # FIXME ?>
+		<meta name="robots" content="noindex, nofollow"> <!-- FIXME: Remove before launch -->
 		<link rel="home" href="<?=$html->url("/")?>">
 		<link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css"> 
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/yui/2.7.0/build/base/base-min.css">
