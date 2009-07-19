@@ -35,8 +35,8 @@ $(document).ready(function() {
   echo $form->input("site");
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
   echo '<span class="pull">';
-  echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array("id"=>"edit_pub"),"This will navigate away from this page. All unsaved changes will be lost.")." ";
-  echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.");
+  echo $html->link("Edit publisher",array("controller"=>"publishers","action"=>"edit",$this->data["Publisher"]["publisher_id"]),array("id"=>"edit_pub","class"=>"edit button"),"This will navigate away from this page. All unsaved changes will be lost.")." ";
+  echo $html->link("Add new publisher",array("controller"=>"publishers","action"=>"add",$this->data["Game"]["game_id"]),array("class"=>"add button"),"This will navigate away from this page. All unsaved changes will be lost.");
   echo '</span>';
   echo $form->input("description",array("between"=>"<br>","rows"=>10));
   echo "<em>BBCode enabled. Internal links enabled.</em>";
@@ -100,30 +100,31 @@ $(document).ready(function() {
   <div class="yui-u">
     <form><fieldset>
 <legend>Screenshots</legend>
-<ul>
+<ul class="nobullet">
+  <li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"add",$this->data["Game"]["game_id"]),array("class"=>"button add"),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 <?  
   foreach($this->data["Screenshot"] as $screenshot) {
     echo "<li>".$site->image($screenshot["image_link"],array("width"=>150,"height"=>150));
     echo "<br>";
-    echo $html->link("Edit",array("controller"=>"screenshots","action"=>"edit",$screenshot["screenshot_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
-    echo $html->link("Delete",array("controller"=>"screenshots","action"=>"delete",$screenshot["screenshot_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
+    echo $html->link("Edit",array("controller"=>"screenshots","action"=>"edit",$screenshot["screenshot_id"]),array("class"=>"button edit"),"This will navigate away from this page. All unsaved changes will be lost.")." ";
+    echo $html->link("Delete",array("controller"=>"screenshots","action"=>"delete",$screenshot["screenshot_id"]),array("class"=>"button delete"),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
     echo "</li>";
   }
 ?>
-<li><?=$html->link("Add new screenshot",array("controller"=>"screenshots","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
+
 </ul>
 </fieldset>
 <fieldset><legend>Files</legend>
-<ul>
+<ul class="nobullet">
+  <li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"add",$this->data["Game"]["game_id"]),array("class"=>"add button"),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 <?
   foreach($this->data["Download"] as $file) {
     echo '<li>'.basename($file["download_link"]).' ('.$number->toReadableSize($file["size"]*1024).')<br><i>'.$file["explanation"].' ('.$PLATFORM[$file["file_platform"]].' '.$DL_TYPE[$file["package_type"]].')</i><br>';
-    echo $html->link("Edit",array("controller"=>"downloads","action"=>"edit",$file["file_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")." ";
-    echo $html->link("Delete",array("controller"=>"downloads","action"=>"delete",$file["file_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
+    echo $html->link("Edit",array("controller"=>"downloads","action"=>"edit",$file["file_id"]),array("class"=>"edit button"),"This will navigate away from this page. All unsaved changes will be lost.")." ";
+    echo $html->link("Delete",array("controller"=>"downloads","action"=>"delete",$file["file_id"]),array("class"=>"delete button"),"This will navigate away from this page. All unsaved changes will be lost. Proceed with delete?");
     echo '</li>';
   }
 ?>
-<li><?=$html->link("Add new file",array("controller"=>"downloads","action"=>"add",$this->data["Game"]["game_id"]),array(),"This will navigate away from this page. All unsaved changes will be lost.")?></li>
 </ul>
 </fieldset>
   </div>

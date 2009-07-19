@@ -6,7 +6,7 @@ echo $form->create('Download');
 echo "<fieldset>";
 echo $form->input('download_link');
 if (!file_exists(Configure::read("Site.file_path").basename($this->data["Download"]["download_link"]))) {
-  echo "<span class=\"pull\">The game file is missing.</span>";
+  echo "<div class=\"error-message\">The game file is missing.</div>";
 }
 echo $form->input("game_id");
 echo $form->input("file_platform",array("options"=>$PLATFORM));
@@ -18,11 +18,11 @@ echo $form->input("uploaded",array("timeFormat"=>24,"dateFormat"=>"DMY","minYear
 echo $form->input("explanation",array("rows"=>"2","between"=>"<br>"));
 echo "</fieldset>";
 echo $form->end('Save');
-echo $html->link("Delete",array("action"=>"delete",$this->data["Download"]["file_id"]),array(),"Proceed with delete?");
+echo $html->link("Delete",array("action"=>"delete",$this->data["Download"]["file_id"]),array("class"=>"delete button"),"Proceed with delete?");
 ?>
  </div>
   <div class="yui-u">
     <!-- right bar -->
-    <?=$this->element("spotlight",array("game_id"=>$game_id,"cache"=>array("key"=>$game_id,"time"=>"+1 day")));?> 
+    <?=$this->element("spotlight",array("game_id"=>$this->data["Game"]["game_id"],"cache"=>array("key"=>$this->data["Game"]["game_id"],"time"=>"+1 day")));?> 
   </div>
 </div>

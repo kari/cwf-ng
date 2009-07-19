@@ -1,5 +1,5 @@
 <h1>World News</h1>
-<p><?=$html->link("Add new",array("action"=>"add"))?></p>
+<p><?=$html->link("Add new",array("action"=>"add"),array("class"=>"add button"))?></p>
 <ul class="news">
 <? 
   foreach($wnews as $item) {

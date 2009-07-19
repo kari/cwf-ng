@@ -21,11 +21,11 @@ echo $html->link($site->image($this->data["Screenshot"]["image_link"],array("wid
 echo $form->input("game_id");
 echo $form->input("screenshot_submitter_id",array("options"=>$screenshot_submitters,"label"=>"Submitter"));
 echo $form->end('Save');
-echo $html->link("Delete",array("action"=>"delete",$this->data["Screenshot"]["screenshot_id"]),array(),"Proceed with delete?");
+echo $html->link("Delete",array("action"=>"delete",$this->data["Screenshot"]["screenshot_id"]),array("class"=>"delete button"),"Proceed with delete?");
 ?>
  </div>
   <div class="yui-u">
     <!-- right bar -->
-    <?=$this->element("spotlight",array("game_id"=>$game_id,"cache"=>array("key"=>$game_id,"time"=>"+1 day")));?> 
+    <?=$this->element("spotlight",array("game_id"=>$this->data["Game"]["game_id"],"cache"=>array("key"=>$this->data["Game"]["game_id"],"time"=>"+1 day")));?> 
   </div>
 </div>
