@@ -96,6 +96,12 @@ table.clean th { border-bottom: 2px solid #666;}
 table.slim {margin: 0; padding:0;}
 table.slim td {margin: 0; padding:0; padding-bottom: 5px; padding-right: 5px; vertical-align: top;}
 
+a.button { padding:0.5em; background-color: #05328C; color: #C3D7FF; font-size: 93%; text-decoration: none; border: 1px solid #C3D7FF; display: inline-block;}
+a.add { padding-left: 20px; background-image: url("../img/icons/application_add.png"); background-repeat: no-repeat; background-position: 2px center;}
+a.edit { padding-left: 20px; background-image: url("../img/icons/application_edit.png"); background-repeat: no-repeat; background-position: 2px center;}
+a.delete { padding-left: 20px; background-image: url("../img/icons/application_delete.png"); background-repeat: no-repeat; background-position: 2px center;}
+a.button:hover {color:#FEFEFE;}
+
 div#flashMessage {background-color: #FEFEFE; background-image: url("../img/icons/information.png"); background-repeat: no-repeat; background-position: 2px center; border: 1px solid #001937; padding: 2px; padding-left: 20px;}
 div#authMessage {background-color: #FEFEFE; background-image: url("../img/icons/error.png"); background-repeat: no-repeat; background-position: 2px center; border: 1px solid #001937; padding: 2px; padding-left: 20px;}
 div#adminMessage {margin-left: auto; margin-right: auto; padding:0; width: 500px;}
@@ -110,3 +116,5 @@ div.tooltip {display:none;background-color:#000000;color:#ffffff;}
 
 ul.link_exchange {margin-left:0px;}
 ul.link_exchange li {list-style: none; width: 88px; min-height: 31px; text-align: center; vertical-align: middle; background-color: #efefef;margin-left: auto; margin-right: auto;}
+
+ul.nobullet li {list-style: none; margin-bottom: 1em;}

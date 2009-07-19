@@ -1,4 +1,5 @@
 <h1>Add game</h1>
+<p>On this screen just fill in the basic information. Add as much (or as little) as you know about the game. You willll be able to edit everything and add screenshots and files later on the next screen.</p> 
 <?
   echo $form->create("Game");
   echo "<fieldset><legend>Basic information</legend>";
@@ -58,3 +59,4 @@
 <?
   echo $form->end("Save");
 ?>
+<p>The game will be saved to the database when you click "Save", but will not be visible on the site until you have set its download status.</p>
