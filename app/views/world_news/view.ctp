@@ -9,7 +9,7 @@ if (!empty($wnews["WorldNews"]["wnews_embedded"])) {
 ?>
 <h3>Related links</h3>
 <ul>
-  <? if (!empty($wnews["WorldNews"]["wnews_ext_link"])) { echo "<li>".$html->link("External link related to this news",$wnews["WorldNews"]["wnews_ext_link"])."</li>"; } ?>
+  <? if (!empty($wnews["WorldNews"]["wnews_ext_link"])) { echo "<li>".$html->link("More at ".parse_url($wnews["WorldNews"]["wnews_ext_link"],PHP_URL_HOST),$wnews["WorldNews"]["wnews_ext_link"])."</li>"; } ?>
   <? if (!empty($wnews["WorldNews"]["wnews_embedded"])) { echo "<li>".$html->link("YouTube video",$wnews["WorldNews"]["wnews_embedded"])."</li>"; } 
   ?>
 </ul>
