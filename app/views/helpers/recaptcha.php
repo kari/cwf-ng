@@ -14,7 +14,7 @@ class RecaptchaHelper extends AppHelper {
 	
 	function hide_mail($email = '',$output_method = 'return') {
 		if (! function_exists ("mcrypt_encrypt")) {
-			return "E-mail hiding disabled (MCRYPT_MISSING)";
+			return "<span title=\"MCRYPT_MISSING\">E-mail hidden</span>";
 			#die ("To use reCAPTCHA Mailhide, you need to have the mcrypt php module installed.");
 		}
 		$data = $this->recaptcha_mailhide_html(Configure::read('Mailhide.pubKey'), Configure::read('Mailhide.privateKey'), $email);

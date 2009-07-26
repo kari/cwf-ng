@@ -204,7 +204,6 @@ if ($session->check("Auth.User.user_id")) {
 <?#=debug($game)?>
   </div>
   <div class="yui-u">
-    <h1>Advertisement</h1>
     <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
   </div>
 </div>

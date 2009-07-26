@@ -12,7 +12,7 @@
     ?>
 </ul>
 </div>
-<h2>Games</h2>
+<h2>Games on CWF</h2>
 <ul class="games">
 <?
   foreach($publisher["Game"] as $game) {

@@ -3,6 +3,7 @@
 <h1>Edit Guide for <?=$this->data["Game"]["game_name"]?></h1>
 <?
 echo $form->create('Guide');
+echo $form->hidden("id");
 echo $form->input('title',array("type"=>"text"));
 echo $form->input('user_id');
 echo $form->input("game_id");
