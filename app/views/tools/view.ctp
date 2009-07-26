@@ -12,6 +12,8 @@
       });
     });")
 ?>
+<div class="yui-ge">
+  <div class="yui-u first">
 <h1><?=$tool['Game']['game_name']?></h1>
 <p><small>by <?=$html->link($tool['Publisher']['name'],$tool["Publisher"]["site"])?></small></p>
 <p><?=$bbcode->decode($tool['Game']['description'])?></p>
@@ -118,3 +120,8 @@ foreach ($tool["Download"] as $file) {
 }
 ?></ul>
 <?#=debug($tool)?>
+  </div>
+  <div class="yui-u">
+    <?=$this->element("adbox",array("style"=>"pw-skyscraper"))?>
+  </div>
+</div>

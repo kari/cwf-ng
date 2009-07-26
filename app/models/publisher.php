@@ -7,7 +7,7 @@ class Publisher extends AppModel {
 	var $primaryKey = 'publisher_id';
 	var $order = "name";
 	
-	var $hasMany = array("Game","Interview" => array("foreignKey"=>"developer_id"));
+	var $hasMany = array("Game" => array("order"=>"game_name ASC"),"Interview" => array("foreignKey"=>"developer_id"));
 	
 	var $validate = array(
 		"name" => "notEmpty",
