@@ -33,7 +33,7 @@ class PagesController extends AppController {
 		$this->set("news",$this->News->find("all",array("order" => "post_date DESC","limit"=>5)));
 		# $this->set("blogs",$this->Blog->find("all",array("order" => "created DESC","limit"=>10)));
 		$this->set("reviews",$this->Review->find("all",array("conditions" => "review_rating <> -99","order" => "added DESC","limit" => 5)));
-		$this->set("scrollable_games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>12,"contain"=>array("Screenshot","Publisher"))));
+		$this->set("scrollable_games",$this->Game->find("all",array("conditions"=>array("download_status"=>0,"Genres.tools"=>0),"order" => "Game.created DESC","limit"=>12,"contain"=>array("Screenshot","Publisher","Genres.tools"))));
 		# $this->set("games",$this->Game->find("all",array("conditions"=>array("download_status"=>0),"order" => "Game.created DESC","limit"=>10,"contain"=>array("Screenshot","Publisher"))));
 		$this->set("interviews",$this->Interview->find("all",array("limit"=>5)));
 		$this->set("worldnews",$this->WorldNews->find("all",array("limit"=>5)));
