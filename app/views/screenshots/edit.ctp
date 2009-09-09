@@ -22,6 +22,7 @@ echo $form->input("game_id");
 echo $form->input("screenshot_submitter_id",array("options"=>$screenshot_submitters,"label"=>"Submitter"));
 echo $form->end('Save');
 echo $html->link("Delete",array("action"=>"delete",$this->data["Screenshot"]["screenshot_id"]),array("class"=>"delete button"),"Proceed with delete?");
+echo $html->link("Add a new screenshot",array("action"=>"add",$this->data["Game"]["game_id"]),array("class"=>"add button"));
 ?>
  </div>
   <div class="yui-u">

@@ -13,7 +13,7 @@ class ScreenshotsController extends AppController {
 		$this->log("Hit screenshots/add controller",LOG_DEBUG);
 		if (!empty($this->data)) {
 			$this->log("Seems like we have some POST data...",LOG_DEBUG);
-			$valid_mime = array("image/png","image/jpeg","image/gif"); # Valid MIME types for uploads
+			$valid_mime = array("image/png"); # Valid MIME types for uploads
 			$path = Configure::read("Site.screenshot_path");
 			
 			if (empty($this->data["Screenshot"]["image"])) {
@@ -43,7 +43,7 @@ class ScreenshotsController extends AppController {
 			$this->log("Got upload.",LOG_DEBUG);
 			
 			if (!in_array($this->data["Screenshot"]["image"]["type"],$valid_mime)) { 
-				$this->Session->setFlash("Uploaded file not an image.");
+				$this->Session->setFlash("Uploaded file not a valid image. Please, upload a PNG.");
 				$this->redirect($this->referer());
 			}
 			
@@ -88,6 +88,11 @@ class ScreenshotsController extends AppController {
 		$this->set("game_id",$id);
 		$this->set("screenshot_submitters",$this->Screenshot->User->find('list')); # FIXME: should only list users with relevant access level? (That'd be set in the model assocations...)
 		$this->set("games",$this->Screenshot->Game->find("list"));
+	}
+	
+	function admin() {
+		# Dummy redirector to game/admin
+		$this->redirect("/games/admin");
 	}
 	
 	function edit($id=null) { # interview/edit allows to edit all news.
