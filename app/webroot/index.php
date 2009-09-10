@@ -1,5 +1,5 @@
 <?php
-/* SVN FILE: $Id: index.php 7296 2008-06-27 09:09:03Z gwoo $ */
+/* SVN FILE: $Id$ */
 /**
  * Short description for file.
  *
@@ -7,24 +7,22 @@
  *
  * PHP versions 4 and 5
  *
- * CakePHP(tm) :  Rapid Development Framework <http://www.cakephp.org/>
- * Copyright 2005-2008, Cake Software Foundation, Inc.
- *								1785 E. Sahara Avenue, Suite 490-204
- *								Las Vegas, Nevada 89104
+ * CakePHP(tm) :  Rapid Development Framework (http://www.cakephp.org)
+ * Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
  *
  * Licensed under The MIT License
  * Redistributions of files must retain the above copyright notice.
  *
  * @filesource
- * @copyright		Copyright 2005-2008, Cake Software Foundation, Inc.
- * @link				http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
- * @package			cake
- * @subpackage		cake.app.webroot
- * @since			CakePHP(tm) v 0.2.9
- * @version			$Revision: 7296 $
- * @modifiedby		$LastChangedBy: gwoo $
- * @lastmodified	$Date: 2008-06-27 02:09:03 -0700 (Fri, 27 Jun 2008) $
- * @license			http://www.opensource.org/licenses/mit-license.php The MIT License
+ * @copyright     Copyright 2005-2008, Cake Software Foundation, Inc. (http://www.cakefoundation.org)
+ * @link          http://www.cakefoundation.org/projects/info/cakephp CakePHP(tm) Project
+ * @package       cake
+ * @subpackage    cake.app.webroot
+ * @since         CakePHP(tm) v 0.2.9
+ * @version       $Revision$
+ * @modifiedby    $LastChangedBy$
+ * @lastmodified  $Date$
+ * @license       http://www.opensource.org/licenses/mit-license.php The MIT License
  */
 /**
  * Use the DS to separate the directories in other defines
@@ -44,7 +42,6 @@
  */
 	if (!defined('ROOT')) {
 		define('ROOT', dirname(dirname(dirname(__FILE__))));
-		# define('ROOT',"/Users/zyx/Sites/cwf-ng");
 	}
 /**
  * The actual directory name for the "app".
@@ -52,7 +49,6 @@
  */
 	if (!defined('APP_DIR')) {
 		define('APP_DIR', basename(dirname(dirname(__FILE__))));
-		# define('APP_DIR',"app");
 	}
 /**
  * The absolute path to the "cake" directory, WITHOUT a trailing DS.
@@ -93,6 +89,5 @@
 	}
 	if (Configure::read() > 0) {
 		echo "<!-- " . round(getMicrotime() - $TIME_START, 4) . "s -->";
-		echo "<!-- " . round(memory_get_usage()/1024.0/1024.0,3) ."MB -->"; 
 	}
 ?>

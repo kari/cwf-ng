@@ -1,4 +1,4 @@
-<?
+<?php
 class AppController extends Controller {  
 	var $components = array('Auth',"RememberMe");
 	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); // FIXME: Move helpers to individual controllers to optimize stuff
