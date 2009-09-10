@@ -21,7 +21,7 @@ if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
   <li><?=$html->link("Forum profile","http://curlysworldoffreeware.com/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
   <li>Interests: <?=$user["User"]["user_interests"]?></li>
-  <li>User timzeone: <span class="tz"><?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> </span>
+  <li>User timezone: <span class="tz"><?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> </span>
 <?
  # echo date_format(date_create("now",timezone_open(timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0))),"T")." (like ".timezone_name_from_abbr("",$user["User"]["user_timezone"]*60*60,0).")";
  
