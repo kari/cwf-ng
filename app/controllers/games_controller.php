@@ -287,10 +287,11 @@ class GamesController extends AppController {
 		$game = $this->Game->find("first",array("conditions"=>array("Game.game_id"=>$id)));
 		if (!empty($game)) {
 			$this->Game->del($id);
-			$this->flash('The game with id '.$id.' has been deleted.', '/games/queue');
+			$this->Session->setFlash('The game with id '.$id.' has been deleted.');
+			$this->redirect("/games/admin");
 		} else {
 			$this->Session->setFlash($this->Auth->authError);
-			$this->redirect("/games/queue");
+			$this->redirect("/games/admin");
 		}
 	}
 	

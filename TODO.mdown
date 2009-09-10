@@ -9,6 +9,8 @@
     * PEAR isn't in Apple-bundled PHP
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
+  * get could also redirect to a temporary public url.
+  
 
 ## Pre-launch v1
 

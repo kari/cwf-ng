@@ -6,15 +6,22 @@ class PublishersController extends AppController {
 	var $helpers = array("cache");
 	var $cacheAction = array("view/"=>"+1 day");
 	var $components = array('Recaptcha');
-
+	# var $uses = array("Publisher","Game","Interview");
+	
 	function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->allow(array("view"));
 	}
 
   function view($id = null) {
-    $this->set('publisher', $this->Publisher->read('',$id));
+		$this->Publisher->contain(array("Game.download_status=0","Interview"));
+		$this->set("publisher",$this->Publisher->find("first",array("conditions"=>array("Publisher.publisher_id"=>$id))));
   }
+
+	function admin() {
+		# Dummy redirector
+		$this->redirect("/games/admin");
+	}
 
 	function add($game_id = null) {
 		if (!empty($this->data)) {
@@ -60,7 +67,8 @@ class PublishersController extends AppController {
 		$publisher = $this->Publisher->find("first",array("conditions"=>array("publisher_id"=>$id)));
 		if (!empty($publisher)) {
 			$this->Publisher->del($id);
-			$this->flash('The publisher with id '.$id.' has been deleted.', '/');
+			$this->Session->setFlash('The publisher with id '.$id.' has been deleted.');
+			$this->redirect("/games/admin");
 		} else {
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/");
