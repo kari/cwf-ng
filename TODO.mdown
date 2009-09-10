@@ -22,6 +22,7 @@
 * Blog comments
   * Defer to v1.5 or v2 with other blog functionalities?
 * Birthday list
+* Add this -buttons to game/view
 * Similar games
   * Dont think if it is planned, but we might think of "similar games" or "more games from this creator" or "people who downloaded game x also downloaded game y" option displayed in gameinfo panel. Showing three games for example, like it is usually done.
 
