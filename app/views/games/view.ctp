@@ -146,7 +146,7 @@ foreach ($game["Guide"] as $guide) {
 <?
 foreach ($game["Review"] as $review) {
  echo '<li><h3>'.$html->link($review["review_title"],array("controller"=>"reviews","action"=>"view",$review["review_id"])).' by '.$review["User"]["username"].'</h3>';
- echo "<p>".nl2br($text->trim($review["review_text"],300))."</p></li>";
+ echo "<p>".$text->trim($bbcode->strip($review["review_text"]),300)."</p></li>";
 }
 if ($session->check("Auth.User.user_id") && $review_notify) {
   echo "<p>You have downloaded this game some time ago and it'd be great if you'd ".$html->link("review it",array("controller"=>"reviews","action"=>"add",$game["Game"]["game_id"]))."!</p>";

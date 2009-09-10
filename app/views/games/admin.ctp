@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 ?>
 <h1>Game admin</h1>
-<p><?=$html->link("Add a game",array("action"=>"add"),array("class"=>"add button"))?></p>
+<p><?=$html->link("Add a game",array("action"=>"add"),array("class"=>"add button"))?> <?= $html->link("Moderate comments",array("controller"=>"comments","action"=>"admin"),array("class"=>"button")) ?></p>
 <? $paginator->options(array("url"=>array("page"=>1))); ?>
 Filter by Download status: [<?=$paginator->link("All",array())?>] [<?=$paginator->link("Accepted",array("status"=>1))?>] [<?=$paginator->link("Validation queue",array("status"=>2))?>] [<?=$paginator->link("Others",array("status"=>3))?>]
 
@@ -47,7 +47,7 @@ foreach($games as $game) {
     echo "<td><strong>".$game["Game"]["game_name"]."</strong";
   }
   if (empty($game["Screenshot"])) {
-    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has not screenshots!";
+    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no screenshots!";
   }
   if (empty($game["Download"])) {
     echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no files!";

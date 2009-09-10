@@ -6,6 +6,7 @@ class Publisher extends AppModel {
 	var $tablePrefix = 'CWF_';
 	var $primaryKey = 'publisher_id';
 	var $order = "name";
+	var $actsAs = array("Containable");
 	
 	var $hasMany = array("Game" => array("order"=>"game_name ASC"),"Interview" => array("foreignKey"=>"developer_id"));
 	

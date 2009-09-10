@@ -35,7 +35,11 @@ if ($session->check("Auth.User.user_id")) {
     <div class="items"> 
       <? 
       foreach($scrollable_games as $game) {
-        echo "<div>".$site->image($game["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150,"title"=>$game["Game"]["game_name"])).$html->link("<h3>".$game["Game"]["game_name"]."</h3>",array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array(),false,false)."</div>";
+        if (!empty($game["Screenshot"])) {
+          echo "<div>".$site->image($game["Screenshot"][0]["image_link"],array("width"=>150,"height"=>150,"title"=>$game["Game"]["game_name"])).$html->link("<h3>".$game["Game"]["game_name"]."</h3>",array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array(),false,false)."</div>";
+        } else {
+          echo "<div>".$html->image("/img/cwf_nosshot.png",array("width"=>150,"height"=>150,"title"=>"No screenshot")).$html->link("<h3>".$game["Game"]["game_name"]."</h3>",array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array(),false,false)."</div>";
+        }
       }
       ?>
     </div>

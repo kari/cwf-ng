@@ -9,6 +9,11 @@ class DownloadsController extends AppController {
 		$this->Auth->allow(array("get"));
 		$this->Auth->mapActions(array("read"=>array("get")));
 	}
+	
+	function admin() {
+		# Dummy redirector
+		$this->redirect("/games/admin");
+	}
 
 	function get($id=null) {
 		# $this->Download->contain(array("Download","Game","Game.Genres"));
@@ -89,7 +94,9 @@ class DownloadsController extends AppController {
 	
 	function edit($id=null) { # interview/edit allows to edit all news.
 		if ($id == null) { $this->redirect("/"); }
+		if (!$this->Download->find("first",array("conditions"=>array("Download.file_id"=>$id)))) {$this->redirect("/"); }
 		if (!empty($this->data)) {
+			$this->data["Download"]["file_id"] = $id;
 			$file = Configure::read("Site.file_path").basename($this->data["Download"]["download_link"]);
 			# Add file size information if file exists.
 			if (file_exists($file) && filesize($file)) {
@@ -117,7 +124,8 @@ class DownloadsController extends AppController {
 		if (!empty($download)) {
 			# FIXME: Delete file on the file system too. 
 			$this->Download->del($id);
-			$this->flash('The download with id '.$id.' has been deleted.', array("controller"=>"games","action"=>"edit",$download["Download"]["game_id"]));
+			$this->Session->setFlash('The download has been deleted.');
+			$this->redirect( array("controller"=>"games","action"=>"edit",$download["Download"]["game_id"]));
 		} else {
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/");
