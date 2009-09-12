@@ -13,7 +13,7 @@ class ScreenshotsController extends AppController {
 		$this->log("Hit screenshots/add controller",LOG_DEBUG);
 		if (!empty($this->data)) {
 			$this->log("Seems like we have some POST data...",LOG_DEBUG);
-			$valid_mime = array("image/png"); # Valid MIME types for uploads
+			$valid_mime = array("image/png","image/x-png"); # Valid MIME types for uploads, x-png because IE parties like it's 1996.
 			$path = Configure::read("Site.screenshot_path");
 			
 			if (empty($this->data["Screenshot"]["image"])) {

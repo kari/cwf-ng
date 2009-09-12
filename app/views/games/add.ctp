@@ -7,7 +7,7 @@
   echo $form->input("year",array("maxLength"=>4));
   echo $form->input("publisher_id",array("empty"=>"(empty publisher)"));
   echo "<em>If publisher is not listed, leave this empty. You can add new publishers in the next screen.</em>";
-  echo $form->input("site",array("label"=>"Website","value"=>"http://"));
+  echo $form->input("site",array("label"=>"Website","value"=>($this->data["Game"]["site"] ? $this->data["Game"]["site"] : "http://")));
   echo $form->input("description",array("between"=>"<br>","rows"=>10));
   echo $form->input("requirements",array("label"=>"Requirements (optional)","between"=>"<br>","rows"=>2));
   echo "</fieldset>";
@@ -46,7 +46,7 @@
 </fieldset>
 <fieldset><legend>Site info</legend>
 <?
-  echo $form->input("forum_link",array("label"=>"Forum topic","value"=>"http://"));
+  echo $form->input("forum_link",array("label"=>"Forum topic","value"=>($this->data["Game"]["forum_link"] ? $this->data["Game"]["forum_link"] : "http://")));
   echo $form->input("site_rating",array("type"=>"select","label"=>"GH Score","options"=>array(0,1,2,3,4,5,6)));
   
   echo $form->input("download_status",array("type"=>"select","options"=>$DL_STATUS,"selected"=>-1,"disabled"=>true));
