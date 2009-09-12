@@ -8,7 +8,7 @@ if ($game_redirect) {
   echo $form->create('Publisher');
 }
 echo $form->input('name');
-echo $form->input("site");
+echo $form->input("site",array("value"=>($this->data["Publisher"]["site"] ? $this->data["Publisher"]["site"] : "http://")));
 echo $form->input("email");
 echo $form->end('Save');
 ?>

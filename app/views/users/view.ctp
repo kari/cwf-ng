@@ -9,7 +9,7 @@
 <ul>
 <?
 if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
-  echo "<li>".$html->link("Edit profile","/forum/editprofile")."</li>";
+  echo "<li>".$html->link("Edit profile","http://curlysworldoffreeware.com/profile.php?mode=editprofile")."</li>";
 }
 ?>
   <li class="site"><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"),array("class"=>"url"))?></li>

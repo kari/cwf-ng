@@ -16,7 +16,7 @@
       echo $form->input('user_password',array('type' => 'password',"value"=>"","label"=>"Password","class"=>"short"));
       echo "</td><td>";
       echo $form->end('Login');
-      echo "<br>".$html->link("Register","/signup",array("class"=>"button"));
+      echo "<br>".$html->link("Register","/signup",array("class"=>"x-button"));
       echo "</td></tr></table>";
     }
 ?>

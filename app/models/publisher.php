@@ -12,7 +12,9 @@ class Publisher extends AppModel {
 	
 	var $validate = array(
 		"name" => "notEmpty",
-		"site" => array("rule"=>"url", "allowEmpty"=>true,"message"=>"Please enter a valid web address, or leave this empty."),
+		"site" => array(
+			"url"=>array("rule"=>"url","allowEmpty"=>true,"message"=>"Please enter a valid URL or leave empty."),
+			"custom"=>array("rule"=>array("custom","/^http\:\/\/.+/i"),"message"=>"URL must begin with \"http://\"")),
 		"email" => array("rule"=>"email","allowEmpty"=>true,"message"=>"Please enter a valid e-mail address, or leave this empty."), # Note: E-mail MUST be hidden (from spambots) when shown publicly.
 		);
 }
