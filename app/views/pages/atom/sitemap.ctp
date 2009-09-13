@@ -1,6 +1,6 @@
 <?
 # Set Feed data.
-$this->set("feedData",array("title"=>"Sitemap for CWF","self"=>"http://curlysworldoffreeware.com/sitemap.atom","id"=>"tag:curlysworldoffreeware.com/sitemap.atom"));
+$this->set("feedData",array("title"=>"Sitemap for CWF","self"=>"http://".Configure::read("Site.url")."/sitemap.atom","id"=>"tag:".Configure::read("Site.url")."/sitemap.atom"));
 
 # Main
 echo "<entry<title>Curly's World of Freeware</title><id>".Router::url("/",true)."</id><updated>".$time->toAtom(time())."</updated><link rel=\"alternate\" href=\"".Router::url("/",true)."\" /></entry>\n";

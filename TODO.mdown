@@ -10,11 +10,13 @@
   * We can use the code from old version (dl.php)?
     * Need to port it from there to our Media-view
   * get could also redirect to a temporary public url.
+	* apache is also really good at serving static files, maybe some .htaccess magic?
   
 
 ## Pre-launch v1
 
-* Migrate DB
+* PaterBot migration script
+	* Migrate DB
 * Handle legacy URL rewrites
 
 ## Deferred to v1.5

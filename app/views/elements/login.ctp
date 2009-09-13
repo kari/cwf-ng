@@ -6,7 +6,7 @@
       echo "Hello, ".$html->link($session->read("Auth.User.username"),array("controller"=>"users","action"=>"view",$session->read("Auth.User.user_id"))).".<br> ".$html->link("Logout?",array("controller"=>"users","action"=>"logout"));
       echo "</td></tr></table>";
       if ($session->read("Auth.User.user_new_privmsg") > 0) { 
-        echo $html->image("/img/icons/email.png")." ".$html->link("New private messages.","http://curlysworldoffreeware.com/privmsg.php?folder=inbox",null,null,false); 
+        echo $html->image("/img/icons/email.png")." ".$html->link("New private messages.","http://".Configure::read("Site.url")."/privmsg.php?folder=inbox",null,null,false); 
       }
     } else {
       # Surprsingly enough, FormHelper is not available when cached...
