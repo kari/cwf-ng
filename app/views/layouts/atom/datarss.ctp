@@ -22,10 +22,10 @@ echo '<?profile http://search.yahoo.com/searchmonkey-profile ?>'; # FIXME: This 
   <link href="<?=(isset($feedData["self"]) ? $feedData["self"] : Router::url(null,true))?>" rel="self"/>
   <author>
     <name>Curly's World of Freeware</name>
-    <uri>http://curlysworldoffreeware.com/</uri>
+    <uri><?="http://".Configure::read("Site.url")."/"?></uri>
   </author>
   <icon><?=$html->url("/favicon.ico",true)?></icon>
-  <generator uri="http://curlysworldoffreeware.com/">CWF CMS</generator>
+  <generator uri="<?="http://".Configure::read("Site.url")."/"?>">CWF CMS</generator>
   <rights type="text">http://creativecommons.org/licenses/by-nc-nd/3.0/</rights>
 <? echo $content_for_layout ?>
 </feed>

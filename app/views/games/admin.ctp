@@ -47,13 +47,13 @@ foreach($games as $game) {
     echo "<td><strong>".$game["Game"]["game_name"]."</strong";
   }
   if (empty($game["Screenshot"])) {
-    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no screenshots!";
+    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no screenshots! ".$html->link("Add screenshots?",array("controller"=>"screenshots","action"=>"add",$game["Game"]["game_id"]));
   }
   if (empty($game["Download"])) {
-    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no files!";
+    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no files! ".$html->link("Add files?",array("controller"=>"downloads","action"=>"add",$game["Game"]["game_id"]));
   }
   if (empty($game["Publisher"]["publisher_id"])) {
-    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no publisher!";
+    echo "<br>".$html->image("/img/icons/bullet_error.png",array("title"=>"Error"))."Game has no publisher! ".$html->link("Edit game?",array("action"=>"edit",$game["Game"]["game_id"]));
   }
   echo "</td>";
   echo "<td>";
@@ -69,8 +69,8 @@ foreach($games as $game) {
       break;
   }
   echo $DL_STATUS[$game["Game"]["download_status"]]."</td>";
-  echo "<td>".$game["GameHunter"]["username"]."</td>";
-  echo "<td>".$game["Game"]["site_rating"]."</td>";
+  echo "<td>".$html->link($game["GameHunter"]["username"],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))."</td>";
+  echo "<td>".$game["Game"]["site_rating"]."/6</td>";
   echo "<td>".$time->format("d.m.Y",$game["Game"]["created"])."</td>";
   echo "</tr>";
 }
