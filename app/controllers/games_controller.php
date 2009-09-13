@@ -92,7 +92,7 @@ class GamesController extends AppController {
 			if ($limit < 1) $limit = 1;
 			if ($limit > 10) $limit = 10;
 			$this->Game->recursive = 1;
-			$findparams = array("conditions"=>array("download_status" => 0,"Genres.tools"=>0),'limit'=>$limit,"order"=>"rand()","contain"=>array("Screenshot","Publisher","Rating","Genres.tools"));
+			$findparams = array("conditions"=>array("download_status" => 0,"Genres.tools"=>0,"Genres.adult"=>0),'limit'=>$limit,"order"=>"rand()","contain"=>array("Screenshot","Publisher","Rating","Genres.tools"));
 			if ($limit == 1) {
 				return $this->Game->find("first",$findparams);
 			} else {
