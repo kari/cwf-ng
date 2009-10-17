@@ -8,7 +8,7 @@ $html->meta("atom","/games/index.atom",array("title"=>"CWF – Recent games","re
   echo $javascript->codeBlock("$(document).ready(function() {
     $('div.scrollable').scrollable({
       size: 4,
-    });
+    }).navigator();
     });")
 ?>
 <div class="yui-g">
