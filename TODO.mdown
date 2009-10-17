@@ -3,7 +3,7 @@
 ## Backlog to v1
 
 * BBCode handling and editing
-  * Check how texts are handled at each part of site, because some of them are missing BBcode decoding
+  * Check how texts are handled at each part of site, because some of them are missing BBcode decoding (should be fixed?)
 * Downloads 
   * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
     * PEAR isn't in Apple-bundled PHP
@@ -11,7 +11,6 @@
     * Need to port it from there to our Media-view
   * get could also redirect to a temporary public url.
 	* apache is also really good at serving static files, maybe some .htaccess magic?
-  
 
 ## Pre-launch v1
 
@@ -29,6 +28,7 @@
 * Add this -buttons to game/view
 * Similar games
   * Dont think if it is planned, but we might think of "similar games" or "more games from this creator" or "people who downloaded game x also downloaded game y" option displayed in gameinfo panel. Showing three games for example, like it is usually done.
+* Upgrade YUI libraries to YUI 3 if they're available at a CDN
 
 ## Deferred to v2 or later
 
@@ -67,12 +67,16 @@
   * [Slimbox2](http://www.digitalia.be/software/slimbox2) a Lightbox clone for jQuery
   * [Colorbox](http://colorpowered.com/colorbox/) is something new and shiny, but couldn't notice any advantages.
 * Games/index
-  * Paging alphabetically [A] [B]...
+  * Paging alphabetically [A] [B]... (probably hinges on cakephp)
+
+## Even further down the line
+
+* Some other platform than PHP? (would mean it's not hosted on surftown anymore, though.)
     
 # TODOs from code
 
 `# grep -rn TODO app/*
-app/controllers/downloads_controller.php:41:			$this->view = 'Media'; # TODO: Rewrite built-in media view to support throttling, additional mime types...
+app/controllers/downloads_controller.php:46:			$this->view = 'Media'; # TODO: Rewrite built-in media view to support throttling, additional mime types...
 app/controllers/reviews_controller.php:49:					# TODO: Should editing a published review push it back to moderation queue?
 app/controllers/screenshots_controller.php:51:				die("Hack attempt. IP logged. Please go and die."); # TODO: log IP, ensure attacker is actually dead.
 app/controllers/tools_controller.php:38:		$this->Game->recursive = 2; # TODO: It'd be nice to limit this just to Review and Comment, with caching, who cares?
@@ -82,4 +86,3 @@ app/views/media.php:20:	// TODO: Update mimeType array from downloads_controller
 app/views/media.php:97:			// TODO: We shouldn't be here. Fix error message.
 app/views/media.php:133:				header("X-Real-Content-Type: ".$this->mimeType[$extension]); # TODO: We probably should use this one.
 app/views/pages/atom/sitemap.ctp:8:# TODO: How to handle rest of Atom Sitemap. Put everything here (even though XML version does that better), have many different Sitemaps that link (even though that also could be done in XML) (and anyway, in that case there would only be recent objects)
-
