@@ -43,12 +43,13 @@
  * Then we connect url '/test' to our test controller. This is helpful in
  * developement.
  */
-	Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
+	# Router::connect('/tests', array('controller' => 'tests', 'action' => 'index'));
 	
-	// Blah
+	// CWF routes
 	Router::connect("/admin",array("controller"=>"pages","action"=>"admin"));
 	Router::connect("/sitemap",array("controller"=>"pages","action"=>"sitemap"));
 	Router::connect("/signup",array("controller"=>"users","action"=>"signup"));
 	Router::connect("/about",array("controller"=>"pages","action"=>"about"));
+	Router::connect("/game_info.php",array("controller"=>"games","action"=>"legacy"));
 	Router::parseExtensions('atom','xml');
 ?>

@@ -11,12 +11,13 @@
     * Need to port it from there to our Media-view
   * get could also redirect to a temporary public url.
 	* apache is also really good at serving static files, maybe some .htaccess magic?
+* GvsG hall of fame should have a link (in the element, in the voting notification?)
 
 ## Pre-launch v1
 
-* PaterBot migration script
-	* Migrate DB
+* Migrate DB (done)
 * Handle legacy URL rewrites
+
 
 ## Deferred to v1.5
 

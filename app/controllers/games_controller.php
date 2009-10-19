@@ -27,7 +27,7 @@ class GamesController extends AppController {
 
 	function beforeFilter() {
 		parent::beforeFilter();
-		$this->Auth->allow(array("index","view","random","top","get","flag"));
+		$this->Auth->allow(array("index","view","random","top","get","flag","legacy"));
 		$this->Auth->mapActions(array("queue"=>"admin"));
 		$this->Recaptcha->publickey = Configure::read("Site.captcha_public_key"); 
 		$this->Recaptcha->privatekey = Configure::read("Site.captcha_private_key");
@@ -85,6 +85,11 @@ class GamesController extends AppController {
 				$this->set("admin_mode",true);
 			} */
 		}
+	}
+	
+	function legacy() {
+		# Handles legacy URLs without mod_alias. Ugly, but works.
+		$this->redirect(array("action"=>"view",$this->params["url"]["gameid"]),301);
 	}
 	
 	function random($limit=1) {
