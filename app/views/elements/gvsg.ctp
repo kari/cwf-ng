@@ -26,4 +26,5 @@ $games = $this->requestAction('games/random/2');
 <input type="submit" value="Vote" /></form>
 </td></tr>
 </table>
+<p style="text-align:center"><?=$html->link("See hall of fame!",array("controller"=>"gvsg","action"=>"stats"))?></p>
 </cake:nocache>

@@ -40,7 +40,10 @@ if (empty($game["Screenshot"])) {
     <li>Game hunter: <?=$html->link($game['GameHunter']['username'],array("controller"=>"users","action"=>"view",$game["GameHunter"]["user_id"]))?></li>
     <li>Game proposer: <?=$html->link($game['GameProposer']['username'],array("controller"=>"users","action"=>"view",$game["GameProposer"]["user_id"]))?></li>
     <li>Download count: <?=$game["Game"]["download_count"]?></li>
-    <li><?=$html->link("Forum link",$game["Game"]["forum_link"])?></li>
+    <li><?
+		$forum_url = parse_url($game["Game"]["forum_link"]);
+		echo $html->link("Forum link","http://".Configure::read("Forum.url").$forum_url["path"]."?".$forum_url["query"]);
+		?></li>
     <li><?=$html->link("Game homepage",$game["Game"]["site"])?></li>
     <li>Platforms:<ul><?
         foreach ($game["Specs"] as $platform => $platform_set) {
