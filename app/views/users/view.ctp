@@ -9,17 +9,17 @@
 <ul>
 <?
 if ($session->read("Auth.User.user_id")==$this->data["cached_user_id"]) {
-  echo "<li>".$html->link("Edit profile","http://".Configure::read("Site.url")."/profile.php?mode=editprofile")."</li>";
+  echo "<li>".$html->link("Edit profile","http://".Configure::read("Forum.url")."/profile.php?mode=editprofile")."</li>";
 }
 ?>
   <li class="site"><?=$html->link("Website",$user["User"]["user_website"],array("rel"=>"me"),array("class"=>"url"))?></li>
-  <li>Location: <span class="adr label"><?=$user["User"]["user_from"]?></span> <?=$html->image("http://".Configure::read("Site.url")."/images/flags/".$user["User"]["user_from_flag"])?></li>
+  <li>Location: <span class="adr label"><?=$user["User"]["user_from"]?></span> <?=$html->image("http://".Configure::read("Forum.url")."/images/flags/".$user["User"]["user_from_flag"])?></li>
   <li>Occupation: <?=$user["User"]["user_occ"]?></li>
   <li>Birthday: <?=date("d.m.Y",strtotime("+".$user["User"]["user_birthday"]." days",0))?></li> 
   <li>Last visit: <?=date("d.m.Y",$user["User"]["user_lastvisit"])?></li>
   <li>User since: <?=date("d.m.Y",$user["User"]["user_regdate"])?></li>
   <li>Forum posts: <?=$user["User"]["user_posts"]?></li>
-  <li><?=$html->link("Forum profile","http://".Configure::read("Site.url")."/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
+  <li><?=$html->link("Forum profile","http://".Configure::read("Forum.url")."/profile.php?mode=viewprofile&u=".$user["User"]["user_id"])?></li>
   <li>Interests: <?=$user["User"]["user_interests"]?></li>
   <li>User timezone: <span class="tz"><?=sprintf("%+1.1f",$user["User"]["user_timezone"])?> </span>
 <?
