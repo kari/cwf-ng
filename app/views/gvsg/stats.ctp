@@ -10,7 +10,7 @@
     $i++;
     echo "<tr><td>";
     echo $i.".</td><td>";
-    echo $html->link($game["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]))."</td><td>";
+    echo $html->link($game["Game"]["game_name"],array("controller"=>"games","action"=>"view",$game["Game"]["game_id"]),array(),false,false)."</td><td>";
     echo $game["Stats"]["wins"]."</td><td>".$game["Stats"]["points"];
     echo "</td></tr>";
   }

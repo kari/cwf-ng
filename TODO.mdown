@@ -2,22 +2,12 @@
 
 ## Backlog to v1
 
-* BBCode handling and editing
-  * Check how texts are handled at each part of site, because some of them are missing BBcode decoding (should be fixed?)
-* Downloads 
-  * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
-    * PEAR isn't in Apple-bundled PHP
-  * We can use the code from old version (dl.php)?
-    * Need to port it from there to our Media-view
-  * get could also redirect to a temporary public url.
-	* apache is also really good at serving static files, maybe some .htaccess magic?
-* GvsG hall of fame should have a link (in the element, in the voting notification?)
+* EMPTY!
 
 ## Pre-launch v1
 
-* Migrate DB (done)
-* Handle legacy URL rewrites
-
+* Migrate DB (done, upgraded production)
+* Handle legacy URL rewrites (done, not tested)
 
 ## Deferred to v1.5
 
@@ -30,6 +20,13 @@
 * Similar games
   * Dont think if it is planned, but we might think of "similar games" or "more games from this creator" or "people who downloaded game x also downloaded game y" option displayed in gameinfo panel. Showing three games for example, like it is usually done.
 * Upgrade YUI libraries to YUI 3 if they're available at a CDN
+* Downloads throttling (if necessary)
+  * Implement Download throttling? ([PEAR::HTTP_Download](http://pear.php.net/package/HTTP_Download/))
+    * PEAR isn't in Apple-bundled PHP
+  * We can use the code from old version (dl.php)?
+    * Need to port it from there to our Media-view
+  * get could also redirect to a temporary public url.
+	* apache is also really good at serving static files, maybe some .htaccess magic?
 
 ## Deferred to v2 or later
 
