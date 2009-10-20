@@ -130,12 +130,12 @@ class SiteHelper extends AppHelper {
 			if ($wm) {
 					imagecopymerge($img,$wm,imagesx($img)-imagesx($wm)-2,imagesy($img)-imagesy($wm)-2,0,0,imagesx($wm),imagesy($wm),75); # right-margin = 2, bottom-margin = 2, opacity = 75%
 			}
-			$text = "http://".Configure::read("Site.url")."/";
+			$text = "http://".Configure::read("Site.url")."/"; # This is almost directly out of PHP.net's imagettftext's example, but it does its job.
 			$font = WWW_ROOT."/img/DejaVuSans.ttf";
 			$white = imagecolorallocate($img, 255, 255, 255);
 			$blue = imagecolorallocate($img, 0, 0, 255);
-			imagettftext($im, 12, 0, 11, 21, $white, $font, $text);
-			imagettftext($im, 12, 0, 10, 20, $blue, $font, $text);
+			imagettftext($img, 12, 0, 11, 21, $white, $font, $text);
+			imagettftext($img, 12, 0, 10, 20, $blue, $font, $text);
 		}
 		if (!imagepng($img,$filename)) { # Saved as PNG.
 			return false; # image saving failed
