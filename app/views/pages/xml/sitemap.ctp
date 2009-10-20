@@ -88,7 +88,7 @@ foreach ($worldnews as $item) {
 # debug($topics);
 foreach ($topics as $item) {
    echo "<url>";
-   echo "<loc>"."http://".Configure::read("Site.url")."/viewtopic.php?t=".$item['Topic']['topic_id']."</loc>";
+   echo "<loc>"."http://".Configure::read("Forum.url")."/viewtopic.php?t=".$item['Topic']['topic_id']."</loc>";
    # echo "<lastmod>".$time->toAtom($item['WorldNews']['wnews_date'])."</lastmod>";
    # echo "<changefreq>never</changefreq>";
    echo "<priority>0.7</priority>";

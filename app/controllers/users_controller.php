@@ -48,7 +48,7 @@ class UsersController extends AppController {
     }
 
 		function signup() {
-			$this->redirect("http://".Configure::read("Site.url")."/profile.php?mode=register"); #FIXME: before release
+			$this->redirect("http://".Configure::read("Forum.url")."/profile.php?mode=register"); #FIXME: before release
 		}
 }
 
