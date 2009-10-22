@@ -146,7 +146,7 @@ class GamesController extends AppController {
 	function view($id = null) {
 	# FIXME: view decide if $id is a number (primary key) or slug (acidbomb-2-rearmament) and work accordingly. Same thing to all view-actions which'd benefit from friendly urls. 
 	  if ($id == null) { $this->cakeError('error404'); }
-		$this->Game->contain(array("Genres","GameProposer","GameHunter","Specs","Publisher","Review"=>array("User"),"Screenshot","Rating","Download"));
+		$this->Game->contain(array("Genres","GameProposer","GameHunter","Specs","Publisher","Review"=>array("User"),"Screenshot","Rating","Download","Guide"));
 		# $this->Game->cacheQueries = true;
 		$game = $this->Game->find("first",array("conditions"=>array("Game.download_status"=>0,"Game.game_id"=>$id)));
 		if (empty($game)) { $this->cakeError("error404"); }
