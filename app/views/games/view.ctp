@@ -137,7 +137,7 @@ foreach ($game["Download"] as $file) {
 ?></ul>
 <? if (!empty($game["Guide"])) { ?>
 <h2>Guides</h2>
-<ul class=""><?
+<ul class="blogs"><?
 foreach ($game["Guide"] as $guide) {
   echo "<li>".$html->link($guide["title"],array("controller"=>"guides","action"=>"view",$guide["id"]))."</li>";
 }
