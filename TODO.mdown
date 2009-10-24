@@ -27,17 +27,18 @@
     * Need to port it from there to our Media-view
   * get could also redirect to a temporary public url.
 	* apache is also really good at serving static files, maybe some .htaccess magic?
+* If CakePHP 1.3 is released, update game/index pagination sorting, as 1.3 supports default sort direction finally.
 
 ## Deferred to v2 or later
 
-* game/index and other filtering using GET instead of cookies
+* game/index and other filtering using GET instead of cookies (not before CakePHP 1.3)
 * Semantic Web
   * SearchMonkey Atom feeds (can't add until site is live)
   * Google implements same with Microformats (hReview etc.) or RDF+XHTML, but our site
     is HTML4 so microformats are the only way forward.
 * GD-generated headings (SiteHelper::himg("Something or other") ?)
-  * GD isn't in Apple-bundled PHP.
-* Localization (l10n) and internationalization (i18n)
+  * GD isn't in Apple-bundled PHP, so that makes deving a bit of a pain
+* internationalization (i18n) and then localization (l10n) 
   * dk, de, fi, pl, …
 * Atom feeds with AtomHelper of a sort
 * BBCode Rich text editor
@@ -48,17 +49,18 @@
 * User <--> Developer mapping (not many right now)
 * [OpenSearch](http://www.opensearch.org/)
 * "Hey, you downloaded this game a week ago. Mind writing a review?"
-* Intrasite linking (eg. "game:123", "guide:123")
+	* Isn't this already done?
+* Intrasite linking (eg. "game:123", "guide:123") for BBCode
 * [Canonical urls](http://googlewebmastercentral.blogspot.com/2009/02/specify-your-canonical.html)
 * XML/Atom Gzipping
+	* Isn't this already done?
 * One newsfeed for frontpage (maybe?)
-* Pages/view (dynamic pages)
+* Pages/view (dynamic pages) (it's a routing thing)
 * Build script to stage new revisions to CWF
-  * It's much easier with HG+SSH. Other tasks can be added to the Rakefile
+  * It's much easier with Hg+SSH. Other tasks can be added to the Rakefile
 * "Other links" to games. (new DB table, model...)
   * External links are easy, what about internal links?
-* OpenID/oAuth/Facebook Connect/Google Friend Connect...
-* FancyBox alternatives
+* FancyBox alternatives (or why bother)
   * We have jQuery Tools that has some nice overlays.
   * [FaceBox](http://www.dynamicdrive.com/dynamicindex4/facebox/index.htm) can show DIVs and other stuff
   * [Popeye](http://herr-schuessler.de/blog/jquerypopeye-an-inline-lightbox-alternative/) can zoom images inline, how desirable is this behaviour?

@@ -10,13 +10,14 @@
       }
     } else {
       # Surprsingly enough, FormHelper is not available when cached...
-      echo $form->create('User', array("url"=>"/users/login")); # FIXME
       echo "<table class=\"slim\"><tr><td>";
+ 			echo $form->create('User', array("url"=>"/users/login")); # FIXME
       echo $form->input('username',array("value"=>"","label"=>"Username","class"=>"short"));
       echo $form->input('user_password',array('type' => 'password',"value"=>"","label"=>"Password","class"=>"short"));
       echo "</td><td>";
-      echo $form->end('Login');
-      echo "<br>".$html->link("Register","/signup",array("class"=>"x-button"));
-      echo "</td></tr></table>";
+      echo $form->button("Login",array("type"=>"submit"));
+      echo "<hr><p>".$html->link("Register","/signup",array("class"=>"x-button"))."</p>";
+			echo $form->end();      
+			echo "</td></tr></table>";
     }
 ?>
