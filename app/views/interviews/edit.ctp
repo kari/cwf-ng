@@ -3,6 +3,7 @@
 <h1>Edit Interview for <?=$this->data["Game"]["game_name"]?></h1>
 <?
 echo $form->create('Interview');
+echo $form->hidden("interview_id");
 echo $form->input('interview_title',array("type"=>"text"));
 echo $form->input("game_id",array("empty"=>"(No game)"));
 echo $form->input("developer_id");
