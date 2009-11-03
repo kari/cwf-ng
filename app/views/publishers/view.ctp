@@ -3,10 +3,11 @@
 <h1 class="fn"><?=$publisher["Publisher"]["name"]?></h1>
 <h2>Details</h2>
 <ul>
-  <li class="site"><?=$html->link($publisher["Publisher"]["site"],$publisher["Publisher"]["site"],array("class"=>"url"))?></li>
-  <? 
+  <?
+	if (!empty($publisher["Publisher"]["site"])) {
+		echo "<li class=\"site\">".$html->link($publisher["Publisher"]["site"],$publisher["Publisher"]["site"],array("class"=>"url"))."</li>";
+	} 
   if (!empty($publisher["Publisher"]["email"])) {
-    # echo $html->link($publisher["Publisher"]["email"],"mailto:".$publisher["Publisher"]["email"])
     echo "<li class=\"email\">".$recaptcha->hide_mail($publisher["Publisher"]["email"])."</li>"; 
   }
     ?>

@@ -19,6 +19,7 @@ echo $form->create('Screenshot');
 echo $html->link($site->image($this->data["Screenshot"]["image_link"],array("width"=>150,"height"=>150,"title"=>"Screenshot")),$site->image_url($this->data["Screenshot"]["image_link"]),array("title"=>$this->data["Game"]["game_name"],"id"=>"ss"),false,false);
 # echo $form->input('image_link');
 echo $form->input("game_id");
+echo $form->hidden("screenshot_id");
 echo $form->input("screenshot_submitter_id",array("options"=>$screenshot_submitters,"label"=>"Submitter"));
 echo $form->end('Save');
 echo $html->link("Delete",array("action"=>"delete",$this->data["Screenshot"]["screenshot_id"]),array("class"=>"delete button"),"Proceed with delete?");

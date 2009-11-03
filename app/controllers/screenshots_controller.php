@@ -10,9 +10,9 @@ class ScreenshotsController extends AppController {
 	}
 	
 	function add($id = null) {
-		$this->log("Hit screenshots/add controller",LOG_DEBUG);
+		# $this->log("Hit screenshots/add controller",LOG_DEBUG);
 		if (!empty($this->data)) {
-			$this->log("Seems like we have some POST data...",LOG_DEBUG);
+			# $this->log("Seems like we have some POST data...",LOG_DEBUG);
 			$valid_mime = array("image/png","image/x-png"); # Valid MIME types for uploads, x-png because IE parties like it's 1996.
 			$path = Configure::read("Site.screenshot_path");
 			
@@ -40,7 +40,7 @@ class ScreenshotsController extends AppController {
 					break;
 			}
 			
-			$this->log("Got upload.",LOG_DEBUG);
+			# $this->log("Got upload.",LOG_DEBUG);
 			
 			if (!in_array($this->data["Screenshot"]["image"]["type"],$valid_mime)) { 
 				$this->Session->setFlash("Uploaded file not a valid image. Please, upload a PNG.");
@@ -49,9 +49,10 @@ class ScreenshotsController extends AppController {
 			
 			if (!is_uploaded_file($this->data["Screenshot"]["image"]["tmp_name"])) {
 				die("Hack attempt. IP logged. Please go and die."); # TODO: log IP, ensure attacker is actually dead.
+				$this->log("Hack attempt at screenshot add thingie.",LOG_DEBUG);
 			}
 			
-			$this->log("Upload looks good",LOG_DEBUG);
+			# $this->log("Upload looks good",LOG_DEBUG);
 			
 			if (file_exists($path.$this->data["Screenshot"]["image"]["name"])) {
 				$this->Session->setFlash("File with same name already exists. Please rename file.");
@@ -60,25 +61,27 @@ class ScreenshotsController extends AppController {
 				# File doesn't already exist.
 			}
 			
-			$this->log("Good, uploaded file doesn't exist already Let's try to save.",LOG_DEBUG);
+			#$this->log("Good, uploaded file doesn't exist already Let's try to save.",LOG_DEBUG);
 			
 			if (is_writable(rtrim($path,"\/"))) {
-				$this->log("Destination path is writable",LOG_DEBUG);
+				# $this->log("Destination path is writable",LOG_DEBUG);
 				if (move_uploaded_file($this->data["Screenshot"]["image"]["tmp_name"],$path.$this->data["Screenshot"]["image"]["name"])) {
-					$this->log("Moved tmp file to destination.",LOG_DEBUG);
+					# $this->log("Moved tmp file to destination.",LOG_DEBUG);
 					$this->data["Screenshot"]["image_link"] = $this->data["Screenshot"]["image"]["name"];
 				} else {
 					$this->Session->setFlash("Error moving uploaded file.");
+					$this->log("Error moving uploaded file ".$this->data["Screenshot"]["image"]["tmp_name"]);
 					$this->redirect("/");
 				}
 			} else {
 				$this->Session->setFlash("Screenshot uploads disabled. Please contact admininstrator.");
+				$this->log("Screenshot upload directory is not writeable!");
 				$this->redirect("/");
 			}
 			
-			$this->log("Upload OK, moving to DB save.",LOG_DEBUG);
+			#$this->log("Upload OK, moving to DB save.",LOG_DEBUG);
 			if ($this->Screenshot->save($this->data)) {
-				$this->log("All OK. Redirecting..",LOG_DEBUG);
+				# $this->log("All OK. Redirecting..",LOG_DEBUG);
 				$this->Session->setFlash("Screenshot was added.");
 				$this->redirect(array("action"=>"edit",$this->Screenshot->id));
 			} else {
