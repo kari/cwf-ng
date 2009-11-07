@@ -56,7 +56,7 @@ if ($session->check("Auth.User.user_id")) {
   $first = true;
   foreach($news as $item) {
     echo "<li><strong>";
-    echo $time->format("d.m.Y",$item["News"]["post_date"])." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"]."</strong><br>";
+    echo $time->format("M Y",$item["News"]["post_date"])." - ".$html->link($item["News"]["news_title"],array("controller"=>"news","action"=>"view",$item["News"]["news_id"]))." by ".$item["User"]["username"]."</strong><br>";
     if ($first) {
       echo $text->trim($bbcode->strip($item["News"]["news_text"]),1000,"...",false);
       $first = false;
@@ -74,7 +74,7 @@ if ($session->check("Auth.User.user_id")) {
     $first = true;
     foreach($worldnews as $item) {
       echo "<li><strong>";
-      echo $time->format("d.m.Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"world_news","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
+      echo $time->format("M Y",$item["WorldNews"]["wnews_date"])." - ".$html->link($item["WorldNews"]["wnews_title"],array("controller"=>"world_news","action"=>"view",$item["WorldNews"]["wnews_id"]))." by ".$item["User"]["username"]."</strong><br>";
       if ($first) {
         echo $text->trim($bbcode->strip($item["WorldNews"]["wnews_text"]),1000,"...",false);
         $first = false;
@@ -93,8 +93,8 @@ if ($session->check("Auth.User.user_id")) {
 <ul class="reviews">
 <? foreach($reviews as $review) {
   echo "<li><strong>";
-  echo $time->format("d.m.Y",$review["Review"]["added"]);
-  echo " - ".$html->link($review["Review"]["review_title"],array("controller"=>"reviews","action"=> "view",$review["Review"]["review_id"]))." for ".$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]))." by ".$review["User"]["username"];
+  # echo $time->format("M Y",$review["Review"]["added"])." - ";
+  echo $html->link($review["Review"]["review_title"],array("controller"=>"reviews","action"=> "view",$review["Review"]["review_id"]))." for ".$html->link($review["Game"]["game_name"],array("controller"=>"games","action"=>"view",$review["Game"]["game_id"]))." by ".$review["User"]["username"];
   echo "</strong><br>".$text->trim($bbcode->strip($review["Review"]["review_text"]),200,"...",false);
   echo "</li>";
 }?>  
@@ -105,7 +105,8 @@ if ($session->check("Auth.User.user_id")) {
 <ul class="reviews">
 <? foreach($interviews as $item) {
   echo "<li><strong>";
-  echo date("d.m.Y",strtotime($item["Interview"]["interview_date"]))." - ".$html->link($item["Interview"]["interview_title"],array("controller"=>"interviews","action"=>"view",$item["Interview"]["interview_id"]))." by ".$item["Interviewer"]["username"];
+  # echo date("M Y",strtotime($item["Interview"]["interview_date"]))." - ";
+	echo $html->link($item["Interview"]["interview_title"],array("controller"=>"interviews","action"=>"view",$item["Interview"]["interview_id"]))." by ".$item["Interviewer"]["username"];
   echo "</strong><br>".$text->trim($bbcode->strip($item["Interview"]["text"]),200,"...",false);
   echo "</li>";  
   }
