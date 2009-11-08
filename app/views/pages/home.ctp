@@ -28,7 +28,7 @@ if ($session->check("Auth.User.user_id")) {
 <!-- navigator --> 
 <div class="navi"></div>  
 <!-- prev link --> 
-<a class="prev"></a>
+<a class="prevPage"></a>
 <!-- root element for scrollable --> 
 <div class="scrollable"> 
     <!-- root element for the items --> 
@@ -45,7 +45,7 @@ if ($session->check("Auth.User.user_id")) {
     </div>
 </div>
 <!-- next link --> 
-<a class="next"></a>
+<a class="nextPage"></a>
 
 </div>
 <div class="yui-g">
