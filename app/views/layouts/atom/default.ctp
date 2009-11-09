@@ -14,7 +14,7 @@
 echo '<?xml version="1.0" encoding="utf-8"?>'; 
 ?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <id><?=(isset($feedData["id"]) ? $feedData["id"] : "tag:".substr(Router::url(null,true),7))?></id>
+  <id><?=(isset($feedData["id"]) ? $feedData["id"] : Router::url(null,true))?></id>
   <title type="text"><?=(isset($feedData["title"]) ? $feedData["title"] : $title_for_layout) ?></title>
   <updated><?=(isset($feedData["updated"]) ? $time->toAtom($feedData["updated"]) : $time->toAtom(time()))?></updated>
   <link href="<?=(isset($feedData["alternate"]) ? $feedData["alternate"] : substr(Router::url(null,true),0,-5))?>" rel="alternate"/>

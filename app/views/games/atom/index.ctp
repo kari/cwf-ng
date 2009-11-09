@@ -9,7 +9,7 @@ foreach($games as $game) {
   } else {
     $thumb_url = null;
   }
-  $description = htmlspecialchars($game['Game']['description'],ENT_NOQUOTES,"UTF-8"); # FIXME: description should be parsed by BBCode.
+  $description = htmlspecialchars($bbcode->decode($game['Game']['description']),ENT_NOQUOTES,"UTF-8"); # FIXME: description should be parsed by BBCode.
   $game_name = htmlspecialchars($game["Game"]["game_name"],ENT_NOQUOTES,"UTF-8");
   $publisher_name = htmlspecialchars($game["Publisher"]["name"],ENT_NOQUOTES,"UTF-8");
   echo "<entry>";
@@ -18,7 +18,7 @@ foreach($games as $game) {
   echo "<updated>".$time->toAtom($game["Game"]["created"])."</updated>"; # Required
   echo "<author><name>".$publisher_name."</name></author>"; # Recommended
   echo "<link rel=\"alternate\" href=\"".$href."\" />"; # Must if no Content
-  echo "<summary type=\"html\">".(($thumb_url) ? "<img src=\"".$thumb_url."\"/><br/>" : "").$description."</summary>"; 
+  echo "<summary type=\"html\">".(($thumb_url) ? "&lt;img src=\"".$thumb_url."\"/&gt;&lt;br/&gt;" : "").$description."</summary>"; 
   
   # SearchMonkey DataRSS
   echo '<y:adjunct version="1.0" name="com.curlysworldoffreeware.game">';
