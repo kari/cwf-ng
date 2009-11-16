@@ -79,6 +79,8 @@ class DownloadsController extends AppController {
 				$this->data["Download"]["size"] = 0; # DB field is NOT NULL
 				$this->log("File '".$file."' is missing.");
 			}
+			# legacy support
+			$this->data["Download"]["download_link"] = "Download/Games/".basename($this->data["Download"]["download_link"]);
 			if($this->Download->save($this->data)) {
 				$this->Session->setFlash("Download was added.");
 				$this->redirect(array("action"=>"edit",$this->Download->id));
