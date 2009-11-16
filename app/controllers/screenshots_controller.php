@@ -78,6 +78,9 @@ class ScreenshotsController extends AppController {
 				$this->log("Screenshot upload directory is not writeable!");
 				$this->redirect("/");
 			}
+			# legacy support
+			$this->data["Screenshot"]["image_link"] = "Downloads/Screenshots/".$this->data["Screenshot"]["image_link"];
+			$this->data["Screenshot"]["thumb_link"] = $this->data["Screenshot"]["image_link"];
 			
 			#$this->log("Upload OK, moving to DB save.",LOG_DEBUG);
 			if ($this->Screenshot->save($this->data)) {
