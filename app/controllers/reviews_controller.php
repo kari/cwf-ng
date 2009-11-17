@@ -83,11 +83,21 @@ class ReviewsController extends AppController {
 	}
 	
 	function delete($id=null) {
-		$review = $this->Review->find("first",array("conditions"=>array("Review.review_id"=>$id,"Review.user_id"=>$this->Auth->user("user_id"))));
+		$review = $this->Review->find("first",array("conditions"=>array("Review.review_id"=>$id)));		
 		if (!empty($review)) {
-			$this->Review->del($id);
-			$this->flash('The review with id '.$id.' has been deleted.', '/reviews');
-		} else {
+			if ($review["Review"]["user_id"] == $this->Auth->user("user_id")) { # user's own content
+				$this->Review->del($id);
+				$this->Session->setFlash("The review has been deleted");
+				$this->redirect("/reviews");
+			} elseif ($this->Review->User->isAuthorized($this->Auth->user(),"reviews","admin")) { # User has Admin access on this controller
+				$this->Review->del($id);
+				$this->Session->setFlash("The review has been deleted");
+				$this->redirect("/reviews/admin");
+			} else { # No access
+					$this->Session->setFlash($this->Auth->authError);
+					$this->redirect("/reviews");
+			}
+		} else { # no object
 			$this->Session->setFlash($this->Auth->authError);
 			$this->redirect("/reviews");
 		}
