@@ -84,13 +84,14 @@ foreach ($worldnews as $item) {
 }
 
 # Forums
-foreach ($topics as $item) {
-   echo "<url>";
-   echo "<loc>"."http://".Configure::read("Forum.url")."/viewtopic.php?t=".$item['Topic']['topic_id']."</loc>";
-   echo "<lastmod>".$time->toAtom($item['Post']['post_time'])."</lastmod>";
+# NOTE: Disabled because forum lives under different subdomain
+#foreach ($topics as $item) {
+#   echo "<url>";
+#   echo #"<loc>"."http://".Configure::read("Forum.url")."/viewtopic.php?t=".$item['Topic']['topic_id']."</loc>";
+#   echo "<lastmod>".$time->toAtom($item['Post']['post_time'])."</lastmod>";
    # echo "<changefreq>never</changefreq>";
-   echo "<priority>0.7</priority>";
-   echo "</url>\n"; 
+#   echo "<priority>0.7</priority>";
+#   echo "</url>\n"; 
 }
 # Blogs?
 

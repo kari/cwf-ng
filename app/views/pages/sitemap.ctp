@@ -12,4 +12,4 @@
 <h2><?=$html->link("Guides","/guides/")?></h2>
 <h2><?=$html->link("Interviews","/interviews/")?></h2>
 <h2><?=$html->link("Tools","/tools/")?></h2>
-<h2><?=$html->link("Forums","/forum")?></h2>
+<h2><?=$html->link("Forums","http://".Configure::read("Forum.url"))?></h2>
