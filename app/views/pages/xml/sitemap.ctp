@@ -92,7 +92,7 @@ foreach ($worldnews as $item) {
    # echo "<changefreq>never</changefreq>";
 #   echo "<priority>0.7</priority>";
 #   echo "</url>\n"; 
-}
+# }
 # Blogs?
 
 ?>
