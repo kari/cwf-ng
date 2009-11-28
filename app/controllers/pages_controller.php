@@ -63,9 +63,9 @@ class PagesController extends AppController {
 			
 			$this->set("guides",$this->Guide->find("all",array("fields"=>array("id","created"))));
 			
-			$public_forums = array(34,33,32,18,16,27,17,19,24); # FIXME: Volatile. Needs a better way of discovery.
+			$public_forums = array(17,33,32,34,18,19,16,27,15,9,24); # FIXME: Volatile. Needs a better way of discovery.
 			$this->set("forums",$public_forums);
-			$query = "SELECT Topic.topic_id, Topic.topic_time FROM phpbb_topics AS Topic WHERE Topic.forum_id IN (".implode(",",$public_forums).")"; # FIXME: No updated time and no paging.
+			$query = "SELECT Topic.topic_id, Topic.topic_time, Post.post_time FROM phpbb_topics AS Topic JOIN phpbb_posts AS Post ON Topic.topic_last_post_id = Post.post_id WHERE Topic.forum_id IN (".implode(",",$public_forums).")"; # FIXME: No updated time and no paging.
 			$this->set("topics",$this->Game->query($query));
 			
 		} else {
