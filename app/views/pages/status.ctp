@@ -1,7 +1,7 @@
 <? $this->pageTitle = "System Status"; ?>
 <h1>CWF-ng status</h1>
 <h2>Server Environment</h2>
-CWF-ng Version: 1.0-dev<br>
+CWF-ng Version: 1.0<br>
 PHP Version: <?=phpversion()?><br>
 GD Version: <?
 if (!extension_loaded("gd")) {
