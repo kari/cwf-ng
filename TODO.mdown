@@ -28,6 +28,7 @@
   * get could also redirect to a temporary public url.
 	* apache is also really good at serving static files, maybe some .htaccess magic?
 * If CakePHP 1.3 is released, update game/index pagination sorting, as 1.3 supports default sort direction finally.
+* Check if it makes any sense to use this [rating plugin](http://bakery.cakephp.org/articles/view/ajax-star-rating-plugin-1) 
 
 ## Deferred to v2 or later
 
