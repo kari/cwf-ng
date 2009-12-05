@@ -1,7 +1,7 @@
 <?php
 class AppController extends Controller {  
-	var $components = array('Auth',"RememberMe");
-	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); // FIXME: Move helpers to individual controllers to optimize stuff
+	var $components = array('Auth'); # ,"RememberMe");
+	var $helpers = array("html","form","javascript","text","site","Bbcode","number","time"); # FIXME: Move helpers to individual controllers to optimize stuff
 	var $uses = array("User");
 	
 	function beforeFilter() {
@@ -20,8 +20,18 @@ class AppController extends Controller {
 	    'password' => 'user_password'
 	    );
 		$this->Auth->userScope = array('User.user_active' => '1'); # only allow activated (non-banned) users
-		$this->RememberMe->check();
-		$controller = str_replace("_","",$this->params["controller"]);
+		
+		# $this->RememberMe->check(); # FIXME: Remove rememberme
+		
+		# If user is not logged in according to AuthComponent, check if phpBB cookie exists, fetch user's password from database and do a manual login.
+		
+/*		if (!$this->Auth->user()) {
+			$phbbp_cookie = unserialize($_COOKIE["CWmysql_data"]);
+			$authloginid = $phpbb_cookie["authloginid"];
+			$authloginkey = md5($authloginid);
+		} */
+		
+		$controller = str_replace("_","",$this->params["controller"]); # FIXME: There's probably a function for formatting the controller name more robustly.
 		if ($this->User->isAuthorized($this->Auth->user(),$controller,"admin")) { # FIXME: Controller name here is not set by the same function as with authorization. Works, though.
 			$this->set("admin_mode",true);
 		}

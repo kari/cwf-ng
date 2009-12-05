@@ -7,7 +7,7 @@
     echo $form->input('username',array("label"=>"User name"));
     echo $form->input('user_password',array('type' => 'password',"label"=>"Password"));
     echo "<br>";
-    echo $form->input("remember_me",array("type"=>"checkbox","label"=>"Remember login"));
+    # echo $form->input("remember_me",array("type"=>"checkbox","label"=>"Remember login"));
     # echo "</fieldset>";
     echo $form->end('Login');
 ?>
